@@ -1,0 +1,373 @@
+# Copyright (C) 2020 paddle
+# This file is distributed under the same license as the paddle package.
+msgid ""
+msgstr ""
+"Project-Id-Version: paddle\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: 404.php:18
+msgid "Oops! That page can&rsquo;t be found."
+msgstr ""
+
+#: 404.php:22
+msgid "It looks like nothing was found at this location. Maybe try one of the links below or a search?"
+msgstr ""
+
+#: 404.php:31
+msgid "Most Used Categories"
+msgstr ""
+
+#. translators: %1$s: smiley
+#: 404.php:49
+msgid "Try looking in the monthly archives. %1$s"
+msgstr ""
+
+#. translators: 1: comment count number, 2: title.
+#: comments.php:41
+msgctxt "comments title"
+msgid "%1$s thought on &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
+msgstr[0] ""
+msgstr[1] ""
+
+#: comments.php:35
+msgid "One thought on &ldquo;%1$s&rdquo;"
+msgstr ""
+
+#: comments.php:68
+msgid "Comments are closed."
+msgstr ""
+
+#: functions.php:85
+msgid "Primary"
+msgstr ""
+
+#: functions.php:167
+msgid "Sidebar"
+msgstr ""
+
+#: functions.php:169
+msgid "Add widgets here."
+msgstr ""
+
+#: functions.php:178
+msgid "Footer 1"
+msgstr ""
+
+#: functions.php:180, functions.php:190, functions.php:200, functions.php:210
+msgid "Add widgets here to appear in your footer."
+msgstr ""
+
+#: functions.php:188
+msgid "Footer 2"
+msgstr ""
+
+#: functions.php:198
+msgid "Footer 3"
+msgstr ""
+
+#: functions.php:208
+msgid "Footer 4"
+msgstr ""
+
+#: header.php:27
+msgid "Skip to content"
+msgstr ""
+
+#: header.php:61, inc/template-functions.php:90, inc/template-functions.php:186
+msgid "Search"
+msgstr ""
+
+#. translators: %s: search query.
+#: search.php:23
+msgid "Search Results for: %s"
+msgstr ""
+
+#: singular.php:28
+msgid "Previous:"
+msgstr ""
+
+#: singular.php:29
+msgid "Next:"
+msgstr ""
+
+#: inc/template-functions.php:88, inc/template-functions.php:89
+msgid "Search for:"
+msgstr ""
+
+#: inc/template-functions.php:189
+msgid "Close"
+msgstr ""
+
+#. translators: Copyright date format, see https://secure.php.net/date
+#: inc/template-functions.php:227
+msgctxt "copyright date format"
+msgid "Y"
+msgstr ""
+
+#: inc/template-functions.php:252
+msgid "Theme by "
+msgstr ""
+
+#: inc/template-functions.php:252
+msgid "Paddle Themes"
+msgstr ""
+
+#. translators: %s: post date.
+#: inc/template-tags.php:30
+msgctxt "post date"
+msgid "Posted on %s"
+msgstr ""
+
+#. translators: used between list items, there is a space after the comma
+#: inc/template-tags.php:47
+msgid ", "
+msgstr ""
+
+#. translators: 1: list of categories.
+#: inc/template-tags.php:50
+msgid "Posted in"
+msgstr ""
+
+#. translators: used between list items, there is a space after the comma
+#: inc/template-tags.php:66
+msgctxt "list item separator"
+msgid ", "
+msgstr ""
+
+#. translators: 1: list of tags.
+#: inc/template-tags.php:69
+msgctxt "paddle"
+msgid "Tagged"
+msgstr ""
+
+#. translators: %s: post author.
+#: inc/template-tags.php:83
+msgctxt "post author"
+msgid "by %s"
+msgstr ""
+
+#. translators: %s: post title
+#: inc/template-tags.php:113
+msgid "Leave a Comment<span class=\"screen-reader-text\"> on %s</span>"
+msgstr ""
+
+#. translators: %s: Name of current post. Only visible to screen readers
+#. translators: %s: Name of current post. Only visible to screen readers
+#: inc/template-tags.php:130, template-parts/content-page.php:39
+msgid "Edit <span class=\"screen-reader-text\">%s</span>"
+msgstr ""
+
+#. translators: %s: Name of current post
+#: inc/template-tags.php:223
+msgid "Continue reading"
+msgstr ""
+
+#: inc/woocommerce.php:184
+msgid "View your shopping cart"
+msgstr ""
+
+#. translators: number of items in the mini cart.
+#: inc/woocommerce.php:188
+msgid "%d item"
+msgid_plural "%d items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: template-parts/content-none.php:14
+msgid "Nothing Found"
+msgstr ""
+
+#: template-parts/content-none.php:44
+msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
+msgstr ""
+
+#: template-parts/content-none.php:37
+msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
+msgstr ""
+
+#: template-parts/content-none.php:24
+msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr ""
+
+#: template-parts/content-page.php:25, template-parts/content.php:71
+msgid "Pages:"
+msgstr ""
+
+#. translators: %s: Name of current post. Only visible to screen readers
+#: template-parts/content.php:57
+msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:24
+msgid "Theme Options"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:34
+msgid "Header Options"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:36
+msgid "Header options"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:74
+msgid "Display menu item in uppercase"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:93
+msgid "Enable CTA button in the header"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:111
+msgid "CTA Link URL"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:133
+msgid "CTA button text"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:158, inc/customizer/theme-settings.php:160
+msgid "Page Layout"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:178
+msgid "Full Width"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:198
+msgid "Right Sidebar"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:199
+msgid "Show widget sidebar on the right. The default is bottom after post"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:226
+msgid "Primary Color"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:237
+msgid "Featured Image"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:260
+msgid "Full Width Featured Image Style"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:265
+msgid "Slim Full Width"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:266
+msgid "Hero Full Width"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:267
+msgid "Classic"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:279
+msgid "Category Page"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:336
+msgid "Enable author link info"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:362
+msgid "Select The Banner Image Opacity Overlay Level"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:399
+msgid "Select Alignment"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:404
+msgid "Right"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:405
+msgid "Left"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:406
+msgid "Center"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:430
+msgid "Banner Text Color"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:471
+msgid "Banner Text Area Background Color"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:483
+msgid "Build Your Dream Website with Paddle"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:489
+msgid "Banner Title"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:499
+msgid "Let's improve the way you see business."
+msgstr ""
+
+#: inc/customizer/theme-settings.php:505
+msgid "Banner description"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:514
+msgid "Learn More"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:520
+msgid "Button 1 Label"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:534
+msgid "Button 1 URL Link"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:548
+msgid "Button 2 Label"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:561
+msgid "Button 2 URL Link"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:575
+msgid "Footer Settings"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:596
+msgid "Footer Copyright Text"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:597
+msgid "Copyright text to be displayed in the footer. No HTML allowed."
+msgstr ""
+
+#: template-parts/footer/widgets.php:40
+msgid "Footer"
+msgstr ""
+
+#: template-parts/header/featured-header-image.php:67
+msgctxt "post author"
+msgid "By"
+msgstr ""
+
+#: template-parts/header/featured-header-image.php:41
+msgid "By %s"
+msgstr ""

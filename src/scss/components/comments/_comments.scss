@@ -1,0 +1,131 @@
+
+/**
+ * Comments
+ */
+
+.comments-area {
+	.comment-content a {
+		word-wrap: break-word;
+	}
+}
+
+.comments-title, .pings-title {
+    font-size: 1.5em;
+    font-weight: 400;
+    border-bottom: 1px solid #ebebeb;
+    margin-bottom: .833em;
+    padding-bottom: .542em;
+    line-height: 1.208em;
+	position: relative;
+	
+	li.comment,  li.comment {
+		padding: 37px 0;
+		list-style: none;
+		clear: both;
+	}
+	li:last-child, li:last-child {
+		border-bottom: none;
+		padding-bottom: 0;
+	}
+}
+
+footer.comment-meta {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+} 
+
+.comment-author.vcard {
+	display: block;
+	font-size: 1.1rem;
+    font-weight: 400;
+	img.avatar {
+		height: auto;
+		margin-right: 1em;
+		float: left;
+		width: 2em;
+	}
+}
+.comment-metadata {
+    font-size: 14px;
+    color: #aeaeae;
+	font-weight: 400;
+	margin-left: 3.5rem;
+    float: left;
+}
+.comment-content {
+    font-weight: 300;
+    font-size: 1.1rem;
+    margin: 1rem 0;
+}
+.comment-body .reply {
+    padding-top: 1em;
+	font-size: 14px;
+	margin-bottom: 1rem;
+	a {
+		background: $color__primary;
+		border: 1px solid $color__primary;
+		color: #fff;
+		display: inline-block;
+		float: none;
+		font-size: 14px;
+		line-height: 1.5;
+		padding: 1px 15px 2px;
+		border-radius: 2px;
+		margin-top: 10px;
+		text-transform: uppercase;
+    	text-decoration: none!important;
+	}
+	a:hover {
+		border: 1px solid $color__primary;
+		background: #fff;
+		color: $color__primary;
+	}
+}
+
+ol.comment-list, .pings-list {
+	list-style: none;
+	margin-left: 0;
+	
+	@media (max-width: 575px) {
+		padding-left: 0;
+	}
+}
+
+
+ .comment-content a {
+	word-wrap: break-word;
+}
+#commentform input#submit {
+    background-color: transparent;
+    font-size: 14px;
+    border: 2px solid;
+    border-radius: 50px;
+	padding: 5px 40px;
+	color: $color__primary;
+}
+#commentform input#submit:hover {
+	color: #fff;
+	background-color: $color__primary;
+}
+
+.comments-area p.no-comments {
+    background-color: transparent;
+    padding: 5px;
+    font-weight: 700;
+}
+.comment-respond input[type="checkbox"] + label {
+    font-size: 1rem;
+}
+
+article.comment-body {
+    border-bottom: 1px solid #f2f2f2;
+	margin-bottom: 24px;
+}
+
+.bypostauthor {
+	display: block;
+}
+p.logged-in-as {
+	font-size: 1rem;
+}

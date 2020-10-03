@@ -1,0 +1,41 @@
+.widget-area {
+	.widget {
+		margin: 0 0 5.5em;
+	
+		// Make sure select elements fit in widgets.
+		select {
+			max-width: 100%;
+		}
+	
+		ul {
+			list-style: none;
+			padding-left: 0;
+			margin-left:0;
+		}
+		.widget-title {
+			font-size: 1.357em;
+			font-weight: 400;
+			margin: 0 0 1.6em;
+			letter-spacing: 0.04em;
+			text-transform: uppercase;
+			padding-bottom: 1.053em;
+			position: relative;
+			line-height: 1em;
+			border-bottom: 1px solid #ebebeb;
+		}
+	}
+}
+#secondary .widget ul li:not(:last-child) {
+    border-bottom: 1px solid #eaeaea;
+    position: relative;
+}
+
+#secondary .widget ul li a {
+    font-weight: 400;
+    padding: 0.5em 0;
+    margin-bottom: 0;
+    display: inline-block;
+    letter-spacing: -.01em;
+    line-height: 1.4em;
+    font-size: 1.071em;
+}

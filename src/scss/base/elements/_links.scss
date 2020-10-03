@@ -1,0 +1,26 @@
+
+a {
+    color: #555;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+}
+
+#page a {
+	&:active  {
+		text-decoration: underline;
+	}
+}
+#primary a:not([class*="wp-block-"]):not(.author-link):not(.post-entry-link) {
+    text-decoration: underline;
+}
+#page a:not([class*="wp-block-"]):hover, #page a:focus {
+    color: $color__primary;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.post-entry-link {
+    color: #242424;
+    font-weight: 900;
+}
+

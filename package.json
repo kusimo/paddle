@@ -1,0 +1,45 @@
+{
+  "name": "paddle",
+  "version": "1.0.0",
+  "description": "Paddle WordPress theme built with Bootstrap and understrap framework",
+  "main": "index.js",
+  "scripts": {
+    "start": "gulp",
+    "build": "gulp build --prod",
+    "compilertl": "gulp rtl"
+  },
+  "keywords": [
+    "WordPress",
+    "Theme"
+  ],
+   "homepage": "https://github.com/kusimo/paddle#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kusimo/paddle"
+  },
+  "author": "Abidemi Kusimo",
+  "license": "GPL-2.0-or-later",
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/register": "^7.11.5",
+    "babel-register": "^6.26.0",
+    "browser-sync": "^2.26.12",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-babel": "^8.0.0",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-if": "^3.0.0",
+    "gulp-imagemin": "^7.1.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-rename": "^2.0.0",
+    "gulp-replace": "^1.0.0",
+    "gulp-sass": "^4.1.0",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-uglify": "^3.0.2",
+    "gulp-wp-pot": "^2.5.0",
+    "gulp-zip": "^5.0.2",
+    "yargs": "^16.0.3"
+  },
+  "dependencies": {}
+}

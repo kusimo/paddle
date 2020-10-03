@@ -1,0 +1,27 @@
+/*!
+Theme Name: Paddle
+Theme URI: https://github.com/kusimo/paddle
+Author: Abidemi Kusimo
+Author URI: https://basichow.com/
+Description: <code>Paddle</code> WordPress theme built with Bootstrap and understrap framework. 
+Version: 1.0.0
+Tested up to: 5.4
+Requires PHP: 5.6
+License: GNU General Public License v2 or later
+License URI: LICENSE
+Text Domain: paddle
+Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, one Column, right sidebar, custom colours, editor style, featured image, full width template, rtl-language-support, footer widgets, theme options, blog
+
+This theme, like WordPress, is licensed under the GPL.
+
+Paddle is based on Underscores https://underscores.me/, (C) 2012-2020 Automattic, Inc.
+Underscores is distributed under the terms of the GNU GPL v2 or later.
+
+Normalizing styles have been helped along thanks to the fine work of
+Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
+
+Resource Licenses:
+Bootstrap: http://getbootstrap.com | https://github.com/twbs/bootstrap/blob/master/LICENSE (Code licensed under MIT, documentation under CC BY 3.0.),
+Boostrap Offcanvas Navbar : Thanks to Phil Hughes https://github.com/iamphill/Bootstrap-Offcanvas (Code licensed under MIT)
+jQuery: https://jquery.org | (Code licensed under MIT)
+*/
