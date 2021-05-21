@@ -115,7 +115,7 @@
 
 		<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
 		<div class="offcanvas-header">
-			<button type="button" class="btn btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="<?php esc_html_e( 'Close', 'paddle' ); ?>">
+			<button type="button" class="btn btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="<?php esc_attr_e( 'Close', 'paddle' ); ?>">
 				<span class="toggle-text"><?php esc_html_e( 'Close menu', 'paddle' ); ?></span>
 			</button>
 		</div>

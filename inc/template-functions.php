@@ -283,7 +283,7 @@ if ( ! function_exists( 'paddle_search_modal' ) ) {
 					<div class="modal-body">
 						<div class="search-form-container">
 							<?php get_search_form(); ?>
-							<button type="button" class="btn close btn-close text-reset" data-bs-dismiss="modal" aria-label="<?php esc_html_e( 'Close', 'paddle' ); ?>">
+							<button type="button" class="btn close btn-close text-reset" data-bs-dismiss="modal" aria-label="<?php esc_attr_e( 'Close', 'paddle' ); ?>">
 								<span class="sr-only screen-reader-text">
 									<?php
 									echo __( 'Close', 'paddle' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static output 
@@ -365,7 +365,7 @@ if ( ! function_exists( 'paddle_drawer_nav_close' ) ) :
 		?>
 	<div class="drawer__header d-flex justify-content-end mt-2">
 		<div class="drawer__close">
-		<button type="button" class="off-canvas-button-close close mb-2" aria-label="<?php esc_html_e( 'Close', 'paddle' ); ?>">
+		<button type="button" class="off-canvas-button-close close mb-2" aria-label="<?php esc_attr_e( 'Close', 'paddle' ); ?>">
 			<span aria-hidden="true">×</span>
 			<span class="sr-only"><?php echo esc_html__( 'Close', 'paddle' ); ?></span>
 		</button>

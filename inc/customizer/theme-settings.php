@@ -73,7 +73,7 @@ if ( ! function_exists( 'paddle_theme_customize_register' ) ) {
 			array(
 				'type'        => 'radio',
 				'section'     => 'paddle_theme_header_options',
-				'label'       => esc_html__( 'Header layout' ),
+				'label'       => esc_html__( 'Header layout', 'paddle' ),
 				'description' => esc_html( 'Select where you want the logo to appear on the page' ),
 				'priority'    => 0,
 				'choices'     => array(
