@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Paddle functions and definitions
  *
@@ -19,7 +20,7 @@ if ( ! defined( 'PADDLE_DEV_VERSION' ) ) {
 
 if ( ! defined( 'PADDLE_PRIMARY_COLOR' ) ) {
 	// Replace the version number of the theme on each release.
-	define( 'PADDLE_PRIMARY_COLOR', '#001aff' );
+	define( 'PADDLE_PRIMARY_COLOR', '#000000' );
 }
 
 /**
@@ -29,10 +30,10 @@ if ( ! defined( 'PADDLE_PRIMARY_COLOR' ) ) {
  */
 function paddle_theme_version() {
 	// Get the theme data.
-		$the_theme     = wp_get_theme();
-		$theme_version = $the_theme->get( 'Version' );
+	$the_theme     = wp_get_theme();
+	$theme_version = $the_theme->get( 'Version' );
 
-		return $theme_version;
+	return $theme_version;
 }
 
 /**
@@ -59,7 +60,7 @@ if ( ! function_exists( 'paddle_setup' ) ) :
 		load_theme_textdomain( 'paddle', get_template_directory() . '/languages' );
 
 		// Add default posts and comments RSS feed links to head.
-		add_theme_support( 'automatic-feed-links');
+		add_theme_support( 'automatic-feed-links' );
 
 		/*
 		 * Let WordPress manage the document title.
@@ -82,9 +83,18 @@ if ( ! function_exists( 'paddle_setup' ) ) :
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menus(
 			array(
-				'menu-1' => esc_html__( 'Primary', 'paddle' ),
+				'primary' => esc_html__( 'Primary', 'paddle' ),
+				'social'  => esc_html__( 'Social Menu', 'paddle' ),
 			)
 		);
+
+		// Gutenberg Compatible
+		add_theme_support( 'align-wide' );
+		add_theme_support( 'wp-block-styles' );
+		add_theme_support( 'editor-styles' );
+
+		// Add support for responsive embedded content.
+		add_theme_support( 'responsive-embeds' );
 
 		/*
 		 * Switch default core markup for search form, comment form, and comments
@@ -134,8 +144,8 @@ if ( ! function_exists( 'paddle_setup' ) ) :
 		);
 	}
 
-		// Check and setup theme default settings.
-		paddle_setup_theme_default_settings();
+	// Check and setup theme default settings.
+	paddle_setup_theme_default_settings();
 
 endif;
 
@@ -166,7 +176,7 @@ function paddle_widgets_init() {
 		array(
 			'name'          => esc_html__( 'Sidebar', 'paddle' ),
 			'id'            => 'sidebar-1',
-			'description'   => esc_html__( 'Add widgets here.', 'paddle' ),
+			'description'   => esc_html__( 'This widget displays the sidebar.', 'paddle' ),
 			'before_widget' => '<section id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</section>',
 			'before_title'  => '<h2 class="widget-title">',
@@ -174,46 +184,89 @@ function paddle_widgets_init() {
 		)
 	);
 
-	register_sidebar( array(
-		'name'          => __( 'Footer 1', 'paddle' ),
-		'id'            => 'footer-1',
-		'description'   => __( 'Add widgets here to appear in your footer.', 'paddle' ),
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h2 class="widget-title">',
-		'after_title'   => '</h2>',
-	) );
+	register_sidebar(
+		array(
+			'name'          => esc_html__( 'After Single Product Page', 'paddle' ),
+			'id'            => 'after-single-product',
+			'description'   => esc_html__( 'This widget is displayed on product page after single product.', 'paddle' ),
+			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h4 class="widget-title">',
+			'after_title'   => '</h4>',
+		)
+	);
 
-	register_sidebar( array(
-		'name'          => __( 'Footer 2', 'paddle' ),
-		'id'            => 'footer-2',
-		'description'   => __( 'Add widgets here to appear in your footer.', 'paddle' ),
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h2 class="widget-title">',
-		'after_title'   => '</h2>',
-	) );
+	register_sidebar(
+		array(
+			'name'          => esc_html__( 'After Product Meta', 'paddle' ),
+			'id'            => 'after-product-meta',
+			'description'   => esc_html__( 'This widget is displayed on the product page after meta data, e.g. SKU.', 'paddle' ),
+			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h5 class="after_product_meta-title">',
+			'after_title'   => '</h5>',
+		)
+	);
 
-	register_sidebar( array(
-		'name'          => __( 'Footer 3', 'paddle' ),
-		'id'            => 'footer-3',
-		'description'   => __( 'Add widgets here to appear in your footer.', 'paddle' ),
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h2 class="widget-title">',
-		'after_title'   => '</h2>',
-	) );
+	register_sidebar(
+		array(
+			'name'          => esc_html__( 'Product Area Collapse', 'paddle' ),
+			'id'            => 'product-area-collapse',
+			'description'   => esc_html__( 'This widget is displayed inside single product page as a dropdown option. The widget title will be used as the dropdown label', 'paddle' ),
+			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h5 class="product-area-collapse-title d-none">',
+			'after_title'   => '</h5>',
+		)
+	);
 
-	register_sidebar( array(
-		'name'          => __( 'Footer 4', 'paddle' ),
-		'id'            => 'footer-4',
-		'description'   => __( 'Add widgets here to appear in your footer.', 'paddle' ),
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h2 class="widget-title">',
-		'after_title'   => '</h2>',
-	) );
+	register_sidebar(
+		array(
+			'name'          => __( 'Footer 1', 'paddle' ),
+			'id'            => 'footer-1',
+			'description'   => __( 'This widget appears in your footer.', 'paddle' ),
+			'before_widget' => '<section id="%1$s" class="widget if-logo-footer %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
+		)
+	);
 
+	register_sidebar(
+		array(
+			'name'          => __( 'Footer 2', 'paddle' ),
+			'id'            => 'footer-2',
+			'description'   => __( 'This widget appears in your footer.', 'paddle' ),
+			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
+		)
+	);
+
+	register_sidebar(
+		array(
+			'name'          => __( 'Footer 3', 'paddle' ),
+			'id'            => 'footer-3',
+			'description'   => __( 'This widget appears in your footer.', 'paddle' ),
+			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
+		)
+	);
+
+	register_sidebar(
+		array(
+			'name'          => __( 'Footer 4', 'paddle' ),
+			'id'            => 'footer-4',
+			'description'   => __( 'This widget appears in your footer.', 'paddle' ),
+			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
+		)
+	);
 }
 
 add_action( 'widgets_init', 'paddle_widgets_init' );

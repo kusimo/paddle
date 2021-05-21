@@ -69,7 +69,7 @@ if ( post_password_required() ) {
 			<?php
 		endif;
 
-	endif; 
+	endif;
 
 	$paddle_comments_args = array(
 		'class_submit' => 'btn btn-primary btn-lg btn-uppercase',

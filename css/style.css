@@ -1,23 +1,36 @@
 /*!
 Theme Name: Paddle
-Theme URI: https://underscores.me/
-Author: Automattic
-Author URI: https://automattic.com/
-Description: Hi. I'm a starter theme called <code>_s</code>, or <em>underscores</em>, if you like. I'm a theme meant for hacking so don't use me as a <em>Parent Theme</em>. Instead try turning me into the next, most awesome, WordPress theme out there. That's what I'm here for.
-Version: 1.0.0
-Tested up to: 5.4
+Author: Abidemi Kusimo
+Description: <code>Paddle</code> is a theme built with <code>Bootstrap5</code> and understrap framework. You can easily customize the theme to fit your purpose. The theme comes with <code>colour settings</code> to help match your brand with your site. Also, includes <code>post layout</code>; you can choose to have two column layout and <code>sidebar</code> on the right or one column layout (Full width). <code>Call to Action (CTA)</code> button on the menu bar. The theme option provides features that will drive your site to the next level.
+Version: 1.0.3
+Tested up to: 5.7
 Requires PHP: 5.6
 License: GNU General Public License v2 or later
-License URI: LICENSE
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: paddle
-Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready
+Tags: Custom-Background, Custom-Logo, Custom-Menu, Featured-Images, Threaded-Comments, Translation-Ready, Rtl-Language-Support, Blog, One-Column, Two-Columns, Right-Sidebar, Custom-Colors, Custom-Header, Footer-Widgets, Theme-Options
 
 This theme, like WordPress, is licensed under the GPL.
-Use it to make something cool, have fun, and share what you've learned.
 
 Paddle is based on Underscores https://underscores.me/, (C) 2012-2020 Automattic, Inc.
 Underscores is distributed under the terms of the GNU GPL v2 or later.
 
+Paddle WordPress Theme, Copyright 2021 Abidemi Kusimo.
+Paddle is distributed under the terms of the GNU GPL.
+
 Normalizing styles have been helped along thanks to the fine work of
 Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
+
+Resource Licenses:
+Bootstrap: http://getbootstrap.com | https://github.com/twbs/bootstrap/blob/master/LICENSE (Code licensed under MIT, documentation under CC BY 3.0.),
+Boostrap Offcanvas Navbar : Thanks to Phil Hughes https://github.com/iamphill/Bootstrap-Offcanvas (Code licensed under MIT)
+jQuery: https://jquery.org | (Code licensed under MIT)
+
+Paddle Wordpress Theme, Copyright 2021 Abidemi Kusimo
+Paddle is distributed under the terms of the GNU GPL
+
+Image for theme screenshot, Copyright Abidemi S. Kusimo
+License:  CC-0 License. Unsplash photos are made to be used freely.
+License URL: https://unsplash.com/license
+Source: https://unsplash.com/photos/KCYN0bG2DDg
 */

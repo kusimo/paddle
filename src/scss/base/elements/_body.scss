@@ -1,47 +1,63 @@
 body {
-	background: $color__background-body; // Fallback for when there is no custom background color defined.
-	#page.site {
-		overflow-x: hidden;
-		word-wrap: break-word;
-	}
+  background: $color__background-body; // Fallback for when there is no custom background color defined.
+  #page.site {
+    overflow-x: hidden;
+    word-wrap: break-word;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  body.left-sidebar .content-area,
+  body.left-sidebar-woocommerce .content-area {
+    order: 1;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .left-sidebar-woocommerce.woocommerce-active aside#secondary {
+    padding-right: 5rem;
+  }
 }
 
 /**
  * Clearings
  */
 
- .clear:before,
- .clear:after,
- .site:before,
- .site:after,
- .entry-content:before,
- .entry-content:after,
- .comment-content:before,
- .comment-content:after,
- .site-content:before,
- .site-content:after,
- .nav-links:before,
- .nav-links:after,
- .comment-navigation:before,
- .comment-navigation:after,
- .social-navigation ul:before,
- .social-navigation ul:after,
- .textwidget:before,
- .textwidget:after {
-	 content: "";
-	 display: table;
- }
- 
- .clear:after,
- .site:after,
- .entry-content:after,
- .comment-content:after,
- .site-content:after,
- .nav-links:after,
- .comment-navigation:after,
- .social-navigation ul:after,
- .textwidget:after {
-	 clear: both;
- }
- 
- 
+.clear:before,
+.clear:after,
+.site:before,
+.site:after,
+.entry-content:before,
+.entry-content:after,
+.comment-content:before,
+.comment-content:after,
+.site-content:before,
+.site-content:after,
+.nav-links:before,
+.nav-links:after,
+.comment-navigation:before,
+.comment-navigation:after,
+.social-navigation ul:before,
+.social-navigation ul:after,
+.textwidget:before,
+.textwidget:after {
+  content: '';
+  display: table;
+}
+
+.clear:after,
+.site:after,
+.entry-content:after,
+.comment-content:after,
+.site-content:after,
+.nav-links:after,
+.comment-navigation:after,
+.social-navigation ul:after,
+.textwidget:after {
+  clear: both;
+}
+.container:after {
+  content: '';
+  display: block;
+  clear: both;
+}

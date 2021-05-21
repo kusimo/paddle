@@ -28,7 +28,7 @@
 
 // Import variables and mixins.
 */
-@import "abstracts/abstracts";
+@import 'abstracts/abstracts';
 
 /*--------------------------------------------------------------
 # Generic
@@ -36,16 +36,16 @@
 
 /* Normalize
 --------------------------------------------- */
-@import "generic/normalize";
+@import 'generic/normalize';
 
 /* Box sizing
 --------------------------------------------- */
-@import "generic/box-sizing";
+@import 'generic/box-sizing';
 
 /*--------------------------------------------------------------
 # Base
 --------------------------------------------------------------*/
-@import "base/base";
+@import 'base/base';
 
 /*--------------------------------------------------------------
 # Layouts
@@ -56,7 +56,7 @@
 /*--------------------------------------------------------------
 # Components
 --------------------------------------------------------------*/
-@import "components/components";
+@import 'components/components';
 
 /*--------------------------------------------------------------
 # Plugins
@@ -64,7 +64,7 @@
 
 /* Jetpack infinite scroll
 --------------------------------------------- */
-@import "plugins/jetpack/infinite-scroll";
+@import 'plugins/jetpack/infinite-scroll';
 
 /*--------------------------------------------------------------
 # Utilities
@@ -72,11 +72,8 @@
 
 /* Accessibility
 --------------------------------------------- */
-@import "utilities/accessibility";
+@import 'utilities/accessibility';
 
 /* Alignments
 --------------------------------------------- */
-@import "utilities/alignments";
-
-
-
+@import 'utilities/alignments';

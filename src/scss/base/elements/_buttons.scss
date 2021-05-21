@@ -1,69 +1,111 @@
 button:not(.btn),
-input[type="button"]:not(.btn),
-input[type="reset"]:not(.btn),
-input[type="submit"]:not(.btn) {
-	border-color: $color__border-button;
-	border-radius: 3px;
-	color: rgba(0, 0, 0, 0.8);
-	line-height: 1;
-	padding: 0.6em 1em 0.4em;
+input[type='button']:not(.btn),
+input[type='reset']:not(.btn),
+input[type='submit']:not(.btn) {
+  background: $color__primary;
+  border: 1px solid $color__primary;
+  color: #fff;
+  padding: 0.6em 1em 0.4em;
+  line-height: 1;
+  border-radius: 0;
+  box-shadow: none;
+  text-shadow: none;
+  text-transform: uppercase;
+  transition: linear 0.2s;
 
-	&:hover {
-		border-color: $color__border-button-hover;
-	}
-
-	&:active,
-	&:focus {
-		border-color: $color__border-button-focus;
-		outline:none;
-	}
-}
-
-.btn-rounded {
-    border-radius: 40px;
+  &:hover {
+    border-color: transparent;
     color: #fff;
-    border: 2px solid transparent;
+    background-color: $color__secondary;
+  }
+
+  &:active,
+  &:focus {
+    border-color: $color__border-button-focus;
+    //outline: none;
+  }
 }
 
-a.btn.btn-primary.btn-lg {
-	padding: 15px 25px;
+.btn-primary {
+  display: inline-block;
+  border: 1px solid transparent;
+  font-size: 14px;
+  font-weight: 600;
+  min-width: 167px;
+  padding: 18px 47px 14px;
+  line-height: normal;
+  cursor: pointer;
+  text-align: center;
+  background-color: #000;
 }
- a.btn.btn-primary:hover, a.btn.btn-primary:focus {
-    background-color:#fff;
+.btn-primary.r-50 {
+  border-radius: 50px;
 }
-#header-btn-cta {
-	margin-left: auto;
-}
-#header-btn-cta a {
-	font-weight: 700;
-    letter-spacing: 0.0333em;
-	padding: 15px 25px!important }
-
-@media (max-width:767px) {
-	#header-btn-cta {
-		bottom: 0;
-		padding: 1.5rem;
-		clear: both;
-		margin-bottom: 2rem;
-		margin-top: 3rem;
-		left: -50vw;
-		margin-left: 50%;
-		max-width: none;
-		overflow: hidden;
-		top: 0;
-		width: 100vw;
-		a {
-			border-radius: 0;
-			width: 100%;
-			padding: 15px 30px !important;
-			text-transform: uppercase;
-		}
-	}
-	
+.btn-primary.r-none {
+  border-radius: 0px;
 }
 
 .btn-uppercase {
-	font-weight: 600;
-    letter-spacing: 0.0333em;
-    text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.0333em;
+  text-transform: uppercase;
 }
+
+a.btn.btn-primary.btn-lg {
+  padding: 15px 25px;
+}
+a.btn.btn-primary:hover,
+a.btn.btn-primary:focus {
+  background-color: #fff;
+}
+.btn-rounded {
+  border-radius: 40px;
+  color: #fff;
+  border: 2px solid transparent;
+}
+#header-btn-cta {
+  margin-left: auto;
+}
+@media screen and (min-width: 768px) {
+  #header-btn-cta {
+    float: right;
+    margin-left: 7px;
+  }
+}
+#header-btn-cta a {
+  font-weight: 500;
+  letter-spacing: 0.0333em;
+  text-transform: uppercase;
+  padding: 0.7em 1.2em !important;
+}
+
+@media (max-width: 767px) {
+  #header-btn-cta {
+    max-width: none;
+    overflow: hidden;
+    margin-top: 12px;
+    a {
+      border-radius: 0;
+      width: 100%;
+      padding: 15px 30px !important;
+      text-transform: uppercase;
+    }
+  }
+}
+
+/** Off Canvas Close Button ***/ 
+#js-bootstrap-offcanvas {
+  background: #fff;
+  .drawer__header {
+    border-bottom: 1px solid #e8e8e1;
+    button {
+      background:transparent!important;
+      color: $color__primary!important;
+      border: none;
+    }
+  }
+
+}
+
+
+

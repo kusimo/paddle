@@ -10,10 +10,10 @@
 ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-	<?php 
+	<?php
 	if ( ( is_single() || ( is_page() && ! is_front_page() ) ) && has_post_thumbnail() ) :
 		get_template_part( 'template-parts/header/featured-header', 'image' );
-		
+
 	else :
 		if ( is_singular() ) {
 			the_title( '<h1 class="entry-title">', '</h1>' );
@@ -21,26 +21,29 @@
 			the_title( '<h2 class="entry-title heading-size-1"><a class="post-entry-link" href="' . esc_url( get_permalink() ) . '"  "rel="bookmark">', '</a></h2>' );
 		}
 
-		if ( 'post' === get_post_type() ) : 
+		if ( 'post' === get_post_type() ) :
 			?>
-            <div class="entry-meta">
+			<div class="entry-meta">
 				<small>
 				<?php
 				paddle_posted_by();
 				?>
 				</small>
 
-			<?php 
-			// Display date link in the header if not in the footer. 
-			if ( is_archive() && 1 === get_theme_mod( 'hide_archive_meta') ) : paddle_posted_on(); endif; 
+			<?php
+			// Display date link in the header if not in the footer.
+			if ( is_archive() && 1 === get_theme_mod( 'hide_archive_meta' ) ) :
+				paddle_posted_on();
+endif;
 			?>
 
 			</div><!-- .entry-meta -->
-		<?php endif;	// End if post type.
+			<?php
+		endif;    // End if post type.
 
 		paddle_post_thumbnail();
 
-	endif; 
+	endif;
 	?>
 
 
@@ -77,11 +80,13 @@
 	
 	<div class="clearfix"></div>
 
-	<?php if( is_archive() && 1 === get_theme_mod( 'hide_archive_meta') ) :  
-		 else : 
-		 ?>
+	<?php
+	if ( is_archive() && 1 === get_theme_mod( 'hide_archive_meta' ) ) :
+				return '';
+		 else :
+				?>
 	<footer class="entry-footer">
-		<?php paddle_entry_footer(); ?>
+			 <?php paddle_entry_footer(); ?>
 	</footer><!-- .entry-footer -->
 	<?php endif; ?>
 </article><!-- #post-<?php the_ID(); ?> -->

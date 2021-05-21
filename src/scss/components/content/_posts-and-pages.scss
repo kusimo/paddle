@@ -1,3 +1,6 @@
+.site-content {
+  margin: 0 0 80px;
+}
 .home .site-content {
   padding-top: 30px;
 }
@@ -100,6 +103,9 @@ article {
   @media (max-width: 575px) {
     padding: 2.5rem 0 3rem;
   }
+  form {
+    margin-bottom: 40px;
+}
 }
  .entry-summary {
   padding-bottom: 4rem;
@@ -153,8 +159,6 @@ article {
           width: 100%;
 
             .page__title {
-              font-size: 2.125rem;
-              font-weight: 500;
               padding-bottom: .75rem;
               word-break: keep-all;
               margin: 0;
@@ -162,8 +166,6 @@ article {
               .entry-title {
                 word-break: keep-all;
                 margin: 0;
-                font-size: 2.125rem;
-                font-weight: 500;
             }
           }
 
@@ -283,10 +285,6 @@ article {
         max-width: 70%;
         .page__title {
           padding-bottom: 1.5rem;
-          .entry-title {
-            font-size: 2.5rem;
-            font-weight:900;
-          }
         }
       }
     }
@@ -332,7 +330,7 @@ article {
         display: inline-block;
         line-height: 1;
         margin-bottom: 4px;
-        text-decoration: none!important;
+        //text-decoration: none!important;
       }
     }
   }
@@ -375,7 +373,7 @@ span.tags-links a {
   border-radius: 15px;
   border: 1px solid #ccc;
   margin-bottom: 5px;
-  text-decoration: none!important;
+  //text-decoration: none!important;
 }
 
 small .byline{
@@ -477,7 +475,8 @@ h2:not(.noline-title):before {
   transform: rotate(-45deg);
 }
 .article-more-link:hover a {
-  text-decoration: none!important;
+  //text-decoration: none!important;
+  text-decoration: none;
 }
 .article-more-link:hover .read-more:before {
   right: -3px;

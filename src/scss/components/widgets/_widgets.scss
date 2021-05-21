@@ -1,41 +1,80 @@
 .widget-area {
-	.widget {
-		margin: 0 0 5.5em;
-	
-		// Make sure select elements fit in widgets.
-		select {
-			max-width: 100%;
-		}
-	
-		ul {
-			list-style: none;
-			padding-left: 0;
-			margin-left:0;
-		}
-		.widget-title {
-			font-size: 1.357em;
-			font-weight: 400;
-			margin: 0 0 1.6em;
-			letter-spacing: 0.04em;
-			text-transform: uppercase;
-			padding-bottom: 1.053em;
-			position: relative;
-			line-height: 1em;
-			border-bottom: 1px solid #ebebeb;
-		}
-	}
+  .widget {
+    margin: 0 0 5.5em;
+
+    // Make sure select elements fit in widgets.
+    select {
+      max-width: 100%;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+      margin-left: 0;
+    }
+    .widget-title, h3, h4 {
+      font-size: 1.1357em;
+      font-weight: 400;
+      margin: 0 0 1.6em;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding-bottom: 1.053em;
+      position: relative;
+      line-height: 1.4em;
+      border-bottom: 1px solid #ebebeb;
+      @media screen and (min-width:768px) {
+        font-size: 20px;
+        margin-top:32px;
+      }
+    }
+  }
 }
-#secondary .widget ul li:not(:last-child) {
-    border-bottom: 1px solid #eaeaea;
-    position: relative;
+#secondary .widget ul li {
+  position: relative;
+  margin-bottom: 0.5em;
+  padding-bottom: 0.5em;
+  line-height: 1.5em;
+  margin: 0 0 15px;
+  padding-left: 15px;
+  border-bottom: 1px dashed #cecece;
+}
+#secondary .widget ul li:last-child {
+  border-bottom: none !important;
 }
 
 #secondary .widget ul li a {
-    font-weight: 400;
-    padding: 0.5em 0;
-    margin-bottom: 0;
-    display: inline-block;
-    letter-spacing: -.01em;
-    line-height: 1.4em;
-    font-size: 1.071em;
+  font-weight: 400;
+  padding: 0.5em 0;
+  margin-bottom: 0;
+  display: inline-block;
+  letter-spacing: -0.01em;
+  line-height: 1.4em;
+  font-size: 1.071em;
+}
+
+/* Recent Post */
+body {
+  counter-reset: section; /* Set a counter named 'section', and its initial value is 0. */
+}
+section[id*='recent-posts-'] {
+  li {
+    display: flex;
+    align-items: baseline;
+  }
+  li:before {
+    border-bottom: none;
+    font-weight: 500;
+    width: 28px;
+    height: 24px;
+    counter-increment: section; /* Increment the value of section counter by 1 */
+    content: counter(section) ' ';
+    margin-left: -0.75rem;
+    display: inline-table;
+    text-align: center;
+    font-size: 1.2rem;
+    margin-right: 10px;
+    background-color: $color__primary;
+    color: #ffffff;
+    border-radius: 5px;
+  }
 }

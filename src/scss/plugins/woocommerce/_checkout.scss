@@ -1,21 +1,313 @@
+.woocommerce-info a,
+.woocommerce-info a:hover {
+  color: #fff;
+}
+.woocommerce .col2-set,
+.woocommerce-page .col2-set {
+  width: 100%;
+}
+.woocommerce .col2-set::after,
+.woocommerce .col2-set::before,
+.woocommerce-page .col2-set::after,
+.woocommerce-page .col2-set::before {
+  content: ' ';
+  display: table;
+}
+
+.woocommerce-cart header.entry-header {
+	text-align: center;
+}
+.woocommerce-cart header.entry-header h1 {
+	margin-bottom: 1rem;
+	font-size: 30px;
+	text-transform: uppercase;
+}
+.woocommerce a {text-decoration: none!important;}
+.woocommerce-cart a.remove:hover {
+	color: red !important;
+	background: 0 0
+}
+
+#add_payment_method table.cart td.actions .coupon .input-text,
+.woocommerce-cart table.cart td.actions .coupon .input-text,
+.woocommerce-checkout table.cart td.actions .coupon .input-text {
+	width: 200px
+}
+
+.woocommerce-cart .cart .button,
+.woocommerce-cart .cart input.button, .woocommerce-address-fields .button {
+	margin-top: 1rem;
+	background-color: #000;
+	color: #fff;
+	border-radius: 0;
+	height: 50px;
+	width: 100%;
+	text-transform: uppercase;
+	transition: all .3s ease-in-out;
+	outline: 0 !important;
+	-webkit-appearance: none
+}
+
+.woocommerce-cart .cart input.button:hover{
+	color: #fff !important
+}
+.woocommerce-address-fields .button:hover{color: #000}
+
+.woocommerce-cart-form .coupon {
+	margin: 20px 0
+}
+
+.woocommerce-cart-form .coupon input#coupon_code {
+	padding:10px;
+	padding-left: 20px;
+	border-radius: 5px;
+	border-right: 2px solid #e7e7e7;
+	width: 100%;
+	outline: 0;
+}
+.woocommerce-cart-form .coupon  label{
+	display:none;
+}
+
+.woocommerce-cart-form .coupon input.button {
+	margin-left: 15px
+}
+
+.woocommerce-cart .cart_totals h2 {
+	text-transform: uppercase;
+	margin: 35px 0;
+	border-bottom: 3px solid #f0f0f0;
+	padding-bottom: .292em;
+	margin-top: -.333em;
+	font-weight: 500;
+	letter-spacing: .01em;
+	font-size: 22px;
+}
+.wc-proceed-to-checkout a.checkout-button {
+	font-weight: 500;
+	letter-spacing: .0333em;
+	text-transform: uppercase;
+	padding: .7em 1.2em!important;
+	width: 100%;
+	text-align: center;
+	background: #000;
+	color: #fff;
+}
+
+.woocommerce-cart table.shop_table {
+	padding: 20px
+}
+
+.woocommerce-cart a.added_to_cart {
+	margin-top: 20px;
+	margin-left: 5px
+}
+
+#add_payment_method table.cart img,
+.woocommerce-cart table.cart img,
+.woocommerce-checkout table.cart img {
+	width: 70px
+}
+
+.woocommerce .col2-set {
+  .col-1 {
+    width: 100%;
+    margin-right: $columns__margin;
+    max-width: unset;
+  }
+
+  .col-2 {
+    width: 100%;
+    margin-right: 0;
+    max-width: unset;
+  }
+
+  .col-1,
+  .col-2 {
+    width: 100%;
+    .form-row {
+      .woocommerce-input-wrapper {
+        width: 100%;
+      }
+      label {
+        font-weight: 500;
+      }
+    }
+    .form-row-first,
+    .form-row-last {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .input-text,
+  input[type='email'],
+  input[type='password'],
+  input[type='search'],
+  input[type='text'],
+  input[type='url'],
+  textarea {
+    padding: 9px;
+    outline: 0;
+    border: 1px solid #dbdbdb;
+    -webkit-appearance: none;
+    border-radius: 3px;
+    box-sizing: border-box;
+    font-weight: 400;
+    font-size: 1em;
+    vertical-align: baseline;
+    width: 100%;
+  }
+}
+
+form .woocommerce-billing-fields .woocommerce-billing-fields__field-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
 @media screen and (min-width: 768px) {
+  .woocommerce .col2-set {
+    .col-1 {
+      float: left;
+      margin-right: $columns__margin;
+      max-width: unset;
+    }
 
-	.col2-set {
+    .col-2 {
+      float: right;
+      max-width: unset;
+    }
 
-		.form-row-first {
-			float: left;
-			margin-right: $columns__margin;
+    .col-1,
+    .col-2 {
+      @include column-width(2);
+      .form-row-first,
+      .form-row-last {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+}
+.select2-container--default .select2-selection--single {
+  height: 45px;
+  border: 1px solid #ebebeb;
+}
+.select2-container--default
+  .select2-selection--single
+  .select2-selection__rendered {
+  line-height: 45px;
+  outline: 0;
+}
+.select2-container--default
+  .select2-selection--single
+  .select2-selection__arrow {
+  height: 45px;
+  top: 0;
+  right: 10px;
+}
+#order_review_heading {
+  position: relative;
+  font-weight: 700;
+  text-transform: capitalize;
+  @media screen and (min-width:768px) {
+	  padding-top: 3rem;
+  }
+}
+#order_review_heading::after {
+  content: '';
+  position: absolute;
+  background-color: #f7f7f7;
+  height: 2px;
+  width: 100%;
+  left: 0;
+  bottom: -15px;
+}
+#order_review {
+  thead {
+    .th {
+      display: block;
+      margin-bottom: 12px;
+    }
+    th.product-total {
+      text-align: right;
+    }
+  }
+  tbody tr {
+    td {
+      padding: 5px 0;
+    }
+    td.product-total {
+      float: right;
+	  span {
+		  font-size:18px;
+		  font-weight: normal;
+	  }
+
+    }
+  }
+  tfoot {
+    .cart-subtotal {
+      th,
+      td {
+        padding: 15px 0;
+      }
+	  td {
+       text-align: right;
+	   span {
+		font-weight: normal;
+		font-size: 120%; 
+	   }
+      }
+    }
+	.order-total {
+		td {
+			text-align: right;
+			span {
+				font-size: 140%;
+			}
 		}
+	}
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+  button#place_order {
+    font-size: 18px;
+    width: 100%;
+    white-space: pre-wrap;
+    color: #fff;
+    font-weight: 700;
+    line-height: 40px;
+    letter-spacing: 0.5px;
+    /* border-radius: 2em; */
+    margin-bottom: 0.875em;
+    background: black;
+    text-transform: uppercase;
+  }
+  .woocommerce-privacy-policy-text {
+    font-size: 16px;
+    margin-bottom: 30px;
+  }
+}
 
-		.form-row-last {
-			float: right;
-			margin-right: 0;
-		}
-
-		.form-row-first,
-		.form-row-last {
-
-			@include column-width(2);
-		}
+form.checkout_coupon.woocommerce-form-coupon {
+	input#coupon_code {
+		width: 100%;
+		height: 44px;
+		padding-left: 12px;	
+	}
+	button.button {
+		background-color: #000;
+		color: #fff;
+		border-radius: 0;
+		height: 50px;
+		width: 100%;
+		text-transform: uppercase;
+		transition: all .3s ease-in-out;
+		outline: 0 !important;
+		-webkit-appearance: none;
 	}
 }

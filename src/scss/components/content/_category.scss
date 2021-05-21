@@ -9,10 +9,11 @@
         width:100%;
     }
     .entry-title {
-        line-height: 0.9;
+        line-height: 1.2;
         margin-bottom: .6308em;
+        word-break: break-all;
         @media screen and (min-width: 768px) {
-            line-height: 0.4;
+            line-height: 1;
         }
     }
     h2::before {

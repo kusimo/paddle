@@ -1,16 +1,16 @@
 === Paddle === 
 
 Contributors: kusimo
-Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, one Column, right sidebar, custom colours, editor style, featured image, full width template, rtl-language-support, footer widgets, theme options, blog
-Version: 0.0.1
-Tested up to: 5.4
+Tags: Custom-Background, Custom-Logo, Custom-Menu, Featured-Images, Threaded-Comments, Translation-Ready, Rtl-Language-Support, Blog, One-Column, Two-Columns, Right-Sidebar, Custom-Colors, Custom-Header, Footer-Widgets, Theme-Options
+Version: 1.0.3
+Tested up to: 5.7
 Requires PHP: 5.6
-License: GNU General Public License v3
-License URI: http://www.gnu.org/licenses/gpl-3.0.html
+License: GPL-2.0-or-later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 
 == Description ==
-Paddle blog WordPress theme is a beautiful starter theme built with Bootstrap and understrap framework. You can easily customize the theme for your purpose. Use theme option to change the colour that matches your brand. Choose from different category layout; column or classic, amazing feature image layout options, Call to action button on header image with text of your choice. The theme option provides features that will take your site to the next level.
+Paddle is a theme built with Bootstrap5 and understrap framework. You can easily customize the theme to fit your purpose. The theme comes with colour settings to help match your brand with your site. Also, includes post layout; you can choose to have two column layout and sidebar on the right or one column layout (Full width). Call to Action (CTA) button on the menu bar. The theme option provides features that will drive your site to the next level.
 
 == More Information here: ==
 https://github.com/kusimo/paddle/
@@ -24,16 +24,10 @@ https://github.com/kusimo/paddle/
 
 == Resources & Credits ==
 
-Twitter Bootstrap Framework 4.3.1
-Copyright 2011-2016 Twitter, Inc.
+Twitter Bootstrap Framework 5.0
+Copyright 2011-2021 Twitter, Inc.
 License: Licensed under the MIT license
 http://getbootstrap.com
-
-
-Boostrap Offcanvas Navbar
-Copyright (c) Phil Hughes
-License: MIT
-https://github.com/iamphill/Bootstrap-Offcanvas
 
 
 Underscores https://underscores.me/, (C) 2012-2020 Automattic, Inc., 
@@ -46,7 +40,8 @@ Source: https://necolas.github.io/normalize.css/
 
 == Image used in Screenshots ==
 
-Background Image, Copyright Abidemi Kusimo
-License: CC0 1.0 Universal (CC0 1.0)
-Source: https://basichow.com/images/trophy-winner
+Image for theme screenshot, Copyright Abidemi S. Kusimo
+License:  CC-0 License. Unsplash photos are made to be used freely.
+License URL: https://unsplash.com/license
+Source: https://unsplash.com/photos/KCYN0bG2DDg
 

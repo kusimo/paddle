@@ -13,12 +13,12 @@
  * @global array $themecolors
  */
 function paddle_wpcom_setup() {
-	global $themecolors;
+	 global $themecolors;
 
 	// Set theme colors for third party services.
 	if ( ! isset( $themecolors ) ) {
 		// Whitelist wpcom specific variable intended to be overruled.
-		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
+     // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 		$themecolors = array(
 			'bg'     => '',
 			'border' => '',

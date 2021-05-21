@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The template for displaying archive page
  *
@@ -14,16 +15,16 @@ get_header();
 ?>
 
 <div id="primary" class="content-area col-sm-12 <?php echo esc_attr( paddle_layout_container( 'content' ) ); ?>">
-	<main id="primary" class="site-main <?php echo esc_attr( paddle_layout_width() ); ?>">
+	<main class="site-main <?php echo esc_attr( paddle_layout_width() ); ?>">
 
 		<?php if ( have_posts() ) : ?>
 
-			<header class="page-header">
-				<?php
-				the_archive_title( '<h1 class="page-title">', '</h1>' );
-				the_archive_description( '<div class="archive-description">', '</div>' );
-				?>
-			</header><!-- .page-header --> 
+		<header class="page-header">
+			<?php
+			the_archive_title( '<h1 class="page-title">', '</h1>' );
+			the_archive_description( '<div class="archive-description">', '</div>' );
+			?>
+		</header><!-- .page-header -->
 
 			<?php
 			if ( 1 === get_theme_mod( 'archive_layout', 1 ) ) {
@@ -42,10 +43,10 @@ get_header();
 
 				endwhile;
 			}
-			
+
 			?>
 
-			<?php 
+			<?php
 			the_posts_navigation();
 
 		else :

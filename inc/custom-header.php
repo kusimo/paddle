@@ -22,32 +22,36 @@ function paddle_custom_header_setup() {
 		apply_filters(
 			'paddle_custom_header_args',
 			array(
-				'default-image'      => get_parent_theme_file_uri( '/assets/images/header-image.jpg' ),
-				'default-text-color' => '#404040', 
+				'default-image'      => '',
+				'default-text-color' => '#404040',
 				'width'              => 1920,
 				'height'             => 822,
 				'flex-height'        => true,
 				'wp-head-callback'   => 'paddle_header_style',
-				'video'				 => false,
+				'video'              => false,
 			)
 		)
 	);
+
 }
 add_action( 'after_setup_theme', 'paddle_custom_header_setup' );
 
 if ( ! function_exists( 'paddle_header_style' ) ) :
 	/**
-	 * Styles the header image and text displayed on the blog.
+	 * Styles the header text displayed on the blog.
 	 *
 	 * @see paddle_custom_header_setup().
 	 */
 	function paddle_header_style() {
-		$header_text_color = get_header_textcolor(); 
+
+		paddle_header_image_style();
+
+		$header_text_color = get_header_textcolor();
 
 		/*
-		 * If no custom options for text are set, let's bail.
-		 * get_header_textcolor() options: Any hex value, 'blank' to hide text. Default: add_theme_support( 'custom-header' ).
-		 */
+		* If no custom options for text are set, let's bail.
+		* get_header_textcolor() options: Any hex value, 'blank' to hide text. Default: add_theme_support( 'custom-header' ).
+		*/
 		if ( get_theme_support( 'custom-header', 'default-text-color' ) === $header_text_color ) {
 			return;
 		}
@@ -59,7 +63,6 @@ if ( ! function_exists( 'paddle_header_style' ) ) :
 		// Has the text been hidden?
 		if ( ! display_header_text() ) :
 			?>
-			
 			.site-title,
 			.site-description {
 				position: absolute;
@@ -67,26 +70,57 @@ if ( ! function_exists( 'paddle_header_style' ) ) :
 				}
 			<?php
 			// If the user has set a custom color for the text use that.
-		else :
-			?>
+	else :
+		?>
 			.site-title a,
 			.site-description {
 				color: #<?php echo esc_attr( $header_text_color ); ?>
-			}
-		<?php endif; ?>
+			} <?php endif; ?>
 
-		<?php 
+		<?php
 		// Header image CSS.
-		if ( has_header_image() ) : ?>
+		if ( has_header_image() ) :
+			?>
 
 			.home-banner-image {
-				background-image: url( <?php header_image(); ?>);
+				background-image: url( <?php header_image(); ?>); 
 			}
 			.home-banner .home-banner-overlay {
 				background: rgba(0, 0, 0, 0.<?php echo absint( paddle_banner_opacity() ); ?>);
 			}
 
 		<?php endif; ?>
+
+		</style>
+		<?php
+	}
+endif;
+
+
+if ( ! function_exists( 'paddle_header_image_style' ) ) :
+	/**
+	 * Styles the header image.
+	 *
+	 * @see paddle_custom_header_setup().
+	 */
+	function paddle_header_image_style() {
+
+		/*
+		* If no custom options for header image are set, let's bail.
+		*/
+		if ( ! has_header_image() ) {
+			return;
+		}
+		// If we get this far, we have custom styles. Let's do this.
+		?>
+		<style type="text/css">
+
+			.home-banner-image {
+				background-image: url( <?php header_image(); ?>); 
+			}
+			.home-banner .home-banner-overlay {
+				background: rgba(0, 0, 0, 0.<?php echo absint( paddle_banner_opacity() ); ?>);
+			}
 
 		</style>
 		<?php

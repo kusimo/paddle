@@ -1,17 +1,30 @@
-# Copyright (C) 2020 paddle
-# This file is distributed under the same license as the paddle package.
+# Copyright (C) 2021 Abidemi Kusimo
+# This file is distributed under the GNU General Public License v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: paddle\n"
+"Project-Id-Version: Paddle 1.0.3\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/paddle\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Basepath: ..\n"
-"X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
-"X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPathExcluded-0: *.js\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"POT-Creation-Date: 2021-05-17T17:46:23+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.4.0\n"
+"X-Domain: paddle\n"
+
+#. Theme Name of the theme
+msgid "Paddle"
+msgstr ""
+
+#. Description of the theme
+msgid "<code>Paddle</code> is a theme built with <code>Bootstrap5</code> and understrap framework. You can easily customize the theme to fit your purpose. The theme comes with <code>colour settings</code> to help match your brand with your site. Also, includes <code>post layout</code>; you can choose to have two column layout and <code>sidebar</code> on the right or one column layout (Full width). <code>Call to Action (CTA)</code> button on the menu bar. The theme option provides features that will drive your site to the next level."
+msgstr ""
+
+#. Author of the theme
+msgid "Abidemi Kusimo"
+msgstr ""
 
 #: 404.php:18
 msgid "Oops! That page can&rsquo;t be found."
@@ -21,13 +34,18 @@ msgstr ""
 msgid "It looks like nothing was found at this location. Maybe try one of the links below or a search?"
 msgstr ""
 
-#: 404.php:31
+#: 404.php:32
 msgid "Most Used Categories"
 msgstr ""
 
 #. translators: %1$s: smiley
-#: 404.php:49
+#: 404.php:50
 msgid "Try looking in the monthly archives. %1$s"
+msgstr ""
+
+#. translators: 1: title.
+#: comments.php:35
+msgid "One thought on &ldquo;%1$s&rdquo;"
 msgstr ""
 
 #. translators: 1: comment count number, 2: title.
@@ -38,87 +56,504 @@ msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
 msgstr[0] ""
 msgstr[1] ""
 
-#: comments.php:35
-msgid "One thought on &ldquo;%1$s&rdquo;"
-msgstr ""
-
 #: comments.php:68
 msgid "Comments are closed."
 msgstr ""
 
-#: functions.php:85
+#: functions.php:86
 msgid "Primary"
 msgstr ""
 
-#: functions.php:167
+#: functions.php:87
+msgid "Social Menu"
+msgstr ""
+
+#: functions.php:177
 msgid "Sidebar"
 msgstr ""
 
-#: functions.php:169
-msgid "Add widgets here."
+#: functions.php:179
+msgid "This widget displays the sidebar."
 msgstr ""
 
-#: functions.php:178
+#: functions.php:189
+msgid "After Single Product Page"
+msgstr ""
+
+#: functions.php:191
+msgid "This widget is displayed on product page after single product."
+msgstr ""
+
+#: functions.php:201
+msgid "After Product Meta"
+msgstr ""
+
+#: functions.php:203
+msgid "This widget is displayed on the product page after meta data, e.g. SKU."
+msgstr ""
+
+#: functions.php:213
+msgid "Product Area Collapse"
+msgstr ""
+
+#: functions.php:215
+msgid "This widget is displayed inside single product page as a dropdown option. The widget title will be used as the dropdown label"
+msgstr ""
+
+#: functions.php:225
 msgid "Footer 1"
 msgstr ""
 
-#: functions.php:180, functions.php:190, functions.php:200, functions.php:210
-msgid "Add widgets here to appear in your footer."
+#: functions.php:227
+#: functions.php:239
+#: functions.php:251
+#: functions.php:263
+msgid "This widget appears in your footer."
 msgstr ""
 
-#: functions.php:188
+#: functions.php:237
 msgid "Footer 2"
 msgstr ""
 
-#: functions.php:198
+#: functions.php:249
 msgid "Footer 3"
 msgstr ""
 
-#: functions.php:208
+#: functions.php:261
 msgid "Footer 4"
 msgstr ""
 
-#: header.php:27
+#: header.php:28
 msgid "Skip to content"
 msgstr ""
 
-#: header.php:61, inc/template-functions.php:90, inc/template-functions.php:186
+#: header.php:44
+#: inc/template-functions.php:107
+#: inc/template-functions.php:265
 msgid "Search"
 msgstr ""
 
-#. translators: %s: search query.
-#: search.php:23
-msgid "Search Results for: %s"
+#: header.php:119
+msgid "Close menu"
 msgstr ""
 
-#: singular.php:28
-msgid "Previous:"
+#: inc/customizer/theme-settings.php:24
+msgid "Theme Options"
 msgstr ""
 
-#: singular.php:29
-msgid "Next:"
+#: inc/customizer/theme-settings.php:34
+msgid "Header Options"
 msgstr ""
 
-#: inc/template-functions.php:88, inc/template-functions.php:89
+#: inc/customizer/theme-settings.php:36
+msgid "Header options"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:57
+msgid "Show the header search button icon"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:74
+msgid "Float logo to the left"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:98
+msgid "Menu background color"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:124
+msgid "Header link color"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:144
+msgid "Center align menu"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:164
+msgid "Display menu item in uppercase"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:183
+msgid "Enable short solid line before headings titles in the page body (h1 and h2)"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:202
+msgid "Enable CTA button in the header"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:221
+msgid "CTA Link URL"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:243
+msgid "CTA button text"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:274
+msgid "Main heading H1 style"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:275
+msgid "Toggle the style of the main headings style (Default is classic)."
+msgstr ""
+
+#: inc/customizer/theme-settings.php:280
+#: inc/customizer/theme-settings.php:612
+msgid "Please select"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:281
+msgid "classic"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:282
+msgid "boxed"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:304
+msgid "Main heading H1 background color"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:305
+msgid "Select backgournd color for boxed style Heading. (the default background heading the theme primary color)."
+msgstr ""
+
+#: inc/customizer/theme-settings.php:320
+msgid "Slider Settings"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:321
+msgid "Slider Section - Use this on homepage. You need to disable the homepage header image for this to work. "
+msgstr ""
+
+#: inc/customizer/theme-settings.php:337
+msgid "Check to enable the slider. Hide image in the Header Imge section for slider to work."
+msgstr ""
+
+#: inc/customizer/theme-settings.php:358
+msgid "Set slider page 1"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:359
+#: inc/customizer/theme-settings.php:424
+#: inc/customizer/theme-settings.php:490
+msgid "Select a page from the dropdown below."
+msgstr ""
+
+#: inc/customizer/theme-settings.php:379
+#: inc/customizer/theme-settings.php:380
+msgid "Button Text for Page 1"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:400
+#: inc/customizer/theme-settings.php:401
+msgid "URL for Page 1"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:423
+msgid "Set slider page 2"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:444
+#: inc/customizer/theme-settings.php:445
+msgid "Button Text for Page 2"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:465
+#: inc/customizer/theme-settings.php:466
+msgid "URL for Page 2"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:489
+msgid "Set slider page 3"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:510
+#: inc/customizer/theme-settings.php:511
+msgid "Button Text for Page 3"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:531
+#: inc/customizer/theme-settings.php:532
+msgid "URL for Page 3"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:545
+#: inc/customizer/theme-settings.php:547
+msgid "Page Layout"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:565
+msgid "Full Width"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:585
+msgid "Enable Sidebar"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:605
+msgid "Change the sidebar position"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:606
+msgid "The default sidebar postion is right. You can choose to show left sidebar only on Woocommerce pages."
+msgstr ""
+
+#: inc/customizer/theme-settings.php:613
+#: inc/customizer/theme-settings.php:836
+msgid "Right"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:614
+#: inc/customizer/theme-settings.php:837
+msgid "Left"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:615
+msgid "Left (Only on Woocommerce Pages)"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:632
+msgid "Remove Sidebar on Woocommerce Single Product Pages"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:657
+msgid "Primary Color"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:668
+msgid "Featured Image"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:691
+msgid "Full Width Featured Image Style"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:696
+msgid "Slim Full Width"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:697
+msgid "Hero Full Width"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:698
+msgid "Classic"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:710
+msgid "Category Page"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:729
+msgid "Toggle Layout"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:732
+msgid "Toggle layout for category page, achieve page or tag page"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:748
+msgid "Hide Footer Meta"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:751
+msgid "Hide tag and category links on category page."
+msgstr ""
+
+#: inc/customizer/theme-settings.php:767
+msgid "Enable author link info"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:795
+msgid "Select The Banner Image Opacity Overlay Level"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:800
+#: inc/customizer/theme-settings.php:932
+msgid "9"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:801
+#: inc/customizer/theme-settings.php:933
+msgid "8"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:802
+#: inc/customizer/theme-settings.php:934
+msgid "7"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:803
+#: inc/customizer/theme-settings.php:935
+msgid "6"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:804
+#: inc/customizer/theme-settings.php:936
+msgid "5"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:805
+#: inc/customizer/theme-settings.php:937
+msgid "4"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:806
+#: inc/customizer/theme-settings.php:938
+msgid "3"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:807
+#: inc/customizer/theme-settings.php:939
+msgid "2"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:808
+#: inc/customizer/theme-settings.php:940
+msgid "1"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:809
+#: inc/customizer/theme-settings.php:941
+msgid "0"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:831
+msgid "Select Alignment"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:838
+msgid "Center"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:861
+msgid "Banner Text Color"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:882
+msgid "Enable background color"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:903
+msgid "Set Banner Background Color"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:926
+msgid "Set Opacity for Background Color"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:959
+msgid "This adds border radius to the banner container"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:962
+msgid "Add border radius to the Banner Text Area"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:978
+msgid "Toggle the header style. This change the title text to uppercase and add background color."
+msgstr ""
+
+#: inc/customizer/theme-settings.php:981
+msgid "Toggle Banner Title Style"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:989
+msgid "Build Your Dream Website with Paddle"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:999
+msgid "Banner Title"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:1012
+msgid "Let's improve the way you see business."
+msgstr ""
+
+#: inc/customizer/theme-settings.php:1022
+msgid "Banner description"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:1034
+msgid "Learn More"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:1044
+msgid "Button 1 Label"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:1065
+msgid "Button 1 URL Link"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:1086
+msgid "Button 2 Label"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:1107
+msgid "Button 2 URL Link"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:1127
+msgid "This moves the home page content slightly over the homepage banner"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:1130
+msgid "Shift content up over banner"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:1140
+msgid "Footer Settings"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:1141
+msgid "Footer settings"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:1158
+msgid "Show your logo in footer. Logo appears before the first footer widget. You need to add a widget to the footer to make it work."
+msgstr ""
+
+#: inc/customizer/theme-settings.php:1177
+msgid "Footer Copyright Text"
+msgstr ""
+
+#: inc/customizer/theme-settings.php:1178
+msgid "Copyright text to be displayed in the footer. No HTML allowed."
+msgstr ""
+
+#: inc/customizer/theme-settings.php:1196
+msgid "Show the theme credit in footer"
+msgstr ""
+
+#. translators: 1: product ID number
+#: inc/customizer/theme-settings.php:1349
+msgid "Please Add Sale Price - Product ID: %1$s"
+msgstr ""
+
+#: inc/template-functions.php:105
+#: inc/template-functions.php:106
 msgid "Search for:"
 msgstr ""
 
-#: inc/template-functions.php:189
+#: inc/template-functions.php:275
+#: inc/template-functions.php:356
 msgid "Close"
 msgstr ""
 
 #. translators: Copyright date format, see https://secure.php.net/date
-#: inc/template-functions.php:227
+#: inc/template-functions.php:316
 msgctxt "copyright date format"
 msgid "Y"
 msgstr ""
 
-#: inc/template-functions.php:252
-msgid "Theme by "
+#: inc/template-functions.php:343
+msgid "Powered by "
 msgstr ""
 
-#: inc/template-functions.php:252
-msgid "Paddle Themes"
+#: inc/template-functions.php:343
+msgid "WordPress. Designed by A. Kusimo"
 msgstr ""
 
 #. translators: %s: post date.
@@ -138,31 +573,30 @@ msgid "Posted in"
 msgstr ""
 
 #. translators: used between list items, there is a space after the comma
-#: inc/template-tags.php:66
+#: inc/template-tags.php:65
 msgctxt "list item separator"
 msgid ", "
 msgstr ""
 
 #. translators: 1: list of tags.
-#: inc/template-tags.php:69
-msgctxt "paddle"
+#: inc/template-tags.php:68
 msgid "Tagged"
 msgstr ""
 
 #. translators: %s: post author.
-#: inc/template-tags.php:83
+#: inc/template-tags.php:82
 msgctxt "post author"
 msgid "by %s"
 msgstr ""
 
 #. translators: %s: post title
-#: inc/template-tags.php:113
+#: inc/template-tags.php:112
 msgid "Leave a Comment<span class=\"screen-reader-text\"> on %s</span>"
 msgstr ""
 
 #. translators: %s: Name of current post. Only visible to screen readers
-#. translators: %s: Name of current post. Only visible to screen readers
-#: inc/template-tags.php:130, template-parts/content-page.php:39
+#: inc/template-tags.php:129
+#: template-parts/content-page.php:39
 msgid "Edit <span class=\"screen-reader-text\">%s</span>"
 msgstr ""
 
@@ -171,203 +605,94 @@ msgstr ""
 msgid "Continue reading"
 msgstr ""
 
-#: inc/woocommerce.php:184
+#: inc/woocommerce.php:176
 msgid "View your shopping cart"
 msgstr ""
 
 #. translators: number of items in the mini cart.
-#: inc/woocommerce.php:188
+#: inc/woocommerce.php:180
 msgid "%d item"
 msgid_plural "%d items"
 msgstr[0] ""
 msgstr[1] ""
 
+#: inc/woocommerce.php:237
+msgid "My Account"
+msgstr ""
+
+#: inc/woocommerce.php:241
+msgid "Sign in"
+msgstr ""
+
+#: inc/woocommerce.php:339
+msgid "Short Description"
+msgstr ""
+
+#: inc/woocommerce.php:361
+msgid "Additional Information"
+msgstr ""
+
+#. translators: %1$s%2$0.2f: total savings amount, %3$s percentages
+#: inc/woocommerce.php:422
+msgid "You save %1$s%2$0.2f (%3$s)"
+msgstr ""
+
+#. Template Name of the theme
+msgid "Full Width Page"
+msgstr ""
+
+#: page-templates/fullwidth-page.php:29
+#: singular.php:29
+msgid "Previous:"
+msgstr ""
+
+#: page-templates/fullwidth-page.php:30
+#: singular.php:30
+msgid "Next:"
+msgstr ""
+
+#. translators: %s: search query.
+#: search.php:24
+msgid "Search Results for: %s"
+msgstr ""
+
 #: template-parts/content-none.php:14
 msgid "Nothing Found"
 msgstr ""
 
-#: template-parts/content-none.php:44
-msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
+#. translators: 1: link to WP admin new post page.
+#: template-parts/content-none.php:24
+msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
 msgstr ""
 
 #: template-parts/content-none.php:37
 msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
 msgstr ""
 
-#: template-parts/content-none.php:24
-msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+#: template-parts/content-none.php:44
+msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
 msgstr ""
 
-#: template-parts/content-page.php:25, template-parts/content.php:71
+#: template-parts/content-page.php:25
+#: template-parts/content.php:74
 msgid "Pages:"
 msgstr ""
 
 #. translators: %s: Name of current post. Only visible to screen readers
-#: template-parts/content.php:57
+#: template-parts/content.php:60
 msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
 msgstr ""
 
-#: inc/customizer/theme-settings.php:24
-msgid "Theme Options"
-msgstr ""
-
-#: inc/customizer/theme-settings.php:34
-msgid "Header Options"
-msgstr ""
-
-#: inc/customizer/theme-settings.php:36
-msgid "Header options"
-msgstr ""
-
-#: inc/customizer/theme-settings.php:74
-msgid "Display menu item in uppercase"
-msgstr ""
-
-#: inc/customizer/theme-settings.php:93
-msgid "Enable CTA button in the header"
-msgstr ""
-
-#: inc/customizer/theme-settings.php:111
-msgid "CTA Link URL"
-msgstr ""
-
-#: inc/customizer/theme-settings.php:133
-msgid "CTA button text"
-msgstr ""
-
-#: inc/customizer/theme-settings.php:158, inc/customizer/theme-settings.php:160
-msgid "Page Layout"
-msgstr ""
-
-#: inc/customizer/theme-settings.php:178
-msgid "Full Width"
-msgstr ""
-
-#: inc/customizer/theme-settings.php:198
-msgid "Right Sidebar"
-msgstr ""
-
-#: inc/customizer/theme-settings.php:199
-msgid "Show widget sidebar on the right. The default is bottom after post"
-msgstr ""
-
-#: inc/customizer/theme-settings.php:226
-msgid "Primary Color"
-msgstr ""
-
-#: inc/customizer/theme-settings.php:237
-msgid "Featured Image"
-msgstr ""
-
-#: inc/customizer/theme-settings.php:260
-msgid "Full Width Featured Image Style"
-msgstr ""
-
-#: inc/customizer/theme-settings.php:265
-msgid "Slim Full Width"
-msgstr ""
-
-#: inc/customizer/theme-settings.php:266
-msgid "Hero Full Width"
-msgstr ""
-
-#: inc/customizer/theme-settings.php:267
-msgid "Classic"
-msgstr ""
-
-#: inc/customizer/theme-settings.php:279
-msgid "Category Page"
-msgstr ""
-
-#: inc/customizer/theme-settings.php:336
-msgid "Enable author link info"
-msgstr ""
-
-#: inc/customizer/theme-settings.php:362
-msgid "Select The Banner Image Opacity Overlay Level"
-msgstr ""
-
-#: inc/customizer/theme-settings.php:399
-msgid "Select Alignment"
-msgstr ""
-
-#: inc/customizer/theme-settings.php:404
-msgid "Right"
-msgstr ""
-
-#: inc/customizer/theme-settings.php:405
-msgid "Left"
-msgstr ""
-
-#: inc/customizer/theme-settings.php:406
-msgid "Center"
-msgstr ""
-
-#: inc/customizer/theme-settings.php:430
-msgid "Banner Text Color"
-msgstr ""
-
-#: inc/customizer/theme-settings.php:471
-msgid "Banner Text Area Background Color"
-msgstr ""
-
-#: inc/customizer/theme-settings.php:483
-msgid "Build Your Dream Website with Paddle"
-msgstr ""
-
-#: inc/customizer/theme-settings.php:489
-msgid "Banner Title"
-msgstr ""
-
-#: inc/customizer/theme-settings.php:499
-msgid "Let's improve the way you see business."
-msgstr ""
-
-#: inc/customizer/theme-settings.php:505
-msgid "Banner description"
-msgstr ""
-
-#: inc/customizer/theme-settings.php:514
-msgid "Learn More"
-msgstr ""
-
-#: inc/customizer/theme-settings.php:520
-msgid "Button 1 Label"
-msgstr ""
-
-#: inc/customizer/theme-settings.php:534
-msgid "Button 1 URL Link"
-msgstr ""
-
-#: inc/customizer/theme-settings.php:548
-msgid "Button 2 Label"
-msgstr ""
-
-#: inc/customizer/theme-settings.php:561
-msgid "Button 2 URL Link"
-msgstr ""
-
-#: inc/customizer/theme-settings.php:575
-msgid "Footer Settings"
-msgstr ""
-
-#: inc/customizer/theme-settings.php:596
-msgid "Footer Copyright Text"
-msgstr ""
-
-#: inc/customizer/theme-settings.php:597
-msgid "Copyright text to be displayed in the footer. No HTML allowed."
-msgstr ""
-
-#: template-parts/footer/widgets.php:40
+#: template-parts/footer/widgets.php:45
 msgid "Footer"
+msgstr ""
+
+#. translators: %s: Author name.
+#: template-parts/header/featured-header-image.php:41
+msgid "By %s"
 msgstr ""
 
 #: template-parts/header/featured-header-image.php:67
 msgctxt "post author"
 msgid "By"
-msgstr ""
-
-#: template-parts/header/featured-header-image.php:41
-msgid "By %s"
 msgstr ""

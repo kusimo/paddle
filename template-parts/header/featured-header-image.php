@@ -9,7 +9,7 @@
  * Check if user is not using right sidebar option
  */
 $paddle_sidebar_check = paddle_layout_container( 'content' );
-if ( 'col-lg-8' !== $paddle_sidebar_check && 'classic' !== get_theme_mod( 'paddle_featured_image_style' ) ) :  // Theme is not using the right sidebar option or classic, get wide header image.               
+if ( 'col-lg-8' !== $paddle_sidebar_check && 'classic' !== get_theme_mod( 'paddle_featured_image_style', 'classic' ) ) :  // Theme is not using the right sidebar option or classic, get wide header image.
 	?>
 
 	<header class="entry-header has-post-thumbnail <?php echo esc_attr( get_theme_mod( 'paddle_featured_image_style', 'slim-full-width' ) ); ?>">
@@ -56,12 +56,12 @@ if ( 'col-lg-8' !== $paddle_sidebar_check && 'classic' !== get_theme_mod( 'paddl
 
 	</header><!-- .entry-header -->
 
-	<?php 
-else :  // Right sidebar option is in use. 
+	<?php
+else :  // Right sidebar option is in use.
 
 	the_title( '<h1 class="entry-title">', '</h1>' );
 
-	if( 1 === get_theme_mod( 'paddle_enable_author_bio', 1 ) ) {
+	if ( 1 === get_theme_mod( 'paddle_enable_author_bio', 1 ) ) {
 		printf(
 			'<div class="by-author"> %1$s<span class="author vcard"><a class="url" href="%2$s"> %3$s</a></span></div>',
 			esc_html_x( 'By', 'post author', 'paddle' ),
@@ -74,7 +74,7 @@ else :  // Right sidebar option is in use.
 
 	<figure class="thumbnail-post-single position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
 
-		<?php 
+		<?php
 		paddle_post_thumbnail();
 
 		$paddle_caption = get_the_post_thumbnail_caption();

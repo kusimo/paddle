@@ -11,6 +11,8 @@
 
 ?>
 
+
+
 </div><!-- .row -->
 </div><!-- .container -->
 </div><!-- #content -->
@@ -18,15 +20,15 @@
 <div class="clearfix"></div>
 
 
-<footer id="colophon" class="site-footer border-top">
+<footer id="paddle-footer-colophon" class="site-footer border-top">
 
-		<?php 
+		<?php
 
-				if ( is_active_sidebar( 'footer-1' ) || is_active_sidebar( 'footer-2' ) || is_active_sidebar( 'footer-3' ) || is_active_sidebar( 'footer-4' ) ) :
-             
-             		get_template_part( 'template-parts/footer/widgets' ); 
-             
-				 endif; 
+		if ( is_active_sidebar( 'footer-1' ) || is_active_sidebar( 'footer-2' ) || is_active_sidebar( 'footer-3' ) || is_active_sidebar( 'footer-4' ) ) :
+
+			get_template_part( 'template-parts/footer/widgets' );
+
+				 endif;
 		?>
 		
 	<div class="site-info">
@@ -44,8 +46,6 @@
 </footer><!-- #colophon -->
 </div><!-- #page -->
 
-<!-- Search Modal -->
-<?php if ( 1 === get_theme_mod( 'paddle_header_search_button', 1 )  )  do_action( 'paddle_action_search_modal' ); ?>
 
 <?php wp_footer(); ?>
 

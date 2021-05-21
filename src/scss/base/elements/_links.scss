@@ -1,8 +1,15 @@
 
 a {
     color: #555;
-    text-decoration: none;
+    text-decoration: underline;
+    font-weight: 500;
     transition: all 0.3s ease-in-out;
+}
+.site-title>a {
+text-decoration: none;
+}
+a.nav-link {
+    color: #555;
 }
 
 #page a {

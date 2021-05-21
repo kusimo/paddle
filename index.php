@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The main template file
  *
@@ -19,16 +20,16 @@ get_header();
 ?>
 
 <div id="primary" class="content-area col-sm-12 <?php echo esc_attr( paddle_layout_container( 'content' ) ); ?>">
-	<main id="primary" class="site-main <?php echo esc_attr( paddle_layout_width() ); ?>">
+	<main class="site-main <?php echo esc_attr( paddle_layout_width() ); ?>">
 
 		<?php
 		if ( have_posts() ) :
 
 			if ( is_home() && ! is_front_page() ) :
 				?>
-				<header>
-					<h1 class="page-title screen-reader-text"><?php single_post_title(); ?></h1>
-				</header>
+		<header>
+			<h1 class="page-title screen-reader-text"><?php single_post_title(); ?></h1>
+		</header>
 				<?php
 			endif;
 

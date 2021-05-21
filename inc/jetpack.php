@@ -32,7 +32,7 @@ function paddle_jetpack_setup() {
 	add_theme_support(
 		'jetpack-content-options',
 		array(
-			'post-details' => array(
+			'post-details'    => array(
 				'stylesheet' => 'paddle-style',
 				'date'       => '.posted-on',
 				'categories' => '.cat-links',
@@ -58,8 +58,8 @@ function paddle_infinite_scroll_render() {
 		the_post();
 		if ( is_search() ) :
 			get_template_part( 'template-parts/content', 'search' );
-		else :
-			get_template_part( 'template-parts/content', get_post_type() );
-		endif;
+	   else :
+		   get_template_part( 'template-parts/content', get_post_type() );
+	   endif;
 	}
 }

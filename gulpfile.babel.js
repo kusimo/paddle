@@ -33,9 +33,28 @@ export const styles = () => {
       .pipe(server.stream());
   }
 
+/** WooCommerce Styles */
+/** Style */
+export const woo_styles = () => {
+  return src('src/scss/woocommerce.scss')
+    .pipe(gulpif(!PRODUCTION, sourcemaps.init()))
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulpif(PRODUCTION,  autoprefixer( 'last 2 versions' )))
+    .pipe(dest('css/'))
+    .pipe(gulpif(PRODUCTION, cleanCss({compatibility:'ie8'})))
+    .pipe(gulpif(!PRODUCTION, sourcemaps.write()))
+    .pipe(gulpif(PRODUCTION,  rename( { suffix: '.min' } ) ))
+    .pipe(dest('css/'))
+    .pipe(server.stream());
+}
+
 /** Script */
 export const scripts = () => {
-    return src('src/js/theme.js')
+    return src([
+      'src/js/theme.js',
+      'src/js/navigation.js',
+      'src/js/logo-script.js'
+    ])
     .pipe(dest('js/'))
     .pipe(gulpif(PRODUCTION, 
         babel({
@@ -69,8 +88,8 @@ export const scripts = () => {
   export const compilertl = () => {
     return src([
       'css/theme.css',
-      'css/bootstrap.offcanvas.css',
-      'css/style.css'
+      'css/woocommerce.css',
+      './style.css'
       ])
      .pipe(rtlcss())
      .pipe(rename( { suffix: '-rtl' } ))
@@ -100,6 +119,8 @@ export const scripts = () => {
         "!.gitignore",
         "!gulpfile.babel.js",
         "!package.json",
+        "!composer.json",
+        "!composer.lock",
         "!package-lock.json",
       ])
       .pipe(zip(`${info.name}.zip`))
@@ -119,6 +140,6 @@ export const pot = () => {
   };
 
 
-export const dev = series(parallel(styles, scripts, images), serve, watchFor)
-export const build = series(parallel(styles, scripts, images), pot, compress)
+export const dev = series(parallel(styles, woo_styles, scripts, images), serve, watchFor)
+export const build = series(parallel(styles, woo_styles, scripts, images), pot, compress)
 export default dev;
