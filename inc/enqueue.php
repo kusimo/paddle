@@ -31,7 +31,7 @@ if ( ! function_exists( 'paddle_theme_scripts' ) ) :
 		wp_enqueue_script( 'paddle-bootstrap-scripts', get_template_directory_uri() . '/js/bootstrap5/bootstrap.min.js', array(), '5.0', true );
 
 		// Navigation JS
-		wp_enqueue_script( 'paddle-navigation-scripts', get_template_directory_uri() . '/js/navigation.min.js', array(), '0.0.1', true );
+		wp_enqueue_script( 'paddle-navigation-scripts', get_template_directory_uri() . '/js/navigation.min.js', array(), '0.0.2', true );
 
 		if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 			wp_enqueue_script( 'comment-reply' );

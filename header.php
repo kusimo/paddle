@@ -31,26 +31,7 @@
 			<div class="site-branding p-3">
 				<div class="container py-3">
 					<div
-						class="brand-wrap d-flex <?php echo class_exists( 'woocommerce' ) ? 'justify-content-between' : 'justify-content-between flex-row-reverse'; ?> ">
-
-
-						<div class="header-content-right d-flex flex-row">
-
-							<?php
-							if ( 1 === get_theme_mod( 'paddle_header_search_button', 1 ) ) : // Header search button.
-								?>
-							<div id="search-glass"><button class="btn button-search" data-bs-toggle="modal"
-							data-bs-target="#searchModal"><span
-										class="screen-reader-text"><?php esc_html_e( 'Search', 'paddle' ); ?></span>
-								</button></div>
-							<?php endif; ?>	
-							<div class="toggler">
-								<button class="btn navbar-toggler navbar-toggler-right collapsed offcanvas-toggle pl-0"
-									data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-									<span></span><span></span><span></span>
-								</button>
-							</div>	
-						</div><!-- .header-content-right -->
+						class="brand-wrap d-flex <?php echo class_exists( 'woocommerce' ) ? 'justify-content-between has-woocommerce' : 'justify-content-between'; ?> ">
 
 						<div class="site-logo header-content-left">
 							<?php
@@ -78,6 +59,25 @@
 								</small></p>
 							<?php endif; ?>
 						</div><!-- .logo-branging -->
+
+						<div class="header-content-right d-flex flex-row">
+
+							<?php
+							if ( 1 === get_theme_mod( 'paddle_header_search_button', 1 ) ) : // Header search button.
+								?>
+							<div id="search-glass"><button class="btn button-search" data-bs-toggle="modal"
+							data-bs-target="#searchModal"><span
+										class="screen-reader-text"><?php esc_html_e( 'Search', 'paddle' ); ?></span>
+								</button></div>
+							<?php endif; ?>	
+							<div class="toggler">
+								<button class="btn navbar-toggler navbar-toggler-right collapsed offcanvas-toggle pl-0"
+									data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+									<span></span><span></span><span></span>
+								</button>
+							</div>	
+						</div><!-- .header-content-right -->
+						
 
 						<?php if ( class_exists( 'WooCommerce' ) ) : ?>
 						<div class="woo-header-utilities d-flex align-items-center">

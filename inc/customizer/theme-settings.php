@@ -59,22 +59,29 @@ if ( ! function_exists( 'paddle_theme_customize_register' ) ) {
 			)
 		);
 
-		// Float logo to the left.
+		// Header display option
 		$wp_customize->add_setting(
-			'paddle_float_logo_left',
+			'paddle_header_layout_style',
 			array(
-				'default'           => 0,
-				'sanitize_callback' => 'paddle_checkbox_sanitization',
+				'default'           => 'logo-left',
+				'sanitize_callback' => 'paddle_theme_sanitize_radio',
 			)
 		);
 
 		$wp_customize->add_control(
-			'paddle_float_logo_left',
+			'paddle_header_layout_style',
 			array(
-				'label'    => esc_html__( 'Float logo to the left', 'paddle' ),
-				'section'  => 'paddle_theme_header_options',
-				'type'     => 'checkbox',
-				'priority' => 0,
+				'type'        => 'radio',
+				'section'     => 'paddle_theme_header_options',
+				'label'       => esc_html__( 'Header layout' ),
+				'description' => esc_html( 'Select where you want the logo to appear on the page' ),
+				'priority'    => 0,
+				'choices'     => array(
+					'logo-left'        => esc_html( 'Logo on the left' ),
+					'logo-right'       => esc_html( 'Logo on the right' ),
+					'logo-center'      => esc_html( 'Logo at the center' ),
+					'logo-with-search' => esc_html( 'Logo and search close together.' ),
+				),
 			)
 		);
 
@@ -199,7 +206,7 @@ if ( ! function_exists( 'paddle_theme_customize_register' ) ) {
 		$wp_customize->add_control(
 			'paddle_header_cta',
 			array(
-				'label'    => esc_html__( 'Enable CTA button in the header', 'paddle' ),
+				'label'    => esc_html__( 'Enable CTA button in the menu area.', 'paddle' ),
 				'section'  => 'paddle_theme_header_options',
 				'type'     => 'checkbox',
 				'priority' => 6,
@@ -1341,6 +1348,22 @@ function paddle_select_option_sanitization( $input, $setting ) {
 	return ( array_key_exists( $input, $choices ) ? $input : $setting->default );
 }
 
+/**
+ *  Sanitize radio button
+ */
+
+function paddle_theme_sanitize_radio( $input, $setting ) {
+
+	// Ensure input is a slug.
+	$input = sanitize_key( $input );
+
+	// Get list of choices from the control associated with the setting.
+	$choices = $setting->manager->get_control( $setting->id )->choices;
+
+	// If the input is a valid key, return it; otherwise, return the default.
+	return ( array_key_exists( $input, $choices ) ? $input : $setting->default );
+}
+
 // Checks if the selected product has a sale price. If not, displays a warning
 function paddle_validate_sale_price( $validity, $product ) {
 	$sale_validation = get_post_meta( $product, '_sale_price', true );
@@ -1350,3 +1373,5 @@ function paddle_validate_sale_price( $validity, $product ) {
 	endif;
 	return $validity;
 }
+
+

@@ -100,3 +100,31 @@
 	}
 	
 }() );
+
+
+// Mobile menu Tab and Shift key focus
+(
+	function() {
+		"use strict";
+		let myOffcanvas = document.getElementById('offcanvasExample');
+		if( ! myOffcanvas ) return;
+		myOffcanvas.addEventListener('keyup', tabOffCanvas);
+
+		function tabOffCanvas(e) {
+			e = e || event;
+			var activeElement;
+			let focusable = document.querySelector('#offcanvasExample').querySelectorAll('a, .btn');
+			let first = focusable[0];
+			let last = focusable[focusable.length - 1];
+			if (e.keyCode == 9) {
+				activeElement = document.activeElement;
+				if (e.shiftKey && activeElement.tabIndex === -1) {
+					last.focus();
+				}
+				if (activeElement.className.includes('start') && activeElement.tabIndex === -1 && !e.shiftKey) {
+					first.focus();
+				}
+			}
+		}
+
+	}());

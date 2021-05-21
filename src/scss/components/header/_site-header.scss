@@ -38,7 +38,7 @@
     color: #999;
     margin: 0;
     @media screen and (min-width:768px) {
-      text-align: center;
+      text-align: left;
     }
   }
 
@@ -395,6 +395,9 @@
 }
 
 /* Search Modal */
+body.logged-in #searchModal {
+	margin-top: 40px; // For logged in users, so the header do not overlap admin bar
+}
 
 #searchModal {
   padding-right: 0 !important;
@@ -512,6 +515,95 @@ div#search-glass {
   left: 10px;
 }
 
+body.logo-center {
+  .site-branding {
+    .site-logo {
+      flex: 1;
+      text-align: center;
+      .site-description {
+        text-align: center;
+      }
+    }
+  }
+}
+
+body.logo-left {
+  .site-branding {
+    .site-logo {
+      flex: 1;
+    }
+  }
+}
+
+body.logo-right {
+  .site-branding {
+    .site-logo {
+      flex: 1;
+      order: 4;
+      text-align: right;
+      padding-right:15px;
+      .site-description {
+        text-align: right;
+      }
+    }
+  }
+}
+
+body.logo-with-search {
+  .site-branding {
+    .site-logo {
+      flex: 1;
+      order: 1;
+      text-align: left;
+      
+      .site-description {
+        text-align: left;
+      }
+      @media (max-width: 500px) {
+        text-align: center;
+        .site-description {
+          text-align: center;
+        }
+      }
+      @media (min-width: 768px) {
+        padding-left: 15px;
+      }
+    }
+    .header-content-right {
+      order:0
+    }
+  }
+  .woo-header-utilities {
+    order: 3;
+  }
+}
+
+.site-branding {
+  .has-woocommerce {
+    .woo-header-utilities {
+      @media (min-width: 768px) {
+        order: 3;
+      }
+    }
+  }
+}
+
+body.logo-center  {
+  .site-branding {
+    .has-woocommerce {
+      .header-content-right {
+        order: 0;
+      }
+      .site-logo {
+        order: 2;
+      }
+      .woo-header-utilities {
+        order: 3!important
+      }
+    }
+  }
+}
+
 @media (min-width: 768px) {
   .site-header .header-content-right .toggler {
     display: none;
@@ -521,9 +613,14 @@ div#search-glass {
     display: none !important;
   }
 
-  .site-branding .brand-wrap {
-    align-items: center;
-  }
+  .site-branding {
+
+    .brand-wrap {
+      align-items: center;
+    }
+    
+  } 
+
 }
 
 .toggler button.navbar-toggler {

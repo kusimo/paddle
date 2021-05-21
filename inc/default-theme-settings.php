@@ -104,10 +104,10 @@ if ( ! function_exists( 'paddle_setup_theme_default_settings' ) ) {
 			set_theme_mod( 'paddle_toggle_banner_header_style', 0 );
 		}
 
-		// Float logo to left.
-		$paddle_float_logo_left = get_theme_mod( 'paddle_float_logo_left' );
-		if ( '' === $paddle_float_logo_left ) {
-			set_theme_mod( 'paddle_float_logo_left', 0 );
+		// Set default header layout to logo on the left.
+		$paddle_header_layout_style = get_theme_mod( 'paddle_header_layout_style' );
+		if ( '' === $paddle_header_layout_style ) {
+			set_theme_mod( 'paddle_header_layout_style', 'logo-left' );
 		}
 	}
 }
@@ -135,7 +135,6 @@ if ( ! function_exists( 'paddle_static_header_css' ) ) {
 		$paddle_banner_border_radius             = absint( get_theme_mod( 'paddle_banner_border_radius' ) );
 		$paddle_toggle_banner_header_style       = absint( get_theme_mod( 'paddle_toggle_banner_header_style' ) );
 		$paddle_title_headings_solid_lines_check = absint( get_theme_mod( 'paddle_title_headings_solid_lines' ) );
-		$paddle_float_logo_left_check            = absint( get_theme_mod( 'paddle_float_logo_left' ) );
 		$paddle_remove_woo_single_sidebar_check  = absint( get_theme_mod( 'paddle_remove_woo_single_sidebar' ) );
 
 		$css = '';
@@ -148,9 +147,7 @@ if ( ! function_exists( 'paddle_static_header_css' ) ) {
 			$css .= '.site-header .nav-menu .menu-item a {text-transform: uppercase; }';
 		}
 
-		if ( 1 === $paddle_float_logo_left_check ) {
-			$css .= ' @media (min-width: 768px){.site-logo.header-content-left {flex: 1;margin-left: 15px;} .site-description {text-align:left;} }';
-		}
+	
 		if ( 1 === $paddle_remove_woo_single_sidebar_check ) {
 			$css .= 'body.single.single-product #primary.content-area {max-width:100%; flex: 0 0 100%!important; }';
 		}

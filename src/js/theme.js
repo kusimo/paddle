@@ -126,6 +126,8 @@ document.addEventListener('DOMContentLoaded', function (event) {
 --------------------------------------------------------------------------------------------------- */
 
 (function () {
+  "use strict";
+  // Set focus
   let searchBtnContainer = document.getElementById('search-glass');
 
   searchBtnContainer.addEventListener('click', function (e) {
@@ -143,6 +145,33 @@ document.addEventListener('DOMContentLoaded', function (event) {
       inputs[0].focus();
     }, 500); // End set time out.
   });
+  
+
+  // Tab key navigation
+  let searchModal = document.getElementById('searchModal');
+  if( ! searchModal ) return;
+  searchModal.addEventListener('keyup', checkTabPress);
+
+  function checkTabPress(e) {
+    e = e || event;
+    var activeElement;
+    if (e.keyCode == 9) {
+      activeElement = document.activeElement;
+      let btnClose = document.querySelector('#searchModal .btn-close')
+      if( !btnClose ) return;
+      if(activeElement.tabIndex === -1) {
+        if(e.shiftKey) {								
+          btnClose.focus();
+          } 
+      }
+      if(activeElement.className.includes('fade') && !e.shiftKey) {
+          let inp = document.querySelector('#searchModal #s')
+          if (! inp ) return;
+          inp.focus()
+        }
+    }
+  }
+
 })();
 
 

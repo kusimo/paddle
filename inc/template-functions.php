@@ -31,6 +31,20 @@ function paddle_body_classes( $classes ) {
 		$classes[] = 'boxed-header';
 	}
 
+	// Add header layout option
+	if ( 'logo-left' === get_theme_mod( 'paddle_header_layout_style' ) ) {
+		$classes[] = 'logo-left';
+	}
+	if ( 'logo-right' === get_theme_mod( 'paddle_header_layout_style' ) ) {
+		$classes[] = 'logo-right';
+	}
+	if ( 'logo-center' === get_theme_mod( 'paddle_header_layout_style' ) ) {
+		$classes[] = 'logo-center';
+	}
+	if ( 'logo-with-search' === get_theme_mod( 'paddle_header_layout_style' ) ) {
+		$classes[] = 'logo-with-search';
+	}
+
 	// Add sidebar classes.
 	if ( 'left-sidebar' === get_theme_mod( 'paddle_sidebar_position' ) && 1 === get_theme_mod( 'paddle_page_layout_sidebar' ) ) {
 		$classes[] = 'left-sidebar';

@@ -91,6 +91,10 @@
 
 /* Navigation
 --------------------------------------------- */
+body.logged-in #offcanvasExample .offcanvas-header {
+	margin-top: 50px; // For logged in user so admin bar do not overlap
+}
+
 div#offcanvasExample {
     max-width: 120rem;
     width: calc(100% - 4rem);

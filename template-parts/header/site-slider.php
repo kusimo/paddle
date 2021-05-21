@@ -99,14 +99,14 @@ if ( 1 === get_theme_mod( 'paddle_enable_slider' ) && false === has_header_image
 		?>
 		<!-- Next and previous buttons -->
 		<div class="slider-control-navigation">
-		<button class="prev-slide" aria-label="Previous slide">&#10094;</button>
+		<button class="prev-slide" aria-label="<?php esc_html_e( 'Previous slide', 'paddle' ); ?>">&#10094;</button>
 		<!-- The dots/circles -->
 		<div class="dots-container">
 			<span class="dot" data-index="1"><span class="dot-inner"></span></span>
 			<span class="dot" data-index="2"><span class="dot-inner"></span></span>
 			<span class="dot" data-index="3"><span class="dot-inner"></span></span>
 		</div>
-		<button class="next-slide" aria-label="Next slide">&#10095;</button>
+		<button class="next-slide" aria-label="<?php esc_html_e( 'Next slide', 'paddle' ); ?>">&#10095;</button>
 		<div class="slide-number-holder">
 				<div class="numbertext"><span class="slide-index">1</span> <span> 3 </span></div>
 			</div>

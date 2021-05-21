@@ -141,5 +141,5 @@ export const pot = () => {
 
 
 export const dev = series(parallel(styles, woo_styles, scripts, images), serve, watchFor)
-export const build = series(parallel(styles, woo_styles, scripts, images), pot, compress)
+export const build = series(parallel(styles, woo_styles, scripts, images), compress) // issue with pot
 export default dev;
