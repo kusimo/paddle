@@ -3,7 +3,7 @@ Theme Name: Paddle
 Author: Abidemi Kusimo
 Theme URI: https://github.com/kusimo/paddle
 Description: <code>Paddle</code> is a theme built with <code>Bootstrap5</code> and understrap framework. You can easily customize the theme to fit your purpose. The theme comes with <code>Modal Search</code> <code>Off Canvass menu slider</code>, and <code>colour settings</code> to help match your brand with your site. Also, includes <code>post layout</code>; you can choose to have two column layout and <code>sidebar</code> on the right or one column layout (Full width). <code>Call to Action (CTA)</code> button on the menu bar. The theme option provides features that will drive your site to the next level. For the developers, you can find all the files needed at the theme URI.
-Version: 1.0.6
+Version: 1.0.8
 Tested up to: 5.7
 Requires PHP: 5.6
 License: GNU General Public License v2 or later 
@@ -28,8 +28,8 @@ Bootstrap: http://getbootstrap.com | https://github.com/twbs/bootstrap/blob/mast
 Paddle Wordpress Theme, Copyright 2021 Abidemi Kusimo
 Paddle is distributed under the terms of the GNU GPL
 
-Image for theme screenshot, Copyright Abidemi S. Kusimo
-License:  CC-0 License. Unsplash photos are made to be used freely.
-License URL: https://pixabay.com/service/license/
-Source: https://pixabay.com/photos/golden-ball-trophy-ball-6272150/
+Image for theme screenshot, Copyright Abidemi S. Kusimo. The image is GPL licence like the theme. 
+License:  GNU General Public License.
+License URL: https://github.com/kusimo/paddle/blob/main/LICENSE
+Source: https://github.com/kusimo/paddle/blob/ed71f0ed6a1b91e9afb620739e743222e34986ac/src/free-image/gold-price.jpg
 */
