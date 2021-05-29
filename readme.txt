@@ -2,7 +2,7 @@
 
 Contributors: kusimo
 Tags: Custom-Background, Custom-Logo, Custom-Menu, Featured-Images, Threaded-Comments, Translation-Ready, Rtl-Language-Support, Blog, One-Column, Two-Columns, Right-Sidebar, Custom-Colors, Custom-Header, Footer-Widgets, Theme-Options
-Version: 1.0.8
+Version: 1.0.9
 Tested up to: 5.7
 Requires PHP: 5.6
 License: GPL-2.0-or-later
@@ -45,3 +45,13 @@ License:  GNU General Public License.
 License URL: https://github.com/kusimo/paddle/blob/main/LICENSE
 Source: https://github.com/kusimo/paddle/blob/ed71f0ed6a1b91e9afb620739e743222e34986ac/src/free-image/gold-price.jpg
 
+== Changelog ==
+
+= 1.0.9 - 2021-05-29 =
+* Enhancement - Add privacy policy link to the footer.
+* Fix - Enable widget sidebar for WooCommerce only if active.
+* Enhancement - Add homepage slider section 
+* Enhancement - Enable the slider to display latest post, post by IDs or post from page. 
+
+= 1.0.8 - 2021-05-25 =
+* Initial release

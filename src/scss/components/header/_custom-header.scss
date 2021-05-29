@@ -41,6 +41,31 @@ Custom Header
       font-size: 1.25rem;
     }
   }
+  .banner-tags {
+    display: flex;
+    justify-content: center;
+    padding: 1rem 0;
+    .cat-links {
+      position: relative;
+      display: block;
+      margin-left:30px;
+      margin-bottom:9px;
+    }
+
+    .cat-links {
+      a {
+        background: $color__primary;
+        color: #fff;
+        padding: 5px 15px;
+        border-radius: 45px;
+        margin-right: 5px;
+        display: inline-block;
+        line-height: 1;
+        margin-bottom: 4px;
+        text-decoration: none!important;
+      }
+    }
+  }
   h1 {
     font-size: 26px;
     font-size: 1.625rem;
@@ -48,6 +73,7 @@ Custom Header
     float:none!important;
     margin-bottom: 10px;
     margin-top: 10px;
+    letter-spacing: 0.7px;
     &:before {
       content: none;
     }
@@ -184,6 +210,7 @@ Custom Header
   transition-duration: .8s;
   overflow:hidden;
   min-height: 250px;
+  background-color: currentColor;
   .board {
     position: absolute;
   }

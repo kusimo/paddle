@@ -28,9 +28,8 @@
 
 			get_template_part( 'template-parts/footer/widgets' );
 
-				 endif;
+		endif;
 		?>
-		
 	<div class="site-info">
 		<div class="container py-3 text-center">
 		<?php

@@ -314,7 +314,8 @@ article {
     
     .cat-links, .tags-links, .posted-on, .comments-link {
       position: relative;
-      display: block;
+      display: inline-block;
+      width:100%;
       color: #999;
       margin-left:30px;
       margin-bottom:9px;
@@ -333,6 +334,13 @@ article {
         //text-decoration: none!important;
       }
     }
+    a.post-edit-link {
+      padding: 5px 12px;
+      letter-spacing: .8px;
+      font-weight: 700;
+      text-transform: uppercase;
+      border-radius: 5px;
+  }
   }
   .cat-links::before, .tags-links::before, .posted-on::before, .comments-link::before, small .byline::before {
     content: '';

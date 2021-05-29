@@ -54,6 +54,24 @@ if ( ! function_exists( 'paddle_category_list' ) ) :
 
 endif; // End if function exist category_list.
 
+if ( ! function_exists( 'paddle_category_list_by_id' ) ) :
+	/**
+	 * Display category list
+	 */
+	function paddle_category_list_by_id( $id ) {
+
+		if ( 'post' === get_post_type() ) {
+			/* translators: used between list items, there is a space after the comma */
+			$categories_list = get_the_category_list( esc_html__( ', ', 'paddle' ), '', $id );
+			if ( $categories_list ) {
+				/* translators: 1: list of categories. */
+				printf( '<span class="cat-links"  title="' . __( 'Posted in', 'paddle' ) . '">%1$s</span>', $categories_list ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			}   //End if categories_list.
+		}   // End if post type.
+	}
+
+endif; // End if function exist category_list.
+
 
 if ( ! function_exists( 'paddle_tag_lists' ) ) :
 	/**
@@ -254,3 +272,22 @@ if ( ! function_exists( 'paddle_content_over_banner' ) ) {
 		return $css;
 	}
 }
+
+/**
+ * Trim word
+ */
+if ( ! function_exists( 'paddle_theme_trim_text ' ) ) :
+	function paddle_theme_trim_text( $text, $count ) {
+		$trimed = '';
+		$text   = str_replace( '  ', ' ', $text );
+		$string = explode( ' ', $text );
+		for ( $word_counter = 0; $word_counter <= $count;$word_counter++ ) {
+			$trimed .= $string[ $word_counter ];
+			if ( $word_counter < $count ) {
+				$trimed .= ' '; } else {
+						$trimed .= '...'; }
+		}
+		$trimed = trim( $trimed );
+		return $trimed;
+	}
+endif;

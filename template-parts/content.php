@@ -32,7 +32,7 @@
 
 			<?php
 			// Display date link in the header if not in the footer.
-			if ( is_archive() && 1 === get_theme_mod( 'hide_archive_meta' ) ) :
+			if ( is_archive() || is_front_page() && 1 === get_theme_mod( 'hide_archive_meta' ) ) :
 				paddle_posted_on();
 endif;
 			?>
@@ -77,16 +77,15 @@ endif;
 		);
 		?>
 	</div><!-- .entry-content -->
-	
 	<div class="clearfix"></div>
 
 	<?php
-	if ( is_archive() && 1 === get_theme_mod( 'hide_archive_meta' ) ) :
+	if ( is_archive() || is_front_page() && 1 === get_theme_mod( 'hide_archive_meta' ) ) :
 				return '';
-		 else :
-				?>
+		else :
+			?>
 	<footer class="entry-footer">
-			 <?php paddle_entry_footer(); ?>
+			<?php paddle_entry_footer(); ?>
 	</footer><!-- .entry-footer -->
 	<?php endif; ?>
 </article><!-- #post-<?php the_ID(); ?> -->

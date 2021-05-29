@@ -357,6 +357,11 @@ if ( ! function_exists( 'paddle_theme_credit' ) ) {
 		<span class="theme-credit"><?php esc_html_e( 'Powered by ', 'paddle' ); ?><?php esc_html_e( 'WordPress. Designed by A. Kusimo', 'paddle' ); ?></span>
 			<?php
 		endif;
+
+		if ( function_exists( 'the_privacy_policy_link' ) ) {
+			the_privacy_policy_link( '<span class="bottom-footer-link">', '</span>' );
+
+		}
 	}
 }
 
@@ -379,5 +384,40 @@ if ( ! function_exists( 'paddle_rgba' ) ) :
 	function paddle_rgba( $color, $opacity_number ) {
 		list( $r, $g, $b ) = sscanf( $color, '#%02x%02x%02x' );
 		return 'rgba(' . $r . ',' . $g . ',' . $b . ',.' . $opacity_number . ')';
+	}
+endif;
+
+if ( ! function_exists( 'paddle_get_slider_ids' ) ) :
+	function paddle_get_slider_ids() {
+
+		$paddle_source_page_ids = array();
+		$post_ids               = array();
+		$slide_total            = 0;
+		$paddle_source          = get_theme_mod( 'paddle_slider_source' );
+		$paddle_source_ids      = get_theme_mod( 'paddle_slider_post_ids' );
+
+		if ( 'post-ids' === $paddle_source && '' !== $paddle_source_ids ) {
+			$post_ids = explode( ',', $paddle_source_ids ); // 587,555,1170
+		}
+		if ( 'page' === $paddle_source ) {
+			for ( $i = 1; $i < 4; $i++ ) :
+				array_push( $paddle_source_page_ids, get_theme_mod( 'paddle_slider_page' . $i ) );
+			endfor;
+			$post_ids = $paddle_source_page_ids;
+		}
+		if ( 'latest-post' === $paddle_source ) {
+			$recent_posts = wp_get_recent_posts(
+				array(
+					'numberposts' => 5, // Number of recent posts thumbnails to display
+					'post_status' => 'publish', // Show only the published posts
+				)
+			);
+			foreach ( $recent_posts as $post_item ) {
+				array_push( $post_ids, $post_item['ID'] );
+				$slide_total++;
+			}
+		}
+		return $post_ids;
+
 	}
 endif;

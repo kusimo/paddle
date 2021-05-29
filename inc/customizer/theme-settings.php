@@ -278,7 +278,7 @@ if ( ! function_exists( 'paddle_theme_customize_register' ) ) {
 		$wp_customize->add_control(
 			'paddle_heading_h1_style',
 			array(
-				'label'       => esc_html__( 'Main heading H1 style', 'paddle' ),
+				'label'       => esc_html__( 'Heading H1 Title style (For *category and *achieve pages)', 'paddle' ),
 				'description' => __( 'Toggle the style of the main headings style (Default is classic).', 'paddle' ),
 				'section'     => 'paddle_theme_header_options',
 				'type'        => 'select',
@@ -308,8 +308,8 @@ if ( ! function_exists( 'paddle_theme_customize_register' ) ) {
 				$wp_customize,
 				'paddle_h1bg_color',
 				array(
-					'label'       => __( 'Main heading H1 background color', 'paddle' ),
-					'description' => __( 'Select backgournd color for boxed style Heading. (the default background heading the theme primary color).', 'paddle' ),
+					'label'       => __( 'Title background color for *category and *achieve pages', 'paddle' ),
+					'description' => __( 'Select backgournd color for boxed style Heading. The color will apply if you selected  boxed style. (the default background heading the theme primary color).', 'paddle' ),
 					'section'     => 'paddle_theme_header_options',
 					'settings'    => 'paddle_h1bg_color',
 				)
@@ -318,17 +318,20 @@ if ( ! function_exists( 'paddle_theme_customize_register' ) ) {
 
 		/*
 		---------------------------------------------------------------------------------------*/
-		// Slider Section
-
+		// Home Page Option
 		$wp_customize->add_section(
-			'paddle_slider_settings',
+			'paddle_home_page',
 			array(
 				'priority'    => 14,
-				'title'       => __( 'Slider Settings', 'paddle' ),
-				'description' => __( 'Slider Section - Use this on homepage. You need to disable the homepage header image for this to work. ', 'paddle' ),
+				'title'       => __( 'Homepage Slider', 'paddle' ),
+				'description' => __( 'Settings for the homepage slider. The post feature image will be used for the image slider.', 'paddle' ),
 				'panel'       => 'paddle_theme_option_panel',
 			)
 		);
+
+		/*
+		---------------------------------------------------------------------------------------*/
+		// Slider Section
 
 		// Checkbox to enable slider.
 		$wp_customize->add_setting(
@@ -342,14 +345,62 @@ if ( ! function_exists( 'paddle_theme_customize_register' ) ) {
 			'paddle_enable_slider',
 			array(
 				'label'    => __( 'Check to enable the slider. Hide image in the Header Imge section for slider to work.', 'paddle' ),
-				'section'  => 'paddle_slider_settings',
+				'section'  => 'paddle_home_page',
 				'type'     => 'checkbox',
 				'priority' => 1,
 
 			)
 		);
 
-		// Field 1 - Slider Page Number 1
+		// Slider display source.
+		$wp_customize->add_setting(
+			'paddle_slider_source',
+			array(
+				'default'           => 'latest-post',
+				'sanitize_callback' => 'paddle_theme_sanitize_radio',
+			)
+		);
+
+		$wp_customize->add_control(
+			'paddle_slider_source',
+			array(
+				'type'            => 'radio',
+				'section'         => 'paddle_home_page',
+				'label'           => esc_html__( 'Slider source', 'paddle' ),
+				'description'     => esc_html( 'Select posts to display' ),
+				'priority'        => 2,
+				'active_callback' => 'paddle_call_back_paddle_enable_slider_active',
+				'choices'         => array(
+					'latest-post' => esc_html( 'Latest posts' ),
+					'post-ids'    => esc_html( 'Posts by Id' ),
+					'page'        => esc_html( 'Post from page' ),
+				),
+			)
+		);
+
+		// Source post IDs
+		$wp_customize->add_setting(
+			'paddle_slider_post_ids',
+			array(
+				'type'              => 'theme_mod',
+				'default'           => '',
+				'sanitize_callback' => 'sanitize_text_field',
+			)
+		);
+
+		$wp_customize->add_control(
+			'paddle_slider_post_ids',
+			array(
+				'label'           => __( 'Enter post IDs separated by commas', 'paddle' ),
+				'description'     => __( 'Enter 3 post ids, each post ID should be separated by commas.', 'paddle' ),
+				'section'         => 'paddle_home_page',
+				'type'            => 'text',
+				'priority'        => 2,
+				'active_callback' => 'paddle_slider_pid_active',
+			)
+		);
+
+		// Field 1 - Slider Page.
 		$wp_customize->add_setting(
 			'paddle_slider_page1',
 			array(
@@ -359,62 +410,6 @@ if ( ! function_exists( 'paddle_theme_customize_register' ) ) {
 			)
 		);
 
-		$wp_customize->add_control(
-			'paddle_slider_page1',
-			array(
-				'label'       => __( 'Set slider page 1', 'paddle' ),
-				'description' => __( 'Select a page from the dropdown below.', 'paddle' ),
-				'section'     => 'paddle_slider_settings',
-				'type'        => 'dropdown-pages',
-				'priority'    => 2,
-			)
-		);
-
-		// Field 2 - Slider Button Text Number 1
-		$wp_customize->add_setting(
-			'paddle_slider_button_text1',
-			array(
-				'type'              => 'theme_mod',
-				'default'           => '',
-				'sanitize_callback' => 'sanitize_text_field',
-			)
-		);
-
-		$wp_customize->add_control(
-			'paddle_slider_button_text1',
-			array(
-				'label'       => __( 'Button Text for Page 1', 'paddle' ),
-				'description' => __( 'Button Text for Page 1', 'paddle' ),
-				'section'     => 'paddle_slider_settings',
-				'type'        => 'text',
-				'priority'    => 2,
-			)
-		);
-
-		// Field 3 - Slider Button URL Number 1
-		$wp_customize->add_setting(
-			'paddle_slider_button_url1',
-			array(
-				'type'              => 'theme_mod',
-				'default'           => '',
-				'sanitize_callback' => 'esc_url_raw',
-			)
-		);
-
-		$wp_customize->add_control(
-			'paddle_slider_button_url1',
-			array(
-				'label'       => __( 'URL for Page 1', 'paddle' ),
-				'description' => __( 'URL for Page 1', 'paddle' ),
-				'section'     => 'paddle_slider_settings',
-				'type'        => 'url',
-				'priority'    => 2,
-			)
-		);
-
-		/*---------------------------------------------------------------------------------------*/
-
-		// Field 4 - Slider Page Number 2
 		$wp_customize->add_setting(
 			'paddle_slider_page2',
 			array(
@@ -423,63 +418,6 @@ if ( ! function_exists( 'paddle_theme_customize_register' ) ) {
 				'sanitize_callback' => 'absint',
 			)
 		);
-
-		$wp_customize->add_control(
-			'paddle_slider_page2',
-			array(
-				'label'       => __( 'Set slider page 2', 'paddle' ),
-				'description' => __( 'Select a page from the dropdown below.', 'paddle' ),
-				'section'     => 'paddle_slider_settings',
-				'type'        => 'dropdown-pages',
-				'priority'    => 3,
-			)
-		);
-
-		// Field 5 - Slider Button Text
-		$wp_customize->add_setting(
-			'paddle_slider_button_text2',
-			array(
-				'type'              => 'theme_mod',
-				'default'           => '',
-				'sanitize_callback' => 'sanitize_text_field',
-			)
-		);
-
-		$wp_customize->add_control(
-			'paddle_slider_button_text2',
-			array(
-				'label'       => __( 'Button Text for Page 2', 'paddle' ),
-				'description' => __( 'Button Text for Page 2', 'paddle' ),
-				'section'     => 'paddle_slider_settings',
-				'type'        => 'text',
-				'priority'    => 3,
-			)
-		);
-
-		// Field 6 - Slider Button URL
-		$wp_customize->add_setting(
-			'paddle_slider_button_url2',
-			array(
-				'type'              => 'theme_mod',
-				'default'           => '',
-				'sanitize_callback' => 'esc_url_raw',
-			)
-		);
-
-		$wp_customize->add_control(
-			'paddle_slider_button_url2',
-			array(
-				'label'       => __( 'URL for Page 2', 'paddle' ),
-				'description' => __( 'URL for Page 2', 'paddle' ),
-				'section'     => 'paddle_slider_settings',
-				'type'        => 'url',
-				'priority'    => 3,
-			)
-		);
-
-		/*
-		---------------------------------------------------------------------------------------*/
-		// Field 7 - Slider Page Number 3
 
 		$wp_customize->add_setting(
 			'paddle_slider_page3',
@@ -491,17 +429,80 @@ if ( ! function_exists( 'paddle_theme_customize_register' ) ) {
 		);
 
 		$wp_customize->add_control(
-			'paddle_slider_page3',
+			'paddle_slider_page1',
 			array(
-				'label'       => __( 'Set slider page 3', 'paddle' ),
-				'description' => __( 'Select a page from the dropdown below.', 'paddle' ),
-				'section'     => 'paddle_slider_settings',
-				'type'        => 'dropdown-pages',
-				'priority'    => 4,
+				'label'           => __( 'Set slider page 1', 'paddle' ),
+				'description'     => __( 'Select a page from the dropdown below.', 'paddle' ),
+				'section'         => 'paddle_home_page',
+				'type'            => 'dropdown-pages',
+				'priority'        => 6,
+				'active_callback' => 'paddle_slider_source_from_page_active',
 			)
 		);
 
-		// Field 8 - Slider Button Text
+		$wp_customize->add_control(
+			'paddle_slider_page2',
+			array(
+				'label'           => __( 'Set slider page 2', 'paddle' ),
+				'description'     => __( 'Select a page from the dropdown below.', 'paddle' ),
+				'section'         => 'paddle_home_page',
+				'type'            => 'dropdown-pages',
+				'priority'        => 6,
+				'active_callback' => 'paddle_slider_source_from_page_active',
+			)
+		);
+
+		$wp_customize->add_control(
+			'paddle_slider_page3',
+			array(
+				'label'           => __( 'Set slider page 3', 'paddle' ),
+				'description'     => __( 'Select a page from the dropdown below.', 'paddle' ),
+				'section'         => 'paddle_home_page',
+				'type'            => 'dropdown-pages',
+				'priority'        => 6,
+				'active_callback' => 'paddle_slider_source_from_page_active',
+			)
+		);
+
+		// Slider, use custom URL
+		$wp_customize->add_setting(
+			'paddle_slider_custom_url',
+			array(
+				'default'           => 0,
+				'sanitize_callback' => 'paddle_checkbox_sanitization',
+			)
+		);
+
+		$wp_customize->add_control(
+			'paddle_slider_custom_url',
+			array(
+				'label'           => __( 'Use custom link and button', 'paddle' ),
+				'section'         => 'paddle_home_page',
+				'type'            => 'checkbox',
+				'active_callback' => 'paddle_call_back_paddle_enable_slider_active',
+
+			)
+		);
+
+		// Slider Button Text
+		$wp_customize->add_setting(
+			'paddle_slider_button_text1',
+			array(
+				'type'              => 'theme_mod',
+				'default'           => '',
+				'sanitize_callback' => 'sanitize_text_field',
+			)
+		);
+
+		$wp_customize->add_setting(
+			'paddle_slider_button_text2',
+			array(
+				'type'              => 'theme_mod',
+				'default'           => '',
+				'sanitize_callback' => 'sanitize_text_field',
+			)
+		);
+
 		$wp_customize->add_setting(
 			'paddle_slider_button_text3',
 			array(
@@ -512,17 +513,56 @@ if ( ! function_exists( 'paddle_theme_customize_register' ) ) {
 		);
 
 		$wp_customize->add_control(
-			'paddle_slider_button_text3',
+			'paddle_slider_button_text1',
 			array(
-				'label'       => __( 'Button Text for Page 3', 'paddle' ),
-				'description' => __( 'Button Text for Page 3', 'paddle' ),
-				'section'     => 'paddle_slider_settings',
-				'type'        => 'text',
-				'priority'    => 4,
+				'label'           => __( 'Button 1', 'paddle' ),
+				'description'     => __( 'Enter text for the slide button 1', 'paddle' ),
+				'section'         => 'paddle_home_page',
+				'type'            => 'text',
+				'active_callback' => 'paddle_banner_custom_link_active',
 			)
 		);
 
-		// Field 9 - Slider Button URL
+		$wp_customize->add_control(
+			'paddle_slider_button_text2',
+			array(
+				'label'           => __( 'Button 2', 'paddle' ),
+				'description'     => __( 'Enter text for the slide button 2', 'paddle' ),
+				'section'         => 'paddle_home_page',
+				'type'            => 'text',
+				'active_callback' => 'paddle_banner_custom_link_active',
+			)
+		);
+
+		$wp_customize->add_control(
+			'paddle_slider_button_text3',
+			array(
+				'label'           => __( 'Button 3', 'paddle' ),
+				'description'     => __( 'Enter text for the slide button 3', 'paddle' ),
+				'section'         => 'paddle_home_page',
+				'type'            => 'text',
+				'active_callback' => 'paddle_banner_custom_link_active',
+			)
+		);
+
+		// Slider Button URL.
+		$wp_customize->add_setting(
+			'paddle_slider_button_url1',
+			array(
+				'type'              => 'theme_mod',
+				'default'           => '',
+				'sanitize_callback' => 'esc_url_raw',
+			)
+		);
+		$wp_customize->add_setting(
+			'paddle_slider_button_url2',
+			array(
+				'type'              => 'theme_mod',
+				'default'           => '',
+				'sanitize_callback' => 'esc_url_raw',
+			)
+		);
+
 		$wp_customize->add_setting(
 			'paddle_slider_button_url3',
 			array(
@@ -533,13 +573,35 @@ if ( ! function_exists( 'paddle_theme_customize_register' ) ) {
 		);
 
 		$wp_customize->add_control(
+			'paddle_slider_button_url1',
+			array(
+				'label'           => __( 'URL 1', 'paddle' ),
+				'description'     => __( 'Enter link for slide 1', 'paddle' ),
+				'section'         => 'paddle_home_page',
+				'type'            => 'url',
+				'active_callback' => 'paddle_banner_custom_link_active',
+			)
+		);
+
+		$wp_customize->add_control(
+			'paddle_slider_button_url2',
+			array(
+				'label'           => __( 'URL 2', 'paddle' ),
+				'description'     => __( 'Enter link for slide 2', 'paddle' ),
+				'section'         => 'paddle_home_page',
+				'type'            => 'url',
+				'active_callback' => 'paddle_banner_custom_link_active',
+			)
+		);
+
+		$wp_customize->add_control(
 			'paddle_slider_button_url3',
 			array(
-				'label'       => __( 'URL for Page 3', 'paddle' ),
-				'description' => __( 'URL for Page 3', 'paddle' ),
-				'section'     => 'paddle_slider_settings',
-				'type'        => 'url',
-				'priority'    => 4,
+				'label'           => __( 'URL 3', 'paddle' ),
+				'description'     => __( 'Enter link for slide 3', 'paddle' ),
+				'section'         => 'paddle_home_page',
+				'type'            => 'url',
+				'active_callback' => 'paddle_banner_custom_link_active',
 			)
 		);
 
@@ -633,16 +695,18 @@ if ( ! function_exists( 'paddle_theme_customize_register' ) ) {
 			)
 		);
 
-		$wp_customize->add_control(
-			'paddle_remove_woo_single_sidebar',
-			array(
-				'label'    => __( 'Remove Sidebar on Woocommerce Single Product Pages', 'paddle' ),
-				'section'  => 'paddle_page_layout_options',
-				'type'     => 'checkbox',
-				'priority' => 4,
+		if ( class_exists( 'WooCommerce' ) ) {
+			$wp_customize->add_control(
+				'paddle_remove_woo_single_sidebar',
+				array(
+					'label'    => __( 'Remove Sidebar on Woocommerce Single Product Pages', 'paddle' ),
+					'section'  => 'paddle_page_layout_options',
+					'type'     => 'checkbox',
+					'priority' => 4,
 
-			)
-		);
+				)
+			);
+		}
 
 		// Setting for primary color.
 		$wp_customize->add_setting(
@@ -714,7 +778,7 @@ if ( ! function_exists( 'paddle_theme_customize_register' ) ) {
 		$wp_customize->add_section(
 			'paddle_category_options',
 			array(
-				'title'      => __( 'Category Page', 'paddle' ),
+				'title'      => __( 'Post Layout', 'paddle' ),
 				'capability' => 'edit_theme_options',
 				'priority'   => 30,
 				'panel'      => 'paddle_theme_option_panel',
@@ -733,10 +797,10 @@ if ( ! function_exists( 'paddle_theme_customize_register' ) ) {
 		$wp_customize->add_control(
 			'archive_layout',
 			array(
-				'label'       => __( 'Toggle Layout', 'paddle' ),
+				'label'       => __( 'Toggle Layout (Grid / List)', 'paddle' ),
 				'section'     => ( 'paddle_category_options' ),
 				'type'        => 'checkbox',
-				'description' => __( 'Toggle layout for category page, achieve page or tag page', 'paddle' ),
+				'description' => __( 'Toggle post layout for category page, achieve page, tag page. This layout also applies to homepage.', 'paddle' ),
 			)
 		);
 
@@ -755,7 +819,7 @@ if ( ! function_exists( 'paddle_theme_customize_register' ) ) {
 				'label'       => __( 'Hide Footer Meta', 'paddle' ),
 				'section'     => ( 'paddle_category_options' ),
 				'type'        => 'checkbox',
-				'description' => __( 'Hide tag and category links on category page.', 'paddle' ),
+				'description' => __( 'Hide tag and category links on category page and achieve page.', 'paddle' ),
 			)
 		);
 
@@ -780,8 +844,8 @@ if ( ! function_exists( 'paddle_theme_customize_register' ) ) {
 		);
 
 		/**
-	* Banner
-*/
+		 * Banner
+		 */
 
 		// Banner Image overlay opacity.
 		$wp_customize->add_setting(
@@ -1149,22 +1213,22 @@ if ( ! function_exists( 'paddle_theme_customize_register' ) ) {
 			)
 		);
 
-			// Show Logo.
-			$wp_customize->add_setting(
-				'paddle_footer_logo',
-				array(
-					'default'           => 0,
-					'sanitize_callback' => 'paddle_checkbox_sanitization',
-				)
-			);
-			$wp_customize->add_control(
-				'paddle_footer_logo',
-				array(
-					'type'    => 'checkbox',
-					'section' => 'paddle_footer_settings',
-					'label'   => __( 'Show your logo in footer. Logo appears before the first footer widget. You need to add a widget to the footer to make it work.', 'paddle' ),
-				)
-			);
+		// Show Logo.
+		$wp_customize->add_setting(
+			'paddle_footer_logo',
+			array(
+				'default'           => 0,
+				'sanitize_callback' => 'paddle_checkbox_sanitization',
+			)
+		);
+		$wp_customize->add_control(
+			'paddle_footer_logo',
+			array(
+				'type'    => 'checkbox',
+				'section' => 'paddle_footer_settings',
+				'label'   => __( 'Show your logo in footer. Logo appears before the first footer widget. You need to add a widget to the footer to make it work.', 'paddle' ),
+			)
+		);
 
 		// Copyright text.
 		$wp_customize->add_setting(
@@ -1286,6 +1350,82 @@ if ( ! function_exists( 'paddle_banner_bgcolor_active' ) ) :
 endif;
 
 
+if ( ! function_exists( 'paddle_slider_pid_active' ) ) :
+
+	/**
+	 * Check if user has selected source by ids.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param WP_Customize_Control $control WP_Customize_Control instance.
+	 *
+	 * @return bool Whether the control is active to the current preview.
+	 */
+	function paddle_slider_pid_active( $control ) {
+
+		if ( 'post-ids' === $control->manager->get_setting( 'paddle_slider_source' )->value() ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+endif;
+
+if ( ! function_exists( 'paddle_slider_source_from_page_active' ) ) :
+
+	/**
+	 * Check if user has selected source from page for slider.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param WP_Customize_Control $control WP_Customize_Control instance.
+	 *
+	 * @return bool Whether the control is active to the current preview.
+	 */
+	function paddle_slider_source_from_page_active( $control ) {
+
+		if ( 'page' === $control->manager->get_setting( 'paddle_slider_source' )->value() ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+endif;
+
+if ( ! function_exists( 'paddle_banner_custom_link_active' ) ) :
+
+	/**
+	 * Check if enable banner background color checkbox is active.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param WP_Customize_Control $control WP_Customize_Control instance.
+	 *
+	 * @return bool Whether the control is active to the current preview.
+	 */
+	function paddle_banner_custom_link_active( $control ) {
+
+		if ( 1 === $control->manager->get_setting( 'paddle_slider_custom_url' )->value() ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+endif;
+
+function paddle_call_back_paddle_enable_slider_active( $control ) {
+
+	if ( 1 === $control->manager->get_setting( 'paddle_enable_slider' )->value() ) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+
 
 /**
  * Select sanitization function
@@ -1373,5 +1513,3 @@ function paddle_validate_sale_price( $validity, $product ) {
 	endif;
 	return $validity;
 }
-
-

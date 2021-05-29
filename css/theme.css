@@ -597,6 +597,12 @@ h3, .entry-content h3,
     .textwidget h3 {
       font-size: 24px; } }
 
+.page-header .archive-description {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; }
+
 header::after {
   clear: both;
   content: "";
@@ -1770,7 +1776,8 @@ article .entry-footer {
   padding-bottom: 1.5rem; }
   article .entry-footer .cat-links, article .entry-footer .tags-links, article .entry-footer .posted-on, article .entry-footer .comments-link {
     position: relative;
-    display: block;
+    display: inline-block;
+    width: 100%;
     color: #999;
     margin-left: 30px;
     margin-bottom: 9px; }
@@ -1783,6 +1790,12 @@ article .entry-footer {
     display: inline-block;
     line-height: 1;
     margin-bottom: 4px; }
+  article .entry-footer a.post-edit-link {
+    padding: 5px 12px;
+    letter-spacing: .8px;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 5px; }
 
 article .cat-links::before, article .tags-links::before, article .posted-on::before, article .comments-link::before, article small .byline::before {
   content: '';
@@ -2740,6 +2753,8 @@ body.logo-center .site-branding .site-logo {
   text-align: center; }
   body.logo-center .site-branding .site-logo .site-description {
     text-align: center; }
+  body.logo-center .site-branding .site-logo h1 {
+    margin-top: 0; }
 
 body.logo-left .site-branding .site-logo {
   -webkit-box-flex: 1;
@@ -2946,13 +2961,37 @@ Custom Header
     .home-banner p {
       font-size: 20px;
       font-size: 1.25rem; } }
+  .home-banner .banner-tags {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    padding: 1rem 0; }
+    .home-banner .banner-tags .cat-links {
+      position: relative;
+      display: block;
+      margin-left: 30px;
+      margin-bottom: 9px; }
+    .home-banner .banner-tags .cat-links a {
+      background: #000000;
+      color: #fff;
+      padding: 5px 15px;
+      border-radius: 45px;
+      margin-right: 5px;
+      display: inline-block;
+      line-height: 1;
+      margin-bottom: 4px;
+      text-decoration: none !important; }
   .home-banner h1 {
     font-size: 26px;
     font-size: 1.625rem;
     font-weight: 700;
     float: none !important;
     margin-bottom: 10px;
-    margin-top: 10px; }
+    margin-top: 10px;
+    letter-spacing: 0.7px; }
     .home-banner h1:before {
       content: none; }
     @media (min-width: 768px) {
@@ -3092,7 +3131,8 @@ Custom Header
   -webkit-transition-duration: .8s;
           transition-duration: .8s;
   overflow: hidden;
-  min-height: 250px; }
+  min-height: 250px;
+  background-color: currentColor; }
   #paddle-slider .board {
     position: absolute; }
   #paddle-slider .light-box-shadow {

@@ -183,42 +183,43 @@ function paddle_widgets_init() {
 			'after_title'   => '</h2>',
 		)
 	);
+	if ( class_exists( 'WooCommerce' ) ) :
+		register_sidebar(
+			array(
+				'name'          => esc_html__( 'After Single Product Page', 'paddle' ),
+				'id'            => 'after-single-product',
+				'description'   => esc_html__( 'This widget is displayed on product page after single product.', 'paddle' ),
+				'before_widget' => '<section id="%1$s" class="widget %2$s">',
+				'after_widget'  => '</section>',
+				'before_title'  => '<h4 class="widget-title">',
+				'after_title'   => '</h4>',
+			)
+		);
 
-	register_sidebar(
-		array(
-			'name'          => esc_html__( 'After Single Product Page', 'paddle' ),
-			'id'            => 'after-single-product',
-			'description'   => esc_html__( 'This widget is displayed on product page after single product.', 'paddle' ),
-			'before_widget' => '<section id="%1$s" class="widget %2$s">',
-			'after_widget'  => '</section>',
-			'before_title'  => '<h4 class="widget-title">',
-			'after_title'   => '</h4>',
-		)
-	);
+		register_sidebar(
+			array(
+				'name'          => esc_html__( 'After Product Meta', 'paddle' ),
+				'id'            => 'after-product-meta',
+				'description'   => esc_html__( 'This widget is displayed on the product page after meta data, e.g. SKU.', 'paddle' ),
+				'before_widget' => '<section id="%1$s" class="widget %2$s">',
+				'after_widget'  => '</section>',
+				'before_title'  => '<h5 class="after_product_meta-title">',
+				'after_title'   => '</h5>',
+			)
+		);
 
-	register_sidebar(
-		array(
-			'name'          => esc_html__( 'After Product Meta', 'paddle' ),
-			'id'            => 'after-product-meta',
-			'description'   => esc_html__( 'This widget is displayed on the product page after meta data, e.g. SKU.', 'paddle' ),
-			'before_widget' => '<section id="%1$s" class="widget %2$s">',
-			'after_widget'  => '</section>',
-			'before_title'  => '<h5 class="after_product_meta-title">',
-			'after_title'   => '</h5>',
-		)
-	);
-
-	register_sidebar(
-		array(
-			'name'          => esc_html__( 'Product Area Collapse', 'paddle' ),
-			'id'            => 'product-area-collapse',
-			'description'   => esc_html__( 'This widget is displayed inside single product page as a dropdown option. The widget title will be used as the dropdown label', 'paddle' ),
-			'before_widget' => '<section id="%1$s" class="widget %2$s">',
-			'after_widget'  => '</section>',
-			'before_title'  => '<h5 class="product-area-collapse-title d-none">',
-			'after_title'   => '</h5>',
-		)
-	);
+		register_sidebar(
+			array(
+				'name'          => esc_html__( 'Product Area Collapse', 'paddle' ),
+				'id'            => 'product-area-collapse',
+				'description'   => esc_html__( 'This widget is displayed inside single product page as a dropdown option. The widget title will be used as the dropdown label', 'paddle' ),
+				'before_widget' => '<section id="%1$s" class="widget %2$s">',
+				'after_widget'  => '</section>',
+				'before_title'  => '<h5 class="product-area-collapse-title d-none">',
+				'after_title'   => '</h5>',
+			)
+		);
+	endif;
 
 	register_sidebar(
 		array(

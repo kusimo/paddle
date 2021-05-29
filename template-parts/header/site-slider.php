@@ -8,97 +8,100 @@
 
 ?>
 
+
 <?php
+
 if ( 1 === get_theme_mod( 'paddle_enable_slider' ) && false === has_header_image() ) :
+
+	$slide_total = 0;
+	$i           = 0;
+
 	?>
-
 	<div id="paddle-slider" class="home-banner vh paddle-front-page-slider">
+	<?php
 
-		<?php
-		for ( $i = 1; $i < 4; $i++ ) :
-			// Getting data from Customizer to display the Slider section
-			$slider_page[ $i ]        = get_theme_mod( 'paddle_slider_page' . $i );
-			$slider_button_text[ $i ] = get_theme_mod( 'paddle_slider_button_text' . $i );
-			$slider_button_url[ $i ]  = get_theme_mod( 'paddle_slider_button_url' . $i );
-		endfor;
+	foreach ( paddle_get_slider_ids() as $pid ) {
+		if ( ! empty( absint( $pid ) ) && $i < 3 ) :
+			$slide_total++;
+			$i++;
+			$paddle_banner_title       = get_the_title( $pid );
+			$paddle_banner_description = get_the_excerpt( $pid );
+			$paddle_post_url           = get_the_permalink( $pid );
+			$paddle_banner_btn_1       = get_theme_mod( 'paddle_slider_button_text1', '' );
+			$paddle_banner_btn_1_link  = get_theme_mod( 'paddle_slider_button_url1', '#' );
+			$paddle_image_url          = get_the_post_thumbnail_url( $pid, 'paddle-slider' );
+			$slider_button_text[ $i ]  = get_theme_mod( 'paddle_slider_button_text' . $i );
+			$paddle_custom_link        = get_theme_mod( 'paddle_slider_custom_url' );
 
-		$args = array(
-			'post_type'      => 'page',
-			'posts_per_page' => 3,
-			'post__in'       => $slider_page,
-			'orderby'        => 'post__in',
-		);
-
-		$slider_loop = new WP_Query( $args );
-		$j           = 1;
-		if ( $slider_loop->have_posts() ) :
+			if ( 'page' === get_theme_mod( 'paddle_slider_source' ) ) {
+				// Custom URL.
+				$slider_button_url[ $i ] = get_theme_mod( 'paddle_slider_button_url' . $i );
+			}
 			?>
-		
+
+		<div class="home-banner-overlay vh d-none"></div>
+
+		<div class="slideshow-content" data-src="<?php echo esc_url_raw( $paddle_image_url ); ?>">
+			<div class="home-banner-content outer content-<?php echo esc_attr( paddle_banner_align() ); ?>">
+				<div class="board light-box-shadow">
+
+					<header class="no-bgcolor">
+						<h1 class="banner-h1 animate-up">
+						<?php
+						if ( '' !== $paddle_banner_title ) {
+							echo esc_html( $paddle_banner_title );}
+						?>
+						</h1>
+					</header>
+					<?php
+					/* @todo add options to show category list.
+					<div class="banner-tags">
+						<?php paddle_category_list_by_id( $pid ); ?>
+					</div>
+					 */
+					?>
+
+					<p class="home-banner-summary animate-up">
+						<?php
+						if ( '' !== $paddle_banner_description ) {
+							$paddle_banner_description = wp_strip_all_tags( $paddle_banner_description );
+							echo esc_html( paddle_theme_trim_text( $paddle_banner_description, 20 ) );}
+						?>
+					</p>
+						<div class="home-banner-cta-button-container group-btn animate-up <?php echo esc_attr( paddle_banner_btncss() ); ?>">
+
+							<?php if ( 1 === $paddle_custom_link && ! empty( $slider_button_text[ $i ] ) && ! empty( $paddle_banner_btn_1 ) ) { ?>
+								<a href="<?php echo ( esc_url_raw( $slider_button_url[ $i ] ) ? esc_attr( $slider_button_url[ $i ] ) : '' ); ?>" class="btn btn-primary border-0">
+									<?php echo esc_attr( $slider_button_text[ $i ] ); ?>
+								</a>
+								<?php
+								// End button 1.
+							} else {
+								?>
+								<a href="<?php echo ( esc_url_raw( $paddle_post_url ) ); ?>" class="btn btn-primary border-0">
+									<?php echo esc_html( 'Read more' ); ?>
+								</a>
+							<?php } ?>
+
+						</div><!-- .home-banner-cta-button -->
+						<?php
+						// End buttons.
+						?>
+
+				</div><!-- .board -->
+			</div><!-- .home-banner-content -->
+		</div><!-- .slide container -->
+
+		<div class="home-banner-image"></div><!-- .home-banner-image-->
+
 			<?php
 
-			while ( $slider_loop->have_posts() ) :
-				$slider_loop->the_post();
-
-				$paddle_banner_title       = get_the_title( get_the_ID() );
-				$paddle_banner_description = get_the_content( get_the_ID() );
-				$paddle_banner_btn_1       = get_theme_mod( 'paddle_slider_button_text1', '' );
-				$paddle_banner_btn_1_link  = get_theme_mod( 'paddle_slider_button_url1', '#' );
-				$paddle_image_url          = get_the_post_thumbnail_url( $slider_loop->ID, 'paddle-slider' );
-				?>
-				<div class="home-banner-overlay vh d-none"></div>
-
-				<div class="slideshow-content" data-src="<?php echo esc_url_raw( $paddle_image_url ); ?>">
-					<div class="home-banner-content outer content-<?php echo esc_attr( paddle_banner_align() ); ?>">
-						<div class="board light-box-shadow">
-
-							<header class="no-bgcolor">
-								<h1 class="banner-h1 animate-up">
-									<?php
-									if ( '' !== $paddle_banner_title ) {
-										echo esc_html( $paddle_banner_title );}
-									?>
-								</h1>
-							</header>
-
-							<p class="home-banner-summary animate-up">
-								<?php
-								if ( '' !== $paddle_banner_description ) {
-									$paddle_banner_description = wp_strip_all_tags( $paddle_banner_description );
-									echo esc_html( $paddle_banner_description );}
-								?>
-							</p>
-
-							<?php if ( ! empty( $slider_button_text[ $j ] ) || ! empty( $paddle_banner_btn_1 ) ) : ?>
-								<div class="home-banner-cta-button-container group-btn animate-up <?php echo esc_attr( paddle_banner_btncss() ); ?>">
-
-									<?php if ( ! empty( $slider_button_text[ $j ] ) ) : ?>
-										<a href="<?php echo ( esc_url_raw( $slider_button_url[ $j ] ) ? esc_attr( $slider_button_url[ $j ] ) : '' ); ?>" class="btn btn-primary border-0">
-											<?php echo esc_attr( $slider_button_text[ $j ] ); ?>
-										</a>
-										<?php
-										// End button 1.
-									endif;
-									?>
-
-								</div><!-- .home-banner-cta-button -->
-								<?php
-								// End buttons.
-							endif;
-							?>
-
-						</div><!-- .board -->
-					</div><!-- .home-banner-content -->
-				</div><!-- .slide container -->
-
-				<div class="home-banner-image"></div><!-- .home-banner-image-->
-				<?php
-				$j++;
-			endwhile;
-			wp_reset_postdata();
 		endif;
-		?>
-		<!-- Next and previous buttons -->
-		<div class="slider-control-navigation">
+	}
+
+	?>
+			<!-- Next and previous buttons -->
+			<div class="slider-control-navigation">
 		<button class="prev-slide" aria-label="<?php esc_attr_e( 'Previous slide', 'paddle' ); ?>">&#10094;</button>
 		<!-- The dots/circles -->
 		<div class="dots-container">
@@ -111,5 +114,10 @@ if ( 1 === get_theme_mod( 'paddle_enable_slider' ) && false === has_header_image
 				<div class="numbertext"><span class="slide-index">1</span> <span> 3 </span></div>
 			</div>
 	</div>
-	</div><!-- .home-banner-->
-<?php endif; ?>
+	</div>
+	<?php
+
+endif;
+
+
+

@@ -77,7 +77,7 @@
 								</button>
 							</div>	
 						</div><!-- .header-content-right -->
-						
+
 
 						<?php if ( class_exists( 'WooCommerce' ) ) : ?>
 						<div class="woo-header-utilities d-flex align-items-center">
