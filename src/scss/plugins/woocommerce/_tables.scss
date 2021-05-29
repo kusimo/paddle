@@ -198,3 +198,32 @@ table.shop_table_responsive {
 		text-align: unset;
 	}	
 }
+
+/** Update **/ 
+.woocommerce-cart-form  {
+	table.shop_table_responsive td.actions {
+		display: flex;
+		flex-direction: column-reverse;
+	}
+	thead {
+		font-size: 14px;
+		letter-spacing: 0.5px;
+		th.product-quantity {
+			padding-left:22px;
+		}
+	}
+	
+	@media screen and (min-width: 768px) {
+		table.shop_table_responsive td.actions button[type=submit].button {
+		max-width: 200px;
+	}
+	}
+}
+
+
+.wc-proceed-to-checkout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}

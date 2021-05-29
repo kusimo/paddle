@@ -337,14 +337,14 @@ if ( ! function_exists( 'paddle_theme_customize_register' ) ) {
 		$wp_customize->add_setting(
 			'paddle_enable_slider',
 			array(
-				'default'           => 0,
+				'default'           => 1,
 				'sanitize_callback' => 'paddle_checkbox_sanitization',
 			)
 		);
 		$wp_customize->add_control(
 			'paddle_enable_slider',
 			array(
-				'label'    => __( 'Check to enable the slider. Hide image in the Header Imge section for slider to work.', 'paddle' ),
+				'label'    => __( 'Toggle check to enable/disabd the slider. Hide image in the Header Imge section for slider to work.', 'paddle' ),
 				'section'  => 'paddle_home_page',
 				'type'     => 'checkbox',
 				'priority' => 1,

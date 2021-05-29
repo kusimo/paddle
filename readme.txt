@@ -2,7 +2,7 @@
 
 Contributors: kusimo
 Tags: Custom-Background, Custom-Logo, Custom-Menu, Featured-Images, Threaded-Comments, Translation-Ready, Rtl-Language-Support, Blog, One-Column, Two-Columns, Right-Sidebar, Custom-Colors, Custom-Header, Footer-Widgets, Theme-Options
-Version: 1.0.9
+Version: 1.0.10
 Tested up to: 5.7
 Requires PHP: 5.6
 License: GPL-2.0-or-later
@@ -46,6 +46,12 @@ License URL: https://github.com/kusimo/paddle/blob/main/LICENSE
 Source: https://github.com/kusimo/paddle/blob/ed71f0ed6a1b91e9afb620739e743222e34986ac/src/free-image/gold-price.jpg
 
 == Changelog ==
+
+
+= 1.0.10 - 2021-05-29 =
+* Enhancement - The homepage slider is checked (as default) to show latest posts in the settings, when theme is activated.
+* Enhancement - Add style to WooCommerce basket page, so the Update Basket button shows before the Add Coupon button. 
+* Fix - Fixed undefined offset error in the homepage slider when the post excerpt is less than 20.
 
 = 1.0.9 - 2021-05-29 =
 * Enhancement - Add privacy policy link to the footer.

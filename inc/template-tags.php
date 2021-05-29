@@ -282,7 +282,9 @@ if ( ! function_exists( 'paddle_theme_trim_text ' ) ) :
 		$text   = str_replace( '  ', ' ', $text );
 		$string = explode( ' ', $text );
 		for ( $word_counter = 0; $word_counter <= $count;$word_counter++ ) {
-			$trimed .= $string[ $word_counter ];
+			if ( isset( $string[ $word_counter ] ) ) {
+				$trimed .= $string[ $word_counter ];
+			}
 			if ( $word_counter < $count ) {
 				$trimed .= ' '; } else {
 						$trimed .= '...'; }
