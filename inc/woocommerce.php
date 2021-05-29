@@ -44,7 +44,7 @@ add_action( 'after_setup_theme', 'paddle_woocommerce_setup' );
  * @return void
  */
 function paddle_woocommerce_scripts() {
-	wp_enqueue_style( 'paddle-woocommerce-style', get_template_directory_uri() . '/css/woocommerce.min.css', array(), '1.1.1' );
+	wp_enqueue_style( 'paddle-woocommerce-style', get_template_directory_uri() . '/css/woocommerce.min.css', array(), '1.1.4' );
 
 	$font_path   = esc_url( WC()->plugin_url() . '/assets/fonts/' );
 	$inline_font = '@font-face {
