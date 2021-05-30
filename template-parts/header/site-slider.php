@@ -11,7 +11,7 @@
 
 <?php
 
-if ( 1 === get_theme_mod( 'paddle_enable_slider' ) && false === has_header_image() ) :
+if ( 1 === get_theme_mod( 'paddle_enable_slider', 1 ) && false === has_header_image() ) :
 
 	$slide_total = 0;
 	$i           = 0;
@@ -42,7 +42,7 @@ if ( 1 === get_theme_mod( 'paddle_enable_slider' ) && false === has_header_image
 		<div class="home-banner-overlay vh d-none"></div>
 
 		<div class="slideshow-content" data-src="<?php echo esc_url_raw( $paddle_image_url ); ?>">
-			<div class="home-banner-content outer content-<?php echo esc_attr( paddle_banner_align() ); ?>">
+			<div class="home-banner-content outer content-<?php echo esc_attr( get_theme_mod( 'slider_align_position', 'left' ) ); ?>">
 				<div class="board light-box-shadow">
 
 					<header class="no-bgcolor">
@@ -100,21 +100,21 @@ if ( 1 === get_theme_mod( 'paddle_enable_slider' ) && false === has_header_image
 	}
 
 	?>
-			<!-- Next and previous buttons -->
-			<div class="slider-control-navigation">
+	<!-- Next and previous buttons -->
+	<div class="slider-control-navigation">
 		<button class="prev-slide" aria-label="<?php esc_attr_e( 'Previous slide', 'paddle' ); ?>">&#10094;</button>
 		<!-- The dots/circles -->
 		<div class="dots-container">
-			<span class="dot" data-index="1"><span class="dot-inner"></span></span>
-			<span class="dot" data-index="2"><span class="dot-inner"></span></span>
-			<span class="dot" data-index="3"><span class="dot-inner"></span></span>
+			<?php for ( $x = 1; $x <= $slide_total; $x++ ) : ?>
+			<span class="dot" data-index="<?php echo esc_attr( $x ); ?>"><span class="dot-inner"></span></span>
+			<?php endfor; ?>
 		</div>
 		<button class="next-slide" aria-label="<?php esc_attr_e( 'Next slide', 'paddle' ); ?>">&#10095;</button>
 		<div class="slide-number-holder">
-				<div class="numbertext"><span class="slide-index">1</span> <span> 3 </span></div>
-			</div>
+			<div class="numbertext"><span class="slide-index">1</span> <span> <?php echo esc_html( $slide_total ); ?> </span></div>
+		</div>
 	</div>
-	</div>
+	</div><!-- #paddle-slider -->
 	<?php
 
 endif;

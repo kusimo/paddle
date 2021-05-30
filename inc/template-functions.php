@@ -393,7 +393,7 @@ if ( ! function_exists( 'paddle_get_slider_ids' ) ) :
 		$paddle_source_page_ids = array();
 		$post_ids               = array();
 		$slide_total            = 0;
-		$paddle_source          = get_theme_mod( 'paddle_slider_source' );
+		$paddle_source          = get_theme_mod( 'paddle_slider_source', 'latest-post' );
 		$paddle_source_ids      = get_theme_mod( 'paddle_slider_post_ids' );
 
 		if ( 'post-ids' === $paddle_source && '' !== $paddle_source_ids ) {

@@ -19,7 +19,7 @@ if ( ( is_header_video_active() && has_header_video() ) || has_header_image() ) 
 	$paddle_banner_btn_2_link  = get_theme_mod( 'header_banner_button_2_link', '#' );
 	?>
 
-<div class="home-banner vh">
+<div id="home-header-image" class="home-banner vh">
 	<div class="home-banner-overlay vh"></div>
 	<div class="home-banner-content outer content-<?php echo esc_attr( paddle_banner_align() ); ?>">
 		<div class="board">

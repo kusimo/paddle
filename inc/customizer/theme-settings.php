@@ -324,7 +324,7 @@ if ( ! function_exists( 'paddle_theme_customize_register' ) ) {
 			array(
 				'priority'    => 14,
 				'title'       => __( 'Homepage Slider', 'paddle' ),
-				'description' => __( 'Settings for the homepage slider. The post feature image will be used for the image slider.', 'paddle' ),
+				'description' => __( 'Settings for the homepage slider. The post feature image will be used for the image slider. *** To change the text color and background opacity or color. Go to the *Header image settings', 'paddle' ),
 				'panel'       => 'paddle_theme_option_panel',
 			)
 		);
@@ -344,7 +344,7 @@ if ( ! function_exists( 'paddle_theme_customize_register' ) ) {
 		$wp_customize->add_control(
 			'paddle_enable_slider',
 			array(
-				'label'    => __( 'Toggle check to enable/disabd the slider. Hide image in the Header Imge section for slider to work.', 'paddle' ),
+				'label'    => __( 'Toggle check to enable/disable the slider. Hide image in the Header Imge section for slider to work.', 'paddle' ),
 				'section'  => 'paddle_home_page',
 				'type'     => 'checkbox',
 				'priority' => 1,
@@ -602,6 +602,174 @@ if ( ! function_exists( 'paddle_theme_customize_register' ) ) {
 				'section'         => 'paddle_home_page',
 				'type'            => 'url',
 				'active_callback' => 'paddle_banner_custom_link_active',
+			)
+		);
+
+		// Slider Image overlay opacity.
+		$wp_customize->add_setting(
+			'slider_overlay_opacity',
+			array(
+				'default'           => 3,
+				'type'              => 'theme_mod',
+				'sanitize_callback' => 'sanitize_text_field',
+				'capability'        => 'edit_theme_options',
+			)
+		);
+
+		$wp_customize->add_control(
+			new WP_Customize_Control(
+				$wp_customize,
+				'slider_overlay_opacity',
+				array(
+					'label'    => __( 'Select the overlay opacity.', 'paddle' ),
+					'section'  => 'paddle_home_page',
+					'settings' => 'slider_overlay_opacity',
+					'type'     => 'select',
+					'choices'  => array(
+						'9' => __( '9', 'paddle' ),
+						'8' => __( '8', 'paddle' ),
+						'7' => __( '7', 'paddle' ),
+						'6' => __( '6', 'paddle' ),
+						'5' => __( '5', 'paddle' ),
+						'4' => __( '4', 'paddle' ),
+						'3' => __( '3', 'paddle' ),
+						'2' => __( '2', 'paddle' ),
+						'1' => __( '1', 'paddle' ),
+						'0' => __( '0', 'paddle' ),
+					),
+				)
+			)
+		);
+
+		// Slider text container align postion.
+		$wp_customize->add_setting(
+			'slider_align_position',
+			array(
+				'default'           => 'left',
+				'type'              => 'theme_mod',
+				'sanitize_callback' => 'sanitize_text_field',
+				'capability'        => 'edit_theme_options',
+			)
+		);
+
+		$wp_customize->add_control(
+			new WP_Customize_Control(
+				$wp_customize,
+				'slider_align_position',
+				array(
+					'label'    => __( 'Align content.', 'paddle' ),
+					'section'  => 'paddle_home_page',
+					'settings' => 'slider_align_position',
+					'type'     => 'select',
+					'choices'  => array(
+						'right' => __( 'Right', 'paddle' ),
+						'left'  => __( 'Left', 'paddle' ),
+						'none'  => __( 'Center', 'paddle' ),
+					),
+				)
+			)
+		);
+
+		// Slider text color***.
+		$wp_customize->add_setting(
+			'slider_text_color',
+			array(
+				'default'           => '#ffffff',
+				'transport'         => 'refresh',
+				'type'              => 'theme_mod',
+				'sanitize_callback' => 'sanitize_hex_color',
+			)
+		);
+
+		// Control for banner header text color.
+		$wp_customize->add_control(
+			new WP_Customize_Color_Control(
+				$wp_customize,
+				'slider_text_color',
+				array(
+					'label'    => __( 'Text Color', 'paddle' ),
+					'section'  => 'paddle_home_page',
+					'settings' => 'slider_text_color',
+				)
+			)
+		);
+
+		// Slider background color.
+		$wp_customize->add_setting(
+			'slider_text_container_bg_color',
+			array(
+				'default'           => '#3e3c3c',
+				'transport'         => 'refresh',
+				'type'              => 'theme_mod',
+				'sanitize_callback' => 'sanitize_hex_color',
+			)
+		);
+
+		// Control for banner header background color.
+		$wp_customize->add_control(
+			new WP_Customize_Color_Control(
+				$wp_customize,
+				'slider_text_container_bg_color',
+				array(
+					'label'    => __( 'Text container background color', 'paddle' ),
+					'section'  => 'paddle_home_page',
+					'settings' => 'slider_text_container_bg_color',
+				)
+			)
+		);
+
+		// Slider content background opacity.
+		$wp_customize->add_setting(
+			'slider_text_container_bg_color_opacity',
+			array(
+				'default'           => 3,
+				'type'              => 'theme_mod',
+				'sanitize_callback' => 'sanitize_text_field',
+				'capability'        => 'edit_theme_options',
+			)
+		);
+		$wp_customize->add_control(
+			new WP_Customize_Control(
+				$wp_customize,
+				'slider_text_container_bg_color_opacity',
+				array(
+					'label'       => __( 'Set the opacity for the background color', 'paddle' ),
+					'section'     => 'paddle_home_page',
+					'settings'    => 'slider_text_container_bg_color_opacity',
+					'type'        => 'select',
+					'description' => 'This adds opacity to the overall text container',
+					'choices'     => array(
+						'9' => __( '9', 'paddle' ),
+						'8' => __( '8', 'paddle' ),
+						'7' => __( '7', 'paddle' ),
+						'6' => __( '6', 'paddle' ),
+						'5' => __( '5', 'paddle' ),
+						'4' => __( '4', 'paddle' ),
+						'3' => __( '3', 'paddle' ),
+						'2' => __( '2', 'paddle' ),
+						'1' => __( '1', 'paddle' ),
+						'0' => __( '0', 'paddle' ),
+					),
+				)
+			)
+		);
+
+		// Banner border radius .
+		$wp_customize->add_setting(
+			'slider_container_border_radius',
+			array(
+				'default'           => 1,
+				'sanitize_callback' => 'paddle_checkbox_sanitization',
+			)
+		);
+
+		$wp_customize->add_control(
+			'slider_container_border_radius',
+			array(
+				'description' => __( 'This adds border radius to the slider text container', 'paddle' ),
+				'type'        => 'checkbox',
+				'section'     => 'paddle_home_page',
+				'label'       => __( 'Add border radius', 'paddle' ),
 			)
 		);
 

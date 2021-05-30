@@ -48,9 +48,9 @@ Source: https://github.com/kusimo/paddle/blob/ed71f0ed6a1b91e9afb620739e743222e3
 == Changelog ==
 
 
-= 1.0.10 - 2021-05-29 =
-* Enhancement - The homepage slider is checked (as default) to show latest posts in the settings, when theme is activated.
-* Enhancement - Add style to WooCommerce basket page, so the Update Basket button shows before the Add Coupon button. 
+= 1.0.10 - 2021-05-30 =
+* Enhancement - The homepage slider sets to show 3 latest posts, when theme is activated.
+* Enhancement - Update WooCommerce basket page CSS, so the Update Basket button shows before the Add Coupon button. 
 * Fix - Fixed undefined offset error in the homepage slider when the post excerpt is less than 20.
 
 = 1.0.9 - 2021-05-29 =

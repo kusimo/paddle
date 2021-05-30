@@ -89,7 +89,7 @@ if ( ! function_exists( 'paddle_setup_theme_default_settings' ) ) {
 		// Banner background color opacity.
 		$paddle_banner_content_bg_opacity = get_theme_mod( 'banner_content_bg_opacity' );
 		if ( '' === $paddle_banner_content_bg_opacity ) {
-			set_theme_mod( 'paddle_banner_content_bg_opacity', 0 );
+			set_theme_mod( 'paddle_banner_content_bg_opacity', 5 );
 		}
 
 		// Banner text content border radius.
@@ -130,12 +130,17 @@ if ( ! function_exists( 'paddle_static_header_css' ) ) {
 		$primary_color                           = sanitize_hex_color( get_theme_mod( 'paddle_primary_color', PADDLE_PRIMARY_COLOR ) );
 		$paddle_banner_header_color              = sanitize_hex_color( get_theme_mod( 'paddle_banner_header_color', '#ffffff' ) );
 		$paddle_banner_header_bgcolor            = sanitize_hex_color( get_theme_mod( 'paddle_banner_header_bg_color', '#3e3c3c' ) );
-		$paddle_enable_banner_bgcolor            = absint( get_theme_mod( 'paddle_enable_banner_bgcolor' ) );
-		$banner_content_bg_opacity               = absint( get_theme_mod( 'banner_content_bg_opacity' ) );
-		$paddle_banner_border_radius             = absint( get_theme_mod( 'paddle_banner_border_radius' ) );
+		$paddle_enable_banner_bgcolor            = absint( get_theme_mod( 'paddle_enable_banner_bgcolor', 1 ) );
+		$banner_content_bg_opacity               = absint( get_theme_mod( 'banner_content_bg_opacity', 5 ) );
+		$paddle_banner_border_radius             = absint( get_theme_mod( 'paddle_banner_border_radius', 1 ) );
+		$paddle_slider_border_radius             = absint( get_theme_mod( 'slider_container_border_radius', 1 ) );
 		$paddle_toggle_banner_header_style       = absint( get_theme_mod( 'paddle_toggle_banner_header_style' ) );
 		$paddle_title_headings_solid_lines_check = absint( get_theme_mod( 'paddle_title_headings_solid_lines' ) );
 		$paddle_remove_woo_single_sidebar_check  = absint( get_theme_mod( 'paddle_remove_woo_single_sidebar' ) );
+		$slider_opacity                          = absint( get_theme_mod( 'slider_overlay_opacity', 3 ) );
+		$slider_text_color                       = sanitize_hex_color( get_theme_mod( 'slider_text_color', '#ffffff' ) );
+		$slider_bg_color                         = sanitize_hex_color( get_theme_mod( 'slider_text_container_bg_color', '#3e3c3c' ) );
+		$slider_bg_color_opacity                 = absint( get_theme_mod( 'slider_text_container_bg_color_opacity', 3 ) );
 
 		$css = '';
 
@@ -147,7 +152,6 @@ if ( ! function_exists( 'paddle_static_header_css' ) ) {
 			$css .= '.site-header .nav-menu .menu-item a {text-transform: uppercase; }';
 		}
 
-	
 		if ( 1 === $paddle_remove_woo_single_sidebar_check ) {
 			$css .= 'body.single.single-product #primary.content-area {max-width:100%; flex: 0 0 100%!important; }';
 		}
@@ -258,16 +262,32 @@ if ( ! function_exists( 'paddle_static_header_css' ) ) {
 
 		// Banner Header Background Color.
 		if ( 0 === $paddle_enable_banner_bgcolor ) {
-			$css .= '.home-banner .home-banner-content .board, #paddle-slider .light-box-shadow  { background: transparent!important } ';
+			$css .= '.home-banner .home-banner-content .board  { background: transparent!important } ';
 		} else {
-			$css .= '.home-banner .home-banner-content .board, #paddle-slider .light-box-shadow  { background: ' . $paddle_banner_header_bgcolor . ' } ';
+			$css .= '.home-banner .home-banner-content .board  { background: ' . $paddle_banner_header_bgcolor . ' } ';
 		}
 
 		// Set the background color opacity.
 		if ( 0 !== $banner_content_bg_opacity ) {
 			$css .= '.home-banner .home-banner-content .board  { background: ' . paddle_rgba( $paddle_banner_header_bgcolor, $banner_content_bg_opacity ) . ' } ';
-			$css .= '#paddle-slider .light-box-shadow  { background: ' . paddle_rgba( $paddle_banner_header_bgcolor, $banner_content_bg_opacity ) . ' } ';
-			$css .= '#paddle-slider .light-box-shadow  { box-shadow: 0 0 10px 1px ' . $paddle_banner_header_bgcolor . '; } ';
+		}
+
+		// Slider bg.
+		if ( '' !== $slider_bg_color ) {
+			$css .= '#paddle-slider .light-box-shadow  { background: ' . paddle_rgba( $slider_bg_color, $slider_bg_color_opacity ) . '!important } ';
+		}
+		if ( 0 !== $slider_bg_color_opacity ) {
+			$css .= '#paddle-slider .light-box-shadow  { box-shadow: 0 0 10px 1px ' . $slider_bg_color . '; } ';
+		}
+
+		if ( 0 === $slider_bg_color_opacity ) {
+			$css .= ' #paddle-slider .light-box-shadow  { box-shadow: none!important; } ';
+		}
+
+		// Grundge image.
+
+		if ( '' !== $slider_opacity ) {
+			$css .= '.paddle-front-page-slider .slideshow-content:before {opacity: .' . $slider_opacity . ' ; }';
 		}
 
 		// Banner Text Color
@@ -275,9 +295,18 @@ if ( ! function_exists( 'paddle_static_header_css' ) ) {
 			$css .= ' .home-banner .home-banner-content .board { color: ' . $paddle_banner_header_color . '; } ';
 		}
 
+		// Slider Text Color
+		if ( '#ffffff' !== $slider_text_color ) {
+			$css .= '#paddle-slider.home-banner .home-banner-content .board { color: ' . $slider_text_color . '; } ';
+		}
+
 		// Set banner text content border radius;
 		if ( 1 === $paddle_banner_border_radius ) {
-			$css .= '.home-banner .home-banner-content .board  { border-radius: 15px } ';
+			$css .= '#home-header-image.home-banner .home-banner-content .board  { border-radius: 15px } ';
+		}
+
+		if ( 1 === $paddle_slider_border_radius ) {
+			$css .= ' #paddle-slider  .home-banner-content .board   { border-radius: 15px } ';
 		}
 
 		// Banner Title style toggle.
