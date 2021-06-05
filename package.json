@@ -1,45 +1,74 @@
 {
   "name": "paddle",
-  "version": "1.0.0",
+  "version": "1.0.11",
   "description": "Paddle WordPress theme built with Bootstrap and understrap framework",
-  "main": "index.js",
+  "author": "Abidemi Kusimo",
+  "license": "GPL-2.0-or-later",
   "scripts": {
-    "start": "gulp",
-    "build": "gulp build --prod",
-    "compilertl": "gulp rtl"
+    "watch": "node-sass src/scss/ -o ./ --source-map true --output-style expanded --indent-type tab --indent-width 1 -w",
+    "compile:css": "node-sass src/scss/ -o ./css && stylelint '*.css' --fix || true && stylelint '*.css' --fix",
+    "build-css": "node-sass --include-path src/scss/main.scss  css/main.css --output-style compressed",
+    "css:minify-main": "cleancss --format breaksWith=lf --source-map --source-map-inline-sources --output css/main.min.css css/main.css",
+    "css:minify-woo": "cleancss --format breaksWith=lf --source-map --source-map-inline-sources --output css/woocommerce.min.css css/woocommerce.css",
+    "css:minify": "npm run css:minify-main && npm run css:minify-woo",
+    "compile:rtl": "rtlcss css/main.css css/main-rtl.css",
+    "lint:scss": "wp-scripts lint-style 'src/scss/**/*.scss'",
+    "lint:js": "wp-scripts lint-js 'src/js/*.js'",
+    "bundle": "dir-archiver --src . --dest bundled/paddle.zip --exclude .DS_Store .stylelintrc.json .eslintrc .git .gitattributes .github .gitignore README.md composer.json composer.lock node_modules vendor package-lock.json package.json .travis.yml phpcs.xml.dist src bundled style.css.map",
+    "process:styles": "npm run compile:css && npm run css:minify"
   },
   "keywords": [
     "WordPress",
     "Theme"
   ],
-   "homepage": "https://github.com/kusimo/paddle#readme",
+  "homepage": "https://github.com/kusimo/paddle#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kusimo/paddle"
   },
-  "author": "Abidemi Kusimo",
-  "license": "GPL-2.0-or-later",
+  "bugs": {
+    "url": "https://github.com/kusimo/paddle/issues"
+  },
   "devDependencies": {
     "@babel/core": "^7.11.6",
     "@babel/preset-env": "^7.11.5",
     "@babel/register": "^7.11.5",
+    "@wordpress/scripts": "^12.1.0",
     "babel-register": "^6.26.0",
     "browser-sync": "^2.26.12",
+    "dir-archiver": "^1.1.1",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
     "gulp-babel": "^8.0.0",
     "gulp-clean-css": "^4.3.0",
+    "gulp-concat-css": "^3.1.0",
     "gulp-if": "^3.0.0",
     "gulp-imagemin": "^7.1.0",
     "gulp-plumber": "^1.2.1",
+    "gulp-purgecss": "^4.0.3",
     "gulp-rename": "^2.0.0",
     "gulp-replace": "^1.0.0",
+    "gulp-rtlcss": "^1.4.2",
     "gulp-sass": "^4.1.0",
     "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify": "^3.0.2",
     "gulp-wp-pot": "^2.5.0",
     "gulp-zip": "^5.0.2",
+    "node-sass": "^4.14.1",
+    "rtlcss": "^2.5.0",
     "yargs": "^16.0.3"
   },
-  "dependencies": {}
+  "rtlcssConfig": {
+    "options": {
+      "autoRename": false,
+      "autoRenameStrict": false,
+      "blacklist": {},
+      "clean": true,
+      "greedy": false,
+      "processUrls": false,
+      "stringMap": []
+    },
+    "plugins": [],
+    "map": false
+  }
 }
