@@ -1,5 +1,5 @@
 # paddle
-WordPress theme built with Bootstrap and understrap framework. 
+WordPress theme built with Bootstrap and underscores framework. 
 
 ## About
 

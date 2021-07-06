@@ -21,7 +21,7 @@ if ( ( is_header_video_active() && has_header_video() ) || has_header_image() ) 
 
 <div id="home-header-image" class="home-banner vh">
 	<div class="home-banner-overlay vh"></div>
-	<div class="home-banner-content outer content-<?php echo esc_attr( paddle_banner_align() ); ?>">
+	<div id="hero" class="home-banner-content outer content-<?php echo esc_attr( paddle_banner_align() ); ?>">
 		<div class="board">
 
 			<header class="no-bgcolor">

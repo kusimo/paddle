@@ -1,0 +1,10 @@
+/* Partial edit button */
+body.customize-partial-edit-shortcuts-shown .customize-partial-edit-shortcut button {
+	padding: inherit;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 1px rgb(60 67 74 / 15%);
+}
+body input.input-custom-class {
+    border: 2px solid #e6e6e6;
+}

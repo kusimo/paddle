@@ -224,6 +224,13 @@ button:-moz-focusring,
 
 fieldset {
 	padding: 0.35em 0.75em 0.625em;
+	border: 1px solid #ececec;
+    margin: 0 2px;
+	legend {
+		float: none;
+		width:unset;
+		font-size: unset;
+	}
 }
 
 /**

@@ -18,6 +18,19 @@ for ( $i = 1; $i <= 4; $i++ ) {
 <div class="footer-widgets">
 	<div class="container">
 		<div class="row">
+			<?php 
+			/**
+			 * Footer Logo
+			 */
+				$paddle_footer_logo_active = get_theme_mod('paddle_footer_logo', 0);
+				if ( 1 === $paddle_footer_logo_active ) {
+					$paddle_footer_menu    = new PaddleMenu(); 
+					?>
+					<div id="footer-logo" class="container"><?php $paddle_footer_menu->logo(); ?></div>
+					<?php 
+				}
+			?>
+		
 			<?php
 			for ( $i = 1; $i <= 4; $i++ ) {
 				if ( is_active_sidebar( 'footer-' . $i ) ) {
@@ -50,8 +63,16 @@ for ( $i = 1; $i <= 4; $i++ ) {
 				}
 			}
 			?>
+
 		</div>
 	</div>
+	<?php
+		/**
+		 * Footer Widget 5
+		 */
+		if ( is_active_sidebar( 'footer-5' ) ) :
+			?>
+		<div class="container footer-widget-5">Footer 5 Widget Here</div>
+		<?php endif; ?>
 </div>
 
-<hr />	 

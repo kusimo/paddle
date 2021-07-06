@@ -100,7 +100,7 @@ h1.woocommerce-products-header__title.page-title {
   margin-bottom: 2rem;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 992px) {
   .archive form.woocommerce-ordering {
     clear: unset;
     padding-top: unset;
@@ -147,7 +147,7 @@ span.onsale {
   letter-spacing: 0.2rem;
   color: #ffffff;
   z-index: 2;
-  background: $color__secondary;
+  background: $color__primary;
 }
 
 #secondary .widget.widget_price_filter .price_slider {
@@ -439,7 +439,7 @@ nav.woocommerce-breadcrumb {
   }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 992px) {
   .single-product .single_add_to_cart_button {
     padding: 18px 20px;
   }
@@ -604,7 +604,7 @@ section.related.products, section.widget_recently_viewed_products {
     }
     
   }
-  @media (min-width:768px) {
+  @media (min-width:992px) {
     ul.products li.product {
       margin-bottom: 6rem;
     }

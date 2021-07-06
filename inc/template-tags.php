@@ -266,7 +266,8 @@ if ( ! function_exists( 'paddle_content_over_banner' ) ) {
 	function paddle_content_over_banner() {
 		$css          = '';
 		$option_value = get_theme_mod( 'paddle_enable_content_over_banner', 0 );
-		if ( is_front_page() && has_header_image() && 1 === $option_value ) {
+		$media_value  = get_theme_mod( 'header_media_select', 'none' );
+		if ( is_front_page() && has_header_image() && 1 === $option_value && 'hero' === $media_value) {
 			$css = ' content-over-header';
 		}
 		return $css;

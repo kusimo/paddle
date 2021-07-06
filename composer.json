@@ -1,7 +1,7 @@
 {
     "name": "kusimo/paddle",
     "type": "wordpress-theme",
-    "description": "<code>Paddle</code> is a theme built with <code>Bootstrap5</code> and understrap framework. You can easily customize the theme to fit your purpose. The theme comes with <code>colour settings</code> to help match your brand with your site. Also, includes <code>post layout</code>; you can choose to have two column layout and <code>sidebar</code> on the right or one column layout (Full width). <code>Call to Action (CTA)</code> button on the menu bar. The theme option provides features that will drive your site to the next level.",
+    "description": "<code>Paddle</code> is a theme built with <code>Bootstrap5</code> and underscores framework. You can easily customize the theme to fit your purpose. The theme comes with <code>colour settings</code> to help match your brand with your site. Also, includes <code>post layout</code>; you can choose to have two column layout and <code>sidebar</code> on the right or one column layout (Full width). <code>Call to Action (CTA)</code> button on the menu bar. The theme option provides features that will drive your site to the next level.",
     "keywords": [
         "WordPress",
         "Themes"

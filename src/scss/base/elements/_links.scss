@@ -1,33 +1,39 @@
 
 a {
-    color: #555;
+    color: $color__primary;
     text-decoration: underline;
     font-weight: 500;
     transition: all 0.3s ease-in-out;
 }
-.site-title>a {
+#masthead.site-header .site-title>a {
 text-decoration: none;
 }
-a.nav-link {
-    color: #555;
-}
 
-#page a {
+ a {
 	&:active  {
 		text-decoration: underline;
 	}
 }
-#primary a:not([class*="wp-block-"]):not(.author-link):not(.post-entry-link) {
+a:not([class*="wp-block-"]):not(.author-link):not(.post-entry-link) {
     text-decoration: underline;
 }
-#page a:not([class*="wp-block-"]):hover, #page a:focus {
+ a:not([class*="wp-block-"]):hover,  a:focus, a:active {
     color: $color__primary;
     text-decoration: none;
     transition: all 0.3s ease-in-out;
 }
 
 .post-entry-link {
-    color: #242424;
     font-weight: 900;
-}
+} 
 
+#primary {
+    main {
+        .entry-title {
+            a {
+                color: #000;  
+                transition: linear 0.1s;
+            }
+        }
+    }
+} 

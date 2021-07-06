@@ -44,8 +44,6 @@ if ( ! function_exists( 'paddle_header_style' ) ) :
 	 */
 	function paddle_header_style() {
 
-		paddle_header_image_style();
-
 		$header_text_color = get_header_textcolor();
 
 		/*
@@ -76,51 +74,6 @@ if ( ! function_exists( 'paddle_header_style' ) ) :
 			.site-description {
 				color: #<?php echo esc_attr( $header_text_color ); ?>
 			} <?php endif; ?>
-
-		<?php
-		// Header image CSS.
-		if ( has_header_image() ) :
-			?>
-
-			.home-banner-image {
-				background-image: url( <?php header_image(); ?>); 
-			}
-			.home-banner .home-banner-overlay {
-				background: rgba(0, 0, 0, 0.<?php echo absint( paddle_banner_opacity() ); ?>);
-			}
-
-		<?php endif; ?>
-
-		</style>
-		<?php
-	}
-endif;
-
-
-if ( ! function_exists( 'paddle_header_image_style' ) ) :
-	/**
-	 * Styles the header image.
-	 *
-	 * @see paddle_custom_header_setup().
-	 */
-	function paddle_header_image_style() {
-
-		/*
-		* If no custom options for header image are set, let's bail.
-		*/
-		if ( ! has_header_image() ) {
-			return;
-		}
-		// If we get this far, we have custom styles. Let's do this.
-		?>
-		<style type="text/css">
-
-			.home-banner-image {
-				background-image: url( <?php header_image(); ?>); 
-			}
-			.home-banner .home-banner-overlay {
-				background: rgba(0, 0, 0, 0.<?php echo absint( paddle_banner_opacity() ); ?>);
-			}
 
 		</style>
 		<?php

@@ -2,7 +2,7 @@
 
 Contributors: kusimo
 Tags: Custom-Background, Custom-Logo, Custom-Menu, Featured-Images, Threaded-Comments, Translation-Ready, Rtl-Language-Support, Blog, One-Column, Two-Columns, Right-Sidebar, Custom-Colors, Custom-Header, Footer-Widgets, Theme-Options
-Version: 1.0.10
+Version: 1.0.11
 Tested up to: 5.7
 Requires PHP: 5.6
 License: GPL-2.0-or-later
@@ -10,7 +10,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 
 == Description ==
-Paddle is a theme built with Bootstrap5 and understrap framework. You can easily customize the theme to fit your purpose. The theme comes with Modal Search, off-canvass menu slider, and colour settings to help match your brand with your site. Also, includes <code>post layout</code>; you can choose to have two column layout and <code>sidebar</code> on the right or one column layout (Full width). Call to Action button on the menu bar. The theme option provides features that will drive your site to the next level. For the developers, you can find all the files needed at the theme URI.
+Paddle is a theme built with Bootstrap5 and underscores framework. You can easily customize the theme to fit your purpose. The theme comes with Modal Search, off-canvass menu slider, and colour settings to help match your brand with your site. Also, includes <code>post layout</code>; you can choose to have two column layout and <code>sidebar</code> on the right or one column layout (Full width). Call to Action button on the menu bar. The theme option provides features that will drive your site to the next level. For the developers, you can find all the files needed at the theme URI.
 
 == More Information here: ==
 https://github.com/kusimo/paddle/

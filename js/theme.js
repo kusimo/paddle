@@ -32,68 +32,9 @@
   replaceCommas('.tags-links');
 })();
 
-/*	-----------------------------------------------------------------------------------------------
-	Primary Menu Desktop
---------------------------------------------------------------------------------------------------- */
 
-const primaryMenu = {
-  init: function () {
-    this.focusMenuWithChildren();
-  },
-
-  // The focusMenuWithChildren() function implements Keyboard Navigation in the Primary Menu
-  // by adding the '.focus' class to all 'li.menu-item-has-children' when the focus is on the 'a' element.
-  focusMenuWithChildren: function () {
-    // Get all the link elements within the primary menu.
-    var links,
-      i,
-      len,
-      menu = document.querySelector('.nav-primary');
-
-    if (!menu) {
-      return false;
-    }
-
-    links = menu.getElementsByTagName('a');
-
-    //let subMenu = document.getElementsByClassName('submenu-expand');
-    let subMenu = document.querySelectorAll('.nav-primary .submenu-expand');
-    for(let n = 0; n < subMenu.length; n++) {
-      subMenu[n].setAttribute('tabIndex', '-1');
-    }
-
-    // Each time a menu link is focused or blurred, toggle focus.
-    for (i = 0, len = links.length; i < len; i++) {
-      links[i].addEventListener('focus', toggleFocus, true);
-      links[i].addEventListener('blur', toggleFocus, true);
-    }
-
-    //Sets or removes the .focus class on an element.
-    function toggleFocus() {
-      var self = this;
-
-      // Move up through the ancestors of the current link until we hit .primary-menu.
-      while (-1 === self.className.indexOf('nav-primary')) {
-        // On li elements toggle the class .focus.
-        if ('li' === self.tagName.toLowerCase()) {
-          if (-1 !== self.className.indexOf('focus')) {
-            self.className = self.className.replace(' focus', '');
-          } else {
-            self.className += ' focus';
-          }
-        }
-        self = self.parentElement;
-      }
-    }
-  },
-}; // primaryMenu
 
 document.addEventListener('DOMContentLoaded', function (event) {
-  /*-----------------------------------------------------------------------------------------------
-	Activate Keyboard Navigation in the Primary Menu 
-	------------------------------------------------------------------------------------------------- */
-  primaryMenu.init();
-
 
   /*-----------------------------------------------------------------------------------------------
 	Change Zoom image Magnifier
@@ -130,22 +71,24 @@ document.addEventListener('DOMContentLoaded', function (event) {
   // Set focus
   let searchBtnContainer = document.getElementById('search-glass');
 
-  searchBtnContainer.addEventListener('click', function (e) {
-    if (!searchBtnContainer) return;
+  if( null !== searchBtnContainer ) {
+    searchBtnContainer.addEventListener('click', function (e) {
+      if (!searchBtnContainer) return;
 
-    let searchFormContainer = document
-      .getElementById('searchModal')
-      .getElementsByTagName('form');
-    if (!searchFormContainer) return;
+      let searchFormContainer = document
+        .getElementById('searchModal')
+        .getElementsByTagName('form');
+      if (!searchFormContainer) return;
 
-    //if( textBox ) return;
-    setTimeout(function () {
-      const inputs = searchFormContainer[0].elements;
-      if (!inputs) return;
-      inputs[0].focus();
-    }, 500); // End set time out.
-  });
-  
+      //if( textBox ) return;
+      setTimeout(function () {
+        const inputs = searchFormContainer[0].elements;
+        if (!inputs) return;
+        inputs[0].focus();
+      }, 500); // End set time out.
+    });
+  }
+ 
 
   // Tab key navigation
   let searchModal = document.getElementById('searchModal');
@@ -278,7 +221,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
       if (!slides) return;
       slideIndex++;
       showSlides(slideIndex);
-      setTimeout(autoShowSlides, 7000); // Change image every 7 seconds
+      setTimeout(autoShowSlides, 9000); // Change image every 9 seconds
 
   }
 

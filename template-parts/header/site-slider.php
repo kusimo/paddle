@@ -11,8 +11,6 @@
 
 <?php
 
-if ( 1 === get_theme_mod( 'paddle_enable_slider', 1 ) && false === has_header_image() ) :
-
 	$slide_total = 0;
 	$i           = 0;
 
@@ -33,16 +31,15 @@ if ( 1 === get_theme_mod( 'paddle_enable_slider', 1 ) && false === has_header_im
 			$slider_button_text[ $i ]  = get_theme_mod( 'paddle_slider_button_text' . $i );
 			$paddle_custom_link        = get_theme_mod( 'paddle_slider_custom_url' );
 
-			if ( 'page' === get_theme_mod( 'paddle_slider_source' ) ) {
-				// Custom URL.
-				$slider_button_url[ $i ] = get_theme_mod( 'paddle_slider_button_url' . $i );
-			}
+			// Custom Text and Links.
+			$slider_button_url[ $i ] = get_theme_mod( 'paddle_slider_button_url' . $i );
+			
 			?>
 
 		<div class="home-banner-overlay vh d-none"></div>
 
 		<div class="slideshow-content" data-src="<?php echo esc_url_raw( $paddle_image_url ); ?>">
-			<div class="home-banner-content outer content-<?php echo esc_attr( get_theme_mod( 'slider_align_position', 'left' ) ); ?>">
+			<div class="home-banner-content outer content-<?php echo esc_attr( get_theme_mod( 'banner_align_position', 'left' ) ); ?>">
 				<div class="board light-box-shadow">
 
 					<header class="no-bgcolor">
@@ -115,9 +112,5 @@ if ( 1 === get_theme_mod( 'paddle_enable_slider', 1 ) && false === has_header_im
 		</div>
 	</div>
 	</div><!-- #paddle-slider -->
-	<?php
-
-endif;
-
 
 

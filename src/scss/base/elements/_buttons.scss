@@ -1,22 +1,20 @@
+
 button:not(.btn),
 input[type='button']:not(.btn),
 input[type='reset']:not(.btn),
 input[type='submit']:not(.btn) {
   background: $color__primary;
-  border: 1px solid $color__primary;
+  border: 1px solid transparent;
   color: #fff;
-  padding: 0.6em 1em 0.4em;
+  padding: .7em 1.5em;
   line-height: 1;
   border-radius: 0;
   box-shadow: none;
   text-shadow: none;
   text-transform: uppercase;
-  transition: linear 0.2s;
-
+  letter-spacing: .05em;
   &:hover {
-    border-color: transparent;
     color: #fff;
-    background-color: $color__secondary;
   }
 
   &:active,
@@ -36,7 +34,7 @@ input[type='submit']:not(.btn) {
   line-height: normal;
   cursor: pointer;
   text-align: center;
-  background-color: #000;
+  background-color: $color__primary;
 }
 .btn-primary.r-50 {
   border-radius: 50px;
@@ -57,55 +55,14 @@ a.btn.btn-primary.btn-lg {
 a.btn.btn-primary:hover,
 a.btn.btn-primary:focus {
   background-color: #fff;
+  color: $color__primary;
 }
 .btn-rounded {
   border-radius: 40px;
-  color: #fff;
+  
   border: 2px solid transparent;
 }
-#header-btn-cta {
-  margin-left: auto;
-}
-@media screen and (min-width: 768px) {
-  #header-btn-cta {
-    float: right;
-    margin-left: 7px;
-  }
-}
-#header-btn-cta a {
-  font-weight: 500;
-  letter-spacing: 0.0333em;
-  text-transform: uppercase;
-  padding: 0.7em 1.2em !important;
-}
 
-@media (max-width: 767px) {
-  #header-btn-cta {
-    max-width: none;
-    overflow: hidden;
-    margin-top: 12px;
-    a {
-      border-radius: 0;
-      width: 100%;
-      padding: 15px 30px !important;
-      text-transform: uppercase;
-    }
-  }
-}
-
-/** Off Canvas Close Button ***/ 
-#js-bootstrap-offcanvas {
-  background: #fff;
-  .drawer__header {
-    border-bottom: 1px solid #e8e8e1;
-    button {
-      background:transparent!important;
-      color: $color__primary!important;
-      border: none;
-    }
-  }
-
-}
 
 
 

@@ -9,7 +9,7 @@
   input[type='text'],
   input[type='email'],
   input[type='url'] {
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 992px) {
       width: 100%;
     }
   }
@@ -25,16 +25,25 @@
   line-height: 1.208em;
   position: relative;
 
-  li.comment,
   li.comment {
     padding: 37px 0;
     list-style: none;
     clear: both;
+    .children {
+      margin-left: 0;
+    }
   }
   li:last-child,
   li:last-child {
     border-bottom: none;
     padding-bottom: 0;
+  }
+}
+li.comment {
+  li.parent {
+    ol.chiidren {
+      margin-left: 0;
+    }
   }
 }
 
@@ -59,8 +68,13 @@ footer.comment-meta {
   font-size: 14px;
   color: #aeaeae;
   font-weight: 400;
-  margin-left: 3.5rem;
+  margin-left: 3.2rem;
+  margin-top: -10px;
   float: left;
+  a {
+    color: currentColor;
+    font-weight: 300;
+  }
 }
 .comment-content {
   font-weight: 300;
@@ -99,6 +113,10 @@ ol.comment-list,
 
   @media (max-width: 575px) {
     padding-left: 0;
+    .children {
+      margin-left: 0;
+      padding-left:1rem;
+    }
   }
 }
 

@@ -166,7 +166,7 @@ form .woocommerce-billing-fields .woocommerce-billing-fields__field-wrapper {
   flex-direction: column;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 992px) {
   .woocommerce .col2-set {
     .col-1 {
       float: left;
@@ -211,7 +211,7 @@ form .woocommerce-billing-fields .woocommerce-billing-fields__field-wrapper {
   position: relative;
   font-weight: 700;
   text-transform: capitalize;
-  @media screen and (min-width:768px) {
+  @media screen and (min-width:992px) {
 	  padding-top: 3rem;
   }
 }

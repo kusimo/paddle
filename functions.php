@@ -10,7 +10,7 @@
 
 if ( ! defined( 'PADDLE_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( 'PADDLE_VERSION', '1.0.0' );
+	define( 'PADDLE_VERSION', '1.0.11' );
 }
 
 if ( ! defined( 'PADDLE_DEV_VERSION' ) ) {
@@ -20,7 +20,8 @@ if ( ! defined( 'PADDLE_DEV_VERSION' ) ) {
 
 if ( ! defined( 'PADDLE_PRIMARY_COLOR' ) ) {
 	// Replace the version number of the theme on each release.
-	define( 'PADDLE_PRIMARY_COLOR', '#000000' );
+	$primary_color = get_theme_mod( 'paddle_primary_color') ? sanitize_hex_color( get_theme_mod( 'paddle_primary_color')) : '#000000';
+	define( 'PADDLE_PRIMARY_COLOR', $primary_color );
 }
 
 /**
@@ -144,9 +145,6 @@ if ( ! function_exists( 'paddle_setup' ) ) :
 		);
 	}
 
-	// Check and setup theme default settings.
-	paddle_setup_theme_default_settings();
-
 endif;
 
 add_action( 'after_setup_theme', 'paddle_setup' );
@@ -268,10 +266,26 @@ function paddle_widgets_init() {
 			'after_title'   => '</h2>',
 		)
 	);
+
+	register_sidebar(
+		array(
+			'name'          => __( 'Footer 5', 'paddle' ),
+			'id'            => 'footer-5',
+			'description'   => __( 'This widget appears in your footer.', 'paddle' ),
+			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
+		)
+	);
 }
 
 add_action( 'widgets_init', 'paddle_widgets_init' );
 
+/*
+* Include our Customizer settings.
+*/
+require get_template_directory() . '/inc/customizer/customizer-functions.php';
 
 /**
  * Enqueue scripts and styles.
@@ -279,9 +293,17 @@ add_action( 'widgets_init', 'paddle_widgets_init' );
 require get_template_directory() . '/inc/enqueue.php';
 
 /**
+ * Custom classes for the theme
+ */
+foreach ( glob( get_template_directory() . '/inc/classes/*.php' ) as $file ) {
+	require_once($file);
+}
+
+/**
  * Implement the Custom Header feature.
  */
 require get_template_directory() . '/inc/custom-header.php';
+
 
 /**
  * Custom template tags for this theme.
@@ -296,7 +318,7 @@ require get_template_directory() . '/inc/template-functions.php';
 /**
  * Customizer additions.
  */
-require get_template_directory() . '/inc/customizer/customizer.php';
+//require get_template_directory() . '/inc/customizer/customizer.php';
 
 /**
  * Load Jetpack compatibility file.

@@ -156,7 +156,7 @@ p.stars {
     overflow: hidden;
     position: relative;
     background-color: #f8f9fa;
-    @media (min-width:768px) {
+    @media (min-width:992px) {
       padding: 0 0 0 1em;
     }
 
@@ -208,7 +208,7 @@ p.stars {
       height: 100%;
       content: ' ';
       box-sizing: border-box;
-      @media (min-width:768px) {
+      @media (min-width:992px) {
         border: 7px solid #d3ced2;
       }
     }
@@ -343,7 +343,7 @@ Pagination
   clear: both;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 992px) {
   .woocommerce-pagination {
     float: right;
     border: 0;
@@ -863,7 +863,7 @@ Reviews
       min-width: 25px;
       min-height: 25px;
       border-radius: 50%;
-      background: $color__secondary;
+      background: $color__primary;
       display: inline-block;
       text-align: center;
       padding: 5px;
@@ -878,21 +878,21 @@ Reviews
       font-size: 14px;
     }
 
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: 992px) {
       span.woo-my-account {
         display: inline;
         font-size: 14px;
       }
     }
 
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: 992px) {
       .woo-icon-user::before,
       .woo-cart-icon::before {
         padding: unset;
       }
     }
 
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: 992px) {
       span.woo-my-item {
         top: -12px;
         left: 7px;
@@ -936,7 +936,7 @@ input#rememberme {
     vertical-align: middle;
 }
 label.woocommerce-form__label.woocommerce-form__label-for-checkbox.woocommerce-form-login__rememberme span {font-size: 14px;}
-  @media screen and (min-width:768px) {
+  @media screen and (min-width:992px) {
     label.woocommerce-form-login__rememberme {
       flex-basis: 40%!important;
   }

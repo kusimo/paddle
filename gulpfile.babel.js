@@ -76,7 +76,7 @@ export const purge_bootstrap = () => {
 /** Script */
 export const scripts = () => {
     return src([
-      'src/js/main.js',
+      'src/js/theme.js',
       'src/js/navigation.js'
     ])
     .pipe(dest('js/'))
@@ -111,7 +111,7 @@ export const scripts = () => {
    // CSS to RTL.
   export const compilertl = () => {
     return src([
-      'css/main.css',
+      'css/theme.css',
       'css/woocommerce.css'
       ])
      .pipe(rtlcss())

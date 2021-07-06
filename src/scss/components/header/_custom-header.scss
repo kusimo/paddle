@@ -18,7 +18,7 @@ Custom Header
   @media (min-width: 576px) {
     padding: 80px 30px;
   }
-  @media (min-width: 768px) {
+  @media (min-width: 992px) {
     padding: 160px 45px;
   }
   @media (min-width: 992px) {
@@ -34,8 +34,10 @@ Custom Header
   font-size: 16px;
   font-size: 1rem;
   margin-bottom: 2rem;
+  overflow: hidden;
+  height: 60vh;
   animation: fadeInOpacity 1s linear forwards;
-  @media (min-width: 768px) {
+  @media (min-width: 992px) {
     p {
       font-size: 20px;
       font-size: 1.25rem;
@@ -77,7 +79,7 @@ Custom Header
     &:before {
       content: none;
     }
-    @media (min-width: 768px) {
+    @media (min-width: 992px) {
       font-size: 40px;
       font-size: 2.5rem;
     }
@@ -140,22 +142,22 @@ Custom Header
             transition: .5s ease-in-out;
           }
         }
-        @media (min-width: 768px) {
+        @media (min-width: 992px) {
           flex-direction: row;
         }
       }
-      .group-btn.btn__curves .no-rounded-right {
+      .group-btn .no-rounded-right {
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
       }
-      .group-btn.btn__curves .no-rounded-left {
+      .group-btn .no-rounded-left {
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
       }
       @media (min-width: 576px) {
         max-width: 400px;
       }
-      @media (min-width: 768px) {
+      @media (min-width: 992px) {
         max-width: 570px;
       }
       @media (min-width: 992px) {
@@ -165,7 +167,7 @@ Custom Header
   }
   .home-banner-content.content-left {
     align-items: flex-start;
-    @media (min-width: 768px) {
+    @media (min-width: 992px) {
       .board {
         max-width: 570px;
         margin: 0;
@@ -174,7 +176,7 @@ Custom Header
   }
   .home-banner-content.content-right {
     align-items: flex-end;
-    @media (min-width: 768px) {
+    @media (min-width: 992px) {
       .board {
         max-width: 700px;
         margin: 0;
@@ -194,7 +196,7 @@ Custom Header
 }
 
 .content-over-header {
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 992px) {
     position: relative;
     margin-top: -200px;
     background: #ffffff;
@@ -216,7 +218,6 @@ Custom Header
   }
   .light-box-shadow {
     background: rgba(255, 255, 255, 0.5);
-    box-shadow: 0 0 10px 1px #ffffff;
   }
   @media screen and (max-width:600px) {
     .home-banner-content {
@@ -232,7 +233,7 @@ Custom Header
     padding: 200px 45px;
     p.home-banner-summary {
       display:none;
-      @media screen and (min-width:768px) {
+      @media screen and (min-width:992px) {
         display:block
       }
     }
@@ -379,7 +380,7 @@ Custom Header
       background-color: rgba(255, 255, 255, 1);
       transform: scale(0.4);
     }
-    @media screen and (min-width:768px) {
+    @media screen and (min-width:992px) {
       display:inline-flex;
     }
   }

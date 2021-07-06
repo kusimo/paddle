@@ -22,7 +22,7 @@
       position: relative;
       line-height: 1.4em;
       border-bottom: 1px solid #ebebeb;
-      @media screen and (min-width:768px) {
+      @media screen and (min-width:992px) {
         font-size: 20px;
         margin-top:32px;
       }
@@ -50,6 +50,7 @@
   letter-spacing: -0.01em;
   line-height: 1.4em;
   font-size: 1.071em;
+  color: $color__primary
 }
 
 /* Recent Post */
