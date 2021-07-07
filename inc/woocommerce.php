@@ -277,7 +277,7 @@ if ( ! function_exists( 'paddle_get_total_cart_item' ) ) {
 
 if ( ! function_exists( 'paddle_remove_sidebar_product_pages' ) ) :
 	function paddle_remove_sidebar_product_pages() {
-		if ( is_product() && 1 === get_theme_mod( 'paddle_remove_woo_single_sidebar' ) ) {
+		if ( is_product() && 0 === get_theme_mod( 'paddle_remove_woo_single_sidebar' ) ) {
 			remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar', 10 );
 		}
 	}

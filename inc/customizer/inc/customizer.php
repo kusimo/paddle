@@ -39,7 +39,7 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_panel(
 			'paddle_theme_option_panel',
 			array(
-				'priority' => 10,
+				'priority' => 50,
 				'title'    => __( 'Theme Options', 'paddle' ),
 			)
 		);
@@ -130,19 +130,6 @@ class paddle_initialise_customizer_settings {
 			)
 		);
 
-		
-		/**
-		 * Add page layout Section.
-		 */
-		$wp_customize->add_section(
-			'paddle_page_layout_options',
-			array(
-				'title'       => __( 'Page Layout', 'paddle' ),
-				'capability'  => 'edit_theme_options',
-				'description' => __( 'Page Layout', 'paddle' ),
-				'panel'       => 'paddle_theme_option_panel',
-			)
-		);
 
 		/** 
 		* Theme Featured image section 
@@ -156,32 +143,16 @@ class paddle_initialise_customizer_settings {
 			)
 		);
 
+
 		/**
 		 * Category and achieve option
 		 */
 		$wp_customize->add_section(
-			'paddle_category_options',
+			'paddle_post_and_pages',
 			array(
-				'title'      => __( 'Post Layout', 'paddle' ),
+				'title'      => __( 'Post / Pages', 'paddle' ),
 				'capability' => 'edit_theme_options',
 				'panel'      => 'paddle_theme_option_panel',
-			)
-		);
-
-		/**
-		 * Add our Upsell Section
-		 */
-		$wp_customize->add_section(
-			new Paddle_Upsell_Section(
-				$wp_customize,
-				'upsell_section',
-				array(
-					'title'           => __( 'Documentation Available', 'paddle' ),
-					'url'             => 'http://localhost/howto/',
-					'backgroundcolor' => '#344860',
-					'textcolor'       => '#fff',
-					'priority'        => 0,
-				)
 			)
 		);
 		
@@ -298,7 +269,7 @@ class paddle_initialise_customizer_settings {
 				'priority'        => 40,
 				'input_attrs'     => array(
 					'style'       => 'border: 2px solid #e6e6e6',
-					'placeholder' => __( 'Enter URL Link...' ),
+					'placeholder' => __( 'Enter URL Link...', 'paddle' ),
 				),
 				'active_callback' => 'paddle_check_active_control_paddle_header_cta',
 			)
@@ -322,7 +293,7 @@ class paddle_initialise_customizer_settings {
 				'priority'        => 50,
 				'input_attrs'     => array(
 					'style'       => 'border: 2px solid #e6e6e6',
-					'placeholder' => __( 'Enter Text...' ),
+					'placeholder' => __( 'Enter Text...', 'paddle' ),
 				),
 				'active_callback' => 'paddle_check_active_control_paddle_header_cta',
 			)
@@ -627,7 +598,7 @@ class paddle_initialise_customizer_settings {
 				'section'         => 'paddle_header_top_bar',
 				'type'            => 'text',
 				'input_attrs'     => array(
-					'placeholder' => __( 'Enter Button Text...' ),
+					'placeholder' => __( 'Enter Button Text...', 'paddle'  ),
 				),
 				'active_callback' => 'paddle_top_header_select_button',
 			)
@@ -648,7 +619,7 @@ class paddle_initialise_customizer_settings {
 				'section'         => 'paddle_header_top_bar',
 				'type'            => 'url',
 				'input_attrs'     => array(
-					'placeholder' => __( 'Enter Url e.g: http://example.com' ),
+					'placeholder' => __( 'Enter Url e.g: http://example.com' , 'paddle' ),
 				),
 				'active_callback' => 'paddle_top_header_select_button',
 			)
@@ -838,7 +809,7 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_setting(
 			'header_media_select',
 			array(
-				'default'           => 'hero',
+				'default'           => 'slider',
 				'transport'         => 'refresh',
 				'sanitize_callback' => 'paddle_radio_sanitization',
 			)
@@ -1498,8 +1469,7 @@ class paddle_initialise_customizer_settings {
 				'banner_arrow_button',
 				array(
 					'label' => __('Arrow Button', 'paddle'),
-					'section' => 'paddle_hero_and_slider',
-					'active_callback' => 'paddle_banner_bgcolor_active',
+					'section' => 'paddle_hero_and_slider'
 				)
 			)
 		);
@@ -1522,109 +1492,156 @@ class paddle_initialise_customizer_settings {
 					'description' => __( 'If the banner covers the button, try increase the height of the banner for better result.', 'paddle' ),
 					'label' => __('Shift Content Up', 'paddle'),
 					'section' => 'paddle_hero_and_slider',
-					'active_callback' => 'paddle_banner_bgcolor_active',
+					'active_callback' => 'header_media_selected_hero',
 				)
 			)
 		);
 
 		/*
 		---------------------------------------------------------------------------------------*/
-		// Theme page layout section
-		$wp_customize->add_section(
-			'paddle_page_layout_options',
+		
+		// Page Layout.
+		$wp_customize->add_setting( 'paddle_sidebar_position',
 			array(
-				'title'       => __( 'Page Layout', 'paddle' ),
-				'capability'  => 'edit_theme_options',
-				'description' => __( 'Page Layout', 'paddle' ),
-						'panel'       => 'paddle_theme_option_panel',
+				'default' => 'left-sidebar',
+				'transport' => 'refresh',
+				'sanitize_callback' => 'paddle_radio_sanitization'
 			)
 		);
-
-		// Page width.
-		$wp_customize->add_setting(
-			'paddle_page_layout_width',
+		$wp_customize->add_control( new Paddle_Image_Radio_Button_Custom_Control( $wp_customize, 'paddle_sidebar_position',
 			array(
-				'default'           => 1,
-				'sanitize_callback' => 'paddle_switch_sanitization',
+				'label' => __( 'Post / Page Layout', 'paddle' ),
+				'section' => 'paddle_post_and_pages',
+				'choices' => array(
+					'left-sidebar' => array(
+						'image' => trailingslashit( get_template_directory_uri() ) . 'inc/customizer/images/sidebar-left.png',
+						'name' => __( 'Left Sidebar', 'paddle' )
+					),
+					'no-sidebar' => array(
+						'image' => trailingslashit( get_template_directory_uri() ) . 'inc/customizer/images/sidebar-none.png',
+						'name' => __( 'No Sidebar', 'paddle' )
+					),
+					'right-sidebar' => array(
+						'image' => trailingslashit( get_template_directory_uri() ) . 'inc/customizer/images/sidebar-right.png',
+						'name' => __( 'Right Sidebar', 'paddle' )
+					)
+				)
 			)
-		);
+		) );
 
-		$wp_customize->add_control(
-			'paddle_page_layout_width',
-			array(
-				'label'    => __( 'Full Width', 'paddle' ),
-				'section'  => 'paddle_page_layout_options',
-				'type'     => 'checkbox',
-
-			)
-		);
-
-		// Sidebar option.
-		$wp_customize->add_setting(
-			'paddle_page_layout_sidebar',
-			array(
-				'default'           => 1,
-				'sanitize_callback' => 'paddle_switch_sanitization',
-			)
-		);
-
-		$wp_customize->add_control(
-			'paddle_page_layout_sidebar',
-			array(
-				'label'           => __( 'Enable Sidebar', 'paddle' ),
-				'section'         => 'paddle_page_layout_options',
-				'type'            => 'checkbox',
-				'active_callback' => 'paddle_is_fullwidth_active',
-
-			)
-		);
-
-		// Select Sidebar option
-		$wp_customize->add_setting(
-			'paddle_sidebar_position',
-			array(
-				'default'           => 'right-sidebar',
-				'sanitize_callback' => 'paddle_radio_sanitization',
-			)
-		);
-		$wp_customize->add_control(
-			'paddle_sidebar_position',
-			array(
-				'label'           => esc_html__( 'Change the sidebar position', 'paddle' ),
-				'description'     => __( 'The default sidebar postion is right. You can choose to show left sidebar only on Woocommerce pages.', 'paddle' ),
-				'section'         => 'paddle_page_layout_options',
-				'type'            => 'select',
-				'active_callback' => 'paddle_is_fullwidth_active',
-				'choices'         => array(
-					''                         => esc_html__( 'Please select', 'paddle' ),
-					'right-sidebar'            => esc_html__( 'Right', 'paddle' ),
-					'left-sidebar'             => esc_html__( 'Left', 'paddle' ),
-					'left-sidebar-woocommerce' => esc_html__( 'Left (Only on Woocommerce Pages)', 'paddle' ),
-				),
-			)
-		);
 
 		// Remove sidebar from single product page.
 		$wp_customize->add_setting(
 			'paddle_remove_woo_single_sidebar',
 			array(
-				'default'           => 1,
+				'default'           => 0,
 				'sanitize_callback' => 'paddle_switch_sanitization',
 			)
 		);
 
 		if ( class_exists( 'WooCommerce' ) ) {
+
 			$wp_customize->add_control(
-				'paddle_remove_woo_single_sidebar',
-				array(
-					'label'    => __( 'Remove Sidebar on Woocommerce Single Product Pages', 'paddle' ),
-					'section'  => 'paddle_page_layout_options',
-					'type'     => 'checkbox',
+				new Paddle_Toggle_Switch_Custom_control(
+					$wp_customize,
+					'paddle_remove_woo_single_sidebar',
+					array(
+						'label' => __('WooCommerce Product Sidebar', 'paddle'),
+						'section' => 'paddle_post_and_pages',
+					)
 				)
 			);
 		}
-		
 
+		// Toggle layout.
+		$wp_customize->add_setting(
+			'post_archive_layout',
+			array(
+				'default'           => 'grid',
+				'sanitize_callback' => 'paddle_radio_sanitization',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Paddle_Text_Radio_Button_Custom_Control(
+				$wp_customize,
+				'post_archive_layout',
+				array(
+					'label'           => __( 'Post Achieve', 'paddle' ),
+					'section'         => 'paddle_post_and_pages',
+					'type'            => 'select',
+					'description' => __( 'Toggle post layout for category page, achieve page, tag page. This layout also applies to homepage.', 'paddle' ),
+					'choices'         => array(
+						'grid'        => __( 'Grid', 'paddle' ),
+						'list'        => __( 'List', 'paddle' ),
+					)
+				)
+			)
+		);
+
+
+		// Hide meta
+		$wp_customize->add_setting(
+			'hide_archive_meta',
+			array(
+				'default'           => 0,
+				'sanitize_callback' => 'paddle_switch_sanitization',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Paddle_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'hide_archive_meta',
+				array(
+					'label'       => __( 'Hide Footer Meta', 'paddle' ),
+					'section'     => ( 'paddle_post_and_pages' ),
+					'description' => __( 'Hide tag and category links on category page and achieve page.', 'paddle' ),
+				)
+			)
+		);
+
+		// Enable the author bio.
+		$wp_customize->add_setting(
+			'paddle_enable_author_bio',
+			array(
+				'default'           => 1,
+				'sanitize_callback' => 'paddle_switch_sanitization',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Paddle_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'paddle_enable_author_bio',
+				array(
+					'label'    => __( 'Enable author link info', 'paddle' ),
+					'description' => __( 'Hide or show author link in single post after the title', 'paddle' ),
+					'section'  => 'paddle_post_and_pages',
+				)
+			)
+		);
+
+		// Solid line before h1 and h2
+		$wp_customize->add_setting(
+			'paddle_title_headings_solid_lines',
+			array(
+				'default'           => 0,
+				'sanitize_callback' => 'paddle_switch_sanitization',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Paddle_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'paddle_title_headings_solid_lines',
+				array(
+					'label'    => __( 'Solid Line Before Title', 'paddle' ),
+					'description' => __( 'Add solid line before header 1 and header 2 (h1 and h2)', 'paddle' ),
+					'section'  => 'paddle_post_and_pages',
+				)
+			)
+		);
 
 	}
 
@@ -1652,92 +1669,6 @@ class paddle_initialise_customizer_settings {
 		);
 
 
-		/*
-		---------------------------------------------------------------------------------------*/
-		// Post and category layout section
-		
-		// Toggle layout.
-		$wp_customize->add_setting(
-			'archive_layout',
-			array(
-				'default'           => 1,
-				'sanitize_callback' => 'paddle_switch_sanitization',
-			)
-		);
-
-		$wp_customize->add_control(
-			'archive_layout',
-			array(
-				'label'       => __( 'Toggle Layout (Grid / List)', 'paddle' ),
-				'section'     => ( 'paddle_category_options' ),
-				'type'        => 'checkbox',
-				'description' => __( 'Toggle post layout for category page, achieve page, tag page. This layout also applies to homepage.', 'paddle' ),
-			)
-		);
-
-		// Hide meta
-		$wp_customize->add_setting(
-			'hide_archive_meta',
-			array(
-				'default'           => 0,
-				'sanitize_callback' => 'paddle_switch_sanitization',
-			)
-		);
-
-		$wp_customize->add_control(
-			'hide_archive_meta',
-			array(
-				'label'       => __( 'Hide Footer Meta', 'paddle' ),
-				'section'     => ( 'paddle_category_options' ),
-				'type'        => 'checkbox',
-				'description' => __( 'Hide tag and category links on category page and achieve page.', 'paddle' ),
-			)
-		);
-
-		// Enable the author bio.
-		$wp_customize->add_setting(
-			'paddle_enable_author_bio',
-			array(
-				'default'           => 1,
-				'sanitize_callback' => 'paddle_switch_sanitization',
-			)
-		);
-
-		$wp_customize->add_control(
-			'paddle_enable_author_bio',
-			array(
-				'label'    => __( 'Enable author link info', 'paddle' ),
-				'description' => __( 'Hide or show author link in single post after the title', 'paddle' ),
-				'section'  => 'paddle_category_options',
-				'type'     => 'checkbox',
-			)
-		);
-
-
-	
-
-		
-		/* // Use for secondary color
-		// Secondary Color Control
-		$wp_customize->add_setting(
-			'paddle_secondary_color',
-			array(
-				'default'           => $this->defaults['paddle_secondary_color'],
-				'transport'         => 'refresh',
-				'sanitize_callback' => 'sanitize_hex_color',
-			)
-		);
-		$wp_customize->add_control(
-			'paddle_secondary_color',
-			array(
-				'label'           => __( 'Secondary Color', 'paddle' ),
-				'priority'        => 30,
-				'section'         => 'colors',
-				'type'            => 'color',
-				'active_callback' => 'paddle_check_active_control_enable_secondary_color',
-			)
-		);
-		*/
 	}
 }
 

@@ -340,8 +340,8 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 			$color       = ! empty( $this->textcolor ) ? esc_attr( $this->textcolor ) : '#555d66';
 			?>
 			<li id="accordion-section-<?php echo esc_attr( $this->id ); ?>" class="paddle_upsell_section accordion-section control-section control-section-<?php echo esc_attr( $this->id ); ?> cannot-expand">
-				<h3 class="upsell-section-title" <?php echo ' style="color:' . $color . ';border-left-color:' . $bkgrndcolor . ';border-right-color:' . $bkgrndcolor . ';"'; ?>>
-					<a href="<?php echo esc_url( $this->url ); ?>" target="_blank"<?php echo ' style="background-color:' . $bkgrndcolor . ';color:' . $color . ';"'; ?>><?php echo esc_html( $this->title ); ?></a>
+				<h3 class="upsell-section-title" <?php echo ' style="color:' . esc_attr( $color ) . ';border-left-color:' . esc_attr( $bkgrndcolor ) . ';border-right-color:' . esc_attr( $bkgrndcolor ) . ';"'; ?>>
+					<a href="<?php echo esc_url( $this->url ); ?>" target="_blank"<?php echo ' style="background-color:' . esc_attr( $bkgrndcolor ) . ';color:' . esc_attr( $color ) . ';"'; ?>><?php echo esc_html( $this->title ); ?></a>
 				</h3>
 			</li>
 			<?php
@@ -371,7 +371,8 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		public function __construct( $manager, $id, $args = array(), $options = array() ) {
 			parent::__construct( $manager, $id, $args );
 			// Merge the passed button labels with our default labels
-			$this->button_labels = wp_parse_args( $this->button_labels,
+			$this->button_labels = wp_parse_args(
+				$this->button_labels,
 				array(
 					'add' => __( 'Add', 'paddle' ),
 				)
@@ -388,12 +389,12 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 * Render the control in the customizer
 		 */
 		public function render_content() {
-		?>
+			?>
 		  <div class="sortable_repeater_control">
-				<?php if( !empty( $this->label ) ) { ?>
+				<?php if ( ! empty( $this->label ) ) { ?>
 					<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
 				<?php } ?>
-				<?php if( !empty( $this->description ) ) { ?>
+				<?php if ( ! empty( $this->description ) ) { ?>
 					<span class="customize-control-description"><?php echo esc_html( $this->description ); ?></span>
 				<?php } ?>
 				<input type="hidden" id="<?php echo esc_attr( $this->id ); ?>" name="<?php echo esc_attr( $this->id ); ?>" value="<?php echo esc_attr( $this->value() ); ?>" class="customize-control-sortable-repeater" <?php $this->link(); ?> />
@@ -402,9 +403,9 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 						<input type="text" value="" class="repeater-input" placeholder="https://" /><span class="dashicons dashicons-sort"></span><a class="customize-control-sortable-repeater-delete" href="#"><span class="dashicons dashicons-no-alt"></span></a>
 					</div>
 				</div>
-				<button class="button customize-control-sortable-repeater-add" type="button"><?php echo $this->button_labels['add']; ?></button>
+				<button class="button customize-control-sortable-repeater-add" type="button"><?php echo esc_html( $this->button_labels['add'] ); ?></button>
 			</div>
-		<?php
+			<?php
 		}
 	}
 	/**
@@ -677,16 +678,16 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 
 	endif;
 
-	if ( ! function_exists( 'paddle_top_header_select_button' ) ) {		
+	if ( ! function_exists( 'paddle_top_header_select_button' ) ) {
 		/**
 		 * Check the top header is active and button is selected
 		 *
 		 * @param  mixed $control
 		 * @return void
 		 */
-		function paddle_top_header_select_button($control) {
-			if ( true == $control->manager->get_setting( 'enable_top_bar' )->value() 
-			&&  'button' == $control->manager->get_setting( 'topbar_select' )->value() 
+		function paddle_top_header_select_button( $control ) {
+			if ( true == $control->manager->get_setting( 'enable_top_bar' )->value()
+			&& 'button' == $control->manager->get_setting( 'topbar_select' )->value()
 			) {
 				return true;
 			} else {
@@ -695,16 +696,16 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		}
 	}
 
-	if ( ! function_exists( 'paddle_top_header_select_social' ) ) {		
+	if ( ! function_exists( 'paddle_top_header_select_social' ) ) {
 		/**
 		 * Check the top header is active and social link is selected
 		 *
 		 * @param  mixed $control
 		 * @return void
 		 */
-		function paddle_top_header_select_social($control) {
-			if ( true == $control->manager->get_setting( 'enable_top_bar' )->value() 
-			&&  'social' == $control->manager->get_setting( 'topbar_select' )->value() 
+		function paddle_top_header_select_social( $control ) {
+			if ( true == $control->manager->get_setting( 'enable_top_bar' )->value()
+			&& 'social' == $control->manager->get_setting( 'topbar_select' )->value()
 			) {
 				return true;
 			} else {
@@ -713,15 +714,15 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		}
 	}
 
-	if ( ! function_exists( 'paddle_footer_select_social' ) ) {		
+	if ( ! function_exists( 'paddle_footer_select_social' ) ) {
 		/**
 		 * Check the top header is active and social link is selected
 		 *
 		 * @param  mixed $control
 		 * @return void
 		 */
-		function paddle_footer_select_social($control) {
-			if ( true == $control->manager->get_setting( 'paddle_footer_social' )->value() 
+		function paddle_footer_select_social( $control ) {
+			if ( true == $control->manager->get_setting( 'paddle_footer_social' )->value()
 			) {
 				return true;
 			} else {
@@ -742,14 +743,14 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 * @return bool Whether the control is active to the current preview.
 		 */
 		function paddle_banner_bgcolor_active( $control ) {
-	
+
 			if ( 1 === $control->manager->get_setting( 'paddle_enable_banner_bgcolor' )->value() ) {
 				return true;
 			} else {
 				return false;
 			}
 		}
-	
+
 	endif;
 
 	if ( ! function_exists( 'header_media_selected_hero' ) ) :
@@ -764,14 +765,14 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 * @return bool Whether the control is active to the current preview.
 		 */
 		function header_media_selected_hero( $control ) {
-	
+
 			if ( 'hero' === $control->manager->get_setting( 'header_media_select' )->value() ) {
 				return true;
 			} else {
 				return false;
 			}
 		}
-	
+
 	endif;
 
 	if ( ! function_exists( 'header_media_selected_slider' ) ) :
@@ -786,14 +787,14 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 * @return bool Whether the control is active to the current preview.
 		 */
 		function header_media_selected_slider( $control ) {
-	
+
 			if ( 'slider' === $control->manager->get_setting( 'header_media_select' )->value() ) {
 				return true;
 			} else {
 				return false;
 			}
 		}
-	
+
 	endif;
 
 	if ( ! function_exists( 'paddle_slider_pid_active' ) ) :
@@ -808,16 +809,16 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 * @return bool Whether the control is active to the current preview.
 		 */
 		function paddle_slider_pid_active( $control ) {
-	
-			if ( 'post-ids' === $control->manager->get_setting( 'paddle_slider_source' )->value() 
-				&&  'slider' === $control->manager->get_setting( 'header_media_select' )->value() 
+
+			if ( 'post-ids' === $control->manager->get_setting( 'paddle_slider_source' )->value()
+				&& 'slider' === $control->manager->get_setting( 'header_media_select' )->value()
 			) {
 				return true;
 			} else {
 				return false;
 			}
 		}
-	
+
 	endif;
 
 	if ( ! function_exists( 'paddle_slider_source_from_page_active' ) ) :
@@ -832,16 +833,16 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 * @return bool Whether the control is active to the current preview.
 		 */
 		function paddle_slider_source_from_page_active( $control ) {
-	
-			if ( 'page' === $control->manager->get_setting( 'paddle_slider_source' )->value() 
-				&&  'slider' === $control->manager->get_setting( 'header_media_select' )->value() 
+
+			if ( 'page' === $control->manager->get_setting( 'paddle_slider_source' )->value()
+				&& 'slider' === $control->manager->get_setting( 'header_media_select' )->value()
 				) {
 				return true;
 			} else {
 				return false;
 			}
 		}
-	
+
 	endif;
 
 	if ( ! function_exists( 'paddle_banner_custom_link_active' ) ) :
@@ -856,16 +857,16 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 * @return bool Whether the control is active to the current preview.
 		 */
 		function paddle_banner_custom_link_active( $control ) {
-	
-			if ( 1 === $control->manager->get_setting( 'paddle_slider_custom_url' )->value() 
-			&&  'slider' === $control->manager->get_setting( 'header_media_select' )->value() 
+
+			if ( 1 === $control->manager->get_setting( 'paddle_slider_custom_url' )->value()
+			&& 'slider' === $control->manager->get_setting( 'header_media_select' )->value()
 			) {
 				return true;
 			} else {
 				return false;
 			}
 		}
-	
+
 	endif;
 
 	if ( ! function_exists( 'paddle_is_fullwidth_active' ) ) :
@@ -880,14 +881,14 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 * @return bool Whether the control is active to the current preview.
 		 */
 		function paddle_is_fullwidth_active( $control ) {
-	
+
 			if ( 1 === $control->manager->get_setting( 'paddle_page_layout_width' )->value() ) {
 				return true;
 			} else {
 				return false;
 			}
 		}
-	
+
 	endif;
 
 }

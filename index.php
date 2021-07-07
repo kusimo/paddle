@@ -34,7 +34,7 @@ get_header();
 			endif;
 
 
-			if ( 1 === get_theme_mod( 'archive_layout', 1 ) ) {
+			if ( 'grid' === get_theme_mod( 'post_archive_layout', 'grid' ) ) {
 				get_template_part( 'template-parts/content', 'archive' );
 			} else {
 				/* Start the Loop */

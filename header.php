@@ -29,4 +29,4 @@
 
 	<div id="content" class="site-content">
 	<div class="<?php $paddle_container = ( 'full-width-content' === paddle_layout_width() ? 'container-fluid full-width-container' : 'container' ); echo esc_attr( $paddle_container ); ?>">
-		<div class="row<?php echo esc_attr( paddle_content_over_banner() ); ?>">
+		<div class="row main-row">

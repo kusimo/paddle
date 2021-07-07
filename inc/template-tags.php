@@ -264,11 +264,13 @@ if ( ! function_exists( 'paddle_banner_btncss ' ) ) {
 */
 if ( ! function_exists( 'paddle_content_over_banner' ) ) {
 	function paddle_content_over_banner() {
-		$css          = '';
+		$css          = false;
 		$option_value = get_theme_mod( 'paddle_enable_content_over_banner', 0 );
 		$media_value  = get_theme_mod( 'header_media_select', 'none' );
-		if ( is_front_page() && has_header_image() && 1 === $option_value && 'hero' === $media_value) {
-			$css = ' content-over-header';
+		if (is_home() || is_front_page() ) {
+			if ( 1 === $option_value && 'hero' === $media_value) {
+				$css = true;
+			}
 		}
 		return $css;
 	}

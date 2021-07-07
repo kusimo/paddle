@@ -1899,22 +1899,6 @@ span.posted-on {
 span.edit-link {
   float: right; }
 
-/*
-h1:not(.noline-title):before, h2:not(.noline-title):before, .headline.heading-line:before {
-  background: $color__primary;
-  content: "\020";
-  display: block;
-  height: 3px;
-  margin: 1rem 0;
-  width: 1em;
-}
-h2:not(.noline-title):before {
-  width: 0.67em;
-}
-.entry-content h1:before, .entry-content h2:before {
-  content: unset;
-}
-*/
 .wp-block-image figcaption, .thumbnail-post-single figcaption, .editable figcaption, .wp-caption .wp-caption-text {
   margin: 0;
   padding: 0;
@@ -1998,6 +1982,21 @@ h2:not(.noline-title):before {
 @media (min-width: 992px) {
   .home.blog a.post-thumbnail, .archive.category a.post-thumbnail {
     width: calc(100% - 8rem); } }
+
+/** Page Template **/
+body.page-template.page-template-fullwidth-no-margin #content > .container {
+  max-width: unset;
+  width: 100%; }
+
+body.page-template.page-template-fullwidth-no-title #content > .container {
+  max-width: unset;
+  width: 100%; }
+
+body.page-template.page-template-fullwidth-no-title #content.site-content {
+  padding: 0; }
+
+body.page-template.page-template-fullwidth-no-title article header.entry-header {
+  display: none; }
 
 /* Category page
 --------------------------------------------- */

@@ -163,7 +163,13 @@ function paddle_minimize_css( $css ) {
  * @return void
  */
 function paddle_layout_container( $layout = '' ) {
-	$paddle_sidebar_layout_option = absint( get_theme_mod( 'paddle_page_layout_sidebar', 1 ) );
+	$paddle_sidebar_position = get_theme_mod('paddle_sidebar_position', 'left-sidebar');
+	$paddle_sidebar_layout_option = 0;
+	if('no-sidebar' === $paddle_sidebar_position ){
+		$paddle_sidebar_layout_option = 0;
+	} else {
+		$paddle_sidebar_layout_option = 1;
+	}
 
 	$col_8 = 'col-lg-8';
 	$col_4 = 'col-lg-4';
@@ -185,6 +191,7 @@ function paddle_layout_container( $layout = '' ) {
 	endif;
 
 	return $paddle_container;
+
 }
 
 /**
@@ -193,8 +200,9 @@ function paddle_layout_container( $layout = '' ) {
  * @return void
  */
 function paddle_layout_width() {
-	$paddle_full_page_width   = absint( get_theme_mod( 'paddle_page_layout_width', 1 ) );
-	$paddle_page_width_option = ( 0 === $paddle_full_page_width ) ? '' : ( ( 1 === $paddle_full_page_width ) ? 'full-width-content' : '' );
+	$paddle_sidebar_position = get_theme_mod('paddle_sidebar_position', 'left-sidebar');
+	$paddle_page_width_option ='';
+	if ('no-sidebar' === $paddle_sidebar_position) $paddle_page_width_option = 'full-width-content';
 	return $paddle_page_width_option;
 }
 
@@ -614,7 +622,7 @@ if (! function_exists('paddle_header_media')) {
 	 * @return void
 	 */
 	function paddle_header_media() {
-		$media_type = get_theme_mod('header_media_select', 'none');
+		$media_type = get_theme_mod('header_media_select', 'slider');
 		if ( 'none' !== $media_type && is_front_page() ||  'none' !== $media_type && is_home() ) :
 			if ('hero' === $media_type) {
 				get_template_part( 'template-parts/header/site', 'branding' );

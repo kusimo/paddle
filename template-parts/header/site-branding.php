@@ -9,15 +9,13 @@
 ?>
 
 <?php
-if ( ( is_header_video_active() && has_header_video() ) || has_header_image() ) :
-
 	$paddle_banner_title       = get_theme_mod( 'header_banner_title', 'Build Your Dream Website with Paddle' );
 	$paddle_banner_description = get_theme_mod( 'header_banner_description', 'Go Forward and Conquer' );
 	$paddle_banner_btn_1       = get_theme_mod( 'header_banner_button_1', 'Get Started' );
 	$paddle_banner_btn_1_link  = get_theme_mod( 'header_banner_button_1_link', '#' );
 	$paddle_banner_btn_2       = get_theme_mod( 'header_banner_button_2' );
 	$paddle_banner_btn_2_link  = get_theme_mod( 'header_banner_button_2_link', '#' );
-	?>
+?>
 
 <div id="home-header-image" class="home-banner vh">
 	<div class="home-banner-overlay vh"></div>
@@ -73,4 +71,3 @@ if ( ( is_header_video_active() && has_header_video() ) || has_header_image() ) 
 	</div><!-- .home-banner-content -->
 	<div class="home-banner-image"></div><!-- .home-banner-image-->
 </div><!-- .home-banner-->
-<?php endif; ?>

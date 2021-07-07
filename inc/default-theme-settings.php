@@ -35,8 +35,8 @@ if ( ! function_exists( 'paddle_static_header_css' ) ) {
 		$paddle_enable_icon_bg                   = absint( get_theme_mod( 'enable_icon_bg', 0 ) );
 		$banner_content_bg_opacity               = absint( get_theme_mod( 'banner_content_bg_opacity', 5 ) );
 		$paddle_banner_border_radius             = absint( get_theme_mod( 'paddle_banner_border_radius', 1 ) );
-		$paddle_title_headings_solid_lines_check = absint( get_theme_mod( 'paddle_title_headings_solid_lines' ) );
-		$paddle_remove_woo_single_sidebar_check  = absint( get_theme_mod( 'paddle_remove_woo_single_sidebar' ) );
+		$paddle_title_headings_solid_lines_check = absint( get_theme_mod( 'paddle_title_headings_solid_lines', 0 ) );
+		$paddle_remove_woo_single_sidebar_check  = absint( get_theme_mod( 'paddle_remove_woo_single_sidebar', 0 ) );
 		
 
 		$css = '';
@@ -97,7 +97,7 @@ if ( ! function_exists( 'paddle_static_header_css' ) ) {
 			$css .= '[data-header-style="1"] .menu-item a {text-transform: uppercase; }';
 		}
 
-		if ( 1 === $paddle_remove_woo_single_sidebar_check ) {
+		if ( 0 === $paddle_remove_woo_single_sidebar_check ) {
 			$css .= 'body.single.single-product #primary.content-area {max-width:100%; flex: 0 0 100%; }';
 		}
 
@@ -299,7 +299,7 @@ if ( ! function_exists( 'paddle_static_header_css' ) ) {
 
 		// Banner Header Background Color.
 		if ( 0 === $paddle_enable_banner_bgcolor ) {
-			$css .= '.home-banner .home-banner-content .board  { background: transparent } ';
+			$css .= '.home-banner .home-banner-content .board  { background: transparent!important } ';
 		} else {
 			$css .= '.home-banner .home-banner-content .board  { background: ' . $paddle_banner_header_bgcolor . ' } ';
 		}
@@ -337,10 +337,44 @@ if ( ! function_exists( 'paddle_static_header_css' ) ) {
 			$css .= '.home-banner .home-banner-content .board  { border-radius: 15px } ';
 		}
 
-		// Headings solid lines
-		if ( 0 === $paddle_title_headings_solid_lines_check ) {
-			$css .= ' h1:before, h2:before {background: none} ';
-		}
+		// Shift home .row up
+		if(paddle_content_over_banner()) {
+			$css .= '
+			@media screen and (min-width: 992px) {
+				.row.main-row {
+					position: relative;
+					margin-top: -200px;
+					background: #fff;
+					z-index: 2;
+					padding-top: 3.2rem;
+					padding-left: 2rem;
+					padding-right: 2rem;
+				}
+			  }
+			';
+		} 
+
+		// Headings solid lines H1 and H2 
+		if ( 1 === $paddle_title_headings_solid_lines_check) {
+			$css .='
+			.row.main-row h1:not(.noline-title):before, .row.main-row h2:not(.noline-title):before, .headline.heading-line:before {
+				background: $color__primary;
+				content: "\020";
+				display: block;
+				height: 3px;
+				margin: 1rem 0;
+				width: 1em;
+			  }
+			  .row.main-row h2:not(.noline-title):before {
+				width: 0.67em;
+			  }
+			  .entry-content h1:before, .entry-content h2:before, .woo-page h1:before, .woo-page h2:before {
+				content: unset;
+			  }
+			';
+		} 
+
+		// Retrun all css
 
 		return paddle_minimize_css( $css );
 	}
