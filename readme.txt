@@ -2,7 +2,7 @@
 
 Contributors: kusimo
 Tags: Custom-Background, Custom-Logo, Custom-Menu, Featured-Images, Threaded-Comments, Translation-Ready, Rtl-Language-Support, Blog, One-Column, Two-Columns, Right-Sidebar, Custom-Colors, Custom-Header, Footer-Widgets, Theme-Options
-Version: 1.0.11
+Version: 1.0.13
 Tested up to: 5.7
 Requires PHP: 5.6
 License: GPL-2.0-or-later

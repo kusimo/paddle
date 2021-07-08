@@ -3,9 +3,10 @@
     @media (min-width:992px) {
         margin-bottom: 4rem;
     }
+    margin-top: 2rem;
 }
 .archive .archive-grid.row  {
-    a.post-thumbnail  {
+    a.post-thumbnail.thumb-large  {
         width:100%;
     }
     .entry-title {
@@ -25,6 +26,61 @@
         
     }
 }
+.archive-grid.row article {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+    padding: 0 15px 15px 15px;
+    position: relative;
+    width:100%;
+    box-shadow: 0 8px 30px rgba(2, 59, 109, .1);
+    transform: translateY(0);
+    transition: transform 350ms cubic-bezier(0.63, 0.64, 0.3, 1);
+    height: 100%;
+    background: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+
+    &:hover {
+    transform: translateY(-10px);
+    }
+
+    .entry-meta {
+        display:inline-block;
+    }
+   
+    .thumbnail-container {
+        a.post-thumbnail {
+            padding-top:0; 
+        }
+        &::before, &::after {
+            top:0;
+        }
+        a.post-thumbnail.thumb-large {
+            width:100%;
+        }
+    }
+}
+.archive-grid.row>div {
+    justify-content: center;
+    @media  screen and (min-width:768px) {
+       
+        &:nth-child(2n+1)  {
+             border-right: 3px dashed #e5e5e5;
+             margin-bottom: 35px;
+         }  
+         &:nth-child(1n+1)  {
+             border-right: 3px dashed #e5e5e5;
+             margin-bottom: 35px;
+         }  
+         &:nth-child(3n)  {
+             border-right: none;
+         }
+         
+     }
+}
+
+
 .category-grid-layout {
 
     .archive-grid.row {
@@ -49,7 +105,6 @@
         }
         a.post-thumbnail {
             display: block;
-            padding-top: 3.5rem;
         }
     }
    

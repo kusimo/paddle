@@ -31,7 +31,7 @@ a:not([class*="wp-block-"]):not(.author-link):not(.post-entry-link) {
     main {
         .entry-title {
             a {
-                color: #000;  
+                color: currentColor;  
                 transition: linear 0.1s;
             }
         }

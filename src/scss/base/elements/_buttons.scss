@@ -57,12 +57,22 @@ a.btn.btn-primary:focus {
   background-color: #fff;
   color: $color__primary;
 }
-.btn-rounded {
-  border-radius: 40px;
-  
-  border: 2px solid transparent;
+
+.btn-outline-primary {
+  color: $color__primary;;
+  border-color: $color__primary;;
 }
 
+.btn-outline-primary:hover {
+  color: #fff;
+  background-color: $color__primary;
+  border-color: $color__primary;
+}
+
+.btn-rounded {
+  border-radius: 40px;
+  border: 2px solid transparent;
+}
 
 
 

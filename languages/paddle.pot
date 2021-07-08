@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Paddle 1.0.11\n"
+"Project-Id-Version: Paddle 1.0.13\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/paddle\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-07-07T13:07:02+00:00\n"
+"POT-Creation-Date: 2021-07-08T11:46:21+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.5.0\n"
 "X-Domain: paddle\n"
@@ -146,7 +146,7 @@ msgstr ""
 
 #: inc/customizer/inc/customizer.php:59
 #: inc/customizer/inc/customizer.php:60
-#: inc/customizer/inc/customizer.php:183
+#: inc/customizer/inc/customizer.php:181
 msgid "Header Layout"
 msgstr ""
 
@@ -196,310 +196,310 @@ msgstr ""
 msgid "Footer settings"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:140
+#: inc/customizer/inc/customizer.php:139
 msgid "Featured Image"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:153
+#: inc/customizer/inc/customizer.php:151
 msgid "Post / Pages"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:184
+#: inc/customizer/inc/customizer.php:182
 msgid "Layout for the header."
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:189
+#: inc/customizer/inc/customizer.php:187
 msgid "Logo Left"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:193
+#: inc/customizer/inc/customizer.php:191
 msgid "Logo Center"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:197
+#: inc/customizer/inc/customizer.php:195
 msgid "Logo Right"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:201
+#: inc/customizer/inc/customizer.php:199
 msgid "Logo Left & Search Left"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:205
+#: inc/customizer/inc/customizer.php:203
 msgid "Logo Left & Menu Left"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:226
+#: inc/customizer/inc/customizer.php:224
 msgid "Search Button"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:247
+#: inc/customizer/inc/customizer.php:245
 msgid "CTA Button"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:266
+#: inc/customizer/inc/customizer.php:264
 msgid "CTA URL"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:272
+#: inc/customizer/inc/customizer.php:270
 msgid "Enter URL Link..."
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:290
+#: inc/customizer/inc/customizer.php:288
 msgid "CTA Text"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:296
+#: inc/customizer/inc/customizer.php:294
 msgid "Enter Text..."
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:329
+#: inc/customizer/inc/customizer.php:327
 msgid "Adjust Logo Size"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:354
+#: inc/customizer/inc/customizer.php:352
 msgid "Adjust Logo Padding"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:379
+#: inc/customizer/inc/customizer.php:377
 msgid "Uppercase Text"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:401
+#: inc/customizer/inc/customizer.php:399
 msgid "Menu Background Colour"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:421
+#: inc/customizer/inc/customizer.php:419
 msgid "Menu background colour other than the default (#ffffff) is not recommended for Header Layout 5."
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:422
+#: inc/customizer/inc/customizer.php:420
 msgid "If your upper menu items are more than 6 and you are using the Header Layout 5,  menu items will not be on the same line on medium screen. Please consider switching back to the default background menu color or minimize your menu items. REASONS: Background not looking good with menu more then 6 on medium screen, e.g, Ipad pro."
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:446
+#: inc/customizer/inc/customizer.php:444
 msgid "Foreground Colour"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:467
+#: inc/customizer/inc/customizer.php:465
 msgid "Menu items alignment"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:471
+#: inc/customizer/inc/customizer.php:469
 #: inc/customizer/inc/customizer.php:1177
 msgid "Left"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:472
+#: inc/customizer/inc/customizer.php:470
 msgid "Centered"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:473
+#: inc/customizer/inc/customizer.php:471
 #: inc/customizer/inc/customizer.php:1179
 msgid "Right"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:474
+#: inc/customizer/inc/customizer.php:472
 msgid "Justify"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:494
+#: inc/customizer/inc/customizer.php:492
 msgid "Enable Top Bar"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:514
+#: inc/customizer/inc/customizer.php:512
 msgid "Show on Small Device"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:533
+#: inc/customizer/inc/customizer.php:531
 msgid "Phone number"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:551
+#: inc/customizer/inc/customizer.php:549
 msgid "Email"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:573
+#: inc/customizer/inc/customizer.php:571
 msgid "Right Item"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:577
+#: inc/customizer/inc/customizer.php:575
 msgid "Button"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:578
+#: inc/customizer/inc/customizer.php:576
 msgid "Social Links"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:597
+#: inc/customizer/inc/customizer.php:595
 msgid "Text"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:601
+#: inc/customizer/inc/customizer.php:599
 msgid "Enter Button Text..."
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:618
+#: inc/customizer/inc/customizer.php:616
 msgid "URL"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:622
+#: inc/customizer/inc/customizer.php:620
 msgid "Enter Url e.g: http://example.com"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:642
-#: inc/customizer/inc/customizer.php:752
+#: inc/customizer/inc/customizer.php:640
+#: inc/customizer/inc/customizer.php:750
 msgid "Social URLs"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:643
-#: inc/customizer/inc/customizer.php:753
+#: inc/customizer/inc/customizer.php:641
+#: inc/customizer/inc/customizer.php:751
 msgid "Add your social media links."
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:646
-#: inc/customizer/inc/customizer.php:756
+#: inc/customizer/inc/customizer.php:644
+#: inc/customizer/inc/customizer.php:754
 msgid "Add Social Link"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:667
+#: inc/customizer/inc/customizer.php:665
 msgid "Social Icon Background"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:691
+#: inc/customizer/inc/customizer.php:689
 msgid "Footer Logo"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:692
+#: inc/customizer/inc/customizer.php:690
 msgid "Show your logo in footer. Logo appears before the footer widget area."
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:711
+#: inc/customizer/inc/customizer.php:709
 msgid "Privacy Policy"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:712
+#: inc/customizer/inc/customizer.php:710
 msgid "If the Privacy policy page is detected, the link will be added to the footer."
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:732
+#: inc/customizer/inc/customizer.php:730
 msgid "Footer Social URLs"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:779
+#: inc/customizer/inc/customizer.php:776
 msgid "Footer Copyright Text"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:780
+#: inc/customizer/inc/customizer.php:777
 msgid "Copyright text to be displayed in the footer. No HTML allowed."
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:798
+#: inc/customizer/inc/customizer.php:795
 msgid "Theme Credit"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:822
+#: inc/customizer/inc/customizer.php:819
 msgid "Hero / Slider"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:825
+#: inc/customizer/inc/customizer.php:822
 msgid "Hero"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:826
+#: inc/customizer/inc/customizer.php:823
 msgid "Slider"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:827
+#: inc/customizer/inc/customizer.php:824
 msgid "None"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:843
+#: inc/customizer/inc/customizer.php:844
 msgid "Upload Hero Image"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:867
+#: inc/customizer/inc/customizer.php:869
 msgid "Slider source"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:891
+#: inc/customizer/inc/customizer.php:893
 msgid "Enter post IDs separated by commas"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:892
+#: inc/customizer/inc/customizer.php:894
 msgid "Enter 3 post ids, each post ID should be separated by commas."
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:931
+#: inc/customizer/inc/customizer.php:933
 msgid "Set slider page 1"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:932
-#: inc/customizer/inc/customizer.php:943
-#: inc/customizer/inc/customizer.php:954
+#: inc/customizer/inc/customizer.php:934
+#: inc/customizer/inc/customizer.php:945
+#: inc/customizer/inc/customizer.php:956
 msgid "Select a page from the dropdown below."
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:942
+#: inc/customizer/inc/customizer.php:944
 msgid "Set slider page 2"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:953
+#: inc/customizer/inc/customizer.php:955
 msgid "Set slider page 3"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:975
+#: inc/customizer/inc/customizer.php:977
 msgid "Use custom link and button"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:1013
+#: inc/customizer/inc/customizer.php:1015
 msgid "Button 1"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:1014
+#: inc/customizer/inc/customizer.php:1016
 msgid "Enter text for the slide button 1"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:1024
+#: inc/customizer/inc/customizer.php:1026
 msgid "Button 2"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:1025
+#: inc/customizer/inc/customizer.php:1027
 msgid "Enter text for the slide button 2"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:1035
+#: inc/customizer/inc/customizer.php:1037
 msgid "Button 3"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:1036
+#: inc/customizer/inc/customizer.php:1038
 msgid "Enter text for the slide button 3"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:1073
+#: inc/customizer/inc/customizer.php:1075
 msgid "URL 1"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:1074
+#: inc/customizer/inc/customizer.php:1076
 msgid "Enter link for slide 1"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:1084
+#: inc/customizer/inc/customizer.php:1086
 msgid "URL 2"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:1085
+#: inc/customizer/inc/customizer.php:1087
 msgid "Enter link for slide 2"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:1095
+#: inc/customizer/inc/customizer.php:1097
 msgid "URL 3"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:1096
+#: inc/customizer/inc/customizer.php:1098
 msgid "Enter link for slide 3"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:1118
+#: inc/customizer/inc/customizer.php:1119
 msgid "Height"
 msgstr ""
 
@@ -535,123 +535,139 @@ msgstr ""
 msgid "Background Opacity"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:1294
+#: inc/customizer/inc/customizer.php:1293
 msgid "Border Radius"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:1315
+#: inc/customizer/inc/customizer.php:1314
 msgid "Border Box Shadow"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:1326
+#: inc/customizer/inc/customizer.php:1325
 msgid "Build Your Dream Website with Paddle"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:1336
+#: inc/customizer/inc/customizer.php:1335
 msgid "Banner Title"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:1349
+#: inc/customizer/inc/customizer.php:1348
 msgid "Let's improve the way you see business."
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:1359
+#: inc/customizer/inc/customizer.php:1358
 msgid "Banner description"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:1372
+#: inc/customizer/inc/customizer.php:1371
 msgid "Learn More"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:1382
+#: inc/customizer/inc/customizer.php:1381
 msgid "Button 1 Label"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:1404
+#: inc/customizer/inc/customizer.php:1403
 msgid "Button 1 URL Link"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:1426
+#: inc/customizer/inc/customizer.php:1425
 msgid "Button 2 Label"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:1448
+#: inc/customizer/inc/customizer.php:1447
 msgid "Button 2 URL Link"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:1471
+#: inc/customizer/inc/customizer.php:1470
 msgid "Arrow Button"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:1492
+#: inc/customizer/inc/customizer.php:1490
 msgid "If the banner covers the button, try increase the height of the banner for better result."
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:1493
+#: inc/customizer/inc/customizer.php:1491
 msgid "Shift Content Up"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:1513
+#: inc/customizer/inc/customizer.php:1515
 msgid "Post / Page Layout"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:1518
+#: inc/customizer/inc/customizer.php:1520
 msgid "Left Sidebar"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:1522
+#: inc/customizer/inc/customizer.php:1524
 msgid "No Sidebar"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:1526
+#: inc/customizer/inc/customizer.php:1528
 msgid "Right Sidebar"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:1549
+#: inc/customizer/inc/customizer.php:1551
 msgid "WooCommerce Product Sidebar"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:1570
+#: inc/customizer/inc/customizer.php:1572
 msgid "Post Achieve"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:1573
+#: inc/customizer/inc/customizer.php:1575
 msgid "Toggle post layout for category page, achieve page, tag page. This layout also applies to homepage."
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:1575
+#: inc/customizer/inc/customizer.php:1577
 msgid "Grid"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:1576
+#: inc/customizer/inc/customizer.php:1578
 msgid "List"
 msgstr ""
 
 #: inc/customizer/inc/customizer.php:1597
+msgid "Grid Columns"
+msgstr ""
+
+#: inc/customizer/inc/customizer.php:1602
+msgid "2 Columns"
+msgstr ""
+
+#: inc/customizer/inc/customizer.php:1603
+msgid "3 Columns"
+msgstr ""
+
+#: inc/customizer/inc/customizer.php:1623
+msgid "Expand Grid Image"
+msgstr ""
+
+#: inc/customizer/inc/customizer.php:1644
 msgid "Hide Footer Meta"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:1599
+#: inc/customizer/inc/customizer.php:1646
 msgid "Hide tag and category links on category page and achieve page."
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:1618
+#: inc/customizer/inc/customizer.php:1665
 msgid "Enable author link info"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:1619
+#: inc/customizer/inc/customizer.php:1666
 msgid "Hide or show author link in single post after the title"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:1639
+#: inc/customizer/inc/customizer.php:1686
 msgid "Solid Line Before Title"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:1640
+#: inc/customizer/inc/customizer.php:1687
 msgid "Add solid line before header 1 and header 2 (h1 and h2)"
 msgstr ""
 
-#: inc/customizer/inc/customizer.php:1665
+#: inc/customizer/inc/customizer.php:1712
 msgid "Primary Color"
 msgstr ""
 

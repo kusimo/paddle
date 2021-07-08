@@ -99,7 +99,7 @@ if ( ! function_exists( 'paddle_generate_defaults' ) ) {
 			'search_menu_icon'              => 0,
 			'woocommerce_shop_sidebar'      => 1,
 			'woocommerce_product_sidebar'   => 0,
-			'paddle_header_layout_style'    => 'logo-right',
+			'paddle_header_layout_style'    => 'logo-left-style-2',
 			'paddle_header_search_button'   => 1,
 			'paddle_header_cta'             => 0,
 			'header_logo_size'              => 150,

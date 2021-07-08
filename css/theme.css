@@ -851,7 +851,7 @@ a:not([class*="wp-block-"]):hover, a:focus, a:active {
   font-weight: 900; }
 
 #primary main .entry-title a {
-  color: #000;
+  color: currentColor;
   transition: linear 0.1s; }
 
 /* Forms
@@ -914,6 +914,15 @@ a.btn.btn-primary:hover,
 a.btn.btn-primary:focus {
   background-color: #fff;
   color: #000000; }
+
+.btn-outline-primary {
+  color: #000000;
+  border-color: #000000; }
+
+.btn-outline-primary:hover {
+  color: #fff;
+  background-color: #000000;
+  border-color: #000000; }
 
 .btn-rounded {
   border-radius: 40px;
@@ -1209,8 +1218,8 @@ ul#menu-social-items li,
       height: 20px;
       position: absolute;
       display: inline-block;
-      left: 8px;
-      top: 8px; }
+      left: 9px;
+      top: 9px; }
     ul#menu-social-items li a:hover::before,
     ul#menu-social-items li .icon:hover::before,
     .social-items.topbar-social li a:hover::before,
@@ -1823,13 +1832,14 @@ article .entry-footer {
     margin-bottom: 9px; }
   article .entry-footer .cat-links a {
     background: #efefef;
-    color: #999;
+    color: #777;
     padding: 5px 15px;
     border-radius: 45px;
     margin-right: 5px;
     display: inline-block;
     line-height: 1;
-    margin-bottom: 4px; }
+    margin-bottom: 4px;
+    text-decoration: none !important; }
   article .entry-footer a.post-edit-link {
     padding: 5px 12px;
     letter-spacing: .8px;
@@ -1879,7 +1889,8 @@ span.tags-links a {
   display: inline-block;
   border-radius: 15px;
   border: 1px solid #ccc;
-  margin-bottom: 5px; }
+  margin-bottom: 5px;
+  text-decoration: none !important; }
 
 small .byline {
   position: relative;
@@ -1968,8 +1979,7 @@ span.edit-link {
 .article-more-link:hover .read-more:after {
   right: -3px;
   border-top-width: 0;
-  border-left-width: 0;
-  border: 2px solid #000000; }
+  border-left-width: 0; }
 
 .home.blog a.post-thumbnail, .archive.category a.post-thumbnail {
   display: block;
@@ -2001,12 +2011,13 @@ body.page-template.page-template-fullwidth-no-title article header.entry-header 
 /* Category page
 --------------------------------------------- */
 .archive h1.page-title {
-  margin-bottom: 2rem; }
+  margin-bottom: 2rem;
+  margin-top: 2rem; }
   @media (min-width: 992px) {
     .archive h1.page-title {
       margin-bottom: 4rem; } }
 
-.archive .archive-grid.row a.post-thumbnail {
+.archive .archive-grid.row a.post-thumbnail.thumb-large {
   width: 100%; }
 
 .archive .archive-grid.row .entry-title {
@@ -2023,6 +2034,43 @@ body.page-template.page-template-fullwidth-no-title article header.entry-header 
 .archive .archive-grid.row a.post-entry-link {
   font-size: 1.2rem;
   font-weight: 700; }
+
+.archive-grid.row article {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0;
+  padding: 0 15px 15px 15px;
+  position: relative;
+  width: 100%;
+  box-shadow: 0 8px 30px rgba(2, 59, 109, 0.1);
+  transform: translateY(0);
+  transition: transform 350ms cubic-bezier(0.63, 0.64, 0.3, 1);
+  height: 100%;
+  background: #fff;
+  border-radius: 5px;
+  overflow: hidden; }
+  .archive-grid.row article:hover {
+    transform: translateY(-10px); }
+  .archive-grid.row article .entry-meta {
+    display: inline-block; }
+  .archive-grid.row article .thumbnail-container a.post-thumbnail {
+    padding-top: 0; }
+  .archive-grid.row article .thumbnail-container::before, .archive-grid.row article .thumbnail-container::after {
+    top: 0; }
+  .archive-grid.row article .thumbnail-container a.post-thumbnail.thumb-large {
+    width: 100%; }
+
+.archive-grid.row > div {
+  justify-content: center; }
+  @media screen and (min-width: 768px) {
+    .archive-grid.row > div:nth-child(2n+1) {
+      border-right: 3px dashed #e5e5e5;
+      margin-bottom: 35px; }
+    .archive-grid.row > div:nth-child(1n+1) {
+      border-right: 3px dashed #e5e5e5;
+      margin-bottom: 35px; }
+    .archive-grid.row > div:nth-child(3n) {
+      border-right: none; } }
 
 .category-grid-layout .archive-grid.row .entry-meta small .byline {
   float: left;
@@ -2042,8 +2090,7 @@ body.page-template.page-template-fullwidth-no-title article header.entry-header 
   margin-right: 9px; }
 
 .category-grid-layout .archive-grid.row a.post-thumbnail {
-  display: block;
-  padding-top: 3.5rem; }
+  display: block; }
 
 /* Comments
 --------------------------------------------- */
@@ -2366,7 +2413,7 @@ section[id*='recent-posts-'] li:before {
  */
 .site-footer {
   padding: 0 0;
-  color: #999;
+  color: #5c5c5c;
   background-color: #f9f9f9;
   border-top: 0; }
   .site-footer p:last-child {
@@ -2395,6 +2442,9 @@ section[id*='recent-posts-'] li:before {
       @media (min-width: 992px) {
         .site-footer .site-info .footer-copyrights {
           text-align: left; } }
+      .site-footer .site-info .footer-copyrights a {
+        text-decoration: none !important;
+        color: currentColor; }
 
 .footer-widgets .container, .footer-widgets .container-fluid {
   padding-top: 20px;
@@ -3032,6 +3082,9 @@ Header Style 2
           height: 25px;
           position: unset;
           filter: invert(1); }
+      #topbar ul.social-items li a:before {
+        left: 8px;
+        right: 8px; }
       #topbar ul.social-items li > span {
         overflow: hidden; }
       #topbar ul.social-items li .social-icon-wrap {
@@ -3227,6 +3280,8 @@ Custom Header
     bottom: 0;
     background: rgba(0, 0, 0, 0.4);
     z-index: 1; }
+  .home-banner #hero .home-banner-cta-button-container > a:after {
+    left: -48%; }
   .home-banner .home-banner-content {
     display: flex;
     flex-flow: column;
@@ -3298,6 +3353,8 @@ Custom Header
       .home-banner .home-banner-content.content-right .board {
         max-width: 700px;
         margin: 0; } }
+  .home-banner .home-banner-content.content-none .board {
+    text-align: center; }
   .home-banner .home-banner-image {
     position: absolute;
     top: 0;

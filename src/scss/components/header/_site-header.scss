@@ -904,6 +904,12 @@ Header Style 2
           filter: invert(1)
         }
       }
+      a {
+        &:before {
+          left:8px;
+          right:8px;
+        }
+      }
 
       >span {
         overflow: hidden;

@@ -104,7 +104,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 					<?php foreach ( $this->choices as $key => $value ) { ?>
 						<label class="radio-button-label">
 							<input type="radio" name="<?php echo esc_attr( $this->id ); ?>" value="<?php echo esc_attr( $key ); ?>" <?php $this->link(); ?> <?php checked( esc_attr( $key ), $this->value() ); ?>/>
-							<span><?php echo esc_attr( $value ); ?></span>
+							<span><?php echo esc_html( $value ); ?></span>
 						</label>
 					<?php	} ?>
 				</div>
@@ -883,6 +883,28 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		function paddle_is_fullwidth_active( $control ) {
 
 			if ( 1 === $control->manager->get_setting( 'paddle_page_layout_width' )->value() ) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+	endif;
+
+	if ( ! function_exists( 'paddle_grid_selected' ) ) :
+
+		/**
+		 * Check grid layout is selected.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param WP_Customize_Control $control WP_Customize_Control instance.
+		 *
+		 * @return bool Whether the control is active to the current preview.
+		 */
+		function paddle_grid_selected( $control ) {
+
+			if ( 'grid' === $control->manager->get_setting( 'post_archive_layout' )->value() ) {
 				return true;
 			} else {
 				return false;

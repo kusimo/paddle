@@ -177,7 +177,7 @@ if ( ! function_exists( 'paddle_post_thumbnail' ) ) :
 			<div class="post-thumbnail">
 				<div class="thumbnail-container">
 			<?php if ( is_front_page() ) : ?>
-						<a class="post-thumbnail" href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
+						<a class="post-thumbnail <?php echo esc_attr(1 === get_theme_mod('paddle_expand_grid_image', 1) ? 'thumb-large': 'thumb-small'); ?>" href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
 				<?php the_post_thumbnail(); ?>
 						</a>
 						<?php else : ?>
@@ -188,7 +188,7 @@ if ( ! function_exists( 'paddle_post_thumbnail' ) ) :
 
 		<?php else : ?>
 
-			<a class="post-thumbnail" href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
+			<a class="post-thumbnail <?php echo esc_attr(1 === get_theme_mod('paddle_expand_grid_image', 1) ? 'thumb-large': 'thumb-small'); ?>" href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
 			<div class="thumbnail-container">
 			<?php
 			the_post_thumbnail(

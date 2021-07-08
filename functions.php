@@ -10,7 +10,7 @@
 
 if ( ! defined( 'PADDLE_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( 'PADDLE_VERSION', '1.0.11' );
+	define( 'PADDLE_VERSION', '1.0.13' );
 }
 
 if ( ! defined( 'PADDLE_DEV_VERSION' ) ) {

@@ -203,8 +203,10 @@ if ( ! function_exists( 'paddle_static_header_css' ) ) {
                 background-color: ' . $primary_color . ';
                 border-color: ' . $primary_color . ';
             }
-			.btn-primary:hover,.btn-primary:focus, a.btn.btn-primary:hover,
-			a.btn.btn-primary:focus {
+			.btn-primary:hover,.btn-primary:focus, 
+			a.btn.btn-primary:hover,
+			a.btn.btn-primary:focus, 
+			.btn-outline-primary {
                 border-color: ' . $primary_color . ';
 				color: ' . $primary_color . ';
             }
@@ -222,7 +224,9 @@ if ( ! function_exists( 'paddle_static_header_css' ) ) {
                 fill: ' . $primary_color . ';
               }
             
-            .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle {
+            .btn-primary:not(:disabled):not(.disabled):active, 
+			.btn-primary:not(:disabled):not(.disabled).active, 
+			.show > .btn-primary.dropdown-toggle, .btn-outline-primary:hover {
                 background-color: ' . $primary_color . ';
                 border-color: ' . $primary_color . ';
             }
@@ -250,7 +254,9 @@ if ( ! function_exists( 'paddle_static_header_css' ) ) {
 			.read-more:before {
 				background-color: ' . $primary_color . ';
 			}
-			
+			.read-more:after {
+				color: ' . $primary_color . ';
+			}
 			
 			.comment-body .reply a {
 				background: ' . $primary_color . ';

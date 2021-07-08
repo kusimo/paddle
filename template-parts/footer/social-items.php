@@ -18,7 +18,7 @@ foreach ( $paddle_social_footer_urls as $key => $value ) {
 			?>
 	   <li class="social-item">
 				<a href="<?php echo esc_url( $value ); ?>" title="<?php echo esc_attr( $social_title ); ?>" target="_blank">
-					<span class="screen-reader-text"><?php echo esc_attr( $social_name ); ?></span>
+					<span class="screen-reader-text"><?php echo esc_html( $social_name ); ?></span>
 				</a>
 		</li>
 			<?php
@@ -28,7 +28,7 @@ foreach ( $paddle_social_footer_urls as $key => $value ) {
 			?>
 		<li class="social-item no-social">
 			<a class="icon icon-globe" href="<?php echo esc_url( $value ); ?>" title="<?php echo esc_attr( $social_title ); ?>" target="_blank">
-				<span class="screen-reader-text"><?php echo esc_attr( $social_name ); ?></span>
+				<span class="screen-reader-text"><?php echo esc_html( $social_name ); ?></span>
 			</a>
 		</li>
 			<?php

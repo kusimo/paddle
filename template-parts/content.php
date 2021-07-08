@@ -34,7 +34,7 @@
 			// Display date link in the header if not in the footer.
 			if ( is_archive() || is_front_page() && 1 === get_theme_mod( 'hide_archive_meta' ) ) :
 				paddle_posted_on();
-endif;
+			endif;
 			?>
 
 			</div><!-- .entry-meta -->
@@ -77,6 +77,12 @@ endif;
 		);
 		?>
 	</div><!-- .entry-content -->
+
+	<?php
+	do_action( 'paddle_post' );
+	// @todo Hook the four functions above to paddle_post.
+	?>
+
 	<div class="clearfix"></div>
 
 	<?php
