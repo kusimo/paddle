@@ -10,7 +10,7 @@
 
 if ( ! defined( 'PADDLE_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( 'PADDLE_VERSION', '1.0.13' );
+	define( 'PADDLE_VERSION', '1.0.15' );
 }
 
 if ( ! defined( 'PADDLE_DEV_VERSION' ) ) {
@@ -79,7 +79,9 @@ if ( ! function_exists( 'paddle_setup' ) ) :
 		add_theme_support( 'post-thumbnails' );
 
 		// Register a new image size.
-		add_image_size( 'paddle-600x400-image', 600, 400, true );
+		add_image_size( 'paddle-large-image', 1320, 990, true );
+		add_image_size( 'paddle-medium-image', 800, 600, true );
+		add_image_size( 'paddle-small-thumb', 480, 360, true );
 
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menus(
@@ -333,3 +335,4 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 if ( class_exists( 'WooCommerce' ) ) {
 	require get_template_directory() . '/inc/woocommerce.php';
 }
+

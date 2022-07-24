@@ -72,7 +72,7 @@ for ( $i = 1; $i <= 4; $i++ ) {
 		 */
 		if ( is_active_sidebar( 'footer-5' ) ) :
 			?>
-		<div class="container footer-widget-5">Footer 5 Widget Here</div>
+		<div class="container footer-widget-5"><?php dynamic_sidebar( 'footer-5' ); ?></div>
 		<?php endif; ?>
 </div>
 

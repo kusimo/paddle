@@ -79,7 +79,7 @@ article.sticky .thumbnail-container::after {
 }
 
 header.entry-header {
-  padding: 0 0 2rem;
+  padding: 0 0 0.2rem;
 }
 
 article {
@@ -305,9 +305,9 @@ article {
   .by-author {
     font-size: 1rem;
     margin: 2rem 0;
-    color: #999;
+    color: #333;
     a {
-      color: #999;
+      color: #333;
     }
   }  
 
@@ -324,7 +324,8 @@ article {
       margin-bottom:9px;
     }
 
-    .cat-links {
+    span.cat-links {
+      display:inline!important;
       a {
         background: #efefef;
         color: #777;
@@ -335,6 +336,9 @@ article {
         line-height: 1;
         margin-bottom: 4px;
         text-decoration: none!important;
+      }
+      @media screen and (min-width:925px) {
+        display:inline-block;
       }
     }
     a.post-edit-link {
@@ -386,18 +390,29 @@ article {
 .archive .entry-content, .category .entry-content {
   color: #757575;
 }
-span.tags-links a {
-  padding: 2px 8px;
-  display: inline-block;
-  border-radius: 15px;
-  border: 1px solid #ccc;
-  margin-bottom: 5px;
-  text-decoration: none!important;
+span.tags-links {
+  display:inline!important;
+  &::before {
+    top:0;
+  }
+  @media screen and (min-width:925px) {
+    display:inline-block;
+  }
+  a {
+    padding: 2px 8px;
+    display: inline;
+    border-radius: 15px;
+    border: 1px solid #ccc;
+    margin-bottom: 5px;
+    text-decoration: none!important;
+    
+  }
 }
+
 
 small .byline{
   position: relative;
-  display: block;
+  display: inline-block;
   color: #999;
   margin-left:30px;
   margin-bottom:9px;

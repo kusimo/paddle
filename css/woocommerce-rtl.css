@@ -1462,7 +1462,7 @@ p.stars.selected a:not(.active)::before {
             transition-duration: 0.5s; }
     .woocommerce-tabs ul.tabs li a {
       display: inline-block;
-      padding: 2.86em 0;
+      padding: 1.16em 0;
       font-weight: 700;
       color: #8b8b8b;
       text-decoration: none !important;

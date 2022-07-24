@@ -1,6 +1,6 @@
 {
   "name": "paddle",
-  "version": "1.0.13",
+  "version": "1.0.15",
   "description": "Paddle WordPress theme built with Bootstrap and underscores framework",
   "author": "Abidemi Kusimo",
   "license": "GPL-2.0-or-later",
@@ -70,5 +70,8 @@
     },
     "plugins": [],
     "map": false
+  },
+  "dependencies": {
+    "gulp-cli": "^2.3.0"
   }
 }

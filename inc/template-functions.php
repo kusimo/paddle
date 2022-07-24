@@ -403,10 +403,10 @@ if ( ! function_exists( 'paddle_footer_copyrights' ) ) :
 		<?php
 	}
 endif;
-add_action( 'paddle_action_footer', 'paddle_footer_copyrights' );
-add_action( 'paddle_action_footer', 'paddle_privacy_policy_link' );
-add_action( 'paddle_action_footer', 'paddle_theme_credit' );
-add_action( 'paddle_action_footer', 'paddle_social_menu' );
+add_action( 'paddle_action_footer', 'paddle_footer_copyrights',9 );
+add_action( 'paddle_action_footer', 'paddle_privacy_policy_link',13 );
+add_action( 'paddle_action_footer', 'paddle_theme_credit',15 );
+add_action( 'paddle_action_footer', 'paddle_social_menu',18 );
 
 
 // Theme credit.

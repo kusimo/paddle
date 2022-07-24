@@ -25,7 +25,7 @@
                              </button></div>
                      <?php endif; ?>
                      <div class="toggler">
-                         <button class="open-dialog btn navbar-toggler navbar-toggler-right collapsed offcanvas-toggle pl-0">
+                         <button aria-label="<?php echo esc_attr__('Open Menu', 'paddle'); ?>" class="open-dialog btn navbar-toggler navbar-toggler-right collapsed offcanvas-toggle pl-0">
                              <span></span><span></span><span></span>
                          </button>
                      </div>

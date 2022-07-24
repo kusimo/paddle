@@ -17,7 +17,7 @@ foreach ( $paddle_social_footer_urls as $key => $value ) {
 			$social_title = $paddle_social_icons[ $index ]['title'];
 			?>
 	   <li class="social-item">
-				<a href="<?php echo esc_url( $value ); ?>" title="<?php echo esc_attr( $social_title ); ?>" target="_blank">
+				<a rel="noopener" href="<?php echo esc_url( $value ); ?>" title="<?php echo esc_attr( $social_title ); ?>" target="_blank">
 					<span class="screen-reader-text"><?php echo esc_html( $social_name ); ?></span>
 				</a>
 		</li>

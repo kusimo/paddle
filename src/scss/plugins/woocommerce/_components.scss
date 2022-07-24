@@ -356,6 +356,7 @@ Pagination
 
 .woocommerce-pagination .page-numbers {
   margin: 0;
+  padding-left: 0;
   list-style: none;
 }
 
@@ -368,6 +369,7 @@ Pagination
   display: inline-block;
   text-decoration: none !important;
   margin: 0;
+  margin-bottom: 9px;
   padding: 0.733em 1.2em;
   border: 1px solid #444;
   font-weight: 500;
@@ -822,6 +824,10 @@ Reviews
 /** Site header */
 .site-header {
   .woo-header-utilities {
+    a.nav-link {
+      text-decoration: none;
+      color: currentColor;
+    }
     .woo-icon-user {
       margin-right: 18px;
     }

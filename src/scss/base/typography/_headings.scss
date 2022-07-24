@@ -21,18 +21,15 @@ h1,h1.entry-title, h1.page-title,.entry-content h1,
 .entry-summary h1,
 .comment-content h1,
 .textwidget h1 {
-	font-size: 1.75rem;
 	font-weight: 900;
 	line-height: 1.25;
 	margin: 0.9231em 0;
 	margin-top: 1.2em;
 	@media screen and (min-width: 46.25em) {
-		font-size: 28px;
 		line-height: 1.2;
 		margin:28px 0;
 	}
 	@media screen and (min-width: 68.75em) {
-		font-size: 30px;
 		line-height: 1.2308;
 		margin: 28px 0;
 	}
@@ -42,17 +39,14 @@ h2,h2.entry-title,.entry-content h2,
 .entry-summary h2,
 .comment-content h2,
 .textwidget h2 {
-	font-size: 1.45rem;
 	font-weight: 700;
 	line-height: 1.25;
 	margin: 0.9231em 0;
 	@media screen and (min-width: 46.25em) {
-		font-size: 24px;
 		line-height: 1.2;
 		margin: 1.2em 0;
 	}
 	@media screen and (min-width: 68.75em) {
-		font-size: 28px;
 		line-height: 1.2;
 		margin: 1.2em 0;
 	}
@@ -84,7 +78,7 @@ h2,.entry-content h2,
 	line-height: 1.2173913043;
 	margin: 1.2173913043em 0;
 	@media screen and (min-width: 55em) {
-		font-size: 28px;
+		margin: 1.2173913043em 0;
 	}
 	@media screen and (min-width: 68.75em) {
 		line-height: 1.2069;
@@ -100,20 +94,23 @@ h3, .entry-content h3,
 .entry-summary h3,
 .comment-content h3,
 .textwidget h3 {
-	font-size: 1.1875rem;
 	line-height: 1.1052631579;
 	margin: 1.95em 0;
 	@media screen and (min-width: 46.25em) {
-		font-size: 20px;
+		margin: 1.95em 0;
 	}
 	@media screen and (min-width: 68.75em) {
-		font-size: 24px;
+		margin: 1.95em 0;
 	}
 }
 .page-header {
 	.archive-description {
 		width: 100%;
     	display: flex;
+		margin-bottom: 40px;
+		@media screen and (min-width:768px) {
+			margin-bottom: 80px;
+		}
 	}
 }
 header::after {
@@ -152,8 +149,6 @@ body.boxed-header header>h1:before {
 .textwidget h4,
 .textwidget h5,
 .textwidget h6 {
-	font-size: 16px;
-	font-size: 1rem;
 	line-height: 1.3125;
 }
 
@@ -162,6 +157,8 @@ body.boxed-header header>h1:before {
 .comment-content h4,
 .textwidget h4 {
 	letter-spacing: 0.140625em;
+}
+.textwidget h4 {
 	text-transform: uppercase;
 }
 

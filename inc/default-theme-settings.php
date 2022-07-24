@@ -327,15 +327,17 @@ if ( ! function_exists( 'paddle_static_header_css' ) ) {
 		}
 
 		if ( 0 === get_theme_mod('paddle_banner_box_shadow', 0) ) {
-			$css .= ' #paddle-slider .light-box-shadow, , #hero .board  { box-shadow: none; } ';
+			$css .= ' #paddle-slider .light-box-shadow, #hero .board  { box-shadow: none; } ';
 		}
 
 	
 
 		// Banner Text Color
-		if ( '#ffffff' !== $paddle_banner_header_color ) {
-			$css .= ' .home-banner .home-banner-content .board { color: ' . $paddle_banner_header_color . '; } ';
-		}
+		//if ( '#ffffff' !== $paddle_banner_header_color ) {
+		$css .= ' .home-banner .home-banner-content .board { color: ' . $paddle_banner_header_color . '; } ';
+		$css .= ' .home-banner .home-banner-content .board p { color: ' . $paddle_banner_header_color . '; } ';
+
+		//}
 
 
 		// Set banner text content border radius;
@@ -360,6 +362,18 @@ if ( ! function_exists( 'paddle_static_header_css' ) ) {
 			';
 		} 
 
+		if ('center' === get_theme_mod('paddle_h1_alignment', 'left')) {
+			$css .= '.single article h1.entry-title, header.entry-header, .archive h1.page-title, .page-header .archive-description, 
+			header .term-description, article .by-author,article .entry-meta, nav.woocommerce-breadcrumb {
+				text-align: center;
+			}
+			header .term-description p, .page-header .archive-description p  {
+				width:100%;
+			}
+			';
+			
+		}
+
 		// Headings solid lines H1 and H2 
 		if ( 1 === $paddle_title_headings_solid_lines_check) {
 			$css .='
@@ -378,7 +392,11 @@ if ( ! function_exists( 'paddle_static_header_css' ) ) {
 				content: unset;
 			  }
 			';
-		} 
+			
+			
+		} // End Function.
+
+	
 
 		// Retrun all css
 

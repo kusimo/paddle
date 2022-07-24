@@ -82,7 +82,7 @@ else :  // Right sidebar option is in use.
 		if ( $paddle_caption ) {
 			?>
 
-			<figcaption><?php echo wp_kses_post( $paddle_caption ); ?></figcaption>
+			<figcaption><?php echo wp_kses_post( the_post_thumbnail_caption() ); ?></figcaption>
 
 			<?php
 		}

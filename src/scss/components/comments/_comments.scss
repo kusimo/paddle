@@ -17,12 +17,10 @@
 
 .comments-title,
 .pings-title {
-  font-size: 1.5em;
   font-weight: 400;
-  border-bottom: 1px solid #ebebeb;
   margin-bottom: 0.833em;
-  padding-bottom: 0.542em;
-  line-height: 1.208em;
+  padding-bottom: 0;
+  margin-bottom:1rem;
   position: relative;
 
   li.comment {
@@ -66,7 +64,7 @@ footer.comment-meta {
 }
 .comment-metadata {
   font-size: 14px;
-  color: #aeaeae;
+  color: #333;
   font-weight: 400;
   margin-left: 3.2rem;
   margin-top: -10px;
@@ -117,6 +115,9 @@ ol.comment-list,
       margin-left: 0;
       padding-left:1rem;
     }
+  }
+  li:last-child> article {
+    border-bottom: none;
   }
 }
 

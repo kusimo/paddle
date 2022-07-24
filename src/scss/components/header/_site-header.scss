@@ -11,7 +11,9 @@
   .site-logo img {
     display: inline-block;
     max-height: 80px;
-    width: auto;
+    width: 100%;
+    max-width: 516px;
+    height: auto;
 
     @media screen and (min-width:992px) {
       max-height: 150px;
@@ -44,7 +46,7 @@
 
   .site-description {
     font-size: 1.1rem;
-    color: #999;
+    color: #333;
     margin: 0;
 
     @media screen and (min-width:992px) {

@@ -1690,6 +1690,31 @@ class paddle_initialise_customizer_settings {
 			)
 		);
 
+		// H1 Font Alignment
+		$wp_customize->add_setting(
+			'paddle_h1_alignment',
+			array(
+				'default'           => 'left',
+				'sanitize_callback' => 'paddle_radio_sanitization',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Paddle_Text_Radio_Button_Custom_Control(
+				$wp_customize,
+				'paddle_h1_alignment',
+				array(
+					'label'   => __( 'Page / Post Title Header, Meta & Description', 'paddle' ),
+					'section' => 'paddle_post_and_pages',
+					'type'    => 'select',
+					'choices' => array(
+						'left'   => __( 'Left', 'paddle' ),
+						'center' => __( 'Center', 'paddle' ),
+					),
+				)
+			)
+		);
+
 	}
 
 	/**

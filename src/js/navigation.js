@@ -99,9 +99,9 @@ const primaryMenu = {
 		}
 	
 		// Sub menu toggle navigation
-		const menu = offcanvasMenu.getElementsByTagName( 'ul' )[ 0 ];
+		//const menu = offcanvasMenu.getElementsByTagName( 'ul' )[ 0 ];
+		const menu = document.getElementById('offcanvas-menu-items')
 		
-	
 	
 		// Hide menu toggle button if menu is empty and return early.
 		if ( 'undefined' === typeof menu ) {

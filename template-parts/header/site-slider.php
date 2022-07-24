@@ -68,7 +68,7 @@
 						<div class="home-banner-cta-button-container group-btn animate-up <?php echo esc_attr( paddle_banner_btncss() ); ?>">
 
 							<?php if ( 1 === $paddle_custom_link && ! empty( $slider_button_text[ $i ] ) && ! empty( $paddle_banner_btn_1 ) ) { ?>
-								<a href="<?php echo ( esc_url_raw( $slider_button_url[ $i ] ) ? esc_attr( $slider_button_url[ $i ] ) : '' ); ?>" class="btn btn-primary border-0">
+								<a title="<?php echo esc_attr( $slider_button_text[ $i ] ); ?>" href="<?php echo ( esc_url_raw( $slider_button_url[ $i ] ) ? esc_attr( $slider_button_url[ $i ] ) : $paddle_post_url ); ?>" class="btn btn-primary border-0">
 									<?php echo esc_attr( $slider_button_text[ $i ] ); ?>
 								</a>
 								<?php
@@ -76,7 +76,7 @@
 							} else {
 								?>
 								<a href="<?php echo ( esc_url_raw( $paddle_post_url ) ); ?>" class="btn btn-primary border-0">
-									<?php echo esc_html( 'Read more' ); ?>
+									<?php echo esc_html( 'Continue Reading' ); ?>
 								</a>
 							<?php } ?>
 

@@ -41,11 +41,14 @@
 			<?php
 		endif;    // End if post type.
 
+		do_action('paddle_after_post_title');
+
 		paddle_post_thumbnail();
 
 	endif;
 	?>
 
+	<?php do_action('paddle_before_entry_content'); ?>
 
 	<div class="entry-content">
 		<?php
@@ -78,10 +81,7 @@
 		?>
 	</div><!-- .entry-content -->
 
-	<?php
-	do_action( 'paddle_post' );
-	// @todo Hook the four functions above to paddle_post.
-	?>
+	<?php do_action('paddle_after_entry_content'); ?>
 
 	<div class="clearfix"></div>
 

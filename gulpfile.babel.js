@@ -23,7 +23,7 @@ const server = browserSync.create();
 
 /** Style */
 export const styles = () => {
-    return src('src/scss/main.scss')
+    return src('src/scss/theme.scss')
       .pipe(gulpif(!PRODUCTION, sourcemaps.init()))
       .pipe(sass().on('error', sass.logError))
       .pipe(gulpif(PRODUCTION,  autoprefixer( 'last 2 versions' )))

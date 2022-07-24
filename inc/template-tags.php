@@ -114,11 +114,15 @@ if ( ! function_exists( 'paddle_entry_footer' ) ) :
 		// Hide category and tag text for pages.
 		if ( 'post' === get_post_type() ) {
 
+			do_action('paddle_before_post_entry_footer');
+
 			paddle_category_list();
 
 			paddle_tag_list();
 
 			paddle_posted_on();
+
+			do_action('padddle_after_post_entry_footer');
 		}
 
 		if ( ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
@@ -159,6 +163,7 @@ if ( ! function_exists( 'paddle_entry_footer' ) ) :
 	}
 endif;
 
+
 if ( ! function_exists( 'paddle_post_thumbnail' ) ) :
 	/**
 	 * Displays an optional post thumbnail.
@@ -166,10 +171,11 @@ if ( ! function_exists( 'paddle_post_thumbnail' ) ) :
 	 * Wraps the post thumbnail in an anchor element on index views, or a div
 	 * element when on single views.
 	 */
-	function paddle_post_thumbnail() {
+	function paddle_post_thumbnail($size='') {
 		if ( post_password_required() || is_attachment() || ! has_post_thumbnail() ) {
 			return;
 		}
+		$featured_thumbnail = isset($size) && '' !== $size ? $size : 'paddle-small-thumb';
 
 		if ( is_singular() || is_front_page() ) :
 			?>
@@ -177,22 +183,22 @@ if ( ! function_exists( 'paddle_post_thumbnail' ) ) :
 			<div class="post-thumbnail">
 				<div class="thumbnail-container">
 			<?php if ( is_front_page() ) : ?>
-						<a class="post-thumbnail <?php echo esc_attr(1 === get_theme_mod('paddle_expand_grid_image', 1) ? 'thumb-large': 'thumb-small'); ?>" href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
-				<?php the_post_thumbnail(); ?>
+						<a class="post-thumbnail <?php echo esc_attr( 1 === get_theme_mod( 'paddle_expand_grid_image', 1 ) ? 'thumb-large' : 'thumb-small' ); ?>" href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
+				<?php the_post_thumbnail($featured_thumbnail); ?>
 						</a>
 						<?php else : ?>
-							<?php the_post_thumbnail(); ?>
+							<?php the_post_thumbnail($featured_thumbnail); ?>
 						<?php endif; ?>
 				</div><!-- .thumbnail-container -->
 			</div><!-- .post-thumbnail -->
 
 		<?php else : ?>
 
-			<a class="post-thumbnail <?php echo esc_attr(1 === get_theme_mod('paddle_expand_grid_image', 1) ? 'thumb-large': 'thumb-small'); ?>" href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
+			<a class="post-thumbnail <?php echo esc_attr( 1 === get_theme_mod( 'paddle_expand_grid_image', 1 ) ? 'thumb-large' : 'thumb-small' ); ?>" href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
 			<div class="thumbnail-container">
 			<?php
 			the_post_thumbnail(
-				'paddle-600x400-image',
+				$featured_thumbnail,
 				array(
 					'alt' => the_title_attribute(
 						array(
@@ -267,8 +273,8 @@ if ( ! function_exists( 'paddle_content_over_banner' ) ) {
 		$css          = false;
 		$option_value = get_theme_mod( 'paddle_enable_content_over_banner', 0 );
 		$media_value  = get_theme_mod( 'header_media_select', 'none' );
-		if (is_home() || is_front_page() ) {
-			if ( 1 === $option_value && 'hero' === $media_value) {
+		if ( is_home() || is_front_page() ) {
+			if ( 1 === $option_value && 'hero' === $media_value ) {
 				$css = true;
 			}
 		}
@@ -295,4 +301,24 @@ if ( ! function_exists( 'paddle_theme_trim_text ' ) ) :
 		$trimed = trim( $trimed );
 		return $trimed;
 	}
+endif;
+
+/**
+ * Remove Category name from the title
+ */
+
+add_filter( 'get_the_archive_title', 'paddle_replaceCategoryName' );
+if (! function_exists('paddle_replaceCategoryName')) :
+function paddle_replaceCategoryName( $title ) {
+	if ( is_category() ) {
+		$title = single_cat_title( '', false );
+	} elseif ( is_tag() ) {
+		$title = single_tag_title( '', false );
+	} elseif ( is_author() ) {
+		$title = '<span class="vcard">' . get_the_author() . '</span>';
+	} elseif ( is_post_type_archive() ) {
+		$title = post_type_archive_title( '', false );
+	}
+	return $title;
+}
 endif;
