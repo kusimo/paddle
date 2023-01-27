@@ -140,7 +140,8 @@ if ( ! function_exists( 'paddle_generate_defaults' ) ) {
 			'use_full_bootstrap'			=> 0,
 			'use_bootstrap_js'				=> 0,
 			'header_cta_padding_left'		=> 0,
-			'container_width'				=> 1200
+			'container_width'				=> 1200,
+			'custom_container'				=> 'default'
 		);
 
 		return apply_filters( 'paddle_customizer_defaults', $customizer_defaults );

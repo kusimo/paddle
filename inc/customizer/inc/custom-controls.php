@@ -4,6 +4,9 @@
  *
  */
 
+use Paddle_Custom_Control as GlobalPaddle_Custom_Control;
+use Paddle_Slider_Custom_Control as GlobalPaddle_Slider_Custom_Control;
+
 if ( class_exists( 'WP_Customize_Control' ) ) {
 	/**
 	 * Custom Control Base Class
@@ -108,6 +111,50 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 						</label>
 					<?php	} ?>
 				</div>
+			</div>
+			<?php
+		}
+	}
+
+	/**
+	 * Option buttons Custom Control
+	 */
+	class Paddle_Option_Buttons_Control extends Paddle_Custom_Control {
+		/**
+		 * The type of control being rendered
+		 */
+		public $type = 'option_radio_button';
+
+		/**
+		 * Enqueue our scripts and styles
+		 */
+		public function enqueue() {
+			wp_enqueue_style( 'paddle-custom-controls-css', $this->get_paddle_resource_url() . 'inc/customizer/css/customizer.css', array(), '1.0.4', 'all' );
+		}
+
+		/**
+		 * Render the control in the customizer
+		 */
+		public function render_content() {
+			?>
+			<div class="text_radio_button_control option_radio_button_control">
+				<label></label>
+				<?php if ( ! empty( $this->label ) ) { ?>
+					<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
+				<?php } ?>
+				<?php if ( ! empty( $this->description ) ) { ?>
+					<span class="customize-control-description"><?php echo esc_html( $this->description ); ?></span>
+				<?php } ?>
+
+				<div class="input-wrapper paddle-control-wrapper option-radio-button">
+					<?php foreach ( $this->choices as $key => $value ) { ?>
+						<label class="radio-button-label radio-button-option">
+							<input type="radio" name="<?php echo esc_attr( $this->id ); ?>" value="<?php echo esc_attr( $key ); ?>" <?php $this->link(); ?> <?php checked( esc_attr( $key ), $this->value() ); ?>/>
+							<span><?php echo esc_html( $value ); ?></span>
+						</label>
+					<?php	} ?>
+				</div>
+
 			</div>
 			<?php
 		}
@@ -904,6 +951,28 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		function paddle_grid_selected( $control ) {
 
 			if ( 'grid' === $control->manager->get_setting( 'post_archive_layout' )->value() ) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+	endif;
+
+	if ( ! function_exists( 'paddle_custom_content_selected' ) ) :
+
+		/**
+		 * Check custom container is selected.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param WP_Customize_Control $control WP_Customize_Control instance.
+		 *
+		 * @return bool Whether the control is active to the current preview.
+		 */
+		function paddle_custom_content_selected( $control ) {
+
+			if ( 'custom' === $control->manager->get_setting( 'custom_container' )->value() ) {
 				return true;
 			} else {
 				return false;

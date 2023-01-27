@@ -2,6 +2,16 @@
    CSS for Customizer Custom Controls
    ========================================================================== */
 
+#customize-theme-controls .control-section.open {
+    height: 100%;
+    padding: 12px 24px 25px 24px;
+}
+.customize-section-title {
+    margin: -12px -24px 0 -24px;
+}
+ #customize-theme-controls .accordion-section-content .customize-control-title{
+    color: #1e293b;
+}
 /* ==========================================================================
    Standard Selection
    ========================================================================== */
@@ -152,6 +162,54 @@ li[id$="_font_weight"] .customize-control-title {
 }
 
 /* ==========================================================================
+   Text Radio Buttons 2 
+   ========================================================================== */
+.text_radio_button_control.option_radio_button_control::before {
+    content: '';
+    position: absolute;
+    left: -100%;
+    background-color: #D1D5D7;
+    width: 500%;
+    height: 1px;
+    top: -1px;
+}
+.text_radio_button_control.option_radio_button_control {
+	position: relative;
+    padding-top: 15px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+    border-top: 1px solid #D1D5D7;
+}
+.input-wrapper.paddle-control-wrapper.option-radio-button {
+    display: flex;
+}
+label.radio-button-label.radio-button-option {
+	width: 100%;
+    height: 100%;
+    text-align: center;
+    justify-content: center;
+	flex: 1 1 auto;
+    display: flex;
+}
+.paddle-control-wrapper.option-radio-button .radio-button-label span {
+    width: 100%; 
+	padding: 9px 0;
+	border: 1px solid #D1D5D7;
+	font-size: 12px;
+    font-weight: normal;
+}
+.paddle-control-wrapper.option-radio-button .radio-button-label:first-child span {
+	border-radius: 3px 0 0 3px;
+}
+.paddle-control-wrapper.option-radio-button .radio-button-label > input + span {
+    border-radius: 0 3px 3px 0;
+	margin-left: -1px;
+}
+.text_radio_button_control.option_radio_button_control .customize-control-title {
+	margin-bottom: 15px;
+}
+
+/* ==========================================================================
    Image Radio Buttons
    ========================================================================== */
 .image_radio_button_control .radio-button-label > input {
@@ -188,7 +246,12 @@ span.paddle-label.customize-control-description {
     width: 46%;
     float: left;
     display: inline;
+	text-align: center;
     padding: 0 2%;
+}
+li#customize-control-paddle_header_layout_style label.radio-button-label {
+	width: 100%;
+	padding: unset;
 }
 .image_radio_button_control.paddle-section-spacing {
     margin-top: 32px;
@@ -197,11 +260,12 @@ span.paddle-label.customize-control-description {
 
 .image_radio_button_control .radio-button-label > img {
 	cursor: pointer;
-	border: 3px solid #ddd;
+	border: 7px solid #e5e5e5;
+	width: calc(100% - 15px);
 }
 
 .image_radio_button_control .radio-button-label > input:checked + img {
-	border: 3px solid #2885bb;
+	border: 7px solid #2885bb;
 }
 
 /* ==========================================================================
@@ -392,7 +456,7 @@ span.paddle-label.customize-control-description {
 }
 
 .slider-custom-control .ui-widget-content {
-	background: #f4f4f4 none repeat scroll 0 0;
+	background: #e1e1e1 none repeat scroll 0 0;
 	color: #333;
 }
 
@@ -527,10 +591,11 @@ li[id^="customize-control-paddle_"]
 	height: 22px;
 	padding: 0;
 	line-height: 22px;
-	font-size: 14px;
+	font-size: 12px;
+	letter-spacing: 0.5px;
 	color: white;
 	font-family: Trebuchet, Arial, sans-serif;
-	font-weight: bold;
+	font-weight: normal;
 	box-sizing: border-box;
 }
 

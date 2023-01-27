@@ -2211,6 +2211,31 @@ class paddle_initialise_customizer_settings {
 			)
 		);
 
+		// Toggle between the Default content width and custom container
+		$wp_customize->add_setting(
+			'custom_container',
+			array(
+				'default'           => $this->defaults['custom_container'],
+				'sanitize_callback' => 'paddle_radio_sanitization',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Paddle_Option_Buttons_Control(
+				$wp_customize,
+				'custom_container',
+				array(
+					'label'       => __( 'Content Width', 'paddle' ),
+					'section'     => 'paddle_post_and_pages',
+					'type'        => 'select',
+					'choices'     => array(
+						'default' => __( 'Default', 'paddle' ),
+						'custom' => __( 'Custom', 'paddle' ),
+					),
+				)
+			)
+		);
+
 		// Container width
 		$wp_customize->add_setting( 
 			'container_width', 
@@ -2225,8 +2250,9 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'container_width',
 				array(
-					'section'	  => 'paddle_post_and_pages',
-					'label'		  => __( 'Container Width', 'paddle' ),
+					'section'	      => 'paddle_post_and_pages',
+					'label'		      => __( 'Custom Width', 'paddle' ),
+					'active_callback' => 'paddle_custom_content_selected',
 					'input_attrs'	  => array(
 						'min' 	=> 300,
 						'max' 	=> 1900,
@@ -2235,9 +2261,8 @@ class paddle_initialise_customizer_settings {
 				)
 			)
 		);
-			
-		
 
+			
 		// Remove sidebar from single product page.
 		$wp_customize->add_setting(
 			'paddle_remove_woo_single_sidebar',
@@ -2286,6 +2311,7 @@ class paddle_initialise_customizer_settings {
 				)
 			)
 		);
+
 
 		$wp_customize->add_setting(
 			'paddle_grid_columns',
