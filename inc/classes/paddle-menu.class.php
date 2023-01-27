@@ -67,6 +67,6 @@ class PaddleMenu {
 	}
 
 	public function isSearchEnable() {
-		return get_theme_mod( 'paddle_header_search_button', 1 );
+		return get_theme_mod( 'paddle_header_search_button', PADDLE_DEFAULT_OPTION['paddle_header_search_button'] );
 	}
 } // End Class

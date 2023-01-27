@@ -97,16 +97,6 @@
     .nav-links {
         border-top: 3px dotted #bbb;
     }
-
-    a {
-        color: $color__primary;
-    }
-}
-
-.posts-navigation {
-    a {
-        color: $color__primary;
-    }
 }
 
 
@@ -581,7 +571,7 @@ body.logged-in [data-menu="offcanvas"] .offcanvas-header {
             .menu-item:hover>span svg,
             .submenu-expand svg {
                 height: .9rem;
-                fill: currentColor; //fill: $color__primary;
+                fill: currentColor; 
                 transition: transform .15s linear;
                 width: 1.5rem;
             }

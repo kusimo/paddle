@@ -151,7 +151,7 @@ span.onsale {
   letter-spacing: 0.2rem;
   color: #ffffff;
   z-index: 2;
-  background: $color__primary;
+  background: var(--paddle-color-1);
 }
 
 #secondary .widget.widget_price_filter .price_slider {
@@ -607,7 +607,7 @@ section.widget_recently_viewed_products {
 
         span.price {
           font-size: unset;
-          color: $color__primary;
+          color: var(--paddle-color-1);
         }
 
         .star-rating {
@@ -616,7 +616,7 @@ section.widget_recently_viewed_products {
 
         .amount {
           font-weight: bold;
-          color: $color__primary;
+          color: var(--paddle-color-1);
         }
       }
 

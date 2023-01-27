@@ -4,9 +4,9 @@ button:not(.btn-close),
 input[type='button']:not(.btn),
 input[type='reset']:not(.btn),
 input[type='submit']:not(.btn) {
-  background: $color__primary;
+  background: var(--paddle-color-1);
   border: 1px solid transparent;
-  color: #fff;
+  color: var(--paddle-color-5);
   padding: .7em 1.5em;
   line-height: 1;
   border-radius: 0;
@@ -15,14 +15,19 @@ input[type='submit']:not(.btn) {
   text-transform: uppercase;
   letter-spacing: .05em;
   &:hover {
-    color: #fff;
+    color: var(--paddle-color-5);
+    background: var(--paddle-color-2);
   }
 
   &:active,
   &:focus {
-    border-color: $color__border-button-focus;
+    border-color: var(--paddle-color-4);
     //outline: none;
   }
+}
+.btn {
+  color: var(--paddle-color-5);
+  text-decoration: none!important;
 }
 
 .btn-primary {
@@ -31,11 +36,11 @@ input[type='submit']:not(.btn) {
   font-size: 14px;
   font-weight: 600;
   min-width: 167px;
-  padding: 18px 47px 14px;
+  padding: 14px 47px 14px;
   line-height: normal;
   cursor: pointer;
   text-align: center;
-  background-color: $color__primary;
+  background-color: var(--paddle-color-1);
 }
 .btn-primary.r-50 {
   border-radius: 50px;
@@ -55,19 +60,20 @@ a.btn.btn-primary.btn-lg {
 }
 a.btn.btn-primary:hover,
 a.btn.btn-primary:focus {
-  background-color: #fff;
-  color: $color__primary;
+  background-color: var(--paddle-color-2);
+  color: #fff;
 }
 
 .btn-outline-primary {
-  color: $color__primary;;
-  border-color: $color__primary;;
+  color: var(--paddle-color-1);
+  border-color: var(--paddle-color-1);
+  background-color: transparent;
 }
 
 .btn-outline-primary:hover {
   color: #fff;
-  background-color: $color__primary;
-  border-color: $color__primary;
+  background-color: var(--paddle-color-1);
+  border-color: var(--paddle-color-1);
 }
 
 .btn-rounded {

@@ -10,7 +10,7 @@
 <div class="archive-grid row">
 
 <?php
-$paddle_grid_option = get_theme_mod( 'paddle_grid_columns', '2-columns' );
+$paddle_grid_option = get_theme_mod( 'paddle_grid_columns', PADDLE_DEFAULT_OPTION['paddle_grid_columns'] );
 /* Start the Loop */
 while ( have_posts() ) :
 	$paddle_grid = ( 0 === get_theme_mod( 'paddle_page_layout_sidebar' ) ) ? 'col-12 col-sm-12 col-md-6 col-lg-4 pb-4 d-flex' : 'col-12 col-sm-12 col-md-6 col-lg-6 pb-4 d-flex';

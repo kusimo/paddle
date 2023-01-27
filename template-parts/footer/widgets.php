@@ -22,7 +22,7 @@ for ( $i = 1; $i <= 4; $i++ ) {
 			/**
 			 * Footer Logo
 			 */
-				$paddle_footer_logo_active = get_theme_mod('paddle_footer_logo', 0);
+				$paddle_footer_logo_active = get_theme_mod('paddle_footer_logo', PADDLE_DEFAULT_OPTION['paddle_footer_logo']);
 				if ( 1 === $paddle_footer_logo_active ) {
 					$paddle_footer_menu    = new PaddleMenu(); 
 					?>

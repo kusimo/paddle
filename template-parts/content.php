@@ -7,8 +7,9 @@
  * @package paddle
  */
 
+ $paddle_placeholder_image = 1 ===  absint( get_theme_mod('paddle_placeholder_image', PADDLE_DEFAULT_OPTION['paddle_placeholder_image']) ) ? 'has-placeholder-image' : '';
 ?>
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class($paddle_placeholder_image); ?>>
 
 	<?php
 	if ( ( is_single() || ( is_page() && ! is_front_page() ) ) && has_post_thumbnail() ) :
@@ -32,9 +33,9 @@
 
 			<?php
 			// Display date link in the header if not in the footer.
-			if ( is_archive() || is_front_page() && 1 === get_theme_mod( 'hide_archive_meta' ) ) :
-				paddle_posted_on();
-			endif;
+			//if ( is_archive() || is_front_page() && 1 === get_theme_mod( 'hide_archive_meta', PADDLE_DEFAULT_OPTION['hide_archive_meta'] ) ) :
+			 if(! is_singular()) {	paddle_posted_on(); }
+			//endif;
 			?>
 
 			</div><!-- .entry-meta -->
@@ -45,6 +46,8 @@
 
 		paddle_post_thumbnail();
 
+		paddle_thumbnail_svg_fallback();
+
 	endif;
 	?>
 
@@ -54,7 +57,12 @@
 		<?php
 
 		if ( is_search() || ! is_singular() ) {
-			the_excerpt();
+			do_action( 'paddle_before_archive_excerpt' );
+
+			$paddle_enable_blog_excerpt = get_theme_mod('enable_blog_excerpt', PADDLE_DEFAULT_OPTION['enable_blog_excerpt']);
+			if ( 1 === $paddle_enable_blog_excerpt ) {
+				the_excerpt();
+			} 
 		} else {
 			the_content(
 				sprintf(
@@ -86,7 +94,7 @@
 	<div class="clearfix"></div>
 
 	<?php
-	if ( is_archive() || is_front_page() && 1 === get_theme_mod( 'hide_archive_meta' ) ) :
+	if ( is_archive() && 1 === get_theme_mod( 'hide_archive_meta', PADDLE_DEFAULT_OPTION['hide_archive_meta'] ) || is_front_page() && 1 === get_theme_mod( 'hide_archive_meta', PADDLE_DEFAULT_OPTION['hide_archive_meta'] ) ) :
 				return '';
 		else :
 			?>

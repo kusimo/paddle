@@ -54,9 +54,14 @@
 // @import "layouts/sidebar-content"; // Uncomment this line for a sidebar on left side of your content.
 
 /*--------------------------------------------------------------
+# Bootstrap
+--------------------------------------------------------------*/
+@import 'bootstrap/bootstrap';
+
+/*--------------------------------------------------------------
 # Components
 --------------------------------------------------------------*/
-@import 'components/components';
+//@import 'components/components';
 
 /*--------------------------------------------------------------
 # Plugins

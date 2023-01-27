@@ -9,11 +9,11 @@
 ?>
 
 <?php
-	$paddle_banner_title       = get_theme_mod( 'header_banner_title', 'Build Your Dream Website with Paddle' );
-	$paddle_banner_description = get_theme_mod( 'header_banner_description', 'Go Forward and Conquer' );
-	$paddle_banner_btn_1       = get_theme_mod( 'header_banner_button_1', 'Get Started' );
+	$paddle_banner_title       = get_theme_mod( 'header_banner_title', PADDLE_DEFAULT_OPTION['header_banner_title'] );
+	$paddle_banner_description = get_theme_mod( 'header_banner_description', PADDLE_DEFAULT_OPTION['header_banner_description'] );
+	$paddle_banner_btn_1       = get_theme_mod( 'header_banner_button_1', PADDLE_DEFAULT_OPTION['header_banner_button_1'] );
 	$paddle_banner_btn_1_link  = get_theme_mod( 'header_banner_button_1_link', '#' );
-	$paddle_banner_btn_2       = get_theme_mod( 'header_banner_button_2' );
+	$paddle_banner_btn_2       = get_theme_mod( 'header_banner_button_2', PADDLE_DEFAULT_OPTION['header_banner_button_2'] );
 	$paddle_banner_btn_2_link  = get_theme_mod( 'header_banner_button_2_link', '#' );
 ?>
 
@@ -39,7 +39,7 @@
 			</p>
 
 			<?php if ( ! empty( $paddle_banner_btn_1 ) || ! empty( $paddle_banner_btn_2 ) ) : ?>
-			<div class="home-banner-cta-button-container group-btn <?php echo esc_attr( paddle_banner_btncss() ); ?>">
+			<div class="home-banner-cta-button-container <?php if (! empty( $paddle_banner_btn_2 ) ) : ?> group-btn <?php endif; ?>  <?php echo esc_attr( paddle_banner_btncss() ); ?>">
 
 				<?php if ( ! empty( $paddle_banner_btn_1 ) ) : ?>
 				<a title="<?php echo esc_attr( $paddle_banner_btn_1 );?>" href="<?php echo ( esc_url_raw( $paddle_banner_btn_1_link ) ? esc_attr( $paddle_banner_btn_1_link ) : '#' ); ?>"

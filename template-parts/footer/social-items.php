@@ -1,5 +1,5 @@
 <?php
-$paddle_social_footer_urls = explode( ',', get_theme_mod( 'footer_social_urls', '' ) );
+$paddle_social_footer_urls = explode( ',', get_theme_mod( 'footer_social_urls', PADDLE_DEFAULT_OPTION['footer_social_urls'] ) );
 $paddle_social_icons       = paddle_generate_social_urls();
 
 if ( ! empty( $paddle_social_footer_urls[0] ) ) { ?>

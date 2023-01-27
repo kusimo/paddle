@@ -14,6 +14,7 @@
     width: 100%;
     max-width: 516px;
     height: auto;
+    object-fit: contain;
 
     @media screen and (min-width:992px) {
       max-height: 150px;
@@ -169,7 +170,7 @@ body.logged-in #searchModal {
       bottom: -6px;
       right: 2px;
       bottom: -60px;
-      background-color: $color__primary;
+      background-color: var(--paddle-color-1);
       z-index: 1;
     }
   }
@@ -222,7 +223,10 @@ body.logo-center {
   .site-branding {
     .site-logo {
       flex: 1;
-      text-align: center;
+      @media screen and (min-width:992px) {
+        text-align: center;
+        order: 2;
+      }
 
       .site-description {
         text-align: center;
@@ -263,24 +267,26 @@ body.logo-with-search {
     .site-logo {
       flex: 1;
       order: 1;
-      text-align: left;
-
-      .site-description {
-        text-align: left;
-      }
-
+      text-align: right;
       @media (max-width: 500px) {
-        text-align: center;
+        text-align: right;
 
         .site-description {
-          text-align: center;
+          text-align: right;
         }
       }
 
       @media (min-width: 992px) {
         padding-left: 15px;
       }
+      @media screen and (min-width:992px) {
+          text-align: left;
+          .site-description {
+            text-align: left;
+          }
+      }
     }
+ 
 
     .header-content-right {
       order: 0
@@ -310,7 +316,10 @@ body.logo-center {
       }
 
       .site-logo {
-        order: 2;
+        @media screen and (min-width:992px) {
+          order: 2;
+        }
+       
       }
 
       .woo-header-utilities {
@@ -341,6 +350,7 @@ body.logo-center {
 
 .toggler button.navbar-toggler {
   position: relative;
+  padding: 0.25rem 0.75rem;
   border: none;
   border-radius: 0;
   min-height: 30px;
@@ -429,6 +439,7 @@ body.logo-center {
 
   a {
     text-decoration: none;
+    color: var(--paddle-color-3);
   }
 }
 
@@ -438,7 +449,7 @@ body.logo-center {
   }
 }
 
-[data-header-style="1"] {
+#main-header-navigation {
   width: auto;
   line-height: 0;
   border-bottom: 1px solid #e5e5e5;
@@ -457,6 +468,9 @@ body.logo-center {
       >li {
         padding-top: 10px;
         padding-bottom: 10px;
+        a {
+          color: var(--paddle-color-3);
+        }
 
         &:last-child {
           margin-right: 0;
@@ -472,6 +486,7 @@ body.logo-center {
 
   ul#primary-menu {
     display: flex;
+    flex-wrap: wrap;
   }
 
   ul {
@@ -527,7 +542,7 @@ body.logo-center {
     }
 
     >li.current-menu-item>a {
-      color: $color__primary;
+      color: var(--paddle-color-3);
     }
 
     >li {
@@ -535,7 +550,7 @@ body.logo-center {
       &:hover>a,
       &.current-menu-item>a,
       &.current-menu-ancestor>a {
-        color: $color__primary;
+        color: var(--paddle-color-1);
       }
     }
 
@@ -543,8 +558,6 @@ body.logo-center {
     li:hover ul.children {
       animation: move-right 400ms ease both;
     }
-
-
 
   }
 
@@ -576,7 +589,7 @@ body.logo-center {
       }
 
       >a {
-        color: $color__primary;
+        color: var(--paddle-color-1);
       }
     }
 
@@ -596,7 +609,7 @@ body.logo-center {
 
     a:not(.btn) {
       border: none;
-      color: $color__primary;
+      color: var(--paddle-color-1);
       display: block;
       font-size: 1rem;
       font-weight: 500;
@@ -792,10 +805,7 @@ Header Style 2
 
     nav {
       height: 100%;
-
-      #primary-menu {
-        justify-content: flex-start;
-      }
+      width: 100%;
     }
 
     .header-content-right {
@@ -837,7 +847,7 @@ Header Style 2
   transition: all 0.5s;
   overflow: hidden;
   text-transform: uppercase;
-  background-color: $color__primary;
+  background-color: var(--paddle-color-1);
 
   ul:not(.social-items) {
     list-style-type: none;
@@ -1061,7 +1071,7 @@ Header Style 2
       display: inline-block;
       transition: 0.3s;
       text-decoration: none;
-      //background-color: lighten($color__primary, 50%);
+      //background-color: lighten(var(--paddle-color-1), 50%);
       letter-spacing: .9px;
       z-index: 1;
       position: relative;
@@ -1069,7 +1079,7 @@ Header Style 2
       &::after {
         content: '';
         padding: 8px 24px 8px 24px;
-        background-color: $color__primary;
+        background-color: var(--paddle-color-1);
         filter: brightness(85%) saturate(150%);
         transition: .3s;
         position: absolute;

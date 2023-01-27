@@ -24,33 +24,29 @@ function paddle_body_classes( $classes ) {
 	}
 
 	// Add a class of archive-grid when grid layout is enable.
-	if ( 1 === get_theme_mod( 'hide_archive_meta' ) ) {
+	if ( 1 === get_theme_mod( 'hide_archive_meta', PADDLE_DEFAULT_OPTION['hide_archive_meta'] ) ) {
 		$classes[] = 'category-grid-layout';
-	}
-	// Add a class of main Heading H1.
-	if ( 'boxed' === get_theme_mod( 'paddle_heading_h1_style' ) ) {
-		$classes[] = 'boxed-header';
 	}
 
 	// Add header layout option
-	if ( 'logo-left' === get_theme_mod( 'paddle_header_layout_style' ) ) {
+	if ( 'logo-left' === get_theme_mod( 'paddle_header_layout_style', PADDLE_DEFAULT_OPTION['paddle_header_layout_style'] ) ) {
 		$classes[] = 'logo-left';
 	}
-	if ( 'logo-right' === get_theme_mod( 'paddle_header_layout_style' ) ) {
+	if ( 'logo-right' === get_theme_mod( 'paddle_header_layout_style', PADDLE_DEFAULT_OPTION['paddle_header_layout_style']  ) ) {
 		$classes[] = 'logo-right';
 	}
-	if ( 'logo-center' === get_theme_mod( 'paddle_header_layout_style' ) ) {
+	if ( 'logo-center' === get_theme_mod( 'paddle_header_layout_style', PADDLE_DEFAULT_OPTION['paddle_header_layout_style']  ) ) {
 		$classes[] = 'logo-center';
 	}
-	if ( 'logo-with-search' === get_theme_mod( 'paddle_header_layout_style' ) ) {
+	if ( 'logo-with-search' === get_theme_mod( 'paddle_header_layout_style', PADDLE_DEFAULT_OPTION['paddle_header_layout_style']  ) ) {
 		$classes[] = 'logo-with-search';
 	}
 
 	// Add sidebar classes.
-	if ( 'left-sidebar' === get_theme_mod( 'paddle_sidebar_position' ) && 1 === get_theme_mod( 'paddle_page_layout_sidebar' ) ) {
+	if ( 'left-sidebar' === get_theme_mod( 'paddle_sidebar_position', PADDLE_DEFAULT_OPTION['paddle_sidebar_position'] ) && 1 === get_theme_mod( 'paddle_page_layout_sidebar' ) ) {
 		$classes[] = 'left-sidebar';
 	}
-	if ( 'left-sidebar-woocommerce' === get_theme_mod( 'paddle_sidebar_position' ) && 1 === get_theme_mod( 'paddle_page_layout_sidebar' ) ) {
+	if ( 'left-sidebar-woocommerce' === get_theme_mod( 'paddle_sidebar_position', PADDLE_DEFAULT_OPTION['paddle_sidebar_position'] ) && 1 === get_theme_mod( 'paddle_page_layout_sidebar' ) ) {
 		if ( class_exists( 'woocommerce' ) ) {
 			if ( is_woocommerce() ) {
 				$classes[] = 'left-sidebar-woocommerce';
@@ -111,6 +107,7 @@ add_filter( 'walker_nav_menu_start_el', 'paddle_nav_add_dropdown_icons', 10, 4 )
 /**
  * paddle_add_additional_class_on_li
  * Add class to li menu
+ *
  * @param  mixed $classes
  * @param  mixed $item
  * @param  mixed $args
@@ -163,9 +160,9 @@ function paddle_minimize_css( $css ) {
  * @return void
  */
 function paddle_layout_container( $layout = '' ) {
-	$paddle_sidebar_position = get_theme_mod('paddle_sidebar_position', 'left-sidebar');
+	$paddle_sidebar_position      = get_theme_mod( 'paddle_sidebar_position', PADDLE_DEFAULT_OPTION['paddle_sidebar_position'] );
 	$paddle_sidebar_layout_option = 0;
-	if('no-sidebar' === $paddle_sidebar_position ){
+	if ( 'no-sidebar' === $paddle_sidebar_position ) {
 		$paddle_sidebar_layout_option = 0;
 	} else {
 		$paddle_sidebar_layout_option = 1;
@@ -200,9 +197,11 @@ function paddle_layout_container( $layout = '' ) {
  * @return void
  */
 function paddle_layout_width() {
-	$paddle_sidebar_position = get_theme_mod('paddle_sidebar_position', 'left-sidebar');
-	$paddle_page_width_option ='';
-	if ('no-sidebar' === $paddle_sidebar_position) $paddle_page_width_option = 'full-width-content';
+	$paddle_sidebar_position  = get_theme_mod( 'paddle_sidebar_position', PADDLE_DEFAULT_OPTION['paddle_sidebar_position'] );
+	$paddle_page_width_option = '';
+	if ( 'no-sidebar' === $paddle_sidebar_position ) {
+		$paddle_page_width_option = 'full-width-content';
+	}
 	return $paddle_page_width_option;
 }
 
@@ -215,9 +214,9 @@ function paddle_layout_width() {
  * @return void
  */
 function paddle_add_cta_menu( $items, $args ) {
-	if ( 'primary' === $args->theme_location && 1 === absint( get_theme_mod( 'paddle_header_cta', 0 ) ) ) {
+	if ( 'primary' === $args->theme_location && 1 === absint( get_theme_mod( 'paddle_header_cta', PADDLE_DEFAULT_OPTION['paddle_header_cta'] ) ) ) {
 		$option_url  = get_theme_mod( 'paddle_header_cta_url', home_url() );
-		$option_text = get_theme_mod( 'paddle_header_cta_text', ' CTA TEXT ' );
+		$option_text = get_theme_mod( 'paddle_header_cta_text', PADDLE_DEFAULT_OPTION['paddle_header_cta_text'] );
 		$url         = esc_url( $option_url );
 		if ( ! empty( $option_url ) && ! empty( $option_text ) ) {
 			$items .= '<li id="header-btn-cta" class="menu-item d-flex justify-content-center align-items-center header-cta-menu">'
@@ -239,38 +238,198 @@ add_filter( 'wp_nav_menu_items', 'paddle_add_cta_menu', 10, 2 );
 if ( ! function_exists( 'paddle_generate_social_urls' ) ) {
 	function paddle_generate_social_urls() {
 		$social_icons = array(
-			array( 'url' => 'behance.net', 'icon' => 'fab fa-behance', 'title' => esc_html__( 'Follow me on Behance', 'paddle' ), 'class' => 'behance' ),
-			array( 'url' => 'bitbucket.org', 'icon' => 'fab fa-bitbucket', 'title' => esc_html__( 'Fork me on Bitbucket', 'paddle' ), 'class' => 'bitbucket' ),
-			array( 'url' => 'codepen.io', 'icon' => 'fab fa-codepen', 'title' => esc_html__( 'Follow me on CodePen', 'paddle' ), 'class' => 'codepen' ),
-			array( 'url' => 'deviantart.com', 'icon' => 'fab fa-deviantart', 'title' => esc_html__( 'Watch me on DeviantArt', 'paddle' ), 'class' => 'deviantart' ),
-			array( 'url' => 'discord.gg', 'icon' => 'fab fa-discord', 'title' => esc_html__( 'Join me on Discord', 'paddle' ), 'class' => 'discord' ),
-			array( 'url' => 'dribbble.com', 'icon' => 'fab fa-dribbble', 'title' => esc_html__( 'Follow me on Dribbble', 'paddle' ), 'class' => 'dribbble' ),
-			array( 'url' => 'etsy.com', 'icon' => 'fab fa-etsy', 'title' => esc_html__( 'favorite me on Etsy', 'paddle' ), 'class' => 'etsy' ),
-			array( 'url' => 'facebook.com', 'icon' => 'fab fa-facebook-f', 'title' => esc_html__( 'Like me on Facebook', 'paddle' ), 'class' => 'facebook' ),
-			array( 'url' => 'flickr.com', 'icon' => 'fab fa-flickr', 'title' => esc_html__( 'Connect with me on Flickr', 'paddle' ), 'class' => 'flickr' ),
-			array( 'url' => 'foursquare.com', 'icon' => 'fab fa-foursquare', 'title' => esc_html__( 'Follow me on Foursquare', 'paddle' ), 'class' => 'foursquare' ),
-			array( 'url' => 'github.com', 'icon' => 'fab fa-github', 'title' => esc_html__( 'Fork me on GitHub', 'paddle' ), 'class' => 'github' ),
-			array( 'url' => 'instagram.com', 'icon' => 'fab fa-instagram', 'title' => esc_html__( 'Follow me on Instagram', 'paddle' ), 'class' => 'instagram' ),
-			array( 'url' => 'kickstarter.com', 'icon' => 'fab fa-kickstarter-k', 'title' => esc_html__( 'Back me on Kickstarter', 'paddle' ), 'class' => 'kickstarter' ),
-			array( 'url' => 'last.fm', 'icon' => 'fab fa-lastfm', 'title' => esc_html__( 'Follow me on Last.fm', 'paddle' ), 'class' => 'lastfm' ),
-			array( 'url' => 'linkedin.com', 'icon' => 'fab fa-linkedin-in', 'title' => esc_html__( 'Connect with me on LinkedIn', 'paddle' ), 'class' => 'linkedin' ),
-			array( 'url' => 'medium.com', 'icon' => 'fab fa-medium-m', 'title' => esc_html__( 'Follow me on Medium', 'paddle' ), 'class' => 'medium' ),
-			array( 'url' => 'patreon.com', 'icon' => 'fab fa-patreon', 'title' => esc_html__( 'Support me on Patreon', 'paddle' ), 'class' => 'patreon' ),
-			array( 'url' => 'pinterest.com', 'icon' => 'fab fa-pinterest-p', 'title' => esc_html__( 'Follow me on Pinterest', 'paddle' ), 'class' => 'pinterest' ),
-			array( 'url' => 'plus.google.com', 'icon' => 'fab fa-google-plus-g', 'title' => esc_html__( 'Connect with me on Google+', 'paddle' ), 'class' => 'googleplus' ),
-			array( 'url' => 'reddit.com', 'icon' => 'fab fa-reddit-alien', 'title' => esc_html__( 'Join me on Reddit', 'paddle' ), 'class' => 'reddit' ),
-			array( 'url' => 'slack.com', 'icon' => 'fab fa-slack-hash', 'title' => esc_html__( 'Join me on Slack', 'paddle' ), 'class' => 'slack.' ),
-			array( 'url' => 'slideshare.net', 'icon' => 'fab fa-slideshare', 'title' => esc_html__( 'Follow me on SlideShare', 'paddle' ), 'class' => 'slideshare' ),
-			array( 'url' => 'snapchat.com', 'icon' => 'fab fa-snapchat-ghost', 'title' => esc_html__( 'Add me on Snapchat', 'paddle' ), 'class' => 'snapchat' ),
-			array( 'url' => 'soundcloud.com', 'icon' => 'fab fa-soundcloud', 'title' => esc_html__( 'Follow me on SoundCloud', 'paddle' ), 'class' => 'soundcloud' ),
-			array( 'url' => 'spotify.com', 'icon' => 'fab fa-spotify', 'title' => esc_html__( 'Follow me on Spotify', 'paddle' ), 'class' => 'spotify' ),
-			array( 'url' => 'stackoverflow.com', 'icon' => 'fab fa-stack-overflow', 'title' => esc_html__( 'Join me on Stack Overflow', 'paddle' ), 'class' => 'stackoverflow' ),
-			array( 'url' => 'tumblr.com', 'icon' => 'fab fa-tumblr', 'title' => esc_html__( 'Follow me on Tumblr', 'paddle' ), 'class' => 'tumblr' ),
-			array( 'url' => 'twitch.tv', 'icon' => 'fab fa-twitch', 'title' => esc_html__( 'Follow me on Twitch', 'paddle' ), 'class' => 'twitch' ),
-			array( 'url' => 'twitter.com', 'icon' => 'fab fa-twitter', 'title' => esc_html__( 'Follow me on Twitter', 'paddle' ), 'class' => 'twitter' ),
-			array( 'url' => 'vimeo.com', 'icon' => 'fab fa-vimeo-v', 'title' => esc_html__( 'Follow me on Vimeo', 'paddle' ), 'class' => 'vimeo' ),
-			array( 'url' => 'weibo.com', 'icon' => 'fab fa-weibo', 'title' => esc_html__( 'Follow me on weibo', 'paddle' ), 'class' => 'weibo' ),
-			array( 'url' => 'youtube.com', 'icon' => 'fab fa-youtube', 'title' => esc_html__( 'Subscribe to me on YouTube', 'paddle' ), 'class' => 'youtube' ),
+			array(
+				'url'   => 'behance.net',
+				'icon'  => 'fab fa-behance',
+				'title' => esc_html__( 'Follow me on Behance', 'paddle' ),
+				'class' => 'behance',
+			),
+			array(
+				'url'   => 'bitbucket.org',
+				'icon'  => 'fab fa-bitbucket',
+				'title' => esc_html__( 'Fork me on Bitbucket', 'paddle' ),
+				'class' => 'bitbucket',
+			),
+			array(
+				'url'   => 'codepen.io',
+				'icon'  => 'fab fa-codepen',
+				'title' => esc_html__( 'Follow me on CodePen', 'paddle' ),
+				'class' => 'codepen',
+			),
+			array(
+				'url'   => 'deviantart.com',
+				'icon'  => 'fab fa-deviantart',
+				'title' => esc_html__( 'Watch me on DeviantArt', 'paddle' ),
+				'class' => 'deviantart',
+			),
+			array(
+				'url'   => 'discord.gg',
+				'icon'  => 'fab fa-discord',
+				'title' => esc_html__( 'Join me on Discord', 'paddle' ),
+				'class' => 'discord',
+			),
+			array(
+				'url'   => 'dribbble.com',
+				'icon'  => 'fab fa-dribbble',
+				'title' => esc_html__( 'Follow me on Dribbble', 'paddle' ),
+				'class' => 'dribbble',
+			),
+			array(
+				'url'   => 'etsy.com',
+				'icon'  => 'fab fa-etsy',
+				'title' => esc_html__( 'favorite me on Etsy', 'paddle' ),
+				'class' => 'etsy',
+			),
+			array(
+				'url'   => 'facebook.com',
+				'icon'  => 'fab fa-facebook-f',
+				'title' => esc_html__( 'Like me on Facebook', 'paddle' ),
+				'class' => 'facebook',
+			),
+			array(
+				'url'   => 'flickr.com',
+				'icon'  => 'fab fa-flickr',
+				'title' => esc_html__( 'Connect with me on Flickr', 'paddle' ),
+				'class' => 'flickr',
+			),
+			array(
+				'url'   => 'foursquare.com',
+				'icon'  => 'fab fa-foursquare',
+				'title' => esc_html__( 'Follow me on Foursquare', 'paddle' ),
+				'class' => 'foursquare',
+			),
+			array(
+				'url'   => 'github.com',
+				'icon'  => 'fab fa-github',
+				'title' => esc_html__( 'Fork me on GitHub', 'paddle' ),
+				'class' => 'github',
+			),
+			array(
+				'url'   => 'instagram.com',
+				'icon'  => 'fab fa-instagram',
+				'title' => esc_html__( 'Follow me on Instagram', 'paddle' ),
+				'class' => 'instagram',
+			),
+			array(
+				'url'   => 'kickstarter.com',
+				'icon'  => 'fab fa-kickstarter-k',
+				'title' => esc_html__( 'Back me on Kickstarter', 'paddle' ),
+				'class' => 'kickstarter',
+			),
+			array(
+				'url'   => 'last.fm',
+				'icon'  => 'fab fa-lastfm',
+				'title' => esc_html__( 'Follow me on Last.fm', 'paddle' ),
+				'class' => 'lastfm',
+			),
+			array(
+				'url'   => 'linkedin.com',
+				'icon'  => 'fab fa-linkedin-in',
+				'title' => esc_html__( 'Connect with me on LinkedIn', 'paddle' ),
+				'class' => 'linkedin',
+			),
+			array(
+				'url'   => 'medium.com',
+				'icon'  => 'fab fa-medium-m',
+				'title' => esc_html__( 'Follow me on Medium', 'paddle' ),
+				'class' => 'medium',
+			),
+			array(
+				'url'   => 'patreon.com',
+				'icon'  => 'fab fa-patreon',
+				'title' => esc_html__( 'Support me on Patreon', 'paddle' ),
+				'class' => 'patreon',
+			),
+			array(
+				'url'   => 'pinterest.com',
+				'icon'  => 'fab fa-pinterest-p',
+				'title' => esc_html__( 'Follow me on Pinterest', 'paddle' ),
+				'class' => 'pinterest',
+			),
+			array(
+				'url'   => 'plus.google.com',
+				'icon'  => 'fab fa-google-plus-g',
+				'title' => esc_html__( 'Connect with me on Google+', 'paddle' ),
+				'class' => 'googleplus',
+			),
+			array(
+				'url'   => 'reddit.com',
+				'icon'  => 'fab fa-reddit-alien',
+				'title' => esc_html__( 'Join me on Reddit', 'paddle' ),
+				'class' => 'reddit',
+			),
+			array(
+				'url'   => 'slack.com',
+				'icon'  => 'fab fa-slack-hash',
+				'title' => esc_html__( 'Join me on Slack', 'paddle' ),
+				'class' => 'slack.',
+			),
+			array(
+				'url'   => 'slideshare.net',
+				'icon'  => 'fab fa-slideshare',
+				'title' => esc_html__( 'Follow me on SlideShare', 'paddle' ),
+				'class' => 'slideshare',
+			),
+			array(
+				'url'   => 'snapchat.com',
+				'icon'  => 'fab fa-snapchat-ghost',
+				'title' => esc_html__( 'Add me on Snapchat', 'paddle' ),
+				'class' => 'snapchat',
+			),
+			array(
+				'url'   => 'soundcloud.com',
+				'icon'  => 'fab fa-soundcloud',
+				'title' => esc_html__( 'Follow me on SoundCloud', 'paddle' ),
+				'class' => 'soundcloud',
+			),
+			array(
+				'url'   => 'spotify.com',
+				'icon'  => 'fab fa-spotify',
+				'title' => esc_html__( 'Follow me on Spotify', 'paddle' ),
+				'class' => 'spotify',
+			),
+			array(
+				'url'   => 'stackoverflow.com',
+				'icon'  => 'fab fa-stack-overflow',
+				'title' => esc_html__( 'Join me on Stack Overflow', 'paddle' ),
+				'class' => 'stackoverflow',
+			),
+			array(
+				'url'   => 'tumblr.com',
+				'icon'  => 'fab fa-tumblr',
+				'title' => esc_html__( 'Follow me on Tumblr', 'paddle' ),
+				'class' => 'tumblr',
+			),
+			array(
+				'url'   => 'twitch.tv',
+				'icon'  => 'fab fa-twitch',
+				'title' => esc_html__( 'Follow me on Twitch', 'paddle' ),
+				'class' => 'twitch',
+			),
+			array(
+				'url'   => 'twitter.com',
+				'icon'  => 'fab fa-twitter',
+				'title' => esc_html__( 'Follow me on Twitter', 'paddle' ),
+				'class' => 'twitter',
+			),
+			array(
+				'url'   => 'vimeo.com',
+				'icon'  => 'fab fa-vimeo-v',
+				'title' => esc_html__( 'Follow me on Vimeo', 'paddle' ),
+				'class' => 'vimeo',
+			),
+			array(
+				'url'   => 'weibo.com',
+				'icon'  => 'fab fa-weibo',
+				'title' => esc_html__( 'Follow me on weibo', 'paddle' ),
+				'class' => 'weibo',
+			),
+			array(
+				'url'   => 'youtube.com',
+				'icon'  => 'fab fa-youtube',
+				'title' => esc_html__( 'Subscribe to me on YouTube', 'paddle' ),
+				'class' => 'youtube',
+			),
 		);
 
 		return apply_filters( 'paddle_social_icons', $social_icons );
@@ -285,13 +444,13 @@ if ( ! function_exists( 'paddle_social_menu ' ) ) :
 	 * @return void
 	 */
 	function paddle_social_menu() {
-		$footer_has_social = get_theme_mod('paddle_footer_social', 0);
+		$footer_has_social = get_theme_mod( 'paddle_footer_social', PADDLE_DEFAULT_OPTION['paddle_footer_social'] );
 		if ( 1 === $footer_has_social ) {
-			get_template_part('template-parts/footer/social', 'items'); 
+			get_template_part( 'template-parts/footer/social', 'items' );
 		}
-		
+
 	}
-	
+
 endif;
 
 
@@ -303,7 +462,7 @@ if ( ! function_exists( ' paddle_banner_align ' ) ) {
 	 * @return void
 	 */
 	function paddle_banner_align() {
-		$paddle_banner_align_postion = get_theme_mod( 'banner_align_position', 'left' );
+		$paddle_banner_align_postion = get_theme_mod( 'banner_align_position', PADDLE_DEFAULT_OPTION['banner_align_position'] );
 		return $paddle_banner_align_postion;
 	}
 }
@@ -317,7 +476,7 @@ if ( ! function_exists( 'paddle_banner_opacity' ) ) {
 	 * @return void
 	 */
 	function paddle_banner_opacity() {
-		$paddle_banner_opacity = get_theme_mod( 'banner_overlay_opacity', 2 );
+		$paddle_banner_opacity = get_theme_mod( 'banner_overlay_opacity', PADDLE_DEFAULT_OPTION['banner_overlay_opacity'] );
 		return $paddle_banner_opacity;
 	}
 }
@@ -375,26 +534,13 @@ if ( ! function_exists( 'paddle_footer_copyrights' ) ) :
 			<div class="footer-copyrights">
 
 				<?php
-
-				if ( '' !== esc_html( get_theme_mod( 'paddle_footer_copyright_text' ) ) ) :
-					echo esc_html( get_theme_mod( 'paddle_footer_copyright_text' ) );
+				$copyright = get_theme_mod( 'paddle_footer_copyright_text' );
+				if ( $copyright &&  '' !== wp_kses_post( $copyright ) ) :
+					echo wp_kses_post( get_theme_mod( 'paddle_footer_copyright_text' ) );
 
 				else :
-					?>
-
-					<span class="site-copyright">&copy;
-						<?php
-						echo date_i18n(
-							/* translators: Copyright date format, see https://secure.php.net/date */
-							_x( 'Y', 'copyright date format', 'paddle' )
-						);
-						?>
-						<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php bloginfo( 'name' ); ?></a>
-					</span><!-- .site-copy-right -->
-
-
-					<?php
-					
+					paddle_get_default_footer_copyright();
+				
 				endif;
 
 				?>
@@ -403,16 +549,16 @@ if ( ! function_exists( 'paddle_footer_copyrights' ) ) :
 		<?php
 	}
 endif;
-add_action( 'paddle_action_footer', 'paddle_footer_copyrights',9 );
-add_action( 'paddle_action_footer', 'paddle_privacy_policy_link',13 );
-add_action( 'paddle_action_footer', 'paddle_theme_credit',15 );
-add_action( 'paddle_action_footer', 'paddle_social_menu',18 );
+add_action( 'paddle_action_footer', 'paddle_footer_copyrights', 9 );
+add_action( 'paddle_action_footer', 'paddle_privacy_policy_link', 13 );
+add_action( 'paddle_action_footer', 'paddle_theme_credit', 15 );
+add_action( 'paddle_action_footer', 'paddle_social_menu', 18 );
 
 
 // Theme credit.
 if ( ! function_exists( 'paddle_theme_credit' ) ) {
 	function paddle_theme_credit() {
-		if ( get_theme_mod( 'paddle_theme_credit', 1 ) ) :
+		if ( get_theme_mod( 'paddle_theme_credit', PADDLE_DEFAULT_OPTION['paddle_theme_credit'] ) ) :
 			?>
 			<div class="theme-credit"><?php esc_html_e( 'Powered by ', 'paddle' ); ?><?php esc_html_e( 'WordPress. Designed by A. Kusimo', 'paddle' ); ?></div>
 			<?php
@@ -420,9 +566,9 @@ if ( ! function_exists( 'paddle_theme_credit' ) ) {
 	}
 }
 
-if (! function_exists( 'paddle_privacy_policy_link ') ) {
+if ( ! function_exists( 'paddle_privacy_policy_link ' ) ) {
 	function paddle_privacy_policy_link() {
-		$policy = get_theme_mod('paddle_privacy_policy', 0);
+		$policy = get_theme_mod( 'paddle_privacy_policy', PADDLE_DEFAULT_OPTION['paddle_privacy_policy'] );
 		if ( function_exists( 'the_privacy_policy_link' ) && 1 === $policy ) {
 			the_privacy_policy_link( '<div class="bottom-footer-link policy">', '</div>' );
 		}
@@ -467,7 +613,7 @@ if ( ! function_exists( 'paddle_get_slider_ids' ) ) :
 		$paddle_source_page_ids = array();
 		$post_ids               = array();
 		$slide_total            = 0;
-		$paddle_source          = get_theme_mod( 'paddle_slider_source', 'latest-post' );
+		$paddle_source          = get_theme_mod( 'paddle_slider_source', PADDLE_DEFAULT_OPTION['paddle_slider_source'] );
 		$paddle_source_ids      = get_theme_mod( 'paddle_slider_post_ids' );
 
 		if ( 'post-ids' === $paddle_source && '' !== $paddle_source_ids ) {
@@ -514,34 +660,50 @@ if ( ! function_exists( ' paddle_header_main ' ) ) :
 	 * @return void
 	 */
 	function paddle_header_main() {
-		$paddle_header_style = (get_theme_mod('paddle_header_layout_style', 'logo-left') ==='logo-left-style-2' ? 'header-style-2' : 'header-style-1');
+		$default_header = get_theme_mod( 'paddle_header_layout_style', PADDLE_DEFAULT_OPTION['paddle_header_layout_style'], 'logo-left-style-2' );
+
+		$paddle_header_style = $default_header;
+
+		$header_style_id = '1';
+
+		switch($default_header) {
+			case 'logo-left-style-2' : 
+				$paddle_header_style = 'header-style-2';
+				$header_style_id = '2';	
+				break;
+			case 'logo-left-style-3';
+				$paddle_header_style = 'header-style-3';
+				$header_style_id = '3';	
+				break;
+			default:
+				$paddle_header_style = 'header-style-1';
+				$header_style_id = '1';	
+		}
+
 		?>
 		 <header id="masthead" class="site-header <?php echo esc_attr( $paddle_header_style ); ?>">
-		<?php 
+		<?php
 
-		if( 'header-style-2' === $paddle_header_style ) {
-			get_template_part('template-parts/header/style', '2');
-		} 
-		else  {
-			get_template_part('template-parts/header/style', '1');
-		}
+			get_template_part( 'template-parts/header/style', $header_style_id );
 		?>
 		</header><!-- #masthead -->
-		<div class="clearfix"></div>
-		<?php 
-	
+		
+		<?php
+
 	}
 endif;
 
 
 
-if ( ! function_exists( ' paddle_offcanvas_menu ' ) ) :	
+if ( ! function_exists( ' paddle_offcanvas_menu ' ) ) :
 	/**
 	 * paddle_offcanvas_menu
 	 *
 	 * @return void
 	 */
 	function paddle_offcanvas_menu() {
+		$paddle_header_style = get_theme_mod( 'paddle_header_layout_style', PADDLE_DEFAULT_OPTION['paddle_header_layout_style'], 'logo-left-style-2' );
+		if( 'logo-left-style-3' === $paddle_header_style ) return;
 		?>
 		<div id="offcanvas-content" data-menu="offcanvas">
 			<div class="paddle-theme-dialog" role="dialog" aria-labelledby="dialog-title" aria-describedby="dialog-description" id="offcanvas-menu">
@@ -562,33 +724,35 @@ if ( ! function_exists( ' paddle_offcanvas_menu ' ) ) :
 
 endif;
 
-if( ! function_exists( 'paddle_header_top_bar' ) )  {	
+if ( ! function_exists( 'paddle_header_top_bar' ) ) {
 	/**
 	 * Topbar
 	 *
 	 * @return void
 	 */
 	function paddle_header_top_bar() {
-		$topbar = new Paddle_Header_TopBar;
-		if( ! $topbar::$active ) return;
+		$topbar = new Paddle_Header_TopBar();
+		if ( ! $topbar::$active ) {
+			return;
+		}
 		?>
 		<div id="topbar" class="d-none d-lg-flex align-items-center">
 			<div class="container d-flex align-items-center">
-			<?php if( $topbar->is_left_panel_active() ) : ?>
+			<?php if ( $topbar->is_left_panel_active() ) : ?>
 			<div class="topbar-left col-sm">
 				<ul>
-				<?php if('' !== $topbar->get_contact_number() ) : ?>
+				<?php if ( '' !== $topbar->get_contact_number() ) : ?>
 				<li><i class="icon-phone"></i>
-				<a href="tel:<?php echo esc_attr($topbar->get_contact_number()); ?>">
-				<?php echo esc_html($topbar->get_contact_number()); ?>
+				<a href="tel:<?php echo esc_attr( $topbar->get_contact_number() ); ?>">
+					<?php echo esc_html( $topbar->get_contact_number() ); ?>
 				</a>
 				<span></span>
 				</li>
 				<?php endif; ?>
 				<?php if ( '' !== $topbar->get_contact_email() ) : ?>
 				<li><i class="icon-email"></i>
-				<a href="mailto:<?php echo esc_attr($topbar->get_contact_email()); ?>">
-				<?php echo esc_html($topbar->get_contact_email()); ?>
+				<a href="mailto:<?php echo esc_attr( $topbar->get_contact_email() ); ?>">
+					<?php echo esc_html( $topbar->get_contact_email() ); ?>
 				</a>
 				<span></span>
 				</li>
@@ -598,59 +762,114 @@ if( ! function_exists( 'paddle_header_top_bar' ) )  {
 			<?php endif; // End is_left_panel_active. ?>
 
 			<div class="topbar-right col-sm">
-			<?php if ( '' !== $topbar::$contactText && 'button' === $topbar::$topbar_select) : ?>				
+			<?php if ( '' !== $topbar::$contactText && 'button' === $topbar::$topbar_select ) : ?>				
 				<div class="cta">
 					<a href="<?php echo esc_url_raw( $topbar->contactUrl ); ?>" class="topbar-cta-btn">
 					<?php echo esc_html( $topbar::$contactText ); ?>
 					</a>
 				</div>
 			<?php endif; ?>
-			<?php if ( 'social' === $topbar::$topbar_select) : ?>	
-				<?php get_template_part('template-parts/header/topbar', 'social');  ?>
+			<?php if ( 'social' === $topbar::$topbar_select ) : ?>	
+				<?php get_template_part( 'template-parts/header/topbar', 'social' ); ?>
 			<?php endif; ?>
 			</div>
 
 			</div>
 		</div>
-	<?php }
+		<?php
+	}
 }
 
-if (! function_exists('paddle_header_media')) {	
+if ( ! function_exists( 'paddle_header_media' ) ) {
 	/**
 	 * paddle_header_media
 	 *
 	 * @return void
 	 */
 	function paddle_header_media() {
-		$media_type = get_theme_mod('header_media_select', 'slider');
-		if ( 'none' !== $media_type && is_front_page() ||  'none' !== $media_type && is_home() ) :
-			if ('hero' === $media_type) {
+		$media_type = get_theme_mod( 'header_media_select', PADDLE_DEFAULT_OPTION['header_media_select'] );
+		if ( 'none' !== $media_type && is_front_page() || 'none' !== $media_type && is_home() ) :
+			if ( 'hero' === $media_type ) {
 				get_template_part( 'template-parts/header/site', 'branding' );
 			} else {
 				get_template_part( 'template-parts/header/site', 'slider' );
 			}
-			
-			
+
 		endif;
 	}
 }
 
-if (! function_exists('paddle_get_header_image_url')) {	
+if ( ! function_exists( 'paddle_get_header_image_url' ) ) {
 	/**
 	 * paddle_get_header_image_url
 	 *
-	 * @return void
+	 * @return string
 	 */
 	function paddle_get_header_image_url() {
-		if ( get_theme_mod( 'hero_image' ) > 0 ) {
+		if ( get_theme_mod( 'hero_image', PADDLE_DEFAULT_OPTION['hero_image'] ) > 0 ) {
+
 			return wp_get_attachment_url( get_theme_mod( 'hero_image' ) );
+
 		} else {
-			return get_template_directory_uri() . '/assets/images/white-swipe.png';
+			$media_type = get_theme_mod( 'header_media_select', PADDLE_DEFAULT_OPTION['header_media_select'] );
+			$default_bg_image_enable = get_theme_mod( 'use_default_banner_image', PADDLE_DEFAULT_OPTION['use_default_banner_image'] );
+
+			if ( 0 === $default_bg_image_enable ) return '';
+
+			if ( 'hero' === $media_type )  { 
+				return get_template_directory_uri() . '/assets/images/golden-ball.jpeg';
+			} else {
+				return get_template_directory_uri() . '/assets/images/white-swipe.png';
+			}
+
+			
 		}
 	}
-	
 }
 
+if ( ! function_exists('paddle_get_font_type') ) {
+	function paddle_get_font_type() {
+		$font = '';
+		$font_type = get_theme_mod( 'paddle_typography_preset', PADDLE_DEFAULT_OPTION['paddle_typography_preset'] );
+
+		if ( 'system-font' === $font_type ) {
+			return '';
+		}
+
+		switch($font_type) {
+			case 'roboto' :
+				$font = "'Roboto', sans-serif";
+			break;
+
+			case 'open-sans' :
+				$font= "'Open Sans', sans-serif";
+			break;
+
+			case 'lato' :
+				$font= "'Lato', sans-serif";
+			break;
+
+			case 'montserrat' :
+				$font= "'Montserrat', sans-serif";
+			break;
+
+			case 'raleway' :
+				$font= "'Raleway', sans-serif";
+			break;
+
+			case 'source-sans-pro' :
+				$font= "'Source Sans Pro', sans-serif";
+			break;
+
+			case 'poppins' :
+				$font= "'Poppins', sans-serif";
+			break;
+
+		}
+
+		return $font;
+	}
+}
 
 
 

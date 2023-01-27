@@ -16,7 +16,7 @@
       font-size: 1.65em;
       font-weight: bold;
       margin-bottom: 0;
-      color: $color__primary;
+      color: var(--paddle-color-1);
       @media (min-width:992px) {
         font-size: 1.15em;
       }

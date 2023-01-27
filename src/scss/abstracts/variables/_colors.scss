@@ -1,24 +1,25 @@
-$color__background-body: #fff;
-$color__background-screen: #f1f1f1;
-$color__background-hr: #ccc;
-$color__background-button: #e6e6e6;
 $color__background-pre: #eee;
-$color__background-ins: #fff9c0;
 
-$color__text-screen: #21759b;
-$color__text-input: #666;
-$color__text-input-focus: #111;
-$color__link: #000000; //royalblue
-$color__link-visited: unset; //purple
-$color__link-hover: #191970; //midnightblue
-$color__text-main: #404040;
+$color__primary: #4D656D;//#dd9933;
+$color__secondary: #D5A960; 
 
-$color__border-button: #ccc #ccc #bbb;
-$color__border-button-hover: #ccc #bbb #aaa;
-$color__border-button-focus: #aaa #bbb #bbb;
-$color__border-input: #ccc;
-$color__border-abbr: #666;
+$_color-base: #182230;
+$_color-primary: #016edb;
+$_color-secondary: #0357ab;
+$_color-base-secondary: #2a3a51;
+$_color-border :#e7e7e7;
+$_color-light : #FFFFFF;
+$_color-background-screen: #f1f1f1;
 
-$color__small: #555;
-$color__primary: #000000;//#dd9933;
-$color__secondary: #c1272d; 
+/*
+:root {
+    --paddle-color-0: #{$_color-base}; // H1 - H6
+    --paddle-color-1 : #{$_color-primary}; // button background, body link colour
+    --paddle-color-2 : #{$_color-secondary}; // Link hover color, Button bg color
+    --paddle-color-3 : #{$_color-base-secondary}; // Body text color
+    --paddle-color-4 : #{$_color-border}; // border, input
+    --paddle-color-5 : #{$_color-light}; // body background color
+    --paddle-color-6 : #{$_color-background-screen}; // focus, accesibility
+    
+}
+*/

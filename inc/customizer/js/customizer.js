@@ -374,6 +374,24 @@ jQuery( document ).ready(function($) {
 		$element.find('.customize-control-sortable-pill-checkbox').val(inputValues).trigger('change');
 	}
 
+	// Color section change select color title to the label title
+	let colorTitleLabel = document.querySelectorAll('li[id^="customize-control-paddle_theme_color"] .customize-control-title');
+	let colorTitlePrimaryLabel = document.querySelectorAll('li[id^="customize-control-paddle_primary_color"] .customize-control-title');
+	
+	replaceLabelTitle(colorTitlePrimaryLabel);
+	replaceLabelTitle(colorTitleLabel);
+
+	function replaceLabelTitle(selectors) {
+		if( selectors.length > 0 ) {
+			selectors.forEach(elem => {
+				let parentElem = elem.parentElement;
+				let container = parentElem.querySelector('.wp-color-result-text');
+				if(container) {
+					container.textContent = elem.textContent
+				}
+			})
+		}
+	}
 
 });
 

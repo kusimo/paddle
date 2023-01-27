@@ -1,0 +1,412 @@
+/*
+Theme Name: Paddle
+Description: Used to style the TinyMCE editor.
+*/
+
+
+/**
+ * Table of Contents:
+ *
+ * 1.0 - Body
+ * 2.0 - Typography
+ * 3.0 - Elements
+ * 4.0 - Alignment
+ * 5.0 - Caption
+ * 6.0 - Galleries
+ * 7.0 - Media Elements
+ * 8.0 - RTL
+ */
+
+/**
+ * 1.0 - Body
+ */
+
+ body {
+	background-color: #fff;
+	color: #000;
+	margin: 20px 40px;
+	max-width: 580px;
+}
+
+/**
+ * 2.0 - Typography
+ */
+
+body,
+button,
+input,
+select,
+textarea {
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  line-height: 1.5;
+  font-size: 16px;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  background-color: #fff;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  clear: both;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.2;
+  color: inherit;
+}
+
+h1:first-child,
+h2:first-child,
+h3:first-child,
+h4:first-child,
+h5:first-child,
+h6:first-child {
+	padding-top: 0;
+}
+
+h1 {
+    font-size: 2.5rem;
+  }
+  
+  h2 {
+    font-size: 1.75rem;
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+  }
+  
+  h4 {
+    font-size: 1.25rem;
+  }
+  
+  h5 {
+    font-size: 1.1rem;
+  }
+  
+  h6 {
+    font-size: 1rem;
+  }
+  
+  p {
+    margin-top: 0;
+    margin-bottom: 1.1em;
+  }
+
+  b,
+  strong {
+    font-weight: 700;
+  }
+  
+  dfn,
+  cite,
+  em,
+  i {
+    font-style: italic;
+  }
+  
+  blockquote {
+    border-left: 4px solid #016edb;
+    border-color: #016edb;
+    font-size: 18px;
+    font-size: 1.8rem;
+    font-style: italic;
+    line-height: 1.6667;
+    margin-bottom: 1.6667em;
+    padding-left: 0.7778em;
+  }
+  
+  blockquote p {
+    margin-bottom: 1.6667em;
+  }
+  
+  blockquote > p:last-child {
+    margin-bottom: 0;
+  }
+  
+  blockquote cite,
+  blockquote small {
+    color: #333;
+    font-size: 15px;
+    font-size: 1.5rem;
+    line-height: 1.6;
+  }
+  
+  blockquote em,
+  blockquote i,
+  blockquote cite {
+    font-style: normal;
+  }
+  
+  blockquote strong,
+  blockquote b {
+    font-weight: 400;
+  }
+  
+  address {
+    font-style: italic;
+    margin: 0 0 1.6em;
+  }
+  
+  code,
+  kbd,
+  tt,
+  var,
+  samp,
+  pre {
+    font-family: Inconsolata, monospace;
+    -webkit-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+  }
+  
+  pre {
+    background-color: transparent;
+    background-color: rgba(0, 0, 0, 0.01);
+    border: 1px solid #eaeaea;
+    border: 1px solid rgba(51, 51, 51, 0.1);
+    line-height: 1.2;
+    margin-bottom: 1.6em;
+    max-width: 100%;
+    overflow: auto;
+    padding: 0.8em;
+    white-space: pre;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+  
+  abbr[title] {
+    border-bottom: 1px dotted #eaeaea;
+    border-bottom: 1px dotted rgba(51, 51, 51, 0.1);
+    cursor: help;
+  }
+  
+  mark,
+  ins {
+    background-color: #fff9c0;
+    text-decoration: none;
+  }
+  
+  sup,
+  sub {
+    font-size: 75%;
+    height: 0;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  
+  sup {
+    bottom: 1ex;
+  }
+  
+  sub {
+    top: 0.5ex;
+  }
+  
+  small {
+    font-size: 75%;
+  }
+  
+  big {
+    font-size: 125%;
+  }
+
+/* Typography for Thai Font */
+
+html[lang="th"] h1,
+html[lang="th"] h2,
+html[lang="th"] h3,
+html[lang="th"] h4,
+html[lang="th"] h5,
+html[lang="th"] h6 {
+	letter-spacing: 0;
+	line-height: 1.65;
+}
+
+html[lang="th"] body,
+html[lang="th"] button,
+html[lang="th"] input,
+html[lang="th"] select,
+html[lang="th"] textarea {
+	line-height: 1.8;
+}
+
+/**
+ * 3.0 - Elements
+ */
+
+hr {
+background-color: #e7e7e7;
+border: 0;
+height: 1px;
+margin-bottom: 1.5em;
+}
+
+ul,
+ol {
+  margin: 0 0 1.5em 0.5em;
+}
+
+ul {
+	list-style: disc;
+}
+
+ul {
+    list-style: disc;
+  }
+  
+  ol {
+    list-style: decimal;
+  }
+  
+  li > ul,
+  li > ol {
+    margin-bottom: 0;
+    margin-left: 1.5em;
+  }
+
+  dt {
+    font-weight: 700;
+  }
+  
+  dd {
+    margin: 0 1.5em 1.5em;
+  }
+
+table {
+margin: 0 0 1.5em;
+width: 100%;
+}
+
+thead th {
+	border-bottom: 2px solid #bbb;
+	padding-bottom: 0.5em;
+}
+
+th {
+	padding: 0.4em;
+	text-align: left;
+}
+
+tr {
+	border-bottom: 1px solid #eee;
+}
+
+td {
+	padding: 0.4em;
+}
+
+th:first-child,
+td:first-child {
+	padding-left: 0;
+}
+
+th:last-child,
+td:last-child {
+	padding-right: 0;
+}
+
+a {
+    color: #016edb;
+    text-decoration: underline;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+  }
+
+  a:active {
+    text-decoration: underline;
+  }
+
+a:focus {
+	outline: thin dotted;
+}
+
+a:hover,
+a:focus {
+  color: #0357ab;
+  text-decoration: none;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Fixes linked images */
+
+a img {
+	background: #fff;
+	-webkit-box-shadow: 0 0 0 6px #fff;
+	box-shadow: 0 0 0 6px #fff;
+}
+
+/**
+ * 4.0 - Alignment
+ */
+
+img {
+	height: auto; /* Make sure images are scaled correctly. */
+	width: inherit;  /* Make images fill their parent's space. Solves IE8. */
+	max-width: 100%; /* Adhere to container width. */
+    border-style: none;
+}
+
+embed,
+iframe,
+object {
+	max-width: 100%;
+}
+
+/**
+ * 5.0 - Caption
+ */
+
+.wp-caption {
+	color: #666;
+	font-size: 13px;
+	font-size: 0.8125rem;
+	font-style: italic;
+	margin-bottom: 1.5em;
+	max-width: 100%;
+}
+
+.wp-caption img[class*="wp-image-"] {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.wp-caption .wp-caption-text {
+	margin: 0.8075em 0;
+}
+
+/**
+ * 6.0 - Galleries
+ */
+
+/**
+ * 7.0 - Media Elements
+ */
+
+
+/* Audio Player */
+
+
+/* Playlist Color Overrides: Light */
+
+
+/* Playlist Color Overrides: Dark */
+
+
+/* Playlist Style Overrides */
+
+
+/**
+ * 8.0 - RTL
+ */
+
+

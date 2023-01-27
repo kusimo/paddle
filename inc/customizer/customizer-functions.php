@@ -66,63 +66,24 @@ if ( ! function_exists( 'paddle_add_search_menu_item' ) ) {
 }
 add_filter( 'wp_nav_menu_items', 'paddle_add_search_menu_item', 10, 2 );
 
-/**
- * Set secondary color
- * @return  string
- */
+if( ! function_exists( 'paddle_get_default_footer_copyright' ) ) :
+	/**
+	 * Prints footer copyright
+	*/
+	function paddle_get_default_footer_copyright() { ?>
+		<span class="site-copyright">&copy; 
+			<?php
+			echo date_i18n(
+				/* translators: Copyright date format, see https://secure.php.net/date */
+				_x( 'Y', 'copyright date format', 'paddle' )
+			);
+			?>
+			<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php bloginfo( 'name' ); ?></a>
+		</span><!-- .site-copy-right -->
+ 	<?php }
 
-if ( ! function_exists( 'paddle_convert_rgba_to_hex' ) ) {
-	function paddle_convert_rgba_to_hex( $opacity ) {
-		$color              = get_theme_mod( 'paddle_primary_color' ); //#70b9b020
-		$color_with_opacity = $color . strval( $opacity );
+endif;
 
-		if ( preg_match( '|^#([A-Fa-f0-9]{4}){1,2}$|', $color_with_opacity ) ) {
-			return strval( $color_with_opacity );
-		}
-
-	}
-}
-
-
-/**
-* Set our Customizer default options
-*/
-if ( ! function_exists( 'paddle_generate_defaults' ) ) {
-	function paddle_generate_defaults() {
-		$customizer_defaults = array(
-			'social_newtab'                 => 0,
-			'social_urls'                   => '',
-			'social_alignment'              => 'alignright',
-			'social_rss'                    => 0,
-			'social_url_icons'              => '',
-			'contact_phone'                 => '',
-			'search_menu_icon'              => 0,
-			'woocommerce_shop_sidebar'      => 1,
-			'woocommerce_product_sidebar'   => 0,
-			'paddle_header_layout_style'    => 'logo-left-style-2',
-			'paddle_header_search_button'   => 1,
-			'paddle_header_cta'             => 0,
-			'header_logo_size'              => 150,
-			'header_logo_padding'           => 16,
-			'paddle_menu_text_to_uppercase' => 0,
-			'paddle_menu_bgcolor'           => '#ffffff',
-			'paddle_navlink_text_color'     => '#3c434a',
-			'paddle_menu_items_alignment'   => 'centered',
-			'enable_top_bar'                => 0,
-			'enable_top_bar_on_mobile'      => 0,
-			'paddle_contact_phone'          => '',
-			'topbar_select'                 => 'button',
-			'enable_icon_bg'                => 0,
-			'banner_content_bg_opacity'     => get_theme_mod('banner_content_bg_opacity', 3),
-			'paddle_primary_color'          => PADDLE_PRIMARY_COLOR,
-			'paddle_secondary_color'        => paddle_convert_rgba_to_hex( '08' ),
-			'enable_secondary_color'        => 0,
-			'opacity_slider_control'        => 2,
-		);
-
-		return apply_filters( 'paddle_customizer_defaults', $customizer_defaults );
-	}
-}
 
 /**
 * Load all our Customizer options

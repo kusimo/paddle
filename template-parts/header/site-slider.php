@@ -29,7 +29,7 @@
 			$paddle_banner_btn_1_link  = get_theme_mod( 'paddle_slider_button_url1', '#' );
 			$paddle_image_url          = get_the_post_thumbnail_url( $pid, 'paddle-slider' );
 			$slider_button_text[ $i ]  = get_theme_mod( 'paddle_slider_button_text' . $i );
-			$paddle_custom_link        = get_theme_mod( 'paddle_slider_custom_url' );
+			$paddle_custom_link        = get_theme_mod( 'paddle_slider_custom_url', PADDLE_DEFAULT_OPTION['paddle_slider_custom_url'] );
 
 			// Custom Text and Links.
 			$slider_button_url[ $i ] = get_theme_mod( 'paddle_slider_button_url' . $i );
@@ -39,7 +39,7 @@
 		<div class="home-banner-overlay vh d-none"></div>
 
 		<div class="slideshow-content" data-src="<?php echo esc_url_raw( $paddle_image_url ); ?>">
-			<div class="home-banner-content outer content-<?php echo esc_attr( get_theme_mod( 'banner_align_position', 'left' ) ); ?>">
+			<div class="home-banner-content outer content-<?php echo esc_attr( get_theme_mod( 'banner_align_position', PADDLE_DEFAULT_OPTION['banner_align_position'] ) ); ?>">
 				<div class="board light-box-shadow">
 
 					<header class="no-bgcolor">

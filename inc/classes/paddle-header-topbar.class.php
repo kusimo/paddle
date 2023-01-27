@@ -12,11 +12,11 @@ class Paddle_Header_TopBar {
 		$this->contactNumber    = get_theme_mod( 'paddle_contact_phone', '' );
         self::$contact_email    = get_theme_mod( 'paddle_top_email', '' );
         $this->contactUrl       = get_theme_mod( 'topbar_header_button_url', '' );
-		self::$contactText   = get_theme_mod( 'topbar_header_button_text', '' );
-		self::$active           = absint( get_theme_mod( 'enable_top_bar', 0 ) );
-		self::$enable_on_mobile = absint( get_theme_mod( 'enable_top_bar_on_mobile', 0 ) );
+		self::$contactText   = get_theme_mod( 'topbar_header_button_text', PADDLE_DEFAULT_OPTION['topbar_header_button_text'] );
+		self::$active           = absint( get_theme_mod( 'enable_top_bar', PADDLE_DEFAULT_OPTION['enable_top_bar'] ) );
+		self::$enable_on_mobile = absint( get_theme_mod( 'enable_top_bar_on_mobile', PADDLE_DEFAULT_OPTION['enable_top_bar_on_mobile'] ) );
 
-		self::$topbar_select    = get_theme_mod( 'topbar_select', 'button' );
+		self::$topbar_select    = get_theme_mod( 'topbar_select', PADDLE_DEFAULT_OPTION['topbar_select'] );
 
 	}
 

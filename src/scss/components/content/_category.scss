@@ -1,7 +1,7 @@
 .archive h1.page-title {
     margin-bottom: 2rem;
     @media (min-width:992px) {
-        margin-bottom: 4rem;
+        margin-bottom: 2.5rem;
     }
     margin-top: 2rem;
 }
@@ -94,12 +94,12 @@
         .entry-content {
             padding-bottom: 0;
         }
+       
         span.posted-on {
             position: relative;
             font-size: 14px;
             position: relative;
             float:left;
-            color: $color__small;
             margin-left: 30px;
             margin-bottom: 9px;
             margin-right: 9px;

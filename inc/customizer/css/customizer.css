@@ -109,6 +109,7 @@ input[type="number"]:focus {
 .text_radio_button_control .radio-buttons {
 	display: inline-block;
 	border: 1px solid #f9f9fe;
+	margin-bottom: 14px;
 }
 
 .text_radio_button_control .radio-button-label {
@@ -144,12 +145,55 @@ input[type="number"]:focus {
 	color: #fff;
 }
 
+li[id$="_font_weight"] .customize-control-title {
+	font-weight: normal;
+    margin-bottom: 16px;
+    text-transform: capitalize;
+}
+
 /* ==========================================================================
    Image Radio Buttons
    ========================================================================== */
 .image_radio_button_control .radio-button-label > input {
 	display: none;
 }
+li[id^="customize-control-paddle_"]
+span.customize-control-title, 
+span.paddle-label.customize-control-description {
+    margin: 0 -24px 15px;
+    display: block;
+    padding: 15px 24px;
+    border-width: 1px 0;
+    border-style: solid;
+    border-color: gainsboro;
+    background-color: white;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    line-height: 1;
+    text-transform: uppercase!important;
+}
+span + span.customize-control-title, 
+.slider-custom-control .customize-control-title
+ {
+	font-weight: normal;
+	text-transform: capitalize;
+}
+span.paddle-label.customize-control-description {
+	margin-top: 15px;
+	font-style: normal!important;
+}
+
+.image_radio_button_control.paddle-section-spacing label.radio-button-label {
+    width: 46%;
+    float: left;
+    display: inline;
+    padding: 0 2%;
+}
+.image_radio_button_control.paddle-section-spacing {
+    margin-top: 32px;
+}
+
 
 .image_radio_button_control .radio-button-label > img {
 	cursor: pointer;
@@ -268,7 +312,8 @@ input[type="number"]:focus {
    Slider
    ========================================================================== */
 .slider-custom-control {
-	margin-bottom: 30px;
+	margin-bottom: 70px;
+	position:relative
 }
 
 .slider-custom-control input[type=number]::-webkit-inner-spin-button,
@@ -420,6 +465,18 @@ input[type="number"]:focus {
 	display: none;
 }
 
+.slider-custom-control::after {
+    border-bottom: 1px dashed #cccccc;
+    /* padding-bottom: 22px; */
+    content: "";
+    width: 100%;
+    /* background: black; */
+    height: 2px;
+    position: absolute;
+    left: 0;
+    bottom: -65px;
+}
+
 /* ==========================================================================
    Toggle Switch
    ========================================================================== */
@@ -427,6 +484,7 @@ input[type="number"]:focus {
 	display: inline-block;
 }
 
+li[id^="customize-control-paddle_"]
 .toggle-switch {
 	position: relative;
 	width: 64px;
@@ -434,6 +492,7 @@ input[type="number"]:focus {
 	-moz-user-select: none;
 	-ms-user-select: none;
 	float: right;
+	margin-top: 9px;
 }
 
 .toggle-switch .toggle-switch-checkbox {
@@ -441,6 +500,7 @@ input[type="number"]:focus {
 }
 
 .toggle-switch .toggle-switch-label {
+	position: relative;
 	display: block;
 	overflow: hidden;
 	cursor: pointer;
@@ -448,6 +508,8 @@ input[type="number"]:focus {
 	border-radius: 20px;
 	padding: 0;
 	margin: 0;
+	width:67px;
+	max-width:67px;
 }
 
 .toggle-switch-inner {
@@ -838,3 +900,29 @@ input[type="number"]:focus {
 	text-decoration: none;
 }
 
+li[id^="customize-control-paddle_theme_color"], 
+li[id^="customize-control-paddle_primary_color"] {
+	position: relative;
+	gap: 15px;
+    align-items: center;
+    width: 100%;
+}
+li[id^="customize-control-paddle_theme_color"] .wp-picker-container span, 
+li[id^="customize-control-paddle_primary_color"] .wp-picker-container span {
+	margin-top: 0px;
+	background: #f0f0f1;
+    margin-left: 5px;
+}
+
+li[id^="customize-control-paddle_theme_color"] .wp-picker-container .wp-color-result.button, 
+li[id^="customize-control-paddle_primary_color"] .wp-picker-container .wp-color-result.button
+{
+    width: 30px;
+    height: 30px; 
+}
+li[id^="customize-control-paddle_theme_color"]  input[type=text].wp-color-picker,
+li[id^="customize-control-paddle_primary_color"]  input[type=text].wp-color-picker
+ {
+	width: 120px;
+	text-align: center;
+}

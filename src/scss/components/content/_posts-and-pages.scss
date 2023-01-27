@@ -52,8 +52,8 @@ article.sticky .thumbnail-container::before {
 }
 article.sticky .thumbnail-container::after {
   z-index: 1;
-  background: $color__primary;
-  box-shadow: -25px 20px 0 $color__primary;
+  background: var(--paddle-color-1);
+  box-shadow: -25px 20px 0 var(--paddle-color-1);
 }
  //Full width image
  @media (max-width: 992px) {
@@ -64,8 +64,8 @@ article.sticky .thumbnail-container::after {
     padding: 0!important;
   }
   .home.blog .thumbnail-container, .archive.category .thumbnail-container {
-    margin-right: -15px!important;
-    margin-left: -15px!important;
+    margin-right: -15px;
+    margin-left: -15px;
     a {
       padding: 0!important;
       width: 100%!important;
@@ -86,9 +86,6 @@ article {
   word-wrap: break-word;
   .entry-meta {
     padding-bottom: 1.25em;
-    a {
-      color: $color__small;
-    }
   }
 }
 
@@ -322,6 +319,7 @@ article {
       color: #999;
       margin-left:30px;
       margin-bottom:9px;
+      margin-top: 9px;
     }
 
     span.cat-links {
@@ -347,20 +345,19 @@ article {
       font-weight: 700;
       text-transform: uppercase;
       border-radius: 5px;
-  }
+    }
   }
   .cat-links::before, .tags-links::before, .posted-on::before, .comments-link::before, small .byline::before {
     content: '';
     position: absolute;
-    width:20px;
-    height:20px;
-    top: 0;
-    left: -30px;
+    width:15px;
+    height:15px;
+    top: 2px;
+    left: -24px;
     background-repeat: no-repeat;
     background-size: contain;
   }
   .tags-links::before {
-    top:5px;
     background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNOS43NzcgMmwxMS4zOTQgMTEuMzk1LTcuNzggNy43NzctMTEuMzkxLTExLjM5MXYtNy43ODFoNy43Nzd6bS44MjgtMmgtMTAuNjA1djEwLjYwOWwxMy4zOTEgMTMuMzkxIDEwLjYwOS0xMC42MDQtMTMuMzk1LTEzLjM5NnptLTQuMTA0IDVjLjQgMCAuNzc2LjE1NiAxLjA1OS40MzguNTg1LjU4Ni41ODUgMS41MzkuMDAxIDIuMTIzLS4yODUuMjgzLS42NjEuNDM5LTEuMDYxLjQzOXMtLjc3Ny0uMTU2LTEuMDYtLjQzOGMtLjU4NS0uNTg2LS41ODYtMS41MzgtLjAwMS0yLjEyMy4yODQtLjI4My42NjEtLjQzOSAxLjA2Mi0uNDM5em0wLTFjLS42NDEgMC0xLjI4LjI0NC0xLjc2OS43MzItLjk3Ny45NzYtLjk3NyAyLjU1OCAwIDMuNTM2LjQ4OS40ODggMS4xMjguNzMyIDEuNzY4LjczMnMxLjI3OS0uMjQ0IDEuNzY4LS43MzNjLjk3Ny0uOTc3Ljk3Ny0yLjU1OCAwLTMuNTM3LS40ODgtLjQ4Ni0xLjEyNy0uNzMtMS43NjctLjczeiIvPjwvc3ZnPg==") 
   }
   .cat-links::before {
@@ -377,30 +374,23 @@ article {
   }
 } 
 .archive, .category .entry-footer {
-  border-bottom: 1px solid #ececec;
+  border-bottom: none;
 }
-.entry-footer {
-  span a {
-    color: $color__small;
-    &:hover {
-      color: $color__primary;
-    }
-  }
-}
+
 .archive .entry-content, .category .entry-content {
   color: #757575;
 }
 span.tags-links {
   display:inline!important;
   &::before {
-    top:0;
+    top:2px;
   }
   @media screen and (min-width:925px) {
     display:inline-block;
   }
   a {
     padding: 2px 8px;
-    display: inline;
+    display: inline-block;
     border-radius: 15px;
     border: 1px solid #ccc;
     margin-bottom: 5px;
@@ -412,10 +402,12 @@ span.tags-links {
 
 small .byline{
   position: relative;
-  display: inline-block;
+  //display: inline-block;
   color: #999;
   margin-left:30px;
+  margin-right: 9px;
   margin-bottom:9px;
+  font-size: 15px;
 }
 
 span.posted-on {
@@ -425,9 +417,11 @@ span.posted-on {
   margin-left: 30px;
   margin-bottom: 9px;
   margin-right: 9px;
+  font-size: 15px;
 }
 span.edit-link {
   float: right;
+  margin-top: 1rem;
 }
 
 .wp-block-image figcaption, .thumbnail-post-single figcaption, .editable figcaption, .wp-caption .wp-caption-text {
@@ -448,7 +442,7 @@ span.edit-link {
 .article-more-link {
   position:relative;
   display:inline-block;
-  margin:0;
+  margin: 0 0 15px 0;
   height: 40px;
 }
 .read-more {
@@ -471,9 +465,9 @@ span.edit-link {
   content: '';
   height: 2px;
   width: 18px;
-  background-color: $color__primary;
+  background-color: var(--paddle-color-1);
   position: absolute;
-  top: calc(20px - 4px);
+  top: calc(20px - 5px);
   right: 4rem;
   opacity: 0;
   transition: all .3s ease-out 0s;
@@ -487,7 +481,7 @@ span.edit-link {
   border-top-width: 0;
   border-left-width: 0;
   position: absolute;
-  top: calc(20px - 7px);
+  top: calc(20px - 8px);
   right: 8px;
   transition: all .3s ease-out 0s;
   -webkit-transform: rotate(-45deg);
@@ -505,7 +499,7 @@ span.edit-link {
   right: -3px;
   border-top-width: 0;
   border-left-width: 0;
- // border: 2px solid $color__primary;
+ // border: 2px solid var(--paddle-color-1);
 }
 
 .home.blog a.post-thumbnail, .archive.category a.post-thumbnail {

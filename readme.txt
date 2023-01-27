@@ -2,8 +2,8 @@
 
 Contributors: kusimo
 Tags: Custom-Background, Custom-Logo, Custom-Menu, Featured-Images, Threaded-Comments, Translation-Ready, Rtl-Language-Support, Blog, One-Column, Two-Columns, Right-Sidebar, Custom-Colors, Custom-Header, Footer-Widgets, Theme-Options
-Version: 1.0.15
-Tested up to: 5.7
+Version: 1.2.1
+Tested up to: 6.0.1
 Requires PHP: 5.6
 License: GPL-2.0-or-later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -47,6 +47,8 @@ Source: https://github.com/kusimo/paddle/blob/ed71f0ed6a1b91e9afb620739e743222e3
 
 == Changelog ==
 
+= 1.2.1 - 2022-08-05 =
+* Added option in customizer to select post image size to be used for featured image and fix minor CSS issues.
 
 = 1.0.10 - 2021-05-30 =
 * Enhancement - The homepage slider sets to show 3 latest posts, when theme is activated.

@@ -50,7 +50,6 @@
   letter-spacing: -0.01em;
   line-height: 1.4em;
   font-size: 1.071em;
-  color: $color__primary
 }
 
 /* Recent Post */
@@ -74,7 +73,7 @@ section[id*='recent-posts-'] {
     text-align: center;
     font-size: 1.2rem;
     margin-right: 10px;
-    background-color: $color__primary;
+    background-color: var(--paddle-color-1);
     color: #ffffff;
     border-radius: 5px;
   }

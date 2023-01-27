@@ -1,12 +1,16 @@
 
 a {
-    color: $color__primary;
+    color: var(--paddle-color-1);
     text-decoration: underline;
-    font-weight: 500;
     transition: all 0.3s ease-in-out;
 }
-#masthead.site-header .site-title>a {
+
+#masthead.site-header .site-title>a, #masthead a:not(.btn) {
 text-decoration: none;
+color: var(--paddle-color-1);
+&:hover {
+    color: var(--paddle-color-2);
+}
 }
 
  a {
@@ -14,24 +18,23 @@ text-decoration: none;
 		text-decoration: underline;
 	}
 }
+/*
 a:not([class*="wp-block-"]):not(.author-link):not(.post-entry-link) {
     text-decoration: underline;
 }
- a:not([class*="wp-block-"]):hover,  a:focus, a:active {
-    color: $color__primary;
+*/
+.widget-area a, .widget a { text-decoration: none;}
+
+ a:not([class*="wp-block-"]):hover,  a:focus, a:active, .widget-area a:hover {
+    color: var(--paddle-color-2);
     text-decoration: none;
     transition: all 0.3s ease-in-out;
 }
-
-.post-entry-link {
-    font-weight: 900;
-} 
 
 #primary {
     main {
         .entry-title {
             a {
-                color: currentColor;  
                 transition: linear 0.1s;
             }
         }

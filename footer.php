@@ -42,7 +42,7 @@ if ( $paddle_search_modal->isSearchEnable() ) {
 		is_active_sidebar( 'footer-3' ) ||
 		is_active_sidebar( 'footer-4' ) ||
 		is_active_sidebar( 'footer-5' ) ||
-		1 === get_theme_mod( 'paddle_footer_logo', 0 )
+		1 === get_theme_mod( PADDLE_DEFAULT_OPTION['paddle_footer_logo'], 0 )
 		) :
 
 		get_template_part( 'template-parts/footer/widgets' );
