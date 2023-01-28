@@ -28,5 +28,5 @@
 	<?php do_action( 'paddle_header' ); ?>
 
 	<div id="content" class="site-content">
-	<div class="<?php $paddle_container = ( 'full-width-content' === paddle_layout_width() ? 'container-fluid full-width-container' : 'container' ); echo esc_attr( $paddle_container ); ?>">
+	<div class="container paddle-body-container">
 		<div class="row main-row">

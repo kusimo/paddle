@@ -140,7 +140,7 @@ if ( ! function_exists( 'paddle_generate_defaults' ) ) {
 			'use_full_bootstrap'			=> 0,
 			'use_bootstrap_js'				=> 0,
 			'header_cta_padding_left'		=> 0,
-			'container_width'				=> 1200,
+			'paddle_theme_content_width'	=> 1200,
 			'custom_container'				=> 'default'
 		);
 
@@ -194,10 +194,11 @@ if ( ! function_exists( 'paddle_static_header_css' ) ) {
 		$paragraph_margin_bottom 				 = absint( get_theme_mod( 'paragraph_margin_bottom', PADDLE_DEFAULT_OPTION['paragraph_margin_bottom'] ) );
 		$font_type								 = get_theme_mod( 'paddle_typography_preset', PADDLE_DEFAULT_OPTION['paddle_typography_preset'] );
 		$font_family 							 = '' !== paddle_get_font_type() ? paddle_get_font_type() : '-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji';
+		
 
 		$css = '';
 
-		// Variables
+		// Variables.
 		
 		$css .= ':root {';
 			$css .='
@@ -222,7 +223,7 @@ if ( ! function_exists( 'paddle_static_header_css' ) ) {
 			$css .= '--paddle-font-h2-weight:'. $h2_font_weight.';';
 			$css .= '--paddle-paragraph-m-bottom:'. $paragraph_margin_bottom.'px;';
 
-			$css .= '--paddle-page-width: 1200px';
+			$css .= '--paddle-page-width: '.paddle_get_content_width().'px;';
 			$css .= '--paddle-page-width-margin:0';
 			
 		$css .='}';

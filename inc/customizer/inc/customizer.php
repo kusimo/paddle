@@ -2238,9 +2238,9 @@ class paddle_initialise_customizer_settings {
 
 		// Container width
 		$wp_customize->add_setting( 
-			'container_width', 
+			'paddle_theme_content_width', 
 			array(
-				'default'           =>  $this->defaults['container_width'],
+				'default'           =>  $this->defaults['paddle_theme_content_width'],
 				'sanitize_callback' => 'absint'
 			) 
 			);
@@ -2248,7 +2248,7 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_control(
 			new Paddle_Slider_Custom_Control( 
 				$wp_customize,
-				'container_width',
+				'paddle_theme_content_width',
 				array(
 					'section'	      => 'paddle_post_and_pages',
 					'label'		      => __( 'Custom Width', 'paddle' ),

@@ -68,8 +68,13 @@ function paddle_frontend_css($dynamic_css)
 	$paddle_caption_width 					 = get_theme_mod('paddle_caption_width', PADDLE_DEFAULT_OPTION['paddle_caption_width']);
 	$paddle_thumbnail_alignment				 = get_theme_mod('paddle_thumbnail_alignment', PADDLE_DEFAULT_OPTION['paddle_thumbnail_alignment']);
 	$paddle_header_style                     = get_theme_mod('paddle_header_layout_style', PADDLE_DEFAULT_OPTION['paddle_header_layout_style'], 'logo-left-style-2');
+	// Content width
+	$page_layout = get_theme_mod( 'container_width', PADDLE_DEFAULT_OPTION['paddle_theme_content_width'] );
+	$custom_width = get_theme_mod( 'custom_container', PADDLE_DEFAULT_OPTION['custom_container'] );
 
 	$css = '';
+
+	$css .= '.container.paddle-body-container { max-width: var(--paddle-page-width)}';
 
 	// Colors 
 	$css .= 'h1>a,h2>a,h3>a,h4>a { color: ' . $paddle_theme_color_headings . ' }';

@@ -164,24 +164,7 @@ add_action('after_setup_theme', 'paddle_setup');
  */
 function paddle_content_width()
 {
-	$content_width = $GLOBALS['content_width'];
-
-	// Get layout.
-	$page_layout = get_theme_mod( 'page_layout' );
-
-	// Check if layout is one column.
-	if ( 'one-column' === $page_layout ) {
-		if ( is_home() || is_post_type_archive( 'post' )  ) {
-			$content_width = 644;
-		} elseif ( is_page() ) {
-			$content_width = 740;
-		}
-	}
-
-	// Check if is single post and there is no sidebar.
-	if ( is_single() && ! is_active_sidebar( 'sidebar-1' ) ) {
-		$content_width = 740;
-	}
+	$content_width = paddle_get_content_width();
 
 	/**
 	 * Filter Paddle content width of the theme.
@@ -190,6 +173,31 @@ function paddle_content_width()
 	$GLOBALS['content_width'] = apply_filters( 'paddle_content_width', $content_width );
 }
 add_action('after_setup_theme', 'paddle_content_width', 0);
+
+function paddle_get_content_width() {
+
+	$content_width = 1200;
+
+	$padle_content_width = get_theme_mod( 'container_width', get_theme_mod( 'paddle_theme_content_width', PADDLE_DEFAULT_OPTION['paddle_theme_content_width'] ) );
+	$custom_width = get_theme_mod( 'custom_container', PADDLE_DEFAULT_OPTION['custom_container'] );
+
+	if ( is_home() || is_post_type_archive( 'post' )  ) {
+		$content_width = 1200;
+		if ( 'custom' === $custom_width ) {
+			$content_width = apply_filters( 'paddle_content_width', $padle_content_width );
+		} 
+	} elseif ( is_page() || is_single() ) {
+		// @todo Create customiser option for page and single post custom width. For now use blog archive and home width.
+		$content_width = 1200;
+		if ( 'custom' === $custom_width ) {
+			$content_width = apply_filters( 'paddle_content_width', $padle_content_width );
+		} 
+	} else {
+		$content_width = $padle_content_width;
+	}
+
+	return $content_width;
+}
 
 
 /**

@@ -1157,7 +1157,7 @@ CUSTOM BOOTSTRAP PREFIX WITH .ADP
 }
 @media (min-width: 1200px) {
   .container {
-    max-width: 1140px;
+    max-width: 1200px;
   }
 }
 .container-fluid,
@@ -1199,7 +1199,7 @@ CUSTOM BOOTSTRAP PREFIX WITH .ADP
   .container-md,
   .container-sm,
   .container-xl {
-    max-width: 1140px;
+    max-width: 1200px;
   }
 }
 .row {
