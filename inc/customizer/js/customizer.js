@@ -393,6 +393,30 @@ jQuery( document ).ready(function($) {
 		}
 	}
 
+	/**
+	 * Find control's last element and add class to it
+	 */
+	function addClassToLastItem(items, classNameToAdd) {
+		let itemToFind = document.querySelectorAll(items);
+		if (itemToFind.length > 0) {
+			let lastElement = [...document.querySelectorAll(items)].pop()
+			lastElement.classList.add(classNameToAdd);
+			console.log(lastElement)
+		}
+	}
+
+	let paddleCustomControlsClass = 
+	['.customize-control-toggle_switch_2', 
+	'.customize-control-toggle_switch', 
+	'#customize-control-paddle_sidebar_position',
+	'.customize-control-image_radio_button'
+	];
+	paddleCustomControlsClass.forEach(elem => {
+		addClassToLastItem(elem, 'paddle-last-item')
+	})
+
+	//addClassToLastItem('.customize-control-toggle_switch_2', 'paddle-last-item')
+
 });
 
 /**
@@ -410,5 +434,6 @@ jQuery( document ).ready(function($) {
 		}
 	} );
 } )( jQuery, wp.customize );
+
 
 

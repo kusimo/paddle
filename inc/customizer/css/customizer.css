@@ -140,19 +140,51 @@ input[type="number"]:focus {
 	padding: 5px 15px;
 	display: inline-block;
 }
+.text_radio_button_control .radio-button-label.option-button-title span {
+	opacity: .7;
+}
 
 .text_radio_button_control .radio-button-label span:hover {
 	background-color: rgba(255, 255, 255, .2);
 	color: #2885bb;
 }
 
-.text_radio_button_control .radio-button-label > input:checked + span {
+.text_radio_button_control .radio-button-label:not(.option-button-title) > input:checked + span {
 	background-color: #2084bd;
 	color: #fff;
 }
 
-.text_radio_button_control .radio-button-label > input:checked + span:hover {
+.text_radio_button_control .radio-button-label.option-button-title {
+	background-color: white;
+}
+.text_radio_button_control .radio-button-label.option-button-title > input:checked + span {
+	opacity: 1;
+	position: relative;
+}
+
+.text_radio_button_control .radio-button-label.option-button-title > input + span::after {
+	content: "";
+	position: absolute;
+	height: 3px;
+	width: 100%;
+	top: -1px;
+	left: 0;
+	background-color: white;
+}
+.text_radio_button_control .radio-button-label.option-button-title > input:checked + span::after {
+	background-color: #2084bd;
+}
+
+.text_radio_button_control .radio-button-label.option-button-title span:hover {
+	opacity: 1;
+}
+
+.text_radio_button_control .radio-button-label:not(.option-button-title) > input:checked + span:hover {
 	color: #fff;
+}
+
+.text_radio_button_control .radio-button-label.option-button-title > input:checked + span:hover {
+	opacity: 1;
 }
 
 li[id$="_font_weight"] .customize-control-title {
@@ -164,6 +196,7 @@ li[id$="_font_weight"] .customize-control-title {
 /* ==========================================================================
    Text Radio Buttons 2 
    ========================================================================== */
+   /*
 .text_radio_button_control.option_radio_button_control::before {
     content: '';
     position: absolute;
@@ -173,15 +206,25 @@ li[id$="_font_weight"] .customize-control-title {
     height: 1px;
     top: -1px;
 }
+*/
 .text_radio_button_control.option_radio_button_control {
-	position: relative;
-    padding-top: 15px;
-	margin-top: 15px;
 	margin-bottom: 15px;
-    border-top: 1px solid #D1D5D7;
 }
 .input-wrapper.paddle-control-wrapper.option-radio-button {
     display: flex;
+}
+.text_radio_button_control.option_radio_button_title_control .input-wrapper.paddle-control-wrapper.option-radio-button {
+    margin: 0 -24px 15px;
+    border-width: 1px 0;
+    border-style: solid;
+    border-color: transparent;
+    background-color: transparent;
+	border-top: 1px solid gainsboro;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase!important;
+    margin-top: -20px;
 }
 label.radio-button-label.radio-button-option {
 	width: 100%;
@@ -191,12 +234,21 @@ label.radio-button-label.radio-button-option {
 	flex: 1 1 auto;
     display: flex;
 }
+
 .paddle-control-wrapper.option-radio-button .radio-button-label span {
     width: 100%; 
 	padding: 9px 0;
 	border: 1px solid #D1D5D7;
 	font-size: 12px;
     font-weight: normal;
+}
+.text_radio_button_control.option_radio_button_title_control .option-radio-button .radio-button-label span {
+	position: relative;
+	background-color: white;
+	color: currentColor;
+	border-radius: 0!important;
+	font-weight: 500;
+	padding: 12px 0;
 }
 .paddle-control-wrapper.option-radio-button .radio-button-label:first-child span {
 	border-radius: 3px 0 0 3px;
@@ -205,6 +257,7 @@ label.radio-button-label.radio-button-option {
     border-radius: 0 3px 3px 0;
 	margin-left: -1px;
 }
+
 .text_radio_button_control.option_radio_button_control .customize-control-title {
 	margin-bottom: 15px;
 }
@@ -215,6 +268,7 @@ label.radio-button-label.radio-button-option {
 .image_radio_button_control .radio-button-label > input {
 	display: none;
 }
+/*
 li[id^="customize-control-paddle_"]
 span.customize-control-title, 
 span.paddle-label.customize-control-description {
@@ -231,6 +285,31 @@ span.paddle-label.customize-control-description {
     line-height: 1;
     text-transform: uppercase!important;
 }
+*/
+li[id^="customize-control-paddle_"]
+.customize-control-title.paddle-simple-header-title {
+    margin: 0 -24px 15px;
+    display: block;
+    padding: 15px 24px;
+    border-width: 1px 0;
+    border-style: solid;
+    border-color: gainsboro;
+    background-color: white;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    line-height: 1;
+    text-transform: uppercase!important;
+}
+span.customize-control-title.paddle-simple-header-title-2 {
+    margin: 0 -24px 15px;
+    padding: 5px 24px;
+    line-height: 1;
+    border-top: 1px solid gainsboro;
+    margin-bottom: 0;
+    padding-top: 30px;
+}
+
 span + span.customize-control-title, 
 .slider-custom-control .customize-control-title
  {
@@ -248,13 +327,17 @@ span.paddle-label.customize-control-description {
     display: inline;
 	text-align: center;
     padding: 0 2%;
+	padding-left: 0;
 }
 li#customize-control-paddle_header_layout_style label.radio-button-label {
 	width: 100%;
 	padding: unset;
 }
 .image_radio_button_control.paddle-section-spacing {
-    margin-top: 32px;
+    margin-top: 0px;
+}
+.image_radio_button_control.paddle-section-spacing>span {
+    margin-bottom: 12px;
 }
 
 
@@ -376,7 +459,8 @@ li#customize-control-paddle_header_layout_style label.radio-button-label {
    Slider
    ========================================================================== */
 .slider-custom-control {
-	margin-bottom: 70px;
+	margin-top: 9px;
+	margin-bottom: 50px;
 	position:relative
 }
 
@@ -540,6 +624,9 @@ li#customize-control-paddle_header_layout_style label.radio-button-label {
     left: 0;
     bottom: -65px;
 }
+ul#sub-accordion-section-paddle_post_and_pages .slider-custom-control:first-child::after {
+	content: none;
+}
 
 /* ==========================================================================
    Toggle Switch
@@ -552,11 +639,11 @@ li[id^="customize-control-paddle_"]
 .toggle-switch {
 	position: relative;
 	width: 64px;
+	user-select: none;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	float: right;
-	margin-top: 9px;
 }
 
 .toggle-switch .toggle-switch-checkbox {
@@ -628,6 +715,7 @@ li[id^="customize-control-paddle_"]
 	transition: all 0.3s ease-in 0s;
 }
 
+
 .toggle-switch-checkbox:checked + .toggle-switch-label .toggle-switch-inner {
 	margin-left: 0;
 }
@@ -635,6 +723,75 @@ li[id^="customize-control-paddle_"]
 .toggle-switch-checkbox:checked + .toggle-switch-label .toggle-switch-switch {
 	right: 0px;
 }
+
+.toggle-switch-control.toggle-switch-control-v2 {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+	justify-items: center;
+    border: 1px solid #e3e7ec;
+    background: #fff;
+    margin: 0 0 10px;
+    border-radius: 4px;
+    padding: 6px 12px;   
+}
+li#customize-control-paddle_blog_section_header_2 ~ li  .toggle-switch-control.toggle-switch-control-v2 {
+	margin-bottom: 0;
+}
+li#customize-control-paddle_enable_archive_tag .toggle-switch-control.toggle-switch-control-v2 {
+	margin-bottom: 10px!important;
+}
+
+.toggle-switch-control-v2 .customize-control-title {
+	margin-bottom: 0;
+	font-size: 14px;
+	font-weight: normal;
+}
+
+.toggle-switch-control-v2 .toggle-switch-switch {
+	border-color: transparent;
+	background-color: transparent;
+}
+
+.toggle-switch-control-v2 span i {
+	position: absolute;
+    top: -4px;
+    right: 0px;
+	opacity: .7;
+}
+
+.toggle-switch-control-v2  .toggle-switch-checkbox:checked + .toggle-switch-label .toggle-switch-switch i {
+	opacity: 1;
+}
+
+.toggle-switch-control-v2 .toggle-switch-checkbox + .toggle-switch-label .toggle-switch-switch i::after {
+    opacity: .7;
+    position: absolute;
+    content: '';
+    width: 21px;
+    height: 2px;
+    top: 10px;
+    left: 1px;
+    background: #656565;
+    border-radius: 5px;
+    transform: rotate(-45deg);
+    box-shadow: 0 0 0 1px #fff;
+    transition: opacity .2s ease;
+    background-repeat: no-repeat;
+}
+
+.toggle-switch-control-v2  .toggle-switch-checkbox:checked + .toggle-switch-label .toggle-switch-switch i::after {
+	display: none
+}
+.toggle-switch-control-v2  .toggle-switch-inner:before {
+    background-color: transparent;
+    color: currentColor;
+}
+.toggle-switch-control-v2 .toggle-switch-inner:before, .toggle-switch-control-v2 .toggle-switch-inner:after {
+	font-size: 10px;
+}
+
+
 
 /* ==========================================================================
    Sortable Repeater
@@ -990,4 +1147,40 @@ li[id^="customize-control-paddle_primary_color"]  input[type=text].wp-color-pick
  {
 	width: 120px;
 	text-align: center;
+}
+
+/** Text */
+ul[id^="sub-accordion-section-paddle"] li.customize-control input[type=text],
+ul[id^="sub-accordion-section-paddle"] li.customize-control input[type=url] {
+    background-color: white;
+    position: relative;
+    text-align: left;
+    padding: 20px 12px;
+    border-radius: 3px;
+    margin-top: 9px;
+    border: 1px solid gainsboro;
+}
+
+ul[id^="sub-accordion-section-paddle"] li.customize-control-text label,
+ul[id^="sub-accordion-section-paddle"] li.customize-control-url label {
+    font-weight: normal;
+}
+
+
+
+/* ==========================================================================
+   Element with bottom border
+   ========================================================================== */
+ul[id*="section-paddle_"]  .paddle-last-item {
+	position: relative;
+	margin-bottom: 40px;
+}
+ul[id*="section-paddle_"]  .paddle-last-item::after {
+    content: '';
+    position: absolute;
+    left: -100%;
+    background-color: gainsboro;
+    width: 500%;
+    height: 1px;
+    bottom: -15px;
 }

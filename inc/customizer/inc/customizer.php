@@ -2178,6 +2178,32 @@ class paddle_initialise_customizer_settings {
 		---------------------------------------------------------------------------------------*/
 
 		// Page Layout.
+
+		/* Header options betweens design and general */ 
+		$wp_customize->add_setting(
+			'title_options_blog',
+			array(
+				'default'           => 'general',
+				'sanitize_callback' => 'paddle_radio_sanitization',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Paddle_Option_Buttons_Title_Control(
+				$wp_customize,
+				'title_options_blog',
+				array(
+					'label'       => __( 'General', 'paddle' ),
+					'section'     => 'paddle_post_and_pages',
+					'type'        => 'select',
+					'choices'     => array(
+						'general' => __( 'General', 'paddle' ),
+						'design' => __( 'Design', 'paddle' ),
+					),
+				)
+			)
+		);
+
 		$wp_customize->add_setting(
 			'paddle_sidebar_position',
 			array(
@@ -2193,6 +2219,7 @@ class paddle_initialise_customizer_settings {
 				array(
 					'label'   => __( 'Container Layout', 'paddle' ),
 					'section' => 'paddle_post_and_pages',
+					'active_callback' => 'paddle_blog_general_archive_selected',
 					'choices' => array(
 						'left-sidebar'  => array(
 							'image' => trailingslashit( get_template_directory_uri() ) . 'inc/customizer/images/sidebar-left.png',
@@ -2227,6 +2254,7 @@ class paddle_initialise_customizer_settings {
 				array(
 					'label'       => __( 'Content Width', 'paddle' ),
 					'section'     => 'paddle_post_and_pages',
+					'active_callback' => 'paddle_blog_general_archive_selected',
 					'type'        => 'select',
 					'choices'     => array(
 						'default' => __( 'Default', 'paddle' ),
@@ -2262,6 +2290,22 @@ class paddle_initialise_customizer_settings {
 			)
 		);
 
+		// Header
+		$wp_customize->add_setting( 'paddle_blog_section_header_1',
+			array(
+				'transport' => 'postMessage',
+				'sanitize_callback' => 'paddle_text_sanitization'
+			)
+		);
+
+		$wp_customize->add_control( new Paddle_Simple_Header_Title_Control( $wp_customize, 'paddle_blog_section_header_1',
+			array(
+				'label' => __( 'Post Structure', 'paddle' ),
+				'section' => 'paddle_post_and_pages',
+				'active_callback' => 'paddle_blog_general_archive_selected',
+			)
+		) );
+
 			
 		// Remove sidebar from single product page.
 		$wp_customize->add_setting(
@@ -2286,6 +2330,233 @@ class paddle_initialise_customizer_settings {
 			);
 		}
 
+		// Featured Image
+		$wp_customize->add_setting(
+			'enable_blog_featured_image',
+			array(
+				'default'           => $this->defaults['enable_blog_featured_image'],
+				'sanitize_callback' => 'paddle_switch_sanitization',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Paddle_Toggle_Switch_Custom_control_2(
+				$wp_customize,
+				'enable_blog_featured_image',
+				array(
+					'label'       => __( 'Featured Image', 'paddle' ),
+					'section'     => 'paddle_post_and_pages',
+					'active_callback' => 'paddle_blog_general_archive_selected',
+				)
+			)
+		);
+
+
+		// Header for meta
+		$wp_customize->add_setting( 'paddle_blog_section_header_2',
+			array(
+				'transport' => 'postMessage',
+				'sanitize_callback' => 'paddle_text_sanitization'
+			)
+		);
+
+		$wp_customize->add_control( new Paddle_Simple_Header_Title_Control_2( $wp_customize, 'paddle_blog_section_header_2',
+			array(
+				'label' => __( 'Meta', 'paddle' ),
+				'section' => 'paddle_post_and_pages',
+				'active_callback' => 'paddle_blog_general_archive_selected',
+			)
+		) );
+
+
+		// Enable the author bio archive post.
+		$wp_customize->add_setting(
+			'paddle_enable_archive_author_bio',
+			array(
+				'default'           => $this->defaults['paddle_enable_archive_author_bio'],
+				'sanitize_callback' => 'paddle_switch_sanitization',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Paddle_Toggle_Switch_Custom_control_2(
+				$wp_customize,
+				'paddle_enable_archive_author_bio',
+				array(
+					'label'       => __( 'Author', 'paddle' ),
+					'section'     => 'paddle_post_and_pages',
+					'active_callback' => 'paddle_blog_general_archive_selected',
+				)
+			)
+		);
+
+		$wp_customize->add_setting(
+			'paddle_enable_archive_category',
+			array(
+				'default'           => $this->defaults['paddle_enable_archive_category'],
+				'sanitize_callback' => 'paddle_switch_sanitization',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Paddle_Toggle_Switch_Custom_control_2(
+				$wp_customize,
+				'paddle_enable_archive_category',
+				array(
+					'label'       => __( 'Category', 'paddle' ),
+					'section'     => 'paddle_post_and_pages',
+					'active_callback' => 'paddle_blog_general_archive_selected',
+				)
+			)
+		);
+
+		// Enable comment archive post.
+		$wp_customize->add_setting(
+			'paddle_enable_archive_comment',
+			array(
+				'default'           => $this->defaults['paddle_enable_archive_comment'],
+				'sanitize_callback' => 'paddle_switch_sanitization',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Paddle_Toggle_Switch_Custom_control_2(
+				$wp_customize,
+				'paddle_enable_archive_comment',
+				array(
+					'label'       => __( 'Comment', 'paddle' ),
+					'section'     => 'paddle_post_and_pages',
+					'active_callback' => 'paddle_blog_general_archive_selected',
+				)
+			)
+		);
+
+		// Enable published date archive post.
+		$wp_customize->add_setting(
+			'paddle_enable_archive_published_date',
+			array(
+				'default'           => $this->defaults['paddle_enable_archive_published_date'],
+				'sanitize_callback' => 'paddle_switch_sanitization',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Paddle_Toggle_Switch_Custom_control_2(
+				$wp_customize,
+				'paddle_enable_archive_published_date',
+				array(
+					'label'       => __( 'Publish Date', 'paddle' ),
+					'section'     => 'paddle_post_and_pages',
+					'active_callback' => 'paddle_blog_general_archive_selected',
+				)
+			)
+		);
+
+		// Enable tag archive post.
+		$wp_customize->add_setting(
+			'paddle_enable_archive_tag',
+			array(
+				'default'           => $this->defaults['paddle_enable_archive_tag'],
+				'sanitize_callback' => 'paddle_switch_sanitization',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Paddle_Toggle_Switch_Custom_control_2(
+				$wp_customize,
+				'paddle_enable_archive_tag',
+				array(
+					'label'       => __( 'Tag', 'paddle' ),
+					'section'     => 'paddle_post_and_pages',
+					'active_callback' => 'paddle_blog_general_archive_selected',
+				)
+			)
+		);
+
+
+		// Header for meta
+		$wp_customize->add_setting( 'paddle_blog_section_header_3',
+			array(
+				'transport' => 'postMessage',
+				'sanitize_callback' => 'paddle_text_sanitization'
+			)
+		);
+
+		$wp_customize->add_control( new Paddle_Simple_Header_Title_Control_2( $wp_customize, 'paddle_blog_section_header_3',
+			array(
+				'label' => __( 'Post Content', 'paddle' ),
+				'section' => 'paddle_post_and_pages',
+				'active_callback' => 'paddle_blog_general_archive_selected',
+			)
+		) );
+
+			/** Blog Excerpt */
+			$wp_customize->add_setting( 
+				'enable_blog_excerpt', 
+				array(
+					'default'           =>  $this->defaults['enable_blog_excerpt'],
+					'sanitize_callback' => 'paddle_switch_sanitization',
+				) 
+			);
+			
+			$wp_customize->add_control(
+				new Paddle_Toggle_Switch_Custom_control_2( 
+					$wp_customize,
+					'enable_blog_excerpt',
+					array(
+						'section'     => 'paddle_post_and_pages',
+						'label'	      => __( 'Excerpt', 'paddle' ),
+						'active_callback' => 'paddle_blog_general_archive_selected',
+					)
+				)
+			);
+	
+			// Excerpt Length.
+			$wp_customize->add_setting( 
+			'excerpt_length', 
+			array(
+				'default'           =>  $this->defaults['excerpt_length'],
+				'sanitize_callback' => 'absint'
+			) 
+			);
+			
+			$wp_customize->add_control(
+				new Paddle_Slider_Custom_Control( 
+					$wp_customize,
+					'excerpt_length',
+					array(
+						'section'	  => 'paddle_post_and_pages',
+						'label'		  => __( 'Excerpt Length', 'paddle' ),
+						'active_callback' => 'paddle_blog_excerpt_enabled',
+						'input_attrs'	  => array(
+							'min' 	=> 10,
+							'max' 	=> 100,
+							'step'	=> 5,
+						)                 
+					)
+				)
+			);
+			
+			// Read More Text.
+			$wp_customize->add_setting(
+				'read_more_text',
+				array(
+					'default'           => __( 'Continue reading', 'paddle' ),
+					'sanitize_callback' => 'sanitize_text_field'
+				)
+			);
+			
+			$wp_customize->add_control(
+				'read_more_text',
+				array(
+					'type'    => 'text',
+					'section' => 'paddle_post_and_pages',
+					'active_callback' => 'paddle_blog_excerpt_enabled',
+					'label'   => __( 'Read More Text', 'paddle' ),
+				)
+			);
+
+
 		// Toggle layout.
 		$wp_customize->add_setting(
 			'post_archive_layout',
@@ -2300,9 +2571,10 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'post_archive_layout',
 				array(
-					'label'       => __( 'Blog Achieve Layout', 'paddle' ),
+					'label'       => __( 'Blog Archive Layout', 'paddle' ),
 					'section'     => 'paddle_post_and_pages',
 					'type'        => 'select',
+					'active_callback' => 'paddle_blog_design_archive_selected',
 					'description' => __( 'Toggle post layout for category page, achieve page, tag page. This layout also applies to homepage.', 'paddle' ),
 					'choices'     => array(
 						'grid' => __( 'Grid', 'paddle' ),
@@ -2328,8 +2600,9 @@ class paddle_initialise_customizer_settings {
 				array(
 					'label'           => __( 'Achieve Columns', 'paddle' ),
 					'section'         => 'paddle_post_and_pages',
+					'active_callback' => 'paddle_blog_design_archive_selected',
 					'type'            => 'select',
-					'active_callback' => 'paddle_grid_selected',
+					'active_callback' => 'paddle_blog_design_archive_selected_grid_selected',
 					'choices'         => array(
 						'2-columns' => __( '2 Columns', 'paddle' ),
 						'3-columns' => __( '3 Columns', 'paddle' ),
@@ -2354,7 +2627,29 @@ class paddle_initialise_customizer_settings {
 				array(
 					'label'           => __( 'Image before site title', 'paddle' ),
 					'section'         => 'paddle_post_and_pages',
-					'active_callback' => 'paddle_grid_selected',
+					'active_callback' => 'paddle_blog_design_archive_selected_grid_selected',
+				)
+			)
+		);
+
+		// Single Blog Post
+		// Enable the author bio.
+		$wp_customize->add_setting(
+			'paddle_enable_author_bio',
+			array(
+				'default'           => $this->defaults['paddle_enable_author_bio'],
+				'sanitize_callback' => 'paddle_switch_sanitization',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Paddle_Toggle_Switch_Custom_control_2(
+				$wp_customize,
+				'paddle_enable_author_bio',
+				array(
+					'label'       => __( 'Author', 'paddle' ),
+					'section'     => 'paddle_post_and_pages',
+					'active_callback' => 'paddle_blog_design_archive_selected',
 				)
 			)
 		);
@@ -2375,7 +2670,7 @@ class paddle_initialise_customizer_settings {
 				array(
 					'label'           => __( 'Same Height Image (Grid)', 'paddle' ),
 					'section'         => 'paddle_post_and_pages',
-					'active_callback' => 'paddle_grid_selected',
+					'active_callback' => 'paddle_blog_design_archive_selected_grid_selected',
 				)
 			)
 		);
@@ -2396,7 +2691,7 @@ class paddle_initialise_customizer_settings {
 				array(
 					'label'           => __( 'Expand Grid Image', 'paddle' ),
 					'section'         => 'paddle_post_and_pages',
-					'active_callback' => 'paddle_grid_selected',
+					'active_callback' => 'paddle_blog_design_archive_selected_grid_selected',
 				)
 			)
 		);
@@ -2417,7 +2712,7 @@ class paddle_initialise_customizer_settings {
 				array(
 					'label'           => __( 'Use placeholder image', 'paddle' ),
 					'section'         => 'paddle_post_and_pages',
-					'active_callback' => 'paddle_grid_selected',
+					'active_callback' => 'paddle_blog_design_archive_selected_grid_selected',
 				)
 			)
 		);
@@ -2438,28 +2733,8 @@ class paddle_initialise_customizer_settings {
 				array(
 					'label'       => __( 'Hide Footer Meta', 'paddle' ),
 					'section'     => ( 'paddle_post_and_pages' ),
+					'active_callback' => 'paddle_blog_design_archive_selected',
 					'description' => __( 'Hide tag and category links on category page and achieve page.', 'paddle' ),
-				)
-			)
-		);
-
-		// Enable the author bio.
-		$wp_customize->add_setting(
-			'paddle_enable_author_bio',
-			array(
-				'default'           => $this->defaults['paddle_enable_author_bio'],
-				'sanitize_callback' => 'paddle_switch_sanitization',
-			)
-		);
-
-		$wp_customize->add_control(
-			new Paddle_Toggle_Switch_Custom_control(
-				$wp_customize,
-				'paddle_enable_author_bio',
-				array(
-					'label'       => __( 'Enable author link info', 'paddle' ),
-					'description' => __( 'Hide or show author link in single post after the title', 'paddle' ),
-					'section'     => 'paddle_post_and_pages',
 				)
 			)
 		);
@@ -2503,6 +2778,7 @@ class paddle_initialise_customizer_settings {
 				array(
 					'label'   => __( 'Page / Post Title Header, Meta & Description', 'paddle' ),
 					'section' => 'paddle_post_and_pages',
+					'active_callback' => 'paddle_blog_design_archive_selected',
 					'type'    => 'select',
 					'choices' => array(
 						'left'   => __( 'Left', 'paddle' ),
@@ -2528,6 +2804,7 @@ class paddle_initialise_customizer_settings {
 				array(
 					'label'           => __( 'Post Featured Image Size', 'paddle' ),
 					'section'         => 'paddle_post_and_pages',
+					'active_callback' => 'paddle_blog_design_archive_selected',
 					'type'            => 'select',
 					'choices'         => array(
 						'paddle-small-thumb' => __( '480 x 360', 'paddle' ),
@@ -2558,6 +2835,7 @@ class paddle_initialise_customizer_settings {
 				array(
 					'label'   => __( 'Post thumbnail position', 'paddle' ),
 					'section' => 'paddle_post_and_pages',
+					'active_callback' => 'paddle_blog_design_archive_selected',
 					'type'    => 'select',
 					'choices' => array(
 						'left'   => __( 'Left', 'paddle' ),
@@ -2583,6 +2861,7 @@ class paddle_initialise_customizer_settings {
 				array(
 					'label'           => __( 'Image caption width', 'paddle' ),
 					'section'         => 'paddle_post_and_pages',
+					'active_callback' => 'paddle_blog_design_archive_selected',
 					'type'            => 'select',
 					'choices'         => array(
 						'inherit' => __( 'Full' ),
@@ -2619,70 +2898,7 @@ class paddle_initialise_customizer_settings {
 			)
 		);
 
-		/** Blog Excerpt */
-		$wp_customize->add_setting( 
-			'enable_blog_excerpt', 
-			array(
-				'default'           =>  $this->defaults['enable_blog_excerpt'],
-				'sanitize_callback' => 'paddle_switch_sanitization',
-			) 
-		);
-		
-		$wp_customize->add_control(
-			new Paddle_Toggle_Switch_Custom_control( 
-				$wp_customize,
-				'enable_blog_excerpt',
-				array(
-					'section'     => 'paddle_post_and_pages',
-					'label'	      => __( 'Enable Blog Excerpt.', 'paddle' ),
-					'description' => __( 'Enable to show excerpt on posts and home page. Category and Home Page (ONLY)', 'paddle' ),
-				)
-			)
-		);
-
-		// Excerpt Length.
-		$wp_customize->add_setting( 
-		'excerpt_length', 
-		array(
-			'default'           =>  $this->defaults['excerpt_length'],
-			'sanitize_callback' => 'absint'
-		) 
-		);
-		
-		$wp_customize->add_control(
-			new Paddle_Slider_Custom_Control( 
-				$wp_customize,
-				'excerpt_length',
-				array(
-					'section'	  => 'paddle_post_and_pages',
-					'label'		  => __( 'Excerpt Length', 'paddle' ),
-					'description' => __( 'Automatically generated excerpt length (in words).', 'paddle' ),
-					'input_attrs'	  => array(
-						'min' 	=> 10,
-						'max' 	=> 100,
-						'step'	=> 5,
-					)                 
-				)
-			)
-		);
-		
-		// Read More Text.
-		$wp_customize->add_setting(
-			'read_more_text',
-			array(
-				'default'           => __( 'Continue reading', 'paddle' ),
-				'sanitize_callback' => 'sanitize_text_field'
-			)
-		);
-		
-		$wp_customize->add_control(
-			'read_more_text',
-			array(
-				'type'    => 'text',
-				'section' => 'paddle_post_and_pages',
-				'label'   => __( 'Read More Text', 'paddle' ),
-			)
-		);
+	
 
 		// Bootstrap CSS
 		$wp_customize->add_setting(

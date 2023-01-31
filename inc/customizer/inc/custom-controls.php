@@ -53,7 +53,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 */
 		public function render_content() {
 			?>
-			<div class="image_radio_button_control paddle-section-spacing">
+			<div class="image_radio_button_control paddle-section-spacing paddle-item">
 				<?php if ( ! empty( $this->label ) ) { ?>
 					<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
 				<?php } ?>
@@ -95,7 +95,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 */
 		public function render_content() {
 			?>
-			<div class="text_radio_button_control">
+			<div class="text_radio_button_control  paddle-item">
 				<?php if ( ! empty( $this->label ) ) { ?>
 					<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
 				<?php } ?>
@@ -137,7 +137,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 */
 		public function render_content() {
 			?>
-			<div class="text_radio_button_control option_radio_button_control">
+			<div class="text_radio_button_control option_radio_button_control  paddle-item">
 				<label></label>
 				<?php if ( ! empty( $this->label ) ) { ?>
 					<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
@@ -149,6 +149,50 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 				<div class="input-wrapper paddle-control-wrapper option-radio-button">
 					<?php foreach ( $this->choices as $key => $value ) { ?>
 						<label class="radio-button-label radio-button-option">
+							<input type="radio" name="<?php echo esc_attr( $this->id ); ?>" value="<?php echo esc_attr( $key ); ?>" <?php $this->link(); ?> <?php checked( esc_attr( $key ), $this->value() ); ?>/>
+							<span><?php echo esc_html( $value ); ?></span>
+						</label>
+					<?php	} ?>
+				</div>
+
+			</div>
+			<?php
+		}
+	}
+
+	/**
+	 * Option buttons - use this to show header title and switch between options
+	 */
+	class Paddle_Option_Buttons_Title_Control extends Paddle_Custom_Control {
+		/**
+		 * The type of control being rendered
+		 */
+		public $type = 'option_radio_button_title';
+
+		/**
+		 * Enqueue our scripts and styles
+		 */
+		public function enqueue() {
+			wp_enqueue_style( 'paddle-custom-controls-css', $this->get_paddle_resource_url() . 'inc/customizer/css/customizer.css', array(), '1.0.4', 'all' );
+		}
+
+		/**
+		 * Render the control in the customizer
+		 */
+		public function render_content() {
+			?>
+			<div class="text_radio_button_control option_radio_button_title_control  paddle-item">
+				<label></label>
+				<?php if ( ! empty( $this->label ) ) { ?>
+					<span class="customize-control-title"></span>
+				<?php } ?>
+				<?php if ( ! empty( $this->description ) ) { ?>
+					<span class="customize-control-description"><?php echo esc_html( $this->description ); ?></span>
+				<?php } ?>
+
+				<div class="input-wrapper paddle-control-wrapper option-radio-button">
+					<?php foreach ( $this->choices as $key => $value ) { ?>
+						<label class="radio-button-label radio-button-option option-button-title">
 							<input type="radio" name="<?php echo esc_attr( $this->id ); ?>" value="<?php echo esc_attr( $key ); ?>" <?php $this->link(); ?> <?php checked( esc_attr( $key ), $this->value() ); ?>/>
 							<span><?php echo esc_html( $value ); ?></span>
 						</label>
@@ -180,7 +224,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 */
 		public function render_content() {
 			?>
-			<div class="image_checkbox_control">
+			<div class="image_checkbox_control  paddle-item">
 				<?php if ( ! empty( $this->label ) ) { ?>
 					<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
 				<?php } ?>
@@ -221,7 +265,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		public function render_content() {
 			?>
 			
-			<div class="slider-custom-control">
+			<div class="slider-custom-control  paddle-item">
 				<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
 				<span class="opacity-image"></span>
 				<input type="number" id="<?php echo esc_attr( $this->id ); ?>" name="<?php echo esc_attr( $this->id ); ?>" value="<?php echo esc_attr( $this->value() ); ?>" class="customize-control-slider-value" <?php $this->link(); ?> />
@@ -252,7 +296,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 */
 		public function render_content() {
 			?>
-			<div class="slider-custom-control">
+			<div class="slider-custom-control  paddle-item">
 				<?php if ( ! empty( $this->description ) ) { ?>
 					<span class="paddle-label customize-control-description"><?php echo esc_html( $this->description ); ?></span>
 				<?php } ?>
@@ -282,7 +326,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 */
 		public function render_content() {
 			?>
-			<div class="toggle-switch-control">
+			<div class="toggle-switch-control  paddle-item">
 				<div class="toggle-switch">
 					<input type="checkbox" id="<?php echo esc_attr( $this->id ); ?>" name="<?php echo esc_attr( $this->id ); ?>" class="toggle-switch-checkbox" value="<?php echo esc_attr( $this->value() ); ?>" 
 														  <?php
@@ -293,6 +337,50 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 					<label class="toggle-switch-label" for="<?php echo esc_attr( $this->id ); ?>">
 						<span class="toggle-switch-inner"></span>
 						<span class="toggle-switch-switch"></span>
+					</label>
+				</div>
+				<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
+				<?php if ( ! empty( $this->description ) ) { ?>
+					<span class="customize-control-description"><?php echo esc_html( $this->description ); ?></span>
+				<?php } ?>
+			</div>
+			<?php
+		}
+	}
+
+	/**
+	 * Toggle Switch Custom Control
+	 */
+	class Paddle_Toggle_Switch_Custom_control_2 extends Paddle_Custom_Control {
+		/**
+		 * The type of control being rendered
+		 */
+		public $type = 'toggle_switch_2';
+		/**
+		 * Enqueue our scripts and styles
+		 */
+		public function enqueue() {
+			wp_enqueue_style( 'paddle-custom-controls-css', $this->get_paddle_resource_url() . 'inc/customizer/css/customizer.css', array(), '1.1.0', 'all' );
+		}
+		/**
+		 * Render the control in the customizer
+		 */
+		public function render_content() {
+			?>
+			<div class="toggle-switch-control toggle-switch-control-v2  paddle-item">
+				<div class="toggle-switch">
+					<input type="checkbox" id="<?php echo esc_attr( $this->id ); ?>" name="<?php echo esc_attr( $this->id ); ?>" class="toggle-switch-checkbox" value="<?php echo esc_attr( $this->value() ); ?>" 
+														  <?php
+															$this->link();
+															checked( $this->value() );
+															?>
+					>
+					<label class="toggle-switch-label" for="<?php echo esc_attr( $this->id ); ?>">
+						<span class="toggle-switch-inner toggle-switch-inner-v2">
+						</span>
+						<span class="toggle-switch-switch">
+							<i class="dashicons dashicons-visibility"></i>
+						</span>
 					</label>
 				</div>
 				<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
@@ -343,6 +431,94 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 			<div class="simple-notice-custom-control">
 				<?php if( !empty( $this->label ) ) { ?>
 					<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
+				<?php } ?>
+				<?php if( !empty( $this->description ) ) { ?>
+					<span class="customize-control-description"><?php echo wp_kses( $this->description, $allowed_html ); ?></span>
+				<?php } ?>
+			</div>
+		<?php
+		}
+	}
+
+	/**
+	 * Simple Header Title Custom Control
+	 * This control shows header label
+	 */
+	class Paddle_Simple_Header_Title_Control extends Paddle_Custom_Control {
+		/**
+		 * The type of control being rendered
+		 */
+		public $type = 'simple_header_title';
+		/**
+		 * Render the control in the customizer
+		 */
+		public function render_content() {
+			$allowed_html = array(
+				'a' => array(
+					'href' => array(),
+					'title' => array(),
+					'class' => array(),
+					'target' => array(),
+				),
+				'br' => array(),
+				'em' => array(),
+				'strong' => array(),
+				'i' => array(
+					'class' => array()
+				),
+				'span' => array(
+					'class' => array(),
+				),
+				'code' => array(),
+			);
+		?>
+			<div class="simple-notice-custom-control">
+				<?php if( !empty( $this->label ) ) { ?>
+					<span class="customize-control-title paddle-simple-header-title"><?php echo esc_html( $this->label ); ?></span>
+				<?php } ?>
+				<?php if( !empty( $this->description ) ) { ?>
+					<span class="customize-control-description"><?php echo wp_kses( $this->description, $allowed_html ); ?></span>
+				<?php } ?>
+			</div>
+		<?php
+		}
+	}
+
+	/**
+	 * Simple Header Title Custom Control
+	 * This control shows header label
+	 */
+	class Paddle_Simple_Header_Title_Control_2 extends Paddle_Custom_Control {
+		/**
+		 * The type of control being rendered
+		 */
+		public $type = 'simple_header_title_2';
+		/**
+		 * Render the control in the customizer
+		 */
+		public function render_content() {
+			$allowed_html = array(
+				'a' => array(
+					'href' => array(),
+					'title' => array(),
+					'class' => array(),
+					'target' => array(),
+				),
+				'br' => array(),
+				'em' => array(),
+				'strong' => array(),
+				'i' => array(
+					'class' => array()
+				),
+				'span' => array(
+					'class' => array(),
+				),
+				'code' => array(),
+			);
+		?>
+			<div class="simple-notice-custom-control">
+				<?php if( !empty( $this->label ) ) { ?>
+					<span class="customize-control-title paddle-simple-header-title-2"><?php echo esc_html( $this->label ); ?></span>
 				<?php } ?>
 				<?php if( !empty( $this->description ) ) { ?>
 					<span class="customize-control-description"><?php echo wp_kses( $this->description, $allowed_html ); ?></span>
@@ -436,7 +612,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 */
 		public function render_content() {
 			?>
-		  <div class="sortable_repeater_control">
+		  <div class="sortable_repeater_control  paddle-item">
 				<?php if ( ! empty( $this->label ) ) { ?>
 					<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
 				<?php } ?>
@@ -973,6 +1149,97 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		function paddle_custom_content_selected( $control ) {
 
 			if ( 'custom' === $control->manager->get_setting( 'custom_container' )->value() ) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+	endif;
+
+	if ( ! function_exists( 'paddle_blog_excerpt_enabled' ) ) :
+
+		/**
+		 * Check if excerpt is enable.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param WP_Customize_Control $control WP_Customize_Control instance.
+		 *
+		 * @return bool Whether the control is active to the current preview.
+		 */
+		function paddle_blog_excerpt_enabled( $control ) {
+
+			if ( 1 === $control->manager->get_setting( 'enable_blog_excerpt' )->value() ) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+	endif;
+
+	if ( ! function_exists( 'paddle_blog_design_archive_selected' ) ) :
+
+		/**
+		 * Check if blog design section is selected
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param WP_Customize_Control $control WP_Customize_Control instance.
+		 *
+		 * @return bool Whether the control is active to the current preview.
+		 */
+		function paddle_blog_design_archive_selected( $control ) {
+
+			if ( 'design' === $control->manager->get_setting( 'title_options_blog' )->value() ) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+	endif;
+
+	if ( ! function_exists( 'paddle_blog_design_archive_selected_grid_selected' ) ) :
+
+		/**
+		 * Check if blog design section is selected and grid layout selected
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param WP_Customize_Control $control WP_Customize_Control instance.
+		 *
+		 * @return bool Whether the control is active to the current preview.
+		 */
+		function paddle_blog_design_archive_selected_grid_selected( $control ) {
+
+			if ( 'design' === $control->manager->get_setting( 'title_options_blog' )->value() 
+				&& 'grid' === $control->manager->get_setting( 'post_archive_layout' )->value()) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+	endif;
+
+
+
+	if ( ! function_exists( 'paddle_blog_general_archive_selected' ) ) :
+
+		/**
+		 * Check if blog general section is selected
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param WP_Customize_Control $control WP_Customize_Control instance.
+		 *
+		 * @return bool Whether the control is active to the current preview.
+		 */
+		function paddle_blog_general_archive_selected( $control ) {
+
+			if ( 'general' === $control->manager->get_setting( 'title_options_blog' )->value() ) {
 				return true;
 			} else {
 				return false;
