@@ -2280,7 +2280,7 @@ class paddle_initialise_customizer_settings {
 				array(
 					'section'	      => 'paddle_post_and_pages',
 					'label'		      => __( 'Custom Width', 'paddle' ),
-					'active_callback' => 'paddle_custom_content_selected',
+					'active_callback' => 'paddle_blog_general_archive_selected_custom_width_enabled',
 					'input_attrs'	  => array(
 						'min' 	=> 300,
 						'max' 	=> 1900,
@@ -2527,7 +2527,7 @@ class paddle_initialise_customizer_settings {
 					array(
 						'section'	  => 'paddle_post_and_pages',
 						'label'		  => __( 'Excerpt Length', 'paddle' ),
-						'active_callback' => 'paddle_blog_excerpt_enabled',
+						'active_callback' => 'paddle_blog_general_archive_selected_excerpt_enabled',
 						'input_attrs'	  => array(
 							'min' 	=> 10,
 							'max' 	=> 100,
@@ -2551,7 +2551,7 @@ class paddle_initialise_customizer_settings {
 				array(
 					'type'    => 'text',
 					'section' => 'paddle_post_and_pages',
-					'active_callback' => 'paddle_blog_excerpt_enabled',
+					'active_callback' => 'paddle_blog_general_archive_selected_excerpt_enabled',
 					'label'   => __( 'Read More Text', 'paddle' ),
 				)
 			);

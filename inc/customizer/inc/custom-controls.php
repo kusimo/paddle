@@ -1248,4 +1248,51 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 
 	endif;
 
+
+	if ( ! function_exists( 'paddle_blog_general_archive_selected_excerpt_enabled' ) ) :
+
+		/**
+		 * Check if blog general section is selected and excerpt is enabled
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param WP_Customize_Control $control WP_Customize_Control instance.
+		 *
+		 * @return bool Whether the control is active to the current preview.
+		 */
+		function paddle_blog_general_archive_selected_excerpt_enabled( $control ) {
+
+			if ( 'general' === $control->manager->get_setting( 'title_options_blog' )->value() 
+				&& 1 === $control->manager->get_setting( 'enable_blog_excerpt' )->value()) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+	endif;
+
+	if ( ! function_exists( 'paddle_blog_general_archive_selected_custom_width_enabled' ) ) :
+
+		/**
+		 * Check if blog general section is selected and custom width is enable is enabled
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param WP_Customize_Control $control WP_Customize_Control instance.
+		 *
+		 * @return bool Whether the control is active to the current preview.
+		 */
+		function paddle_blog_general_archive_selected_custom_width_enabled( $control ) {
+
+			if ( 'general' === $control->manager->get_setting( 'title_options_blog' )->value() 
+				&& 'custom' === $control->manager->get_setting( 'custom_container' )->value()) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+	endif;
+
 }
