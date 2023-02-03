@@ -69,12 +69,25 @@ if ( ! function_exists( 'paddle_enqueue_scripts' ) ) :
 			wp_enqueue_script( 'paddle-bootstrap-scripts', get_template_directory_uri() . '/js/bootstrap5/bootstrap.min.js', array(), '5.1', true );
 		}
 
+		// Load theme JS
+		wp_enqueue_script( 'paddle-script', get_template_directory_uri() . '/js/theme.min.js', array(), filemtime( get_template_directory( __FILE__ ) . '/js/theme.min.js' ), true );
 
-		if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
+
+		if ( is_singular() && comments_open() && get_option( 'thread_comments' ) || get_comments_number() ) {
 			//comment CSS
 			wp_enqueue_style( 'paddle-theme-comments', get_template_directory_uri() . '/css/comments.css', array(), PADDLE_DEV_VERSION );
 			wp_style_add_data( 'paddle-theme-comments', 'rtl', 'replace' );
 			wp_enqueue_script( 'comment-reply' );
+		}
+
+		// Load gallery CSS only on post that has gallery
+		if ( paddle_load_ondemand_css(false, 'block-gallery') || paddle_load_ondemand_css(false, '[gallery')) {
+			wp_enqueue_style( 'paddle-gallery-style', get_template_directory_uri() . '/css/gallery.css', array(), PADDLE_DEV_VERSION );
+		}
+
+		// Load custom block CSS
+		if ( paddle_load_ondemand_css(false, 'wp-block-')) {
+			wp_enqueue_style( 'paddle-block-style', get_template_directory_uri() . '/css/custom-block.css', array(), PADDLE_DEV_VERSION );
 		}
 	}
 endif;

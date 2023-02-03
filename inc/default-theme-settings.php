@@ -44,7 +44,7 @@ if ( ! function_exists( 'paddle_generate_defaults' ) ) {
 			'search_menu_icon'              => 0,
 			'woocommerce_shop_sidebar'      => 1,
 			'woocommerce_product_sidebar'   => 0,
-			'paddle_header_layout_style'    => 'logo-left-style-2',
+			'paddle_header_layout_style'    => 'paddle-header-1',
 			'paddle_typography_preset'      => 'system-font',
 			'paddle_header_search_button'   => 1,
 			'paddle_header_cta'             => 0,
@@ -120,13 +120,21 @@ if ( ! function_exists( 'paddle_generate_defaults' ) ) {
 			'header_banner_description'		=> 'Go Forward and Conquer',
 			'paddle_grid_columns'			=> '2-columns',
 			'paddle_enable_author_bio'		=> 1,
-			'paddle_enable_archive_author_bio'		=> 1,
+			'paddle_enable_archive_author'		=> 1,
 			'paddle_enable_archive_category'		=> 1,
 			'paddle_enable_archive_comment' => 0,
 			'paddle_enable_archive_tag' => 0,
 			'paddle_enable_archive_published_date' => 0,
 			'header_menu_padding'			=> 18,
 			'menu_item_margin'			    => 16,
+			'paddle_enable_blog_author'		=> 1,
+			'paddle_enable_blog_author_bio'		=> 0,
+			'paddle_enable_blog_category'		=> 1,
+			'paddle_enable_blog_comment' => 0,
+			'paddle_enable_blog_tag' => 0,
+			'paddle_enable_blog_published_date' => 1,
+			'paddle_enable_blog_updated_date' => 1,
+			'paddle_blog_date_position' => 'before',
 			'menu_border_top'				=> 1,
 			'use_default_banner_image'      => 1,
 			'paddle_thumbnail_size'			=> 'paddle-featured-image',
@@ -136,7 +144,7 @@ if ( ! function_exists( 'paddle_generate_defaults' ) ) {
 			'enable_blog_excerpt'			=> 1,
 			'enable_image_before_site_title' => 1,
 			'enable_same_height_image'      => 1,
-			'enable_blog_featured_image'      => 1,
+			'enable_archive_featured_image'      => 1,
 			'banner_button_align'			=> 'right',
 			'banner_button_transform'		=> 'uppercase',
 			'paddle_placeholder_image'      => 0,
@@ -147,7 +155,10 @@ if ( ! function_exists( 'paddle_generate_defaults' ) ) {
 			'use_bootstrap_js'				=> 0,
 			'header_cta_padding_left'		=> 0,
 			'paddle_theme_content_width'	=> 1200,
-			'custom_container'				=> 'default'
+			'custom_container'				=> 'default',
+			'placeholder_text_posted_on' => 'Posted on',
+			'placeholder_text_updated_on' => 'Updated on',
+			'paddle_theme_button_global' => 'bordered,rounded',
 		);
 
 		return apply_filters( 'paddle_customizer_defaults', $customizer_defaults );
@@ -214,6 +225,8 @@ if ( ! function_exists( 'paddle_static_header_css' ) ) {
 			--paddle-color-3 : '.$paddle_theme_color_body_text.';
 			--paddle-color-4 : '.$paddle_theme_color_border.'; 
 			--paddle-color-accent : '.$primary_color.'; 
+			--paddle-color-5: #FFFFFF;
+  			--paddle-color-6: #f1f1f1;
 
 			--paddle-font-body-family: '. $font_family .';
 			--paddle-font-body-size: '. $body_font_size .'px;';

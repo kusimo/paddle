@@ -29,18 +29,8 @@ function paddle_body_classes( $classes ) {
 	}
 
 	// Add header layout option
-	if ( 'logo-left' === get_theme_mod( 'paddle_header_layout_style', PADDLE_DEFAULT_OPTION['paddle_header_layout_style'] ) ) {
-		$classes[] = 'logo-left';
-	}
-	if ( 'logo-right' === get_theme_mod( 'paddle_header_layout_style', PADDLE_DEFAULT_OPTION['paddle_header_layout_style']  ) ) {
-		$classes[] = 'logo-right';
-	}
-	if ( 'logo-center' === get_theme_mod( 'paddle_header_layout_style', PADDLE_DEFAULT_OPTION['paddle_header_layout_style']  ) ) {
-		$classes[] = 'logo-center';
-	}
-	if ( 'logo-with-search' === get_theme_mod( 'paddle_header_layout_style', PADDLE_DEFAULT_OPTION['paddle_header_layout_style']  ) ) {
-		$classes[] = 'logo-with-search';
-	}
+	$paddle_current_header_style = get_theme_mod( 'paddle_header_layout_style', PADDLE_DEFAULT_OPTION['paddle_header_layout_style'] );
+	$classes[] = $paddle_current_header_style;
 
 	// Add sidebar classes.
 	if ( 'left-sidebar' === get_theme_mod( 'paddle_sidebar_position', PADDLE_DEFAULT_OPTION['paddle_sidebar_position'] ) && 1 === get_theme_mod( 'paddle_page_layout_sidebar' ) ) {
@@ -54,9 +44,34 @@ function paddle_body_classes( $classes ) {
 		}
 	}
 
+	// Date updated.
+	if ( 0 === get_theme_mod( 'paddle_enable_blog_updated_date', PADDLE_DEFAULT_OPTION['paddle_enable_blog_updated_date']  ) ) {
+		$classes[] = 'hide-time-upd';
+	}
+	if ( 0 === get_theme_mod( 'paddle_enable_blog_published_date', PADDLE_DEFAULT_OPTION['paddle_enable_blog_published_date']  ) ) {
+		$classes[] = 'hide-time-pub';
+	}
+
 	return $classes;
 }
 add_filter( 'body_class', 'paddle_body_classes' );
+
+/**
+ * Adds custom classes to the array of post classes.
+ *
+ * @param  array $classes Classes for the post element.
+ * @return array
+ */
+
+ function paddle_post_classes( $classes ) {
+	if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
+		$classes[] = 'post-modified';
+	} else {
+		$classes[] = 'post-not-modified';
+	}
+	return $classes;
+ }
+ add_filter( 'post_class','paddle_post_classes' );
 
 /**
  * Add a pingback url auto-discovery header for single posts, pages, or attachments.

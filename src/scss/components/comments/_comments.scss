@@ -95,7 +95,11 @@ footer.comment-meta {
   float: left;
   a {
     color: currentColor;
+    &.comment-edit-link {
+      color: var(--paddle-color-1);
+    }
   }
+  
 }
 .comment-content {
   margin: 1rem 0 0;
@@ -161,6 +165,19 @@ ol.comment-list,
   }
   li:last-child> article {
     border-bottom: none;
+  }
+}
+
+ol.comment-list {
+  li.trackback {
+    .comment-body {
+      margin-bottom: 5px;
+    }
+  }
+  li.pingback {
+    .comment-body {
+      margin-bottom: 5px;
+    }
   }
 }
 

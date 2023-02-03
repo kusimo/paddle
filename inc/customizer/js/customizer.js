@@ -401,7 +401,6 @@ jQuery( document ).ready(function($) {
 		if (itemToFind.length > 0) {
 			let lastElement = [...document.querySelectorAll(items)].pop()
 			lastElement.classList.add(classNameToAdd);
-			console.log(lastElement)
 		}
 	}
 
@@ -416,6 +415,47 @@ jQuery( document ).ready(function($) {
 	})
 
 	//addClassToLastItem('.customize-control-toggle_switch_2', 'paddle-last-item')
+
+	// Builder preview
+	let buttonPreviewHeader = document.querySelector('#accordion-section-paddle_theme_button_section');
+	let buttonPreviewBack = document.querySelector('#sub-accordion-section-paddle_theme_button_section .customize-section-back')
+	if(buttonPreviewHeader) {
+		buttonPreviewHeader.addEventListener('click', () => {
+			let parentContainer = document.querySelector('#sub-accordion-section-paddle_theme_button_section');
+			let container = parentContainer.querySelector('.sample-container');
+			let customizerPreviewContainer = document.getElementById('customize-preview');
+			
+			if(container) {
+				setTimeout(() => {
+					customizerPreviewContainer.style.bottom = container.clientHeight+'px';
+					customizerPreviewContainer.style.height = 'auto';
+					customizerPreviewContainer.style.marginBottom = '-1px';
+				},200)
+	
+				setTimeout(() => {
+					container.style.transform = 'translateY(0%)';
+				},100)
+			}
+			
+		})
+	}
+
+	if(buttonPreviewBack) {
+		buttonPreviewBack.addEventListener('click', () => {
+			let parentContainer = document.querySelector('#sub-accordion-section-paddle_theme_button_section');
+			let container = parentContainer.querySelector('.sample-container');
+			let customizerPreviewContainer = document.getElementById('customize-preview');
+
+			if (container ) {
+				customizerPreviewContainer.style.bottom = '0';
+			
+				setTimeout(() => {
+					container.style.transform = 'translateY(100%)';
+				},100)
+			}
+			
+		})
+	}
 
 });
 

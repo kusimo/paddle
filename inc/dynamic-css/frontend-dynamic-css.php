@@ -67,12 +67,39 @@ function paddle_frontend_css($dynamic_css)
 	$banner_button_transform                 = get_theme_mod('banner_button_transform', PADDLE_DEFAULT_OPTION['banner_button_transform']);
 	$paddle_caption_width 					 = get_theme_mod('paddle_caption_width', PADDLE_DEFAULT_OPTION['paddle_caption_width']);
 	$paddle_thumbnail_alignment				 = get_theme_mod('paddle_thumbnail_alignment', PADDLE_DEFAULT_OPTION['paddle_thumbnail_alignment']);
-	$paddle_header_style                     = get_theme_mod('paddle_header_layout_style', PADDLE_DEFAULT_OPTION['paddle_header_layout_style'], 'logo-left-style-2');
+	$paddle_header_style                     = get_theme_mod('paddle_header_layout_style', PADDLE_DEFAULT_OPTION['paddle_header_layout_style']);
 	// Content width
 	$page_layout = get_theme_mod( 'container_width', PADDLE_DEFAULT_OPTION['paddle_theme_content_width'] );
 	$custom_width = get_theme_mod( 'custom_container', PADDLE_DEFAULT_OPTION['custom_container'] );
 
+	// Time / Date
+	$hide_time_post_updated = absint(get_theme_mod('paddle_enable_blog_updated_date', PADDLE_DEFAULT_OPTION['paddle_enable_blog_updated_date']));
+	$hide_time_post_published = absint(get_theme_mod('paddle_enable_blog_published_date', PADDLE_DEFAULT_OPTION['paddle_enable_blog_published_date']));
+	$published_placeholder_text = get_theme_mod('placeholder_text_posted_on', PADDLE_DEFAULT_OPTION['placeholder_text_posted_on']);
+	$updated_placeholder_text = get_theme_mod('placeholder_text_updated_on', PADDLE_DEFAULT_OPTION['placeholder_text_updated_on']);
+
 	$css = '';
+
+	if ( 0 === $hide_time_post_updated ) {
+		$css .= 'body.single-post.hide-time-upd time.updated {display: none} ';
+	}
+	if ( 0 === $hide_time_post_published ) {
+		$css .= 'body.single-post.hide-time-pub time.published {display: none}';
+	}
+
+	// Check for when post have never been updated
+	if ( 1 === $hide_time_post_updated && 0 === $hide_time_post_published ) {
+		$css .= 'body.single-post .post-not-modified time.published {display: inline-block!important}';
+	}
+
+	// published.updated
+	if ( 0 === $hide_time_post_updated && 1 === $hide_time_post_published ) {
+		$css .= 'body.single-post .post-not-modified time.published.updated {display: inline-block!important}';
+	}
+
+	$css .= 'time.entry-date.published::before { content: "'.$published_placeholder_text.'"}';
+	$css .= 'time.updated::before { content: "'.$updated_placeholder_text.'"}';
+
 
 	$css .= '.container.paddle-body-container { max-width: var(--paddle-page-width)}';
 

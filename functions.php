@@ -475,6 +475,19 @@ function paddle_resource_hints($urls, $relation_type)
 }
 add_filter('wp_resource_hints', 'paddle_resource_hints', 10, 2);
 
+/**
+ * Check if post is using gallery before adding gallery CSS
+ */
+function paddle_load_ondemand_css($post_id = false, $search_string ='') {
+    if (!$post_id) {
+        global $post;
+    } else {
+        $post = get_post($post_id);
+    }
+	if('' === $search_string) return false;
+    return ( strpos($post->post_content,$search_string) !== false ); 
+}
+
 /*
 * Include our Customizer settings.
 */

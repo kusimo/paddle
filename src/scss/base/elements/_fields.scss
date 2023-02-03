@@ -37,3 +37,10 @@ select {
 textarea {
 	width: 100%;
 }
+label>input { margin-bottom: 9px; }
+@media (min-width:768px) {
+	label>input {
+		max-width:60%;
+	}
+}
+

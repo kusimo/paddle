@@ -27,7 +27,7 @@ if ( ! function_exists( 'paddle_posted_on' ) ) :
 
 		$posted_on = sprintf(
 		/* translators: %s: post date. */
-			esc_html_x( 'Posted on %s', 'post date', 'paddle' ),
+			esc_html_x( '%s', 'post date', 'paddle' ),
 			'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
 		);
 
@@ -59,8 +59,9 @@ if ( ! function_exists( 'paddle_grid_category_list' ) ) :
 	 * Display category list
 	 */
 	function paddle_grid_category_list() {
+		$enable_archive_category = get_theme_mod( 'paddle_enable_archive_category', PADDLE_DEFAULT_OPTION['paddle_enable_archive_category'] );
 
-		if ( 'post' === get_post_type() ) {
+		if ( 'post' === get_post_type() && 1 === $enable_archive_category ) {
 			/* translators: used between list items, there is a space after the comma */
 			$categories_list = get_the_category_list( esc_html__( ', ', 'paddle' ) );
 			if ( $categories_list ) { ?>
@@ -138,16 +139,33 @@ if ( ! function_exists( 'paddle_entry_footer' ) ) :
 
 			do_action('paddle_before_post_entry_footer');
 
-			if (is_single()) paddle_category_list();
+			$enable_blog_category = get_theme_mod( 'paddle_enable_blog_category', PADDLE_DEFAULT_OPTION['paddle_enable_blog_category'] );
+			$enable_blog_tag = get_theme_mod( 'paddle_enable_blog_tag', PADDLE_DEFAULT_OPTION['paddle_enable_blog_tag'] );
+			$enable_blog_published_date = get_theme_mod( 'paddle_enable_blog_published_date', PADDLE_DEFAULT_OPTION['paddle_enable_blog_published_date'] );
+			$paddle_blog_date_position = get_theme_mod( 'paddle_blog_date_position', PADDLE_DEFAULT_OPTION['paddle_blog_date_position'] );
 
-			paddle_tag_list();
+			if ( is_single() && 1 === $enable_blog_category ) {
+				paddle_category_list();
+			} 
 
-			if (is_single()) paddle_posted_on();
+			if ( is_singular() && 1 === $enable_blog_tag ) {
+				paddle_tag_list();
+			}  elseif ( is_archive() && 1 === get_theme_mod( 'paddle_enable_archive_tag', PADDLE_DEFAULT_OPTION['paddle_enable_archive_tag'] ) || is_front_page() && 1 === get_theme_mod( 'paddle_enable_archive_tag', PADDLE_DEFAULT_OPTION['paddle_enable_archive_tag'] ) ) {
+				paddle_tag_list();
+			} else {
+				// Do nothing.
+			}			
+
+			if (is_single() && 'after' === $paddle_blog_date_position ) {
+				paddle_posted_on();
+			}
 
 			do_action('padddle_after_post_entry_footer');
 		}
 
-		if ( ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
+		$enable_archive_comment = get_theme_mod( 'paddle_enable_archive_comment', PADDLE_DEFAULT_OPTION['paddle_enable_archive_comment'] );
+
+		if ( ! is_single() && 1 === $enable_archive_comment && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
 			echo '<span class="comments-link">';
 			comments_popup_link(
 				sprintf(
@@ -185,6 +203,37 @@ if ( ! function_exists( 'paddle_entry_footer' ) ) :
 	}
 endif;
 
+if ( ! function_exists( 'paddle_get_post_comment' ) ) :
+	/**
+	 * function to show comment
+	 *
+	 * @param int $paddle_comment
+	 * @return void
+	 */
+
+	 function paddle_get_post_comment($paddle_comment) {
+
+		if ( 1 === $paddle_comment && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
+			echo '<span class="comments-link">';
+			comments_popup_link(
+				sprintf(
+					wp_kses(
+					/* translators: %s: post title */
+						__( 'Leave a Comment<span class="screen-reader-text"> on %s</span>', 'paddle' ),
+						array(
+							'span' => array(
+								'class' => array(),
+							),
+						)
+					),
+					wp_kses_post( get_the_title() )
+				)
+			);
+			echo '</span>';
+		}
+	 }
+	
+endif;
 
 if ( ! function_exists( 'paddle_post_thumbnail' ) ) :
 	/**

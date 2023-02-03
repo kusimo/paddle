@@ -8,6 +8,7 @@
  */
 
  $paddle_placeholder_image = 1 ===  absint( get_theme_mod('paddle_placeholder_image', PADDLE_DEFAULT_OPTION['paddle_placeholder_image']) ) ? 'has-placeholder-image' : '';
+ 
 ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class($paddle_placeholder_image); ?>>
 
@@ -18,24 +19,40 @@
 	else :
 		if ( is_singular() ) {
 			the_title( '<h1 class="entry-title">', '</h1>' );
+			if ( 1 === get_theme_mod( 'paddle_enable_blog_author', PADDLE_DEFAULT_OPTION['paddle_enable_blog_author'] ) ) {
+				printf(
+					'<div class="by-author"> %1$s<span class="author vcard"><a class="url" href="%2$s"> %3$s</a></span></div>',
+					esc_html_x( 'By', 'post author', 'paddle' ),
+					esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
+					esc_html( get_the_author() )
+				);
+			}
+		
+			// Post date
+			if ('before' === get_theme_mod( 'paddle_blog_date_position', PADDLE_DEFAULT_OPTION['paddle_blog_date_position'] )) {
+				paddle_posted_on();
+			}
+			// Comment.
+			$paddle_enable_blog_comment = get_theme_mod( 'paddle_enable_blog_comment', PADDLE_DEFAULT_OPTION['paddle_enable_blog_comment'] );
+			paddle_get_post_comment($paddle_enable_blog_comment);
+
 		} else {
+			// It is archive
 			the_title( '<h2 class="entry-title heading-size-1"><a class="post-entry-link" href="' . esc_url( get_permalink() ) . '"  "rel="bookmark">', '</a></h2>' );
 		}
 
 		if ( 'post' === get_post_type() ) :
 			?>
 			<div class="entry-meta">
-				<small>
-				<?php
-				paddle_posted_by();
-				?>
-				</small>
-
-			<?php
-			// Display date link in the header if not in the footer.
-			//if ( is_archive() || is_front_page() && 1 === get_theme_mod( 'hide_archive_meta', PADDLE_DEFAULT_OPTION['hide_archive_meta'] ) ) :
-			 if(! is_singular()) {	paddle_posted_on(); }
-			//endif;
+			<?php if ( 1 === absint( get_theme_mod('paddle_enable_archive_author', PADDLE_DEFAULT_OPTION['paddle_enable_archive_author']) )) : ?>
+				<small><?php paddle_posted_by(); ?></small>
+			<?php endif; 
+			
+			 if(! is_singular()) {	
+				if ( 1 === absint( get_theme_mod('paddle_enable_archive_published_date', PADDLE_DEFAULT_OPTION['paddle_enable_archive_published_date']) )) 
+				paddle_posted_on(); 
+			}
+			
 			?>
 
 			</div><!-- .entry-meta -->
@@ -44,8 +61,10 @@
 
 		do_action('paddle_after_post_title');
 
-		paddle_post_thumbnail();
-
+		if ( 1 === absint( get_theme_mod('enable_archive_featured_image', PADDLE_DEFAULT_OPTION['enable_archive_featured_image']) )) {
+			paddle_post_thumbnail();
+		}
+		
 		paddle_thumbnail_svg_fallback();
 
 	endif;

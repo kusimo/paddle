@@ -42,6 +42,48 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 * The type of control being rendered
 		 */
 		public $type = 'image_radio_button';
+
+		/**
+		 * Option to show more
+		 */
+		private $toggle = false;
+
+		/**
+		 * Number of items to show before show more button
+		 */
+		private $visible_items = null;
+		/**
+		 * Label for toggle
+		 */
+		private $toggle_label = null;
+
+		/**
+		 * show count
+		 */
+		private $show_number = false;
+
+		/**
+		 * Constructor
+		 */
+		public function __construct( $manager, $id, $args = array(), $options = array() ) {
+			parent::__construct( $manager, $id, $args );
+			// Check if toggle is enable
+			if ( isset( $this->input_attrs['toggle'] ) && $this->input_attrs['toggle'] ) {
+				$this->toggle = true;
+			}
+			// Get number of visible items
+			if ( isset( $this->input_attrs['visible_items'] ) && '' !== $this->input_attrs['visible_items'] ) {
+				$this->visible_items = $this->input_attrs['visible_items'];
+			}
+			// Label for toggle
+			if ( isset( $this->input_attrs['toggle_label'] ) && '' !== $this->input_attrs['toggle_label'] ) {
+				$this->toggle_label = $this->input_attrs['toggle_label'];
+			}
+
+			if ( isset( $this->input_attrs['show_number'] ) && $this->input_attrs['show_number'] ) {
+				$this->show_number = true;
+			}
+		}		
 		/**
 		 * Enqueue our scripts and styles
 		 */
@@ -52,6 +94,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 * Render the control in the customizer
 		 */
 		public function render_content() {
+			$counter = 0;
 			?>
 			<div class="image_radio_button_control paddle-section-spacing paddle-item">
 				<?php if ( ! empty( $this->label ) ) { ?>
@@ -61,12 +104,37 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 					<span class="customize-control-description"><?php echo esc_html( $this->description ); ?></span>
 				<?php } ?>
 
-				<?php foreach ( $this->choices as $key => $value ) { ?>
+				<?php foreach ( $this->choices as $key => $value ) { 
+					
+					if ( $this->visible_items && $counter >= $this->visible_items && $this->toggle ) :
+						if ($counter === $this->visible_items) { ?> <div class="single-accordion"> <?php }
+					?>
+					<label class="radio-button-label paddle-toggle-item">
+						<input type="radio" name="<?php echo esc_attr( $this->id ); ?>" value="<?php echo esc_attr( $key ); ?>" <?php $this->link(); ?> <?php checked( esc_attr( $key ), $this->value() ); ?>/>
+						<img src="<?php echo esc_attr( $value['image'] ); ?>" alt="<?php echo esc_attr( $value['name'] ); ?>" title="<?php echo esc_attr( $value['name'] ); ?>" />
+						<?php if ($this->show_number) { ?> <span class="number"><?php echo esc_attr($counter+1);?></span> <?php } ?>
+					</label>
+					<?php if ($counter === count($this->choices) - 1) { ?> </div> <?php } ?>
+				<?php else : ?>
 					<label class="radio-button-label">
 						<input type="radio" name="<?php echo esc_attr( $this->id ); ?>" value="<?php echo esc_attr( $key ); ?>" <?php $this->link(); ?> <?php checked( esc_attr( $key ), $this->value() ); ?>/>
 						<img src="<?php echo esc_attr( $value['image'] ); ?>" alt="<?php echo esc_attr( $value['name'] ); ?>" title="<?php echo esc_attr( $value['name'] ); ?>" />
+						<?php if ($this->show_number) { ?> <span class="number"><?php echo esc_attr($counter+1);?></span> <?php } ?>
 					</label>
-				<?php	} ?>
+					<?php
+					endif;
+
+					$counter++;
+				} 
+				if ( $this->toggle ) { ?>
+					<div class="single-accordion-toggle">
+						<span class="count-total"><?php echo esc_attr($counter - $this->visible_items);?></span>
+						<span>
+							<span class="label-title"><?php echo esc_html( $this->toggle_label ); ?></span>
+							<span class="accordion-icon-toggle dashicons dashicons-plus"></span>
+						</span>
+					</div>
+				<?php } ?>
 			</div>
 			<?php
 		}
@@ -527,6 +595,110 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		<?php
 		}
 	}
+
+		/**
+	 * Sortable Pill Checkbox Custom Control
+	 *
+	 * @author Anthony Hortin <http://maddisondesigns.com>
+	 * @license http://www.gnu.org/licenses/gpl-2.0.html
+	 * @link https://github.com/maddisondesigns
+	 */
+	class Paddle_Pill_Checkbox_Custom_Control extends Paddle_Custom_Control {
+		/**
+		 * The type of control being rendered
+		 */
+		public $type = 'pill_checkbox';
+		/**
+		 * Define whether the pills can be sorted using drag 'n drop. Either false or true. Default = false
+		 */
+		private $sortable = false;
+		/**
+		 * The width of the pills. Each pill can be auto width or full width. Default = false
+		 */
+		private $fullwidth = false;
+		/**
+		 * The sample to display. This is html code
+		 */
+		private $sample = null;
+		/**
+		 * Constructor
+		 */
+		public function __construct( $manager, $id, $args = array(), $options = array() ) {
+			parent::__construct( $manager, $id, $args );
+			// Check if these pills are sortable
+			if ( isset( $this->input_attrs['sortable'] ) && $this->input_attrs['sortable'] ) {
+				$this->sortable = true;
+			}
+			// Check if the pills should be full width
+			if ( isset( $this->input_attrs['fullwidth'] ) && $this->input_attrs['fullwidth'] ) {
+				$this->fullwidth = true;
+			}
+			// Check if the pills should show sample
+			if ( isset( $this->input_attrs['sample'] ) && '' !== $this->input_attrs['sample'] ) {
+				$this->sample = $this->input_attrs['sample'];
+			}
+		}		
+		/**
+		 * Enqueue our scripts and styles
+		 */
+		public function enqueue() {
+			wp_enqueue_script( 'paddle-custom-controls-js', $this->get_paddle_resource_url() . 'inc/customizer/js/customizer.js', array( 'jquery', 'jquery-ui-core' ), '1.2.3', true );
+			wp_enqueue_style( 'paddle-custom-controls-css', $this->get_paddle_resource_url() . 'inc/customizer/css/customizer.css', array(), '1.0', 'all' );
+		}
+		/**
+		 * Render the control in the customizer
+		 */
+		public function render_content() {
+			$reordered_choices = array();
+			$saved_choices = explode( ',', esc_attr( $this->value() ) );
+
+			// Order the checkbox choices based on the saved order
+			if( $this->sortable ) {
+				foreach ( $saved_choices as $key => $value ) {
+					if( isset( $this->choices[$value] ) ) {
+						$reordered_choices[$value] = $this->choices[$value];
+					}
+				}
+				$reordered_choices = array_merge( $reordered_choices, array_diff_assoc( $this->choices, $reordered_choices ) );
+			}
+			else {
+				$reordered_choices = $this->choices;
+			}
+		?>
+			<div class="pill_checkbox_control">
+				<?php if( !empty( $this->label ) ) { ?>
+					<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
+				<?php } ?>
+
+				<?php if(!empty( $this->sample )) { ?>
+					<div class="sample-container type-<?php echo esc_attr( $this->sample ); ?>">
+						<span><?php echo esc_attr( $this->sample ); ?> preview</span>
+						<a class="button" a href="#">
+							Button
+						</a>
+					</div>
+				<?php } ?>
+				
+				<input type="hidden" id="<?php echo esc_attr( $this->id ); ?>" name="<?php echo esc_attr( $this->id ); ?>" value="<?php echo esc_attr( $this->value() ); ?>" class="customize-control-sortable-pill-checkbox" <?php $this->link(); ?> />
+				<div class="sortable_pills<?php echo ( $this->sortable ? ' sortable' : '' ) . ( $this->fullwidth ? ' fullwidth_pills' : '' ); ?>">
+				<?php foreach ( $reordered_choices as $key => $value ) { ?>
+					<label class="checkbox-label">
+						<input type="checkbox" name="<?php echo esc_attr( $key ); ?>" value="<?php echo esc_attr( $key ); ?>" <?php checked( in_array( esc_attr( $key ), $saved_choices, true ), true ); ?> class="sortable-pill-checkbox"/>
+						<span class="sortable-pill-title"><?php echo esc_attr( $value ); ?></span>
+						<?php if( $this->sortable && $this->fullwidth ) { ?>
+							<span class="dashicons dashicons-sort"></span>
+						<?php } ?>
+					</label>
+				<?php	} ?>
+				</div>
+				<?php if( !empty( $this->description ) ) { ?>
+					<span class="customize-control-description"><?php echo esc_html( $this->description ); ?></span>
+				<?php } ?>
+			</div>
+		<?php
+		}
+	}
+	
 	/**
 	 * Upsell section
 	 */
@@ -571,7 +743,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 	}
 
 
-		/**
+	/**
 	 * Sortable Repeater Custom Control
 	 *
 	 * @author Anthony Hortin <http://maddisondesigns.com>

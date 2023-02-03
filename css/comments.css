@@ -114,6 +114,9 @@ footer.comment-meta {
 .comment-metadata a {
   color: currentColor;
 }
+.comment-metadata a.comment-edit-link {
+  color: var(--paddle-color-1);
+}
 
 .comment-content {
   margin: 1rem 0 0;
@@ -188,6 +191,13 @@ ol.comment-list .children::before,
 ol.comment-list li:last-child > article,
 .pings-list li:last-child > article {
   border-bottom: none;
+}
+
+ol.comment-list li.trackback .comment-body {
+  margin-bottom: 5px;
+}
+ol.comment-list li.pingback .comment-body {
+  margin-bottom: 5px;
 }
 
 .comment-content a {

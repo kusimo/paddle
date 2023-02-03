@@ -40,3 +40,33 @@ a:not([class*="wp-block-"]):not(.author-link):not(.post-entry-link) {
         }
     }
 } 
+
+/*
+pagination links
+*/
+.post-page-numbers {
+    padding: 0;
+    margin: 0 0 0.3em 0.3em;
+    font-size: .8em;
+    line-height: calc( 2.5em - 4px);
+    display: inline-block;
+    width: 2.5em;
+    height: 2.5em;
+    text-align: center;
+    transition: all .2s linear;
+}
+a.post-page-numbers {
+    border: 2px solid gainsboro;
+    color: #000;
+    background: 0 0;
+}
+span.post-page-numbers.current {
+    border: 2px solid transparent;
+    color: white;
+    background: var(--paddle-color-1);
+}
+
+.page-links {
+    clear: both;
+    margin: 0 0 1.5em;
+}
