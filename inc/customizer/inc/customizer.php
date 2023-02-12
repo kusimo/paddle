@@ -133,8 +133,7 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_section(
 			'paddle_theme_header_options',
 			array(
-				'title'       => __( 'Header Layout', 'paddle' ),
-				'description' => esc_html__( 'Header Layout', 'paddle' ),
+				'title'       => __( 'Desktop / Mobile', 'paddle' ),
 				'panel'       => 'paddle_theme_header_option',
 			)
 		);
@@ -145,7 +144,7 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_section(
 			'paddle_theme_header_buttons_options',
 			array(
-				'title'       => __( 'Header Buttons', 'paddle' ),
+				'title'       => __( 'CTA Button', 'paddle' ),
 				'description' => esc_html__( 'Header Buttons', 'paddle' ),
 				'panel'       => 'paddle_theme_header_option',
 			)
@@ -179,7 +178,7 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_section(
 			'paddle_header_top_bar',
 			array(
-				'title'       => __( 'Header Top Bar', 'paddle' ),
+				'title'       => __( 'Top Bar', 'paddle' ),
 				'description' => esc_html__( 'Add header top bar.', 'paddle' ),
 				'panel'       => 'paddle_theme_header_option',
 			)
@@ -333,24 +332,7 @@ class paddle_initialise_customizer_settings {
             )
         ); 
 
-		/**
-		 * Google Font
-		 */
-		$wp_customize->add_setting( 'paddle_font_message',
-			array(
-				'default' => $this->defaults['paddle_font_message'],
-				'transport' => 'postMessage',
-				'sanitize_callback' => 'paddle_text_sanitization'
-			)
-		);
-		$wp_customize->add_control( new Paddle_Simple_Notice_Custom_control( $wp_customize, 'paddle_font_message',
-			array(
-				'label' => __( 'Use your own google font', 'paddle' ),
-				'description' => __( 'To use other Google Fonts, paste the font in the textarea below. See list of available Google fonts. <a href="https://fonts.google.com/" target="_blank">Google Fonts</a>.', 'paddle' ),
-				'section' => 'paddle_theme_typography_section'
-			)
-		) );
-
+		
 		/**
 		 * Body Font
 		 * Add description to the first control, this is used as general title
@@ -615,9 +597,32 @@ class paddle_initialise_customizer_settings {
             )
         );
 
+		// Header Layout 
+		// Title Options
+		$wp_customize->add_setting(
+			'title_options_header',
+			array(
+				'default'           => 'desktop',
+				'sanitize_callback' => 'paddle_radio_sanitization',
+			)
+		);
 
-
-
+		$wp_customize->add_control(
+			new Paddle_Option_Buttons_Title_Control(
+				$wp_customize,
+				'title_options_header',
+				array(
+					'label'       => __( 'General', 'paddle' ),
+					'section'     => 'paddle_theme_header_options',
+					'type'        => 'select',
+					'priority' 	  => 1,
+					'choices'     => array(
+						'desktop' => __( 'Desktop', 'paddle' ),
+						'mobile' => __( 'Mobile', 'paddle' ),
+					),
+				)
+			)
+		);
 		// Header Image Radio Button Custom Control
 		$wp_customize->add_setting(
 			'paddle_header_layout_style',
@@ -634,11 +639,13 @@ class paddle_initialise_customizer_settings {
 				array(
 					'label'       => __( 'Header Layout', 'paddle' ),
 					'section'     => 'paddle_theme_header_options',
+					'active_callback' => 'paddle_header_desktop_selected',
 					'input_attrs' => array(
 						'toggle'  => true,
 						'visible_items' => 3,
 						'show_number' => true,
-						'toggle_label' => 'More header'
+						'toggle_label' => 'More header',
+						'fullwidth_label' => true
 					),
 					'choices'     => array(
 						'paddle-header-1'         => array(
@@ -670,156 +677,221 @@ class paddle_initialise_customizer_settings {
 			)
 		); // End Header Image Control
 
-		// Enable/Disable Search button.
-		$wp_customize->add_setting(
-			'paddle_header_search_button',
+		$wp_customize->add_setting( 'paddle_header_section_title_5',
 			array(
-				'default'           => $this->defaults['paddle_header_search_button'],
-				'transport'         => 'refresh',
-				'sanitize_callback' => 'paddle_switch_sanitization',
+				'transport' => 'postMessage',
+				'sanitize_callback' => 'paddle_text_sanitization'
 			)
 		);
-		$wp_customize->add_control(
-			new Paddle_Toggle_Switch_Custom_control(
-				$wp_customize,
-				'paddle_header_search_button',
-				array(
-					'label'    => __( 'Search Button', 'paddle' ),
-					'priority' => 20,
-					'section'  => 'paddle_theme_header_buttons_options',
-				)
-			)
-		); // Search Button
 
-		// Call to action button.
-		$wp_customize->add_setting(
-			'paddle_header_cta',
+		$wp_customize->add_control( new Paddle_Simple_Header_Title_Control( $wp_customize, 'paddle_header_section_title_5',
 			array(
-				'default'           => $this->defaults['paddle_header_cta'],
-				'transport'         => 'refresh',
-				'sanitize_callback' => 'paddle_switch_sanitization',
+				'label' => __( 'Header 5', 'paddle' ),
+				'section' => 'paddle_theme_header_options',
+				'active_callback' => 'paddle_header_desktop_selected_header_5',
+			)
+		) );
+		// Header 5 info
+		$wp_customize->add_setting(
+			'header_5_info',
+			array(
+				'transport'         => 'postMessage',
+				'sanitize_callback' => 'paddle_text_sanitization',
 			)
 		);
 		$wp_customize->add_control(
-			new Paddle_Toggle_Switch_Custom_control(
+			new Paddle_Simple_Notice_Custom_control(
 				$wp_customize,
-				'paddle_header_cta',
+				'header_5_info',
 				array(
-					'label'    => __( 'CTA Button', 'paddle' ),
-					'priority' => 30,
-					'section'  => 'paddle_theme_header_buttons_options',
-				)
-			)
-		); // CTA Button
-
-		$wp_customize->add_setting(
-			'paddle_header_cta_position',
-			array(
-				'default'           => $this->defaults['paddle_header_cta_position'],
-				'transport'         => 'refresh',
-				'sanitize_callback' => 'paddle_switch_sanitization',
-			)
-		);
-		$wp_customize->add_control(
-			new Paddle_Toggle_Switch_Custom_control(
-				$wp_customize,
-				'paddle_header_cta_position',
-				array(
-					'label'    => __( 'Position (CTA) Right?', 'paddle' ),
-					'priority' => 30,
-					'section'  => 'paddle_theme_header_buttons_options',
-				)
-			)
-		); // CTA Margin left
-
-		// CTA margin.
-		$wp_customize->add_setting(
-			'header_cta_padding_left',
-			array(
-				'default'           => $this->defaults['header_cta_padding_left'],
-				'transport'         => 'refresh',
-				'sanitize_callback' => 'paddle_range_sanitization',
-			)
-		);
-		$wp_customize->add_control(
-			new Paddle_Slider_Custom_Control(
-				$wp_customize,
-				'header_cta_padding_left',
-				array(
-					'label'       => __( 'Padding Left', 'paddle' ),
-					'description' => __( 'CTA padding Left'),
-					'section'     => 'paddle_theme_header_buttons_options',
-					'priority' => 30,
+					'label'           => __( 'Header 5.', 'paddle' ),
+					'section' => 'paddle_theme_header_options',
+					'active_callback' => 'paddle_header_desktop_selected_header_5',
 					'input_attrs' => array(
-						'min'  => 0,
-						'max'  => 50,
-						'step' => 1,
+						'show_label' => false,
+						'show_desc' => false,
+						'infos'	=> array(
+							'info_1' => __( 'Sub menu is not supported ', 'paddle' ),
+							'info_2_alert' => __( 'Max of 6 menu items ', 'paddle' ),
+							'info_3' => __( 'Use header 1 to 4 for large menu ', 'paddle' ),
+						),
 					),
 				)
 			)
 		);
 
-		// CTA URL.
-		$wp_customize->add_setting(
-			'paddle_header_cta_url',
+		// Split Menu Header 6 - Title.
+		$wp_customize->add_setting( 'paddle_header_section_title_6',
 			array(
-				'default'           => home_url(),
-				'sanitize_callback' => 'esc_url_raw',
+				'transport' => 'postMessage',
+				'sanitize_callback' => 'paddle_text_sanitization'
+			)
+		);
+
+		$wp_customize->add_control( new Paddle_Simple_Header_Title_Control( $wp_customize, 'paddle_header_section_title_6',
+			array(
+				'label' => __( 'Split Menu', 'paddle' ),
+				'section' => 'paddle_theme_header_options',
+				'active_callback' => 'paddle_header_desktop_selected_header_6',
+			)
+		) );
+
+		// Header 6 - Enable / Disable options
+		$wp_customize->add_setting( 'paddle_split_menu_options',
+			array(
+				'default' => $this->defaults['paddle_split_menu_options'],
+				'transport' => 'refresh',
+				'sanitize_callback' => 'paddle_text_sanitization'
+			)
+		);
+		$wp_customize->add_control( new Paddle_Pill_Checkbox_Custom_Control( $wp_customize, 
+		'paddle_split_menu_options',
+			array(
+				'label' => __( 'Show / Hide / Disable', 'paddle' ),
+				'section' => 'paddle_theme_header_options',
+				'active_callback' => 'paddle_header_desktop_selected_header_6',
+				'input_attrs' => array(
+					'sortable' => false,
+					'fullwidth' => true,
+					'sample'	=> '',
+				),
+				'choices' => array(
+					'search' => __( 'Show Search', 'paddle' ),
+					'cta' => __( 'Show CTA', 'paddle' ),
+					'padding' => __( 'Disable CTA Margin', 'paddle'  ),
+				)
+			)
+		) );
+
+		// Add info for user
+		$wp_customize->add_setting(
+			'header_6_info',
+			array(
+				'transport'         => 'postMessage',
+				'sanitize_callback' => 'paddle_text_sanitization',
+			)
+		);
+		$wp_customize->add_control(
+			new Paddle_Simple_Notice_Custom_control(
+				$wp_customize,
+				'header_6_info',
+				array(
+					'label'           => __( 'Header 6.', 'paddle' ),
+					'section' => 'paddle_theme_header_options',
+					'active_callback' => 'paddle_header_desktop_selected_header_6',
+					'input_attrs' => array(
+						'show_label' => false,
+						'show_desc' => false,
+						'infos'	=> array(
+							'info_1' => __( 'Sub menu is not supported ', 'paddle' ),
+							'info_2_alert' => __( 'Max of 6 menu items ', 'paddle' ),
+							'info_3' => __( 'Use menu that are even ', 'paddle' ),
+							'info_4' => __( 'Use header 1 to 4 for large menu ', 'paddle' ),
+						),
+					),
+				)
+			)
+		);
+
+		// Header Border - Title.
+		$wp_customize->add_setting( 'paddle_header_section_title_3',
+			array(
+				'transport' => 'postMessage',
+				'sanitize_callback' => 'paddle_text_sanitization'
+			)
+		);
+
+		$wp_customize->add_control( new Paddle_Simple_Header_Title_Control( $wp_customize, 'paddle_header_section_title_3',
+			array(
+				'label' => __( 'Border', 'paddle' ),
+				'section' => 'paddle_theme_header_options',
+				'active_callback' => 'paddle_header_desktop_selected',
+			)
+		) );
+
+		// Header border top.
+		$wp_customize->add_setting(
+			'menu_border_top',
+			array(
+				'default'           => $this->defaults['menu_border_top'],
+				'sanitize_callback' => 'paddle_switch_sanitization',
 			)
 		);
 
 		$wp_customize->add_control(
-			'paddle_header_cta_url',
-			array(
-				'label'           => esc_html__( 'CTA URL', 'paddle' ),
-				'section'         => 'paddle_theme_header_buttons_options',
-				'type'            => 'url',
-				'priority'        => 40,
-				'input_attrs'     => array(
-					'style'       => 'border: 2px solid #e6e6e6',
-					'placeholder' => __( 'Enter URL Link...', 'paddle' ),
-				),
-				'active_callback' => 'paddle_check_active_control_paddle_header_cta',
+			new Paddle_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'menu_border_top',
+				array(
+					'label'   => __( 'Border Top', 'paddle' ),
+					'section' => 'paddle_theme_header_options',
+					'active_callback' => 'paddle_header_desktop_selected',
+				)
 			)
 		);
 
-		// Setting CTA Text.
+		// Header border bottom.
 		$wp_customize->add_setting(
-			'paddle_header_cta_text',
+			'menu_border_bottom',
 			array(
-				'default'           => $this->defaults['paddle_header_cta_text'],
-				'sanitize_callback' => 'sanitize_text_field',
+				'default'           => $this->defaults['menu_border_bottom'],
+				'sanitize_callback' => 'paddle_switch_sanitization',
 			)
 		);
 
 		$wp_customize->add_control(
-			'paddle_header_cta_text',
-			array(
-				'label'           => esc_html__( 'CTA Text', 'paddle' ),
-				'section'         => 'paddle_theme_header_buttons_options',
-				'type'            => 'text',
-				'priority'        => 50,
-				'input_attrs'     => array(
-					'style'       => 'border: 2px solid #e6e6e6',
-					'placeholder' => __( 'Enter Text...', 'paddle' ),
-				),
-				'active_callback' => 'paddle_check_active_control_paddle_header_cta',
+			new Paddle_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'menu_border_bottom',
+				array(
+					'label'   => __( 'Border Bottom', 'paddle' ),
+					'section' => 'paddle_theme_header_options',
+					'active_callback' => 'paddle_header_desktop_selected',
+				)
 			)
 		);
 
-		$wp_customize->selective_refresh->add_partial(
-			'paddle_header_cta_text',
+		// Menu background colour.
+		$wp_customize->add_setting(
+			'paddle_header_border_color',
 			array(
-				'selector'            => '#header-btn-cta a.btn',
-				'container_inclusive' => false,
-				'render_callback'     => function () {
-					return get_theme_mod( 'paddle_header_cta_text', $this->defaults['paddle_header_cta_text'] );
-				},
-				'fallback_refresh'    => true,
+				'default'           => $this->defaults['paddle_header_border_color'],
+				'transport'         => 'refresh',
+				'type'              => 'theme_mod',
+				'sanitize_callback' => 'sanitize_hex_color',
 			)
 		);
 
-		// Header Logo.
+		$wp_customize->add_control(
+			new WP_Customize_Color_Control(
+				$wp_customize,
+				'paddle_header_border_color',
+				array(
+					'label'    => __( 'Border Color', 'paddle' ),
+					'section'  => 'paddle_theme_header_options',
+					'settings' => 'paddle_header_border_color',
+					'active_callback' => 'paddle_check_header_border_is_active',
+				)
+			)
+		);
+
+
+		// Header Logo - Title.
+		$wp_customize->add_setting( 'paddle_header_section_title_1',
+			array(
+				'transport' => 'postMessage',
+				'sanitize_callback' => 'paddle_text_sanitization'
+			)
+		);
+
+		$wp_customize->add_control( new Paddle_Simple_Header_Title_Control( $wp_customize, 'paddle_header_section_title_1',
+			array(
+				'label' => __( 'Logo', 'paddle' ),
+				'section' => 'paddle_theme_header_options',
+				'active_callback' => 'paddle_header_desktop_selected',
+			)
+		) );
+
 		// Add slider Control for adjusting logo size.
 		$wp_customize->add_setting(
 			'header_logo_size',
@@ -835,8 +907,8 @@ class paddle_initialise_customizer_settings {
 				'header_logo_size',
 				array(
 					'label'       => __( 'Adjust Logo Size', 'paddle' ),
-					'description' => __( 'Size and Padding'),
-					'section'     => 'paddle_theme_header_logo_options',
+					'section'     => 'paddle_theme_header_options',
+					'active_callback' => 'paddle_header_desktop_selected',
 					'input_attrs' => array(
 						'min'  => 50,
 						'max'  => 400,
@@ -862,7 +934,8 @@ class paddle_initialise_customizer_settings {
 				'header_logo_padding',
 				array(
 					'label'       => __( 'Adjust Logo Padding', 'paddle' ),
-					'section'     => 'paddle_theme_header_logo_options',
+					'section'     => 'paddle_theme_header_options',
+					'active_callback' => 'paddle_header_desktop_selected',
 					'input_attrs' => array(
 						'min'  => 1,
 						'max'  => 30,
@@ -885,8 +958,9 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_header_logo_align',
 				array(
-					'label'   => __( 'Logo alignment', 'paddle' ),
-					'section' => 'paddle_theme_header_logo_options',
+					'label'   => __( 'Logo Align', 'paddle' ),
+					'section' => 'paddle_theme_header_options',
+					'active_callback' => 'paddle_header_desktop_selected_header_6',
 					'choices' => array(
 						'self-start'     => __( 'Left', 'paddle' ),
 						'center' => __( 'Center', 'paddle' ),
@@ -896,99 +970,27 @@ class paddle_initialise_customizer_settings {
 			)
 		);
 
-		// Header menu in uppercase.
-		$wp_customize->add_setting(
-			'paddle_menu_text_to_uppercase',
+		// Header Menu - Title.
+		$wp_customize->add_setting( 'paddle_header_section_title_2',
 			array(
-				'default'           => $this->defaults['paddle_menu_text_to_uppercase'],
-				'sanitize_callback' => 'paddle_switch_sanitization',
+				'transport' => 'postMessage',
+				'sanitize_callback' => 'paddle_text_sanitization'
 			)
 		);
 
-		$wp_customize->add_control(
-			new Paddle_Toggle_Switch_Custom_control(
-				$wp_customize,
-				'paddle_menu_text_to_uppercase',
-				array(
-					'label'   => __( 'Uppercase Text', 'paddle' ),
-					'section' => 'paddle_header_menu',
-				)
-			)
-		);
-
-		// Menu background colour.
-		$wp_customize->add_setting(
-			'paddle_menu_bgcolor',
+		$wp_customize->add_control( new Paddle_Simple_Header_Title_Control( $wp_customize, 'paddle_header_section_title_2',
 			array(
-				'default'           => $this->defaults['paddle_menu_bgcolor'],
-				'transport'         => 'refresh',
-				'type'              => 'theme_mod',
-				'sanitize_callback' => 'sanitize_hex_color',
+				'label' => __( 'Menu', 'paddle' ),
+				'section' => 'paddle_theme_header_options',
+				'active_callback' => 'paddle_header_desktop_selected',
 			)
-		);
+		) );
 
-		$wp_customize->add_control(
-			new WP_Customize_Color_Control(
-				$wp_customize,
-				'paddle_menu_bgcolor',
-				array(
-					'label'    => __( 'Menu Background Colour', 'paddle' ),
-					'section'  => 'paddle_header_menu',
-					'settings' => 'paddle_menu_bgcolor',
-				)
-			)
-		);
-
-		// Notice setting and control for displaying a message about header style menu background colour
+		// Header menu item spacing.
 		$wp_customize->add_setting(
-			'theme_using_header_two',
+			'paddle_menu_spacing',
 			array(
-				'transport'         => 'postMessage',
-				'sanitize_callback' => 'paddle_text_sanitization',
-			)
-		);
-		$wp_customize->add_control(
-			new Paddle_Simple_Notice_Custom_control(
-				$wp_customize,
-				'theme_using_header_two',
-				array(
-					'label'           => __( 'Menu background colour other than the default (#ffffff) is not recommended for Header Layout 5.', 'paddle' ),
-					'description'     => esc_html__( 'If your upper menu items are more than 6 and you are using the Header Layout 5,  menu items will not be on the same line on medium screen. Please consider switching back to the default background menu color or minimize your menu items. REASONS: Background not looking good with menu more then 6 on medium screen, e.g, Ipad pro.', 'paddle' ),
-					'section'         => 'paddle_header_menu',
-					'active_callback' => 'paddle_check_theme_header_options',
-				)
-			)
-		);
-
-		// Menu foreground colour.
-		$wp_customize->add_setting(
-			'paddle_navlink_text_color',
-			array(
-				'default'           => $this->defaults['paddle_navlink_text_color'],
-				'transport'         => 'refresh',
-				'type'              => 'theme_mod',
-				'sanitize_callback' => 'sanitize_hex_color',
-
-			)
-		);
-
-		$wp_customize->add_control(
-			new WP_Customize_Color_Control(
-				$wp_customize,
-				'paddle_navlink_text_color',
-				array(
-					'label'    => __( 'Foreground Colour', 'paddle' ),
-					'section'  => 'paddle_header_menu',
-					'settings' => 'paddle_navlink_text_color',
-				)
-			)
-		);
-
-		// Menu items alignment.
-		$wp_customize->add_setting(
-			'paddle_menu_items_alignment',
-			array(
-				'default'           => $this->defaults['paddle_menu_items_alignment'],
+				'default'           => $this->defaults['paddle_menu_spacing'],
 				'transport'         => 'refresh',
 				'sanitize_callback' => 'paddle_radio_sanitization',
 			)
@@ -996,20 +998,19 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_control(
 			new Paddle_Text_Radio_Button_Custom_Control(
 				$wp_customize,
-				'paddle_menu_items_alignment',
+				'paddle_menu_spacing',
 				array(
-					'label'   => __( 'Menu items alignment', 'paddle' ),
-					//'description' => esc_html__( 'Align the menu items', 'paddle' ),
-					'section' => 'paddle_header_menu',
+					'label'   => __( 'Spacing', 'paddle' ),
+					'section' => 'paddle_theme_header_options',
+					'active_callback' => 'paddle_header_desktop_selected',
 					'choices' => array(
-						'left'     => __( 'Left', 'paddle' ),
-						'centered' => __( 'Centered', 'paddle' ),
-						'right'    => __( 'Right', 'paddle' ),
-						'justify'  => __( 'Justify', 'paddle' ),
+						'wrap'     => __( 'Maximum', 'paddle' ),
+						'nowrap' => __( 'Minimum', 'paddle' )
 					),
 				)
 			)
 		);
+
 
 		// Header menu padding.
 		$wp_customize->add_setting(
@@ -1025,10 +1026,11 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'header_menu_padding',
 				array(
-					'label'       => __( 'Top and Bottom Padding', 'paddle' ),
-					'section'     => 'paddle_header_menu',
+					'label'       => __( 'Padding Top/Bottom', 'paddle' ),
+					'section'     => 'paddle_theme_header_options',
+					'active_callback' => 'paddle_header_desktop_selected',
 					'input_attrs' => array(
-						'min'  => 1,
+						'min'  => 0,
 						'max'  => 30,
 						'step' => 1,
 					),
@@ -1050,10 +1052,11 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'menu_item_margin',
 				array(
-					'label'       => __( 'Menu Item Margin', 'paddle' ),
-					'section'     => 'paddle_header_menu',
+					'label'       => __( 'Item Margin Right', 'paddle' ),
+					'section'     => 'paddle_theme_header_options',
+					'active_callback' => 'paddle_header_desktop_selected',
 					'input_attrs' => array(
-						'min'  => 1,
+						'min'  => 0,
 						'max'  => 30,
 						'step' => 1,
 					),
@@ -1061,11 +1064,65 @@ class paddle_initialise_customizer_settings {
 			)
 		);
 
-		// Header menu border top.
+
+		// Menu items alignment.
 		$wp_customize->add_setting(
-			'menu_border_top',
+			'paddle_menu_items_alignment',
 			array(
-				'default'           => $this->defaults['menu_border_top'],
+				'default'           => $this->defaults['paddle_menu_items_alignment'],
+				'transport'         => 'refresh',
+				'sanitize_callback' => 'paddle_radio_sanitization',
+			)
+		);
+		$wp_customize->add_control(
+			new Paddle_Text_Radio_Button_Custom_Control(
+				$wp_customize,
+				'paddle_menu_items_alignment',
+				array(
+					'label'   => __( 'Menu Items Position', 'paddle' ),
+					//'description' => esc_html__( 'Align the menu items', 'paddle' ),
+					'section' => 'paddle_theme_header_options',
+					'active_callback' => 'paddle_header_desktop_selected',
+					'choices' => array(
+						'left'     => __( 'Left', 'paddle' ),
+						'center' => __( 'Centered', 'paddle' ),
+						'right'    => __( 'Right', 'paddle' ),
+						'justify'  => __( 'Justify', 'paddle' ),
+					),
+				)
+			)
+		);
+
+		// Header menu in uppercase.
+		$wp_customize->add_setting(
+			'paddle_menu_capitalization',
+			array(
+				'default'           => $this->defaults['paddle_menu_capitalization'],
+				'transport'         => 'refresh',
+				'sanitize_callback' => 'paddle_radio_sanitization',
+			)
+		);
+		$wp_customize->add_control(
+			new Paddle_Text_Radio_Button_Custom_Control(
+				$wp_customize,
+				'paddle_menu_capitalization',
+				array(
+					'label'   => __( 'Capitalization', 'paddle' ),
+					'section' => 'paddle_theme_header_options',
+					'active_callback' => 'paddle_header_desktop_selected',
+					'choices' => array(
+						'none'     => __( 'None', 'paddle' ),
+						'capitalize' => __( 'Capitalize', 'paddle' ),
+						'uppercase'    => __( 'Uppercase', 'paddle' )
+					),
+				)
+			)
+		);
+		/*
+		$wp_customize->add_setting(
+			'paddle_menu_text_to_uppercase',
+			array(
+				'default'           => $this->defaults['paddle_menu_text_to_uppercase'],
 				'sanitize_callback' => 'paddle_switch_sanitization',
 			)
 		);
@@ -1073,13 +1130,406 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_control(
 			new Paddle_Toggle_Switch_Custom_control(
 				$wp_customize,
-				'menu_border_top',
+				'paddle_menu_text_to_uppercase',
 				array(
-					'label'   => __( 'Border Top', 'paddle' ),
-					'section' => 'paddle_header_menu',
+					'label'   => __( 'Uppercase Text', 'paddle' ),
+					'section' => 'paddle_theme_header_options',
 				)
 			)
 		);
+		*/
+
+		// Menu background colour.
+		$wp_customize->add_setting(
+			'paddle_menu_bgcolor',
+			array(
+				'default'           => $this->defaults['paddle_menu_bgcolor'],
+				'transport'         => 'refresh',
+				'type'              => 'theme_mod',
+				'sanitize_callback' => 'sanitize_hex_color',
+			)
+		);
+
+		$wp_customize->add_control(
+			new WP_Customize_Color_Control(
+				$wp_customize,
+				'paddle_menu_bgcolor',
+				array(
+					'label'    => __( 'Background', 'paddle' ),
+					'section'  => 'paddle_theme_header_options',
+					'active_callback' => 'paddle_header_desktop_selected',
+					'settings' => 'paddle_menu_bgcolor',
+				)
+			)
+		);
+
+		// Menu foreground colour.
+		$wp_customize->add_setting(
+			'paddle_navlink_text_color',
+			array(
+				'default'           => $this->defaults['paddle_navlink_text_color'],
+				'transport'         => 'refresh',
+				'type'              => 'theme_mod',
+				'sanitize_callback' => 'sanitize_hex_color',
+
+			)
+		);
+
+		$wp_customize->add_control(
+			new WP_Customize_Color_Control(
+				$wp_customize,
+				'paddle_navlink_text_color',
+				array(
+					'label'    => __( 'Link', 'paddle' ),
+					'section'  => 'paddle_theme_header_options',
+					'active_callback' => 'paddle_header_desktop_selected',
+					'settings' => 'paddle_navlink_text_color',
+				)
+			)
+		);
+
+		// Menu hover colour.
+		$wp_customize->add_setting(
+			'paddle_navlink_text_color_hover',
+			array(
+				'default'           => $this->defaults['paddle_navlink_text_color_hover'],
+				'transport'         => 'refresh',
+				'type'              => 'theme_mod',
+				'sanitize_callback' => 'sanitize_hex_color',
+
+			)
+		);
+
+		$wp_customize->add_control(
+			new WP_Customize_Color_Control(
+				$wp_customize,
+				'paddle_navlink_text_color_hover',
+				array(
+					'label'    => __( 'Hover', 'paddle' ),
+					'section'  => 'paddle_theme_header_options',
+					'active_callback' => 'paddle_header_desktop_selected',
+					'settings' => 'paddle_navlink_text_color_hover',
+				)
+			)
+		);
+
+		// Notice setting and control for displaying a message about header style menu background colour
+		$wp_customize->add_setting(
+			'theme_using_header_two',
+			array(
+				'transport'         => 'postMessage',
+				'sanitize_callback' => 'paddle_text_sanitization',
+			)
+		);
+		$wp_customize->add_control(
+			new Paddle_Simple_Notice_Custom_control(
+				$wp_customize,
+				'theme_using_header_two',
+				array(
+					'label'           => __( 'Menu background colour other than the default (#ffffff) is not recommended for Header Layout 5.', 'paddle' ),
+					'description'     => esc_html__( 'If your upper menu items are more than 6 and you are using the Header Layout 5,  menu items will not be on the same line on medium screen. Please consider switching back to the default background menu color or minimize your menu items. REASONS: Background not looking good with menu more then 6 on medium screen, e.g, Ipad pro.', 'paddle' ),
+					'section'         => 'paddle_theme_header_options',
+					'active_callback' => 'paddle_check_theme_header_options',
+				)
+			)
+		);
+
+
+		// Header Menu - Title.
+		$wp_customize->add_setting( 'paddle_header_section_title_4',
+			array(
+				'transport' => 'postMessage',
+				'sanitize_callback' => 'paddle_text_sanitization'
+			)
+		);
+
+		$wp_customize->add_control( new Paddle_Simple_Header_Title_Control( $wp_customize, 'paddle_header_section_title_4',
+			array(
+				'label' => __( 'Search', 'paddle' ),
+				'section' => 'paddle_theme_header_options',
+				'active_callback' => 'paddle_header_desktop_selected',
+			)
+		) );
+
+		// Enable/Disable Search button.
+		$wp_customize->add_setting(
+			'paddle_header_search_button',
+			array(
+				'default'           => $this->defaults['paddle_header_search_button'],
+				'transport'         => 'refresh',
+				'sanitize_callback' => 'paddle_switch_sanitization',
+			)
+		);
+		$wp_customize->add_control(
+			new Paddle_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'paddle_header_search_button',
+				array(
+					'label'    => __( 'Enable Search', 'paddle' ),
+					'section' => 'paddle_theme_header_options',
+					'active_callback' => 'paddle_header_desktop_selected',
+				)
+			)
+		); 
+
+		// Search Button Type.
+		$wp_customize->add_setting(
+			'paddle_header_search_button_type',
+			array(
+				'default'           => $this->defaults['paddle_header_search_button_type'],
+				'transport'         => 'refresh',
+				'sanitize_callback' => 'paddle_radio_sanitization',
+			)
+		);
+		$wp_customize->add_control(
+			new Paddle_Text_Radio_Button_Custom_Control(
+				$wp_customize,
+				'paddle_header_search_button_type',
+				array(
+					'label'   => __( 'Search Type (Desktop)', 'paddle' ),
+					//'description' => esc_html__( 'Align the menu items', 'paddle' ),
+					'section' => 'paddle_theme_header_options',
+					'active_callback' => 'paddle_using_header_1_4_5_desktop_selected',
+					'choices' => array(
+						'icon'     => __( 'Icon Only', 'paddle' ),
+						'input' => __( 'Input and Icon', 'paddle' ),
+					),
+				)
+			)
+		);
+
+		// Search icon colour.
+		$wp_customize->add_setting(
+			'paddle_header_search_icon_color',
+			array(
+				'default'           => $this->defaults['paddle_header_search_icon_color'],
+				'transport'         => 'refresh',
+				'type'              => 'theme_mod',
+				'sanitize_callback' => 'sanitize_hex_color',
+
+			)
+		);
+
+		$wp_customize->add_control(
+			new WP_Customize_Color_Control(
+				$wp_customize,
+				'paddle_header_search_icon_color',
+				array(
+					'label'    => __( 'Icon Color', 'paddle' ),
+					'section'  => 'paddle_theme_header_options',
+					'active_callback' => 'paddle_header_desktop_selected_search_enab',
+					'settings' => 'paddle_header_search_icon_color',
+				)
+			)
+		);
+
+		//____________CTA_______________
+				// Header Menu - Title.
+		$wp_customize->add_setting( 'paddle_header_section_title_7',
+			array(
+				'transport' => 'postMessage',
+				'sanitize_callback' => 'paddle_text_sanitization'
+			)
+		);
+
+		$wp_customize->add_control( new Paddle_Simple_Header_Title_Control( $wp_customize, 'paddle_header_section_title_7',
+			array(
+				'label' => __( 'Call To Action', 'paddle' ),
+				'section' => 'paddle_theme_header_options',
+				'active_callback' => 'paddle_header_desktop_selected',
+			)
+		) );
+			$wp_customize->add_setting(
+				'paddle_header_cta',
+				array(
+					'default'           => $this->defaults['paddle_header_cta'],
+					'transport'         => 'refresh',
+					'sanitize_callback' => 'paddle_switch_sanitization',
+				)
+			);
+			$wp_customize->add_control(
+				new Paddle_Toggle_Switch_Custom_control(
+					$wp_customize,
+					'paddle_header_cta',
+					array(
+						'label'    => __( 'CTA Button', 'paddle' ),
+						'section'  => 'paddle_theme_header_options',
+						'active_callback' => 'paddle_header_desktop_selected',
+					)
+				)
+			); // CTA Button
+	
+			$wp_customize->add_setting(
+				'cta_separated',
+				array(
+					'default'           => $this->defaults['cta_separated'],
+					'transport'         => 'refresh',
+					'sanitize_callback' => 'paddle_switch_sanitization',
+				)
+			);
+			$wp_customize->add_control(
+				new Paddle_Toggle_Switch_Custom_control(
+					$wp_customize,
+					'cta_separated',
+					array(
+						'label'    => __( 'Separated', 'paddle' ),
+						'section'  => 'paddle_theme_header_options',
+						'active_callback' => 'paddle_using_header_1_4_desktop_selected'
+					)
+				)
+			); // CTA Margin left
+	
+			// CTA margin.
+			$wp_customize->add_setting(
+				'header_cta_padding_left',
+				array(
+					'default'           => $this->defaults['header_cta_padding_left'],
+					'transport'         => 'refresh',
+					'sanitize_callback' => 'paddle_range_sanitization',
+				)
+			);
+			$wp_customize->add_control(
+				new Paddle_Slider_Custom_Control(
+					$wp_customize,
+					'header_cta_padding_left',
+					array(
+						'label'       => __( 'Padding Left', 'paddle' ),
+						'section'     => 'paddle_theme_header_options',
+						'active_callback' => 'paddle_header_desktop_selected_cta_enab',
+						'input_attrs' => array(
+							'min'  => 0,
+							'max'  => 25,
+							'step' => 1,
+						),
+					)
+				)
+			);
+	
+			// CTA URL.
+			$wp_customize->add_setting(
+				'paddle_header_cta_url',
+				array(
+					'default'           => home_url(),
+					'sanitize_callback' => 'esc_url_raw',
+				)
+			);
+	
+			$wp_customize->add_control(
+				'paddle_header_cta_url',
+				array(
+					'label'           => esc_html__( 'CTA URL', 'paddle' ),
+					'section'         => 'paddle_theme_header_options',
+					'type'            => 'url',
+					'input_attrs'     => array(
+						'style'       => 'border: 2px solid #e6e6e6',
+						'placeholder' => __( 'Enter URL Link...', 'paddle' ),
+					),
+					'active_callback' => 'paddle_header_desktop_selected_cta_enab',
+				)
+			);
+	
+			// Setting CTA Text.
+			$wp_customize->add_setting(
+				'paddle_header_cta_text',
+				array(
+					'default'           => $this->defaults['paddle_header_cta_text'],
+					'sanitize_callback' => 'sanitize_text_field',
+				)
+			);
+	
+			$wp_customize->add_control(
+				'paddle_header_cta_text',
+				array(
+					'label'           => esc_html__( 'CTA Text', 'paddle' ),
+					'section'         => 'paddle_theme_header_options',
+					'type'            => 'text',
+					'priority'        => 50,
+					'input_attrs'     => array(
+						'style'       => 'border: 2px solid #e6e6e6',
+						'placeholder' => __( 'Enter Text...', 'paddle' ),
+					),
+					'active_callback' => 'paddle_header_desktop_selected_cta_enab',
+				)
+			);
+	
+			$wp_customize->selective_refresh->add_partial(
+				'paddle_header_cta_text',
+				array(
+					'selector'            => '#header-btn-cta a.btn',
+					'container_inclusive' => false,
+					'render_callback'     => function () {
+						return get_theme_mod( 'paddle_header_cta_text', $this->defaults['paddle_header_cta_text'] );
+					},
+					'fallback_refresh'    => true,
+				)
+			);
+
+		/****************************************************************
+		 * Mobile Header Layout
+		 */
+		$wp_customize->add_setting(
+			'paddle_header_mobile_layout',
+			array(
+				'default'           => $this->defaults['paddle_header_mobile_layout'],
+				'transport'         => 'refresh',
+				'sanitize_callback' => 'paddle_radio_sanitization',
+			)
+		);
+		$wp_customize->add_control(
+			new Paddle_Image_Radio_Button_Custom_Control(
+				$wp_customize,
+				'paddle_header_mobile_layout',
+				array(
+					'label'       => __( 'Mobile Header Layout', 'paddle' ),
+					'section'     => 'paddle_theme_header_options',
+					'active_callback' => 'paddle_header_mobile_selected',
+					'priority' => 3,
+					'input_attrs' => array(
+						'toggle'  => false,
+						'visible_items' => 2,
+						'show_number' => true,
+						'toggle_label' => 'More header',
+						'fullwidth_label' => true
+					),
+					'choices'     => array(
+						'mobile-header-1'         => array(
+							'image' => trailingslashit( get_template_directory_uri() ) . 'inc/customizer/images/header-layout-style-1-logo-left.jpg',
+							'name'  => __( 'Logo Left', 'paddle' ),
+						),
+						'mobile-header-2'       => array(
+							'image' => trailingslashit( get_template_directory_uri() ) . 'inc/customizer/images/header-layout-style-1-logo-center.jpg',
+							'name'  => __( 'Logo Center', 'paddle' ),
+						),
+					),
+				)
+			)
+		); // End Mobile Header
+		// Search Button Type.
+		$wp_customize->add_setting(
+			'paddle_header_search_button_type_mobile',
+			array(
+				'default'           => $this->defaults['paddle_header_search_button_type_mobile'],
+				'transport'         => 'refresh',
+				'sanitize_callback' => 'paddle_radio_sanitization',
+			)
+		);
+		$wp_customize->add_control(
+			new Paddle_Text_Radio_Button_Custom_Control(
+				$wp_customize,
+				'paddle_header_search_button_type_mobile',
+				array(
+					'label'   => __( 'Search Type (Mobile)', 'paddle' ),
+					//'description' => esc_html__( 'Align the menu items', 'paddle' ),
+					'section' => 'paddle_theme_header_options',
+					'active_callback' => 'paddle_header_mobile_selected',
+					'choices' => array(
+						'icon'     => __( 'Icon Only', 'paddle' ),
+						'input' => __( 'Input and Icon', 'paddle' ),
+					),
+				)
+			)
+		);
+
 
 		// Header Top Bar Switch.
 		$wp_customize->add_setting(
@@ -2657,7 +3107,6 @@ class paddle_initialise_customizer_settings {
 				array(
 					'label'           => __( 'Archive Columns', 'paddle' ),
 					'section'         => 'paddle_post_and_pages',
-					'active_callback' => 'paddle_blog_design_archive_selected',
 					'type'            => 'select',
 					'active_callback' => 'paddle_blog_design_archive_selected_grid_selected',
 					'choices'         => array(

@@ -47,8 +47,12 @@ if ( ! function_exists( 'paddle_generate_defaults' ) ) {
 			'paddle_header_layout_style'    => 'paddle-header-1',
 			'paddle_typography_preset'      => 'system-font',
 			'paddle_header_search_button'   => 1,
+			'paddle_header_search_button_type' => 'icon',
+			'paddle_header_search_button_type_mobile' => 'icon',
+			'paddle_header_search_icon_color' => get_theme_mod('paddle_theme_color_links', '#016edb'),
 			'paddle_header_cta'             => 0,
 			'paddle_header_cta_position'	=> 0,
+			'cta_separated'					=> 1,
 			'header_media_height'           => 60,
 			'header_logo_size'              => 150,
 			'base_font_size'                => 16,
@@ -62,7 +66,9 @@ if ( ! function_exists( 'paddle_generate_defaults' ) ) {
 			'h1_font_weight'				=> '600',
 			'h2_font_weight'				=> '500',
 			'header_logo_padding'           => 16,
+			'paddle_menu_spacing'			=> 'wrap',
 			'paddle_menu_text_to_uppercase' => 0,
+			'paddle_menu_capitalization'    => 'none',
 			'paddle_menu_items_alignment'   => 'centered',
 			'enable_top_bar'                => 0,
 			'enable_top_bar_on_mobile'      => 0,
@@ -77,7 +83,8 @@ if ( ! function_exists( 'paddle_generate_defaults' ) ) {
 			'paddle_banner_box_shadow'      => 0,
 			'banner_content_bg_opacity'     => get_theme_mod('banner_content_bg_opacity', 9),
 			'paddle_menu_bgcolor'           => '#ffffff',
-			'paddle_navlink_text_color'     => '#3c434a',
+			'paddle_navlink_text_color'     => get_theme_mod('paddle_theme_color_body_text', '#2a3a51'),
+			'paddle_navlink_text_color_hover'    => get_theme_mod('paddle_theme_color_links_hover', '#0357ab'),
 			'paddle_banner_header_color'    => '#ffffff',
 			'paddle_banner_header_bg_color' => '#3e3c3c',
 			'paddle_primary_color'          => PADDLE_PRIMARY_COLOR,
@@ -125,7 +132,7 @@ if ( ! function_exists( 'paddle_generate_defaults' ) ) {
 			'paddle_enable_archive_comment' => 0,
 			'paddle_enable_archive_tag' => 0,
 			'paddle_enable_archive_published_date' => 0,
-			'header_menu_padding'			=> 18,
+			'header_menu_padding'			=> 15,
 			'menu_item_margin'			    => 16,
 			'paddle_enable_blog_author'		=> 1,
 			'paddle_enable_blog_author_bio'		=> 0,
@@ -136,6 +143,9 @@ if ( ! function_exists( 'paddle_generate_defaults' ) ) {
 			'paddle_enable_blog_updated_date' => 1,
 			'paddle_blog_date_position' => 'before',
 			'menu_border_top'				=> 1,
+			'menu_border_bottom'			=> 1,
+			'paddle_header_border_color' => get_theme_mod('paddle_theme_color_border', '#e7e7e7'),
+			'paddle_header_mobile_layout' => 'mobile-header-1',
 			'use_default_banner_image'      => 1,
 			'paddle_thumbnail_size'			=> 'paddle-featured-image',
 			'site_title_font_size'			=> 18,
@@ -159,6 +169,7 @@ if ( ! function_exists( 'paddle_generate_defaults' ) ) {
 			'placeholder_text_posted_on' => 'Posted on',
 			'placeholder_text_updated_on' => 'Updated on',
 			'paddle_theme_button_global' => 'bordered,rounded',
+			'paddle_split_menu_options' => 'padding'
 		);
 
 		return apply_filters( 'paddle_customizer_defaults', $customizer_defaults );
@@ -196,6 +207,7 @@ if ( ! function_exists( 'paddle_static_header_css' ) ) {
 		$paddle_theme_color_buttons_hover = paddle_theme_get_color('paddle_theme_color_buttons_hover');
 		$paddle_theme_color_links = paddle_theme_get_color('paddle_theme_color_links');
 		$paddle_theme_color_links_hover = paddle_theme_get_color('paddle_theme_color_links_hover');
+		$paddle_theme_color_search_icon = paddle_theme_get_color('paddle_header_search_icon_color');
 		$paddle_theme_color_border = paddle_theme_get_color('paddle_theme_color_border');
 		$primary_color = sanitize_hex_color( get_theme_mod( 'paddle_primary_color', PADDLE_PRIMARY_COLOR ) );
 
@@ -211,6 +223,11 @@ if ( ! function_exists( 'paddle_static_header_css' ) ) {
 		$paragraph_margin_bottom 				 = absint( get_theme_mod( 'paragraph_margin_bottom', PADDLE_DEFAULT_OPTION['paragraph_margin_bottom'] ) );
 		$font_type								 = get_theme_mod( 'paddle_typography_preset', PADDLE_DEFAULT_OPTION['paddle_typography_preset'] );
 		$font_family 							 = '' !== paddle_get_font_type() ? paddle_get_font_type() : '-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji';
+
+
+		// icon color switch
+		$paddle_header_search_button_type = get_theme_mod('paddle_header_search_button_type', PADDLE_DEFAULT_OPTION['paddle_header_search_button_type']);
+        $paddle_header_search_button_type_mobile = get_theme_mod('paddle_header_search_button_type_mobile', PADDLE_DEFAULT_OPTION['paddle_header_search_button_type_mobile']);
 		
 
 		$css = '';
@@ -223,10 +240,11 @@ if ( ! function_exists( 'paddle_static_header_css' ) ) {
 			--paddle-color-1 : '.$paddle_theme_color_buttons.';
 			--paddle-color-2 : '.$paddle_theme_color_links_hover.';
 			--paddle-color-3 : '.$paddle_theme_color_body_text.';
-			--paddle-color-4 : '.$paddle_theme_color_border.'; 
+			--paddle-color-4 : '.$paddle_theme_color_border.';  
 			--paddle-color-accent : '.$primary_color.'; 
 			--paddle-color-5: #FFFFFF;
   			--paddle-color-6: #f1f1f1;
+			--paddle-color-7: '.$paddle_theme_color_search_icon.';
 
 			--paddle-font-body-family: '. $font_family .';
 			--paddle-font-body-size: '. $body_font_size .'px;';

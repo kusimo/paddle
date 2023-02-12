@@ -844,6 +844,10 @@ img {
   position: relative;
 }
 
+.overflow-hidden {
+  overflow: hidden!important;
+}
+
 /* buttons */
 .button {
   display: inline-block;
@@ -872,4 +876,10 @@ img {
 .button:not(.button-color-dark).has-icon .icon-wrap svg,
 .button:not(.button-color-dark).has-icon .icon-wrap svg path {
   fill: #FFF;
+}
+.fade {
+  transition: opacity .15s linear;
+}
+.no-padding {
+  padding: 0!important;
 }

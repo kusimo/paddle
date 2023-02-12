@@ -745,12 +745,6 @@ body.boxed-header header > h1:before {
   background-color: var(--paddle-color-1);
 }
 
-p.site-title {
-  margin: 0;
-  line-height: 0;
-  font-weight: var(--paddle-font-h1-weight);
-}
-
 header .term-description {
   display: inline-block;
 }
@@ -2027,6 +2021,10 @@ img {
   position: relative;
 }
 
+.overflow-hidden {
+  overflow: hidden !important;
+}
+
 /* buttons */
 .button {
   display: inline-block;
@@ -2055,9 +2053,247 @@ img {
   fill: #FFF;
 }
 
+.fade {
+  -webkit-transition: opacity 0.15s linear;
+  transition: opacity 0.15s linear;
+}
+
 /*--------------------------------------------------------------
 # Components
 --------------------------------------------------------------*/
+/* Site Header - Shared CSS */
+.site-header {
+  line-height: 1;
+}
+
+/*-------------------------------------------- 
+Off canvas Navigation 
+--------------------------------------------- */
+body.logged-in [data-menu=offcanvas] .offcanvas-header {
+  margin-top: 50px;
+}
+
+.paddle-theme-dialog-overlay[aria-hidden=true] {
+  display: none;
+}
+
+.paddle-theme-dialog-overlay:not([aria-hidden=true]) {
+  display: block;
+}
+
+.paddle-theme-dialog-overlay {
+  z-index: 1050;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+[data-menu=offcanvas] {
+  /*
+     .paddle-theme-dialog[aria-hidden="true"] {
+         //display: none;
+     }
+  */
+}
+[data-menu=offcanvas] .offcanvas-header {
+  padding: 0;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+[data-menu=offcanvas] .offcanvas-header button.btn-close.text-reset {
+  position: relative;
+  margin: 0;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 1rem;
+  font-weight: 500;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  padding: 0 0 0 3rem;
+  min-height: 40px;
+  width: 100%;
+  border-bottom: 1px solid;
+  border-radius: 0;
+  background-color: transparent;
+  cursor: pointer;
+  opacity: 1;
+}
+[data-menu=offcanvas] .offcanvas-header button.btn-close.text-reset::after {
+  right: calc(100% - 46px);
+  top: 0;
+  color: currentColor;
+}
+[data-menu=offcanvas] .offcanvas-header button.btn-close.text-reset .toggle-text {
+  display: block;
+  width: 100%;
+  text-align: left;
+}
+[data-menu=offcanvas] .paddle-theme-dialog {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1051;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: stretch;
+      -ms-flex-pack: stretch;
+          justify-content: stretch;
+  padding: 1rem 1rem;
+  overflow-y: auto;
+  max-width: 100%;
+  background-color: #fff;
+  max-width: 120rem;
+  width: calc(100% - 4rem);
+  background: #fff;
+  border-left: 1px solid rgba(0, 0, 0, 0.2);
+  background-clip: padding-box;
+  outline: 0;
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
+  -webkit-transition: -webkit-transform 0.3s ease-in-out;
+  transition: -webkit-transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+}
+[data-menu=offcanvas] .paddle-theme-dialog nav {
+  display: block;
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+[data-menu=offcanvas] .paddle-theme-dialog nav ul {
+  display: block;
+  list-style: none;
+  padding-right: 0;
+  margin-right: 0;
+}
+[data-menu=offcanvas] .paddle-theme-dialog nav ul li {
+  position: relative;
+  border-style: solid;
+  border-color: #ededed;
+  border-width: 0.1rem 0 0 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  line-height: 1;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  margin: 0;
+}
+[data-menu=offcanvas] .paddle-theme-dialog nav ul li .link-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 100%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+[data-menu=offcanvas] .paddle-theme-dialog nav ul li .link-wrap a {
+  display: block;
+  padding: 1rem 1.5rem;
+  line-height: 1.5rem;
+  text-decoration: none;
+  width: 100%;
+}
+[data-menu=offcanvas] .paddle-theme-dialog nav ul li button.toggle.submenu-expand {
+  background: unset;
+  border: unset;
+  color: unset;
+  margin-top: -1px;
+  border-right: 0.1rem solid #ededed;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  padding: 0 0.9rem;
+}
+[data-menu=offcanvas] .paddle-theme-dialog nav ul#offcanvas-menu-items {
+  margin: 0;
+  padding: 0;
+}
+[data-menu=offcanvas] .paddle-theme-dialog nav ul#offcanvas-menu-items li:first-child {
+  border-top: 1px solid transparent;
+}
+[data-menu=offcanvas] .paddle-theme-dialog nav ul#offcanvas-menu-items > li.header-cta-menu {
+  border-top: 1px solid transparent;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+[data-menu=offcanvas] .paddle-theme-dialog nav ul#offcanvas-menu-items > li.header-cta-menu .btn {
+  letter-spacing: 1px;
+  font-size: 100%;
+  text-transform: uppercase;
+}
+[data-menu=offcanvas] .paddle-theme-dialog nav ul:not(.sub-menu) > li > div > a,
+[data-menu=offcanvas] .paddle-theme-dialog nav ul:not(.children) > li > div > a {
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: -0.0375em;
+}
+[data-menu=offcanvas] .paddle-theme-dialog nav .sub-menu,
+[data-menu=offcanvas] .paddle-theme-dialog nav .children {
+  width: 100%;
+  display: none;
+  margin-right: 0;
+  padding-right: 1rem;
+}
+[data-menu=offcanvas] .paddle-theme-dialog nav .sub-menu ul,
+[data-menu=offcanvas] .paddle-theme-dialog nav .children ul {
+  margin-right: 0;
+  padding-right: 1.1rem;
+}
+[data-menu=offcanvas] .paddle-theme-dialog nav .sub-menu.active-panel,
+[data-menu=offcanvas] .paddle-theme-dialog nav .children.active-panel {
+  display: block;
+}
+[data-menu=offcanvas] .paddle-theme-dialog nav .menu-item:hover > span svg,
+[data-menu=offcanvas] .paddle-theme-dialog nav .submenu-expand svg {
+  height: 0.9rem;
+  fill: currentColor;
+  -webkit-transition: -webkit-transform 0.15s linear;
+  transition: -webkit-transform 0.15s linear;
+  transition: transform 0.15s linear;
+  transition: transform 0.15s linear, -webkit-transform 0.15s linear;
+  width: 1.5rem;
+}
+[data-menu=offcanvas] .paddle-theme-dialog nav .menu-item:hover > span svg,
+[data-menu=offcanvas] .paddle-theme-dialog nav .submenu-expand.active svg {
+  -webkit-transform: rotate(-180deg);
+          transform: rotate(-180deg);
+}
+[data-menu=offcanvas] .show-dialog {
+  -webkit-transform: translateX(0%);
+          transform: translateX(0%);
+}
+[data-menu=offcanvas] .hide-dialog {
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
+}
+
 /*--------------------------------------------------------------
 # Plugins
 --------------------------------------------------------------*/

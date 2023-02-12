@@ -21,8 +21,10 @@
                      <?php
                      if ( $paddle_menu->isSearchEnable() ) : // Header search button.
                          ?>
-                         <div id="search-glass"><button class="btn button-search" data-bs-toggle="modal" data-bs-target="#searchModal"><span class="screen-reader-text"><?php esc_html_e( 'Search', 'paddle' ); ?></span>
-                             </button></div>
+                         <div id="search-glass">
+                            <button class="btn button-search" data-bs-toggle="modal" data-bs-target="#searchModal"><span class="screen-reader-text"><?php esc_html_e( 'Search', 'paddle' ); ?></span>
+                             </button>
+                         </div>
                      <?php endif; ?>
                      <div class="toggler">
                          <button aria-label="<?php echo esc_attr__('Open Menu', 'paddle'); ?>" class="open-dialog btn navbar-toggler navbar-toggler-right collapsed offcanvas-toggle pl-0">

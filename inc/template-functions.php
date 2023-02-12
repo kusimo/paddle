@@ -143,10 +143,10 @@ add_filter( 'nav_menu_css_class', 'paddle_add_additional_class_on_li', 1, 3 );
  * @return string Modified form HTML.
  */
 function paddle_search_form( $form ) {
-	$form = '<form role="search" method="get" id="searchform" class="searchform d-inline-flex w-100" action="' . home_url( '/' ) . '" >
+	$form = '<form role="search" method="get" class="search--form d-inline-flex w-100" action="' . home_url( '/' ) . '" >
     <div class="d-flex w-100 align-items-center"><label class="screen-reader-text" for="s">' . esc_attr__( 'Search for:', 'paddle' ) . '</label>
     <input type="text" value="' . get_search_query() . '" name="s" id="s" placeholder="' . esc_attr__( 'Search for:', 'paddle' ) . '" />
-	<button type="submit" class="btn" title="' . esc_attr__( 'Search', 'paddle' ) . '" id="searchsubmit">
+	<button type="submit" class="btn searchsubmit" title="' . esc_attr__( 'Search', 'paddle' ) . '">
 	</button>
     </div>
     </form>';
@@ -229,20 +229,67 @@ function paddle_layout_width() {
  * @return void
  */
 function paddle_add_cta_menu( $items, $args ) {
-	if ( 'primary' === $args->theme_location && 1 === absint( get_theme_mod( 'paddle_header_cta', PADDLE_DEFAULT_OPTION['paddle_header_cta'] ) ) ) {
+	$has_header_cta = absint( get_theme_mod( 'paddle_header_cta', PADDLE_DEFAULT_OPTION['paddle_header_cta'] ) );
+	$header_cta_separated = absint( get_theme_mod( 'cta_separated', PADDLE_DEFAULT_OPTION['cta_separated'] ) );
+	if ( 'primary' === $args->theme_location && 1 === $has_header_cta && 0 === $header_cta_separated ) {
 		$option_url  = get_theme_mod( 'paddle_header_cta_url', home_url() );
 		$option_text = get_theme_mod( 'paddle_header_cta_text', PADDLE_DEFAULT_OPTION['paddle_header_cta_text'] );
 		$url         = esc_url( $option_url );
 		if ( ! empty( $option_url ) && ! empty( $option_text ) ) {
 			$items .= '<li id="header-btn-cta" class="menu-item d-flex justify-content-center align-items-center header-cta-menu">'
-				. '<a href="' . $url . '" class="btn btn-primary btn-lg btn-rounded">' . esc_attr( $option_text ) . '</a>'
-				. '</a>'
+				. '<a href="' . $url . '" class="btn btn-primary cta-button-link">' . esc_attr( $option_text ) . '</a>'
 				. '</li>';
 		}
 	}
 	return $items;
 }
 add_filter( 'wp_nav_menu_items', 'paddle_add_cta_menu', 10, 2 );
+
+/**
+ * paddle_add_separated_cta_to_header
+ */
+function paddle_add_separated_cta_to_header($menu_content, $args ) {
+	$has_header_cta = absint( get_theme_mod( 'paddle_header_cta', PADDLE_DEFAULT_OPTION['paddle_header_cta'] ) );
+	$header_cta_separated = absint( get_theme_mod( 'cta_separated', PADDLE_DEFAULT_OPTION['cta_separated'] ) );
+
+	if ( 'primary' === $args->theme_location && 1 === $has_header_cta && 1 === $header_cta_separated ) {
+
+		$option_url  = get_theme_mod( 'paddle_header_cta_url', home_url() );
+		$option_text = get_theme_mod( 'paddle_header_cta_text', PADDLE_DEFAULT_OPTION['paddle_header_cta_text'] );
+		$url         = esc_url( $option_url );
+
+		$cta_button_content = '<div id="header-btn-cta" class="d-flex justify-content-center align-items-center header-cta-menu">'
+					. '<a href="' . $url . '" class="btn btn-primary cta-button-link">' . esc_attr( $option_text ) . '</a>'
+					. '</div>';
+
+		// Remove spaces from html element
+		$menu_content = preg_replace(
+			array(
+				'/ {2,}/',
+				'/<!--.*?-->|\t|(?:\r?\n[ \t]*)+/s'
+			),
+			array(
+				' ',
+				''
+			),
+			$menu_content);
+		// Split menu content to get the container element
+		$content_to_split = explode('</ul></div>', $menu_content);
+		
+		
+		if (count($content_to_split) > 0) {
+			$menu_content = '';
+			$menu_content .= $content_to_split[0];
+			$menu_content .= '</ul><!-- .menu-->';
+			// Add CTA Button
+			$menu_content .= $cta_button_content;
+			$menu_content .= '</div><!-- .container-->';
+		}
+		
+	}
+	return $menu_content;
+}
+add_filter( 'wp_nav_menu', 'paddle_add_separated_cta_to_header', 10, 2 );
 
 
 /**
@@ -505,7 +552,7 @@ if ( ! function_exists( 'paddle_search_modal' ) ) {
 	 */
 	function paddle_search_modal() {
 		?>
-		<div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+		<search-modal class="full-width-search-container modal" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -530,7 +577,7 @@ if ( ! function_exists( 'paddle_search_modal' ) ) {
 					</div>
 				</div>
 			</div>
-		</div><!-- .modal.fade -->
+		</search-modal><!-- .modal.fade -->
 
 		<?php
 	}
@@ -675,31 +722,24 @@ if ( ! function_exists( ' paddle_header_main ' ) ) :
 	 * @return void
 	 */
 	function paddle_header_main() {
-		$default_header = get_theme_mod( 'paddle_header_layout_style', PADDLE_DEFAULT_OPTION['paddle_header_layout_style'], 'logo-left-style-2' );
-
-		$paddle_header_style = $default_header;
-
-		$header_style_id = '1';
-
-		switch($default_header) {
-			case 'logo-left-style-2' : 
-				$paddle_header_style = 'header-style-2';
-				$header_style_id = '2';	
-				break;
-			case 'logo-left-style-3';
-				$paddle_header_style = 'header-style-3';
-				$header_style_id = '3';	
-				break;
-			default:
-				$paddle_header_style = 'header-style-1';
-				$header_style_id = '1';	
-		}
-
+		$default_header = get_theme_mod( 'paddle_header_layout_style', PADDLE_DEFAULT_OPTION['paddle_header_layout_style'] );
+		
+		$style = explode('-', $default_header);
+		$header_number = is_array($style) ? end($style) : 1;
+		
 		?>
-		 <header id="masthead" class="site-header <?php echo esc_attr( $paddle_header_style ); ?>">
+		 <header id="masthead" class="site-header" data-header="<?php echo esc_attr( paddle_get_default_header_number($default_header) ); ?>" data-header-section="<?php echo esc_attr( $default_header );?>">
 		<?php
-
-			get_template_part( 'template-parts/header/style', $header_style_id );
+			if ( in_array($header_number, ['1', '2', '3', '4'])) {
+				get_template_part( 'template-parts/header/paddle-header', paddle_get_default_header_number($default_header) );
+			} else if ( in_array($header_number, [ '5'])) {
+				get_template_part( 'template-parts/header/paddle-header', paddle_get_default_header_number($default_header) );
+			} else if ( in_array($header_number, [ '6'])) {
+				get_template_part( 'template-parts/header/paddle-header', paddle_get_default_header_number($default_header) );
+			} else {
+				// Do nothing.
+			}
+			
 		?>
 		</header><!-- #masthead -->
 		
@@ -886,6 +926,46 @@ if ( ! function_exists('paddle_get_font_type') ) {
 	}
 }
 
+if ( !function_exists('paddle_svg_color')) {
+	function paddle_svg_color($color = '' ) {
+		if('' === $color) $color = paddle_theme_get_color('paddle_theme_color_links');
+		return str_replace('#','%23', $color);
+	}
+}
 
 
+if ( !function_exists('paddle_search_layout')) {
+	function paddle_search_layout() {
+		$paddle_menu    = new PaddleMenu();
+		// Check the desktop search and mobile search are the same layout
+		if ($paddle_menu->searchLayout('input')) 
+			: // Header search button.
+		?>
+			<div class="full-width-search-container icon-with-input">
+				<div class="search-form-container">
+					<?php get_search_form(); ?>
+				</div>
+			</div>
+		<?php elseif ($paddle_menu->searchLayout('icon')) : ?>
+			<div id="search-glass">
+				<button class="btn button-search" data-bs-toggle="modal" data-bs-target="#searchModal"><span class="screen-reader-text"><?php esc_html_e('Search', 'paddle'); ?></span>
+				</button>
+			</div>
+		<?php elseif ($paddle_menu->searchLayout('both')) : 
+			// Using different search layout for mobile and desktop. Hide one on desktop 
+			?>
+			 <div id="search-glass" class="<?php echo 'icon' === esc_attr($paddle_menu->searchType('mobile')) ? 'd-block d-lg-none mobile' : 'd-none d-lg-flex desktop';?>">
+				<button class="btn button-search" data-bs-toggle="modal" data-bs-target="#searchModal"><span class="screen-reader-text"><?php esc_html_e('Search', 'paddle'); ?></span>
+				</button>
+			</div>
+
+			<div class="full-width-search-container icon-with-input <?php echo 'input' === esc_attr($paddle_menu->searchType('desktop')) ? 'd-none d-lg-flex desktop' : 'd-block d-lg-none mobile';?>">
+				<div class="search-form-container">
+					<?php get_search_form(); ?>
+				</div>
+			</div>
+		   
+		<?php endif;
+	}
+}
 

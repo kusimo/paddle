@@ -63,6 +63,11 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		private $show_number = false;
 
 		/**
+		 * Full width label
+		 */
+		private $fullwidth_label = false;
+
+		/**
 		 * Constructor
 		 */
 		public function __construct( $manager, $id, $args = array(), $options = array() ) {
@@ -83,6 +88,10 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 			if ( isset( $this->input_attrs['show_number'] ) && $this->input_attrs['show_number'] ) {
 				$this->show_number = true;
 			}
+
+			if ( isset( $this->input_attrs['fullwidth_label'] ) && $this->input_attrs['fullwidth_label'] ) {
+				$this->fullwidth_label = true;
+			}
 		}		
 		/**
 		 * Enqueue our scripts and styles
@@ -96,7 +105,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		public function render_content() {
 			$counter = 0;
 			?>
-			<div class="image_radio_button_control paddle-section-spacing paddle-item">
+			<div class="image_radio_button_control paddle-section-spacing paddle-item<?php echo esc_html( $this->fullwidth_label ? ' paddle-fw-label': '' );?>">
 				<?php if ( ! empty( $this->label ) ) { ?>
 					<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
 				<?php } ?>
@@ -473,6 +482,33 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 * The type of control being rendered
 		 */
 		public $type = 'simple_notice';
+
+		/**
+		 * Array of info to display
+		 */
+		private $infos = array();
+		private $show_label = false;
+		private $show_desc = false;
+
+		/**
+		 * Constructor
+		 */
+		public function __construct( $manager, $id, $args = array(), $options = array() ) {
+			parent::__construct( $manager, $id, $args );
+			
+			if ( isset( $this->input_attrs['show_label'] ) && $this->input_attrs['show_label'] ) {
+				$this->show_label = true;
+			}
+			
+			if ( isset( $this->input_attrs['show_desc'] ) &&  $this->input_attrs['show_desc'] ) {
+				$this->show_desc = true;
+			}
+			// Label for toggle
+			if ( isset( $this->input_attrs['infos'] ) && !empty( $this->input_attrs['infos'] ) ) {
+				$this->infos = $this->input_attrs['infos'];
+			}
+			
+		}	
 		/**
 		 * Render the control in the customizer
 		 */
@@ -497,12 +533,24 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 			);
 		?>
 			<div class="simple-notice-custom-control">
-				<?php if( !empty( $this->label ) ) { ?>
+				<?php if( !empty( $this->label ) && $this->show_label) { ?>
 					<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
 				<?php } ?>
-				<?php if( !empty( $this->description ) ) { ?>
+				<?php if( !empty( $this->description ) && $this->show_desc ) { ?>
 					<span class="customize-control-description"><?php echo wp_kses( $this->description, $allowed_html ); ?></span>
 				<?php } ?>
+
+				<?php if( !empty ($this->infos) ) {
+					$html_info = '';
+					foreach( $this->infos as $key => $value ) {?>
+						<span class="customize-control-description <?php echo esc_html($key);?>">
+							<span class="dashicons dashicons-info"></span>
+							<span><?php echo wp_kses( $value, $allowed_html ); ?></span>
+						</span>
+					 <?php }
+					
+				}
+				?>
 			</div>
 		<?php
 		}
@@ -974,26 +1022,6 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		}
 	}
 
-	if ( ! function_exists( 'paddle_check_active_control_paddle_header_cta' ) ) {
-
-		/**
-		 * Check if CTA button is active.
-		 *
-		 * @since 1.0.0
-		 *
-		 * @param WP_Customize_Control $control WP_Customize_Control instance.
-		 *
-		 * @return bool Whether the control is active to the current preview.
-		 */
-		function paddle_check_active_control_paddle_header_cta( $control ) {
-
-			if ( 1 === $control->manager->get_setting( 'paddle_header_cta' )->value() ) {
-				return true;
-			} else {
-				return false;
-			}
-		}
-	}
 
 	if ( ! function_exists( 'paddle_check_theme_header_options' ) ) {
 
@@ -1012,6 +1040,50 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 				&& 1 === $control->manager->get_setting( 'paddle_header_cta' )->value()
 				&& paddle_count_menu_items() > 5
 				) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
+	if ( ! function_exists( 'paddle_using_header_1_4' ) ) {
+
+		/**
+		 * Check the active header style.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param WP_Customize_Control $control WP_Customize_Control instance.
+		 *
+		 * @return bool Whether the control is active to the current preview.
+		 */
+		function paddle_using_header_1_4( $control ) {
+			$style_array = ['paddle-header-1', 'paddle-header-2', 'paddle-header-3', 'paddle-header-4'];
+			if ( in_array( $control->manager->get_setting( 'paddle_header_layout_style' )->value(), $style_array ) ) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
+	if ( ! function_exists( 'paddle_using_header_1_4_desktop_selected' ) ) {
+
+		/**
+		 * Check the active header style.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param WP_Customize_Control $control WP_Customize_Control instance.
+		 *
+		 * @return bool Whether the control is active to the current preview.
+		 */
+		function paddle_using_header_1_4_desktop_selected( $control ) {
+			$style_array = ['paddle-header-1', 'paddle-header-2', 'paddle-header-3', 'paddle-header-4'];
+			if ( in_array( $control->manager->get_setting( 'paddle_header_layout_style' )->value(), $style_array ) 
+			&&  'desktop' === $control->manager->get_setting( 'title_options_header' )->value() 
+			&& 1 === $control->manager->get_setting( 'paddle_header_search_button' )->value()) {
 				return true;
 			} else {
 				return false;
@@ -1466,5 +1538,186 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		}
 
 	endif;
+
+	if ( ! function_exists( 'paddle_check_header_border_is_active' ) ) {
+
+		/**
+		 * Check if header border section is active and on desktop section page.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param WP_Customize_Control $control WP_Customize_Control instance.
+		 *
+		 * @return bool Whether the control is active to the current preview.
+		 */
+		function paddle_check_header_border_is_active( $control ) {
+
+			if ( 1 === $control->manager->get_setting( 'menu_border_bottom' )->value() 
+			&& 'desktop' === $control->manager->get_setting( 'title_options_header' )->value()
+			|| 
+			1 === $control->manager->get_setting( 'menu_border_top' )->value()
+			&& 'desktop' === $control->manager->get_setting( 'title_options_header' )->value()
+			) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
+	if ( ! function_exists( 'paddle_header_desktop_selected' ) ) {
+
+		/**
+		 * Check if Desktop Header section is active.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param WP_Customize_Control $control WP_Customize_Control instance.
+		 *
+		 * @return bool Whether the control is active to the current preview.
+		 */
+		function paddle_header_desktop_selected( $control ) {
+
+			if ( 'desktop' === $control->manager->get_setting( 'title_options_header' )->value() ) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
+	if ( ! function_exists( 'paddle_header_mobile_selected' ) ) {
+
+		/**
+		 * Check if Mobile Header section is active.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param WP_Customize_Control $control WP_Customize_Control instance.
+		 *
+		 * @return bool Whether the control is active to the current preview.
+		 */
+		function paddle_header_mobile_selected( $control ) {
+
+			if ( 'mobile' === $control->manager->get_setting( 'title_options_header' )->value() ) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
+	if ( ! function_exists( 'paddle_header_desktop_selected_search_enab' ) ) {
+
+		/**
+		 * Check if Desktop Header section is active.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param WP_Customize_Control $control WP_Customize_Control instance.
+		 *
+		 * @return bool Whether the control is active to the current preview.
+		 */
+		function paddle_header_desktop_selected_search_enab( $control ) {
+
+			if ( 'desktop' === $control->manager->get_setting( 'title_options_header' )->value() 
+			&& 1 === $control->manager->get_setting( 'paddle_header_search_button' )->value() ) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
+	if ( ! function_exists( 'paddle_header_desktop_selected_header_6' ) ) {
+
+		/**
+		 * Check if Desktop Header section is active and header 6 is selected.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param WP_Customize_Control $control WP_Customize_Control instance.
+		 *
+		 * @return bool Whether the control is active to the current preview.
+		 */
+		function paddle_header_desktop_selected_header_6( $control ) {
+
+			if ( 'desktop' === $control->manager->get_setting( 'title_options_header' )->value() 
+			&& 'paddle-header-6' === $control->manager->get_setting( 'paddle_header_layout_style' )->value() ) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
+	if ( ! function_exists( 'paddle_header_desktop_selected_header_5' ) ) {
+
+		/**
+		 * Check if Desktop Header section is active and header 5 is selected.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param WP_Customize_Control $control WP_Customize_Control instance.
+		 *
+		 * @return bool Whether the control is active to the current preview.
+		 */
+		function paddle_header_desktop_selected_header_5( $control ) {
+
+			if ( 'desktop' === $control->manager->get_setting( 'title_options_header' )->value() 
+			&& 'paddle-header-5' === $control->manager->get_setting( 'paddle_header_layout_style' )->value() ) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
+	if ( ! function_exists( 'paddle_using_header_1_4_5_desktop_selected' ) ) {
+
+		/**
+		 * Check if Desktop selected apply this to section 1-4+5.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param WP_Customize_Control $control WP_Customize_Control instance.
+		 *
+		 * @return bool Whether the control is active to the current preview.
+		 */
+		function paddle_using_header_1_4_5_desktop_selected( $control ) {
+
+			if ( paddle_using_header_1_4_desktop_selected($control) 
+			|| 'paddle-header-5' === $control->manager->get_setting( 'paddle_header_layout_style' )->value() ) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
+	if ( ! function_exists( 'paddle_header_desktop_selected_cta_enab' ) ) {
+
+		/**
+		 * Check if Desktop Header section is active.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param WP_Customize_Control $control WP_Customize_Control instance.
+		 *
+		 * @return bool Whether the control is active to the current preview.
+		 */
+		function paddle_header_desktop_selected_cta_enab( $control ) {
+
+			if ( 'desktop' === $control->manager->get_setting( 'title_options_header' )->value() 
+			&& 1 === $control->manager->get_setting( 'paddle_header_cta' )->value() ) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
+
+
 
 }

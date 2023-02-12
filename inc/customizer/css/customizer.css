@@ -22,6 +22,7 @@ li#accordion-section-background_image {
 }
  #customize-theme-controls .accordion-section-content .customize-control-title{
     color: #1e293b;
+	font-weight: normal;
 }
 /* ==========================================================================
    Standard Selection
@@ -102,7 +103,18 @@ input[type="number"]:focus {
    ========================================================================== */
 
 .simple-notice-custom-control .customize-control-description {
-	line-height: 1.6
+	display: flex;
+	line-height: 1.6;
+	font-style: normal;
+	gap: 7px;
+	
+}
+.simple-notice-custom-control .customize-control-description .dashicons-info{
+	color: #2196f3;
+}
+
+span.customize-control-description.info_2_alert .dashicons-info {
+	color: #f44336!important;
 }
 
 .simple-notice-custom-control code {
@@ -302,8 +314,7 @@ li[id^="customize-control-paddle_"]
 li[id*="_font_"]
 span.paddle-label ,
 li[id*="-paragraph_margin_bottom"]
-span.paddle-label,
-li[id*="_color"].customize-control-color
+span.paddle-label, #sub-accordion-section-paddle_theme_color_section li[id*="_color"].customize-control-color
 span.customize-control-title
 {
     margin: 0 -24px 15px;
@@ -347,12 +358,12 @@ span.paddle-label.customize-control-description {
     padding: 0 2%;
 	padding-left: 0;
 }
-li#customize-control-paddle_header_layout_style label.radio-button-label {
+li.customize-control-image_radio_button .paddle-fw-label label.radio-button-label {
 	position: relative;
 	width: 100%;
 	padding: unset;
 }
-li#customize-control-paddle_header_layout_style label.radio-button-label>span.number {
+li.customize-control-image_radio_button .paddle-fw-label label.radio-button-label>span.number {
 	position: absolute;
     left: -16px;
     padding: 5px;
@@ -437,13 +448,20 @@ li#customize-control-paddle_header_layout_style label.radio-button-label>span.nu
 	font-weight: normal;
 	font-size: 24px;
 	content: "\f147";
-	margin-left: -10px;
+	margin-left: -4px;
 	vertical-align: bottom;
+	margin-right: 15px;
+    background-color: #4caf50;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
 }
 
 .pill_checkbox_control .fullwidth_pills .checkbox-label > .sortable-pill-title {
 	width: 100%;
-	border-radius: 0;
+	font-size: 15px;
+    display: flex;
+    border-radius: 5px;
 }
 
 .pill_checkbox_control .sortable.fullwidth_pills .checkbox-label > .sortable-pill-title {

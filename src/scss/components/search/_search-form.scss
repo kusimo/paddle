@@ -1,5 +1,5 @@
 /* Search Form */
-#searchform {
+.search--form {
   border-radius: 0;
   padding: 0;
   border: 1px solid #eee;
@@ -41,7 +41,7 @@
     opacity: 0.4;
   }
 }
-#searchModal .modal-content button#searchsubmit {
+#searchModal .modal-content button.searchsubmit {
   background-size: 22px;
     opacity: 0.6;
     margin-left: 0;
@@ -51,12 +51,12 @@
     padding: 5px;
     margin-right: 5px;
 }
-.navbar-offcanvas.offcanvas-transform.in button#searchsubmit {
+.navbar-offcanvas.offcanvas-transform.in button.searchsubmit {
   margin-left: -22px;
 }
 
-.navbar-offcanvas.offcanvas-transform.in #searchform input[type='text'],
-.widget #searchform input[type='text'],
-.search-no-results #searchform input[type='text'] {
+.navbar-offcanvas.offcanvas-transform.in .search--form input[type='text'],
+.widget .search--form input[type='text'],
+.search-no-results .search--form input[type='text'] {
   border: none;
 }

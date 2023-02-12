@@ -8,6 +8,8 @@
  * @package paddle
  */
 
+use ParagonIE\Sodium\Core\Util;
+
 if (!defined('PADDLE_VERSION')) {
 	// Replace the version number of the theme on each release.
 	define('PADDLE_VERSION', '1.2.1');
@@ -488,6 +490,25 @@ function paddle_load_ondemand_css($post_id = false, $search_string ='') {
     return ( strpos($post->post_content,$search_string) !== false ); 
 }
 
+/**
+ * Get header style
+ */
+
+ function paddle_get_default_header_number($default_header) {
+	$style = explode('-', $default_header);
+	$header_number = is_array($style) ? end($style) : 1;
+	if ( in_array($header_number, ['1', '2', '3', '4'])) {
+		return '1-4';
+	} 
+	if ( in_array($header_number, ['5'])) {
+		return '5-6';
+	} 
+	if ( in_array($header_number, ['6'])) {
+		return '6';
+	} 
+	return '';
+ }
+
 /*
 * Include our Customizer settings.
 */
@@ -527,9 +548,13 @@ require get_template_directory() . '/inc/template-functions.php';
 //require get_template_directory() . '/inc/customizer/customizer.php';
 
 /**
- * Global CSS variables
+ * Global/Dynamic CSS 
  */
 require get_template_directory() . '/inc/dynamic-css/frontend-dynamic-css.php';
+require get_template_directory() . '/inc/dynamic-css/paddle-header-1-4.php';
+require get_template_directory() . '/inc/dynamic-css/paddle-header-5-6.php';
+require get_template_directory() . '/inc/dynamic-css/paddle-header-6.php';
+
 
 /**
  * Load Jetpack compatibility file.
