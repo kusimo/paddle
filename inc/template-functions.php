@@ -30,7 +30,7 @@ function paddle_body_classes( $classes ) {
 
 	// Add header layout option
 	$paddle_current_header_style = get_theme_mod( 'paddle_header_layout_style', PADDLE_DEFAULT_OPTION['paddle_header_layout_style'] );
-	$classes[] = $paddle_current_header_style;
+	$classes[]                   = $paddle_current_header_style;
 
 	// Add sidebar classes.
 	if ( 'left-sidebar' === get_theme_mod( 'paddle_sidebar_position', PADDLE_DEFAULT_OPTION['paddle_sidebar_position'] ) && 1 === get_theme_mod( 'paddle_page_layout_sidebar' ) ) {
@@ -45,10 +45,10 @@ function paddle_body_classes( $classes ) {
 	}
 
 	// Date updated.
-	if ( 0 === get_theme_mod( 'paddle_enable_blog_updated_date', PADDLE_DEFAULT_OPTION['paddle_enable_blog_updated_date']  ) ) {
+	if ( 0 === get_theme_mod( 'paddle_enable_blog_updated_date', PADDLE_DEFAULT_OPTION['paddle_enable_blog_updated_date'] ) ) {
 		$classes[] = 'hide-time-upd';
 	}
-	if ( 0 === get_theme_mod( 'paddle_enable_blog_published_date', PADDLE_DEFAULT_OPTION['paddle_enable_blog_published_date']  ) ) {
+	if ( 0 === get_theme_mod( 'paddle_enable_blog_published_date', PADDLE_DEFAULT_OPTION['paddle_enable_blog_published_date'] ) ) {
 		$classes[] = 'hide-time-pub';
 	}
 
@@ -63,15 +63,15 @@ add_filter( 'body_class', 'paddle_body_classes' );
  * @return array
  */
 
- function paddle_post_classes( $classes ) {
+function paddle_post_classes( $classes ) {
 	if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
 		$classes[] = 'post-modified';
 	} else {
 		$classes[] = 'post-not-modified';
 	}
 	return $classes;
- }
- add_filter( 'post_class','paddle_post_classes' );
+}
+ add_filter( 'post_class', 'paddle_post_classes' );
 
 /**
  * Add a pingback url auto-discovery header for single posts, pages, or attachments.
@@ -229,7 +229,7 @@ function paddle_layout_width() {
  * @return void
  */
 function paddle_add_cta_menu( $items, $args ) {
-	$has_header_cta = absint( get_theme_mod( 'paddle_header_cta', PADDLE_DEFAULT_OPTION['paddle_header_cta'] ) );
+	$has_header_cta       = absint( get_theme_mod( 'paddle_header_cta', PADDLE_DEFAULT_OPTION['paddle_header_cta'] ) );
 	$header_cta_separated = absint( get_theme_mod( 'cta_separated', PADDLE_DEFAULT_OPTION['cta_separated'] ) );
 	if ( 'primary' === $args->theme_location && 1 === $has_header_cta && 0 === $header_cta_separated ) {
 		$option_url  = get_theme_mod( 'paddle_header_cta_url', home_url() );
@@ -248,8 +248,8 @@ add_filter( 'wp_nav_menu_items', 'paddle_add_cta_menu', 10, 2 );
 /**
  * paddle_add_separated_cta_to_header
  */
-function paddle_add_separated_cta_to_header($menu_content, $args ) {
-	$has_header_cta = absint( get_theme_mod( 'paddle_header_cta', PADDLE_DEFAULT_OPTION['paddle_header_cta'] ) );
+function paddle_add_separated_cta_to_header( $menu_content, $args ) {
+	$has_header_cta       = absint( get_theme_mod( 'paddle_header_cta', PADDLE_DEFAULT_OPTION['paddle_header_cta'] ) );
 	$header_cta_separated = absint( get_theme_mod( 'cta_separated', PADDLE_DEFAULT_OPTION['cta_separated'] ) );
 
 	if ( 'primary' === $args->theme_location && 1 === $has_header_cta && 1 === $header_cta_separated ) {
@@ -266,26 +266,25 @@ function paddle_add_separated_cta_to_header($menu_content, $args ) {
 		$menu_content = preg_replace(
 			array(
 				'/ {2,}/',
-				'/<!--.*?-->|\t|(?:\r?\n[ \t]*)+/s'
+				'/<!--.*?-->|\t|(?:\r?\n[ \t]*)+/s',
 			),
 			array(
 				' ',
-				''
+				'',
 			),
-			$menu_content);
+			$menu_content
+		);
 		// Split menu content to get the container element
-		$content_to_split = explode('</ul></div>', $menu_content);
-		
-		
-		if (count($content_to_split) > 0) {
-			$menu_content = '';
+		$content_to_split = explode( '</ul></div>', $menu_content );
+
+		if ( count( $content_to_split ) > 0 ) {
+			$menu_content  = '';
 			$menu_content .= $content_to_split[0];
 			$menu_content .= '</ul><!-- .menu-->';
 			// Add CTA Button
 			$menu_content .= $cta_button_content;
 			$menu_content .= '</div><!-- .container-->';
 		}
-		
 	}
 	return $menu_content;
 }
@@ -597,12 +596,12 @@ if ( ! function_exists( 'paddle_footer_copyrights' ) ) :
 
 				<?php
 				$copyright = get_theme_mod( 'paddle_footer_copyright_text' );
-				if ( $copyright &&  '' !== wp_kses_post( $copyright ) ) :
+				if ( $copyright && '' !== wp_kses_post( $copyright ) ) :
 					echo wp_kses_post( get_theme_mod( 'paddle_footer_copyright_text' ) );
 
 				else :
 					paddle_get_default_footer_copyright();
-				
+
 				endif;
 
 				?>
@@ -723,23 +722,23 @@ if ( ! function_exists( ' paddle_header_main ' ) ) :
 	 */
 	function paddle_header_main() {
 		$default_header = get_theme_mod( 'paddle_header_layout_style', PADDLE_DEFAULT_OPTION['paddle_header_layout_style'] );
-		
-		$style = explode('-', $default_header);
-		$header_number = is_array($style) ? end($style) : 1;
-		
+
+		$style         = explode( '-', $default_header );
+		$header_number = is_array( $style ) ? end( $style ) : 1;
+
 		?>
-		 <header id="masthead" class="site-header" data-header="<?php echo esc_attr( paddle_get_default_header_number($default_header) ); ?>" data-header-section="<?php echo esc_attr( $default_header );?>">
+		 <header id="masthead" class="site-header" data-header="<?php echo esc_attr( paddle_get_default_header_number( $default_header ) ); ?>" data-header-section="<?php echo esc_attr( $default_header ); ?>">
 		<?php
-			if ( in_array($header_number, ['1', '2', '3', '4'])) {
-				get_template_part( 'template-parts/header/paddle-header', paddle_get_default_header_number($default_header) );
-			} else if ( in_array($header_number, [ '5'])) {
-				get_template_part( 'template-parts/header/paddle-header', paddle_get_default_header_number($default_header) );
-			} else if ( in_array($header_number, [ '6'])) {
-				get_template_part( 'template-parts/header/paddle-header', paddle_get_default_header_number($default_header) );
-			} else {
-				// Do nothing.
-			}
-			
+		if ( in_array( $header_number, array( '1', '2', '3', '4' ) ) ) {
+			get_template_part( 'template-parts/header/paddle-header', paddle_get_default_header_number( $default_header ) );
+		} elseif ( in_array( $header_number, array( '5' ) ) ) {
+			get_template_part( 'template-parts/header/paddle-header', paddle_get_default_header_number( $default_header ) );
+		} elseif ( in_array( $header_number, array( '6' ) ) ) {
+			get_template_part( 'template-parts/header/paddle-header', paddle_get_default_header_number( $default_header ) );
+		} else {
+			// Do nothing.
+		}
+
 		?>
 		</header><!-- #masthead -->
 		
@@ -758,7 +757,9 @@ if ( ! function_exists( ' paddle_offcanvas_menu ' ) ) :
 	 */
 	function paddle_offcanvas_menu() {
 		$paddle_header_style = get_theme_mod( 'paddle_header_layout_style', PADDLE_DEFAULT_OPTION['paddle_header_layout_style'], 'logo-left-style-2' );
-		if( 'logo-left-style-3' === $paddle_header_style ) return;
+		if ( 'logo-left-style-3' === $paddle_header_style ) {
+			return;
+		}
 		?>
 		<div id="offcanvas-content" data-menu="offcanvas">
 			<div class="paddle-theme-dialog" role="dialog" aria-labelledby="dialog-title" aria-describedby="dialog-description" id="offcanvas-menu">
@@ -866,59 +867,59 @@ if ( ! function_exists( 'paddle_get_header_image_url' ) ) {
 			return wp_get_attachment_url( get_theme_mod( 'hero_image' ) );
 
 		} else {
-			$media_type = get_theme_mod( 'header_media_select', PADDLE_DEFAULT_OPTION['header_media_select'] );
+			$media_type              = get_theme_mod( 'header_media_select', PADDLE_DEFAULT_OPTION['header_media_select'] );
 			$default_bg_image_enable = get_theme_mod( 'use_default_banner_image', PADDLE_DEFAULT_OPTION['use_default_banner_image'] );
 
-			if ( 0 === $default_bg_image_enable ) return '';
+			if ( 0 === $default_bg_image_enable ) {
+				return '';
+			}
 
-			if ( 'hero' === $media_type )  { 
+			if ( 'hero' === $media_type ) {
 				return get_template_directory_uri() . '/assets/images/golden-ball.jpeg';
 			} else {
 				return get_template_directory_uri() . '/assets/images/white-swipe.png';
 			}
-
-			
 		}
 	}
 }
 
-if ( ! function_exists('paddle_get_font_type') ) {
+if ( ! function_exists( 'paddle_get_font_type' ) ) {
 	function paddle_get_font_type() {
-		$font = '';
+		$font      = '';
 		$font_type = get_theme_mod( 'paddle_typography_preset', PADDLE_DEFAULT_OPTION['paddle_typography_preset'] );
 
 		if ( 'system-font' === $font_type ) {
 			return '';
 		}
 
-		switch($font_type) {
-			case 'roboto' :
+		switch ( $font_type ) {
+			case 'roboto':
 				$font = "'Roboto', sans-serif";
-			break;
+				break;
 
-			case 'open-sans' :
-				$font= "'Open Sans', sans-serif";
-			break;
+			case 'open-sans':
+				$font = "'Open Sans', sans-serif";
+				break;
 
-			case 'lato' :
-				$font= "'Lato', sans-serif";
-			break;
+			case 'lato':
+				$font = "'Lato', sans-serif";
+				break;
 
-			case 'montserrat' :
-				$font= "'Montserrat', sans-serif";
-			break;
+			case 'montserrat':
+				$font = "'Montserrat', sans-serif";
+				break;
 
-			case 'raleway' :
-				$font= "'Raleway', sans-serif";
-			break;
+			case 'raleway':
+				$font = "'Raleway', sans-serif";
+				break;
 
-			case 'source-sans-pro' :
-				$font= "'Source Sans Pro', sans-serif";
-			break;
+			case 'source-sans-pro':
+				$font = "'Source Sans Pro', sans-serif";
+				break;
 
-			case 'poppins' :
-				$font= "'Poppins', sans-serif";
-			break;
+			case 'poppins':
+				$font = "'Poppins', sans-serif";
+				break;
 
 		}
 
@@ -926,46 +927,49 @@ if ( ! function_exists('paddle_get_font_type') ) {
 	}
 }
 
-if ( !function_exists('paddle_svg_color')) {
-	function paddle_svg_color($color = '' ) {
-		if('' === $color) $color = paddle_theme_get_color('paddle_theme_color_links');
-		return str_replace('#','%23', $color);
+if ( ! function_exists( 'paddle_svg_color' ) ) {
+	function paddle_svg_color( $color = '' ) {
+		if ( '' === $color ) {
+			$color = paddle_theme_get_color( 'paddle_theme_color_links' );
+		}
+		return str_replace( '#', '%23', $color );
 	}
 }
 
 
-if ( !function_exists('paddle_search_layout')) {
+if ( ! function_exists( 'paddle_search_layout' ) ) {
 	function paddle_search_layout() {
-		$paddle_menu    = new PaddleMenu();
+		$paddle_menu = new PaddleMenu();
 		// Check the desktop search and mobile search are the same layout
-		if ($paddle_menu->searchLayout('input')) 
-			: // Header search button.
-		?>
+		if ( $paddle_menu->searchLayout( 'input' ) ) : // Header search button.
+			?>
 			<div class="full-width-search-container icon-with-input">
 				<div class="search-form-container">
 					<?php get_search_form(); ?>
 				</div>
 			</div>
-		<?php elseif ($paddle_menu->searchLayout('icon')) : ?>
+		<?php elseif ( $paddle_menu->searchLayout( 'icon' ) ) : ?>
 			<div id="search-glass">
-				<button class="btn button-search" data-bs-toggle="modal" data-bs-target="#searchModal"><span class="screen-reader-text"><?php esc_html_e('Search', 'paddle'); ?></span>
+				<button class="btn button-search" data-bs-toggle="modal" data-bs-target="#searchModal"><span class="screen-reader-text"><?php esc_html_e( 'Search', 'paddle' ); ?></span>
 				</button>
 			</div>
-		<?php elseif ($paddle_menu->searchLayout('both')) : 
-			// Using different search layout for mobile and desktop. Hide one on desktop 
+			<?php
+		elseif ( $paddle_menu->searchLayout( 'both' ) ) :
+			// Using different search layout for mobile and desktop. Hide one on desktop
 			?>
-			 <div id="search-glass" class="<?php echo 'icon' === esc_attr($paddle_menu->searchType('mobile')) ? 'd-block d-lg-none mobile' : 'd-none d-lg-flex desktop';?>">
-				<button class="btn button-search" data-bs-toggle="modal" data-bs-target="#searchModal"><span class="screen-reader-text"><?php esc_html_e('Search', 'paddle'); ?></span>
+			 <div id="search-glass" class="<?php echo 'icon' === esc_attr( $paddle_menu->searchType( 'mobile' ) ) ? 'd-block d-lg-none mobile' : 'd-none d-lg-flex desktop'; ?>">
+				<button class="btn button-search" data-bs-toggle="modal" data-bs-target="#searchModal"><span class="screen-reader-text"><?php esc_html_e( 'Search', 'paddle' ); ?></span>
 				</button>
 			</div>
 
-			<div class="full-width-search-container icon-with-input <?php echo 'input' === esc_attr($paddle_menu->searchType('desktop')) ? 'd-none d-lg-flex desktop' : 'd-block d-lg-none mobile';?>">
+			<div class="full-width-search-container icon-with-input <?php echo 'input' === esc_attr( $paddle_menu->searchType( 'desktop' ) ) ? 'd-none d-lg-flex desktop' : 'd-block d-lg-none mobile'; ?>">
 				<div class="search-form-container">
 					<?php get_search_form(); ?>
 				</div>
 			</div>
 		   
-		<?php endif;
+			<?php
+		endif;
 	}
 }
 

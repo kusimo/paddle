@@ -66,12 +66,13 @@ if ( ! function_exists( 'paddle_grid_category_list' ) ) :
 			$categories_list = get_the_category_list( esc_html__( ', ', 'paddle' ) );
 			if ( $categories_list ) { ?>
 			<div class="entry-footer grid-category-list">
-				<?php 
+				<?php
 				/* translators: 1: list of categories. */
 				printf( '<span class="cat-links"  title="' . __( 'Posted in', 'paddle' ) . '">%1$s</span>', $categories_list ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				?>
 			</div>
-			<?php }   //End if categories_list.
+				<?php
+			}   //End if categories_list.
 		}   // End if post type.
 	}
 
@@ -137,30 +138,30 @@ if ( ! function_exists( 'paddle_entry_footer' ) ) :
 		// Hide category and tag text for pages.
 		if ( 'post' === get_post_type() ) {
 
-			do_action('paddle_before_post_entry_footer');
+			do_action( 'paddle_before_post_entry_footer' );
 
-			$enable_blog_category = get_theme_mod( 'paddle_enable_blog_category', PADDLE_DEFAULT_OPTION['paddle_enable_blog_category'] );
-			$enable_blog_tag = get_theme_mod( 'paddle_enable_blog_tag', PADDLE_DEFAULT_OPTION['paddle_enable_blog_tag'] );
+			$enable_blog_category       = get_theme_mod( 'paddle_enable_blog_category', PADDLE_DEFAULT_OPTION['paddle_enable_blog_category'] );
+			$enable_blog_tag            = get_theme_mod( 'paddle_enable_blog_tag', PADDLE_DEFAULT_OPTION['paddle_enable_blog_tag'] );
 			$enable_blog_published_date = get_theme_mod( 'paddle_enable_blog_published_date', PADDLE_DEFAULT_OPTION['paddle_enable_blog_published_date'] );
-			$paddle_blog_date_position = get_theme_mod( 'paddle_blog_date_position', PADDLE_DEFAULT_OPTION['paddle_blog_date_position'] );
+			$paddle_blog_date_position  = get_theme_mod( 'paddle_blog_date_position', PADDLE_DEFAULT_OPTION['paddle_blog_date_position'] );
 
 			if ( is_single() && 1 === $enable_blog_category ) {
 				paddle_category_list();
-			} 
+			}
 
 			if ( is_singular() && 1 === $enable_blog_tag ) {
 				paddle_tag_list();
-			}  elseif ( is_archive() && 1 === get_theme_mod( 'paddle_enable_archive_tag', PADDLE_DEFAULT_OPTION['paddle_enable_archive_tag'] ) || is_front_page() && 1 === get_theme_mod( 'paddle_enable_archive_tag', PADDLE_DEFAULT_OPTION['paddle_enable_archive_tag'] ) ) {
+			} elseif ( is_archive() && 1 === get_theme_mod( 'paddle_enable_archive_tag', PADDLE_DEFAULT_OPTION['paddle_enable_archive_tag'] ) || is_front_page() && 1 === get_theme_mod( 'paddle_enable_archive_tag', PADDLE_DEFAULT_OPTION['paddle_enable_archive_tag'] ) ) {
 				paddle_tag_list();
 			} else {
 				// Do nothing.
-			}			
+			}
 
-			if (is_single() && 'after' === $paddle_blog_date_position ) {
+			if ( is_single() && 'after' === $paddle_blog_date_position ) {
 				paddle_posted_on();
 			}
 
-			do_action('padddle_after_post_entry_footer');
+			do_action( 'padddle_after_post_entry_footer' );
 		}
 
 		$enable_archive_comment = get_theme_mod( 'paddle_enable_archive_comment', PADDLE_DEFAULT_OPTION['paddle_enable_archive_comment'] );
@@ -211,7 +212,7 @@ if ( ! function_exists( 'paddle_get_post_comment' ) ) :
 	 * @return void
 	 */
 
-	 function paddle_get_post_comment($paddle_comment) {
+	function paddle_get_post_comment( $paddle_comment ) {
 
 		if ( 1 === $paddle_comment && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
 			echo '<span class="comments-link">';
@@ -231,8 +232,8 @@ if ( ! function_exists( 'paddle_get_post_comment' ) ) :
 			);
 			echo '</span>';
 		}
-	 }
-	
+	}
+
 endif;
 
 if ( ! function_exists( 'paddle_post_thumbnail' ) ) :
@@ -242,15 +243,16 @@ if ( ! function_exists( 'paddle_post_thumbnail' ) ) :
 	 * Wraps the post thumbnail in an anchor element on index views, or a div
 	 * element when on single views.
 	 */
-	function paddle_post_thumbnail($size='') {
+	function paddle_post_thumbnail( $size = '' ) {
 		if ( post_password_required() || is_attachment() || ! has_post_thumbnail() ) {
 			return;
 		}
-		$featured_thumbnail = isset($size) && '' !== $size ? $size : PADDLE_DEFAULT_OPTION['paddle_thumbnail_size'];
+		$featured_thumbnail = isset( $size ) && '' !== $size ? $size : PADDLE_DEFAULT_OPTION['paddle_thumbnail_size'];
 
-		//if( is_singular() ) { $featured_thumbnail = 'paddle-featured-image'; }
+		// if( is_singular() ) { $featured_thumbnail = 'paddle-featured-image'; }
 
-		if( is_archive() ) { $featured_thumbnail = 'paddle-small-thumb'; }
+		if ( is_archive() ) {
+			$featured_thumbnail = 'paddle-small-thumb'; }
 
 		if ( is_singular() || is_front_page() ) :
 			?>
@@ -259,10 +261,10 @@ if ( ! function_exists( 'paddle_post_thumbnail' ) ) :
 				<div class="thumbnail-container">
 			<?php if ( is_front_page() ) : ?>
 						<a class="post-thumbnail <?php echo esc_attr( 1 === get_theme_mod( 'paddle_expand_grid_image', PADDLE_DEFAULT_OPTION['paddle_expand_grid_image'] ) ? 'paddle-large-image' : 'paddle-small-thumb' ); ?>" href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
-				<?php the_post_thumbnail($featured_thumbnail); ?>
+				<?php the_post_thumbnail( $featured_thumbnail ); ?>
 						</a>
 						<?php else : ?>
-							<?php the_post_thumbnail($featured_thumbnail); ?>
+							<?php the_post_thumbnail( $featured_thumbnail ); ?>
 						<?php endif; ?>
 				</div><!-- .thumbnail-container -->
 			</div><!-- .post-thumbnail -->
@@ -331,11 +333,11 @@ add_filter( 'excerpt_more', 'paddle_excerpt_more' );
 
 if ( ! function_exists( 'paddle_excerpt_length' ) ) :
 	/**
-	 * Changes the default 55 character in excerpt 
-	*/
+	 * Changes the default 55 character in excerpt
+	 */
 	function paddle_excerpt_length( $length ) {
 		$excerpt_length = get_theme_mod( 'excerpt_length', PADDLE_DEFAULT_OPTION['excerpt_length'] );
-		return is_admin() ? $length : absint( $excerpt_length );    
+		return is_admin() ? $length : absint( $excerpt_length );
 	}
 endif;
 add_filter( 'excerpt_length', 'paddle_excerpt_length', 999 );
@@ -398,51 +400,51 @@ endif;
  */
 
 add_filter( 'get_the_archive_title', 'paddle_replaceCategoryName' );
-if (! function_exists('paddle_replaceCategoryName')) :
-function paddle_replaceCategoryName( $title ) {
-	if ( is_category() ) {
-		$title = single_cat_title( '', false );
-	} elseif ( is_tag() ) {
-		$title = single_tag_title( '', false );
-	} elseif ( is_author() ) {
-		$title = '<span class="vcard">' . get_the_author() . '</span>';
-	} elseif ( is_post_type_archive() ) {
-		$title = post_type_archive_title( '', false );
+if ( ! function_exists( 'paddle_replaceCategoryName' ) ) :
+	function paddle_replaceCategoryName( $title ) {
+		if ( is_category() ) {
+			$title = single_cat_title( '', false );
+		} elseif ( is_tag() ) {
+			$title = single_tag_title( '', false );
+		} elseif ( is_author() ) {
+			$title = '<span class="vcard">' . get_the_author() . '</span>';
+		} elseif ( is_post_type_archive() ) {
+			$title = post_type_archive_title( '', false );
+		}
+		return $title;
 	}
-	return $title;
-}
 endif;
 
 add_action( 'paddle_before_archive_excerpt', 'paddle_grid_category_list', 10 );
 
-if( ! function_exists( 'paddle__get_image_sizes' ) ) :
+if ( ! function_exists( 'paddle__get_image_sizes' ) ) :
 	/**
 	 * Get information about available image sizes
 	 */
 	function paddle_get_image_sizes( $size = '' ) {
-	 
+
 		global $_wp_additional_image_sizes;
-	 
-		$sizes = array();
+
+		$sizes                        = array();
 		$get_intermediate_image_sizes = get_intermediate_image_sizes();
-	 
+
 		// Create the full array with sizes and crop info
-		foreach( $get_intermediate_image_sizes as $_size ) {
+		foreach ( $get_intermediate_image_sizes as $_size ) {
 			if ( in_array( $_size, array( 'thumbnail', 'medium', 'medium_large', 'large' ) ) ) {
-				$sizes[ $_size ]['width'] = get_option( $_size . '_size_w' );
+				$sizes[ $_size ]['width']  = get_option( $_size . '_size_w' );
 				$sizes[ $_size ]['height'] = get_option( $_size . '_size_h' );
-				$sizes[ $_size ]['crop'] = (bool) get_option( $_size . '_crop' );
+				$sizes[ $_size ]['crop']   = (bool) get_option( $_size . '_crop' );
 			} elseif ( isset( $_wp_additional_image_sizes[ $_size ] ) ) {
-				$sizes[ $_size ] = array( 
-					'width' => $_wp_additional_image_sizes[ $_size ]['width'],
+				$sizes[ $_size ] = array(
+					'width'  => $_wp_additional_image_sizes[ $_size ]['width'],
 					'height' => $_wp_additional_image_sizes[ $_size ]['height'],
-					'crop' =>  $_wp_additional_image_sizes[ $_size ]['crop']
+					'crop'   => $_wp_additional_image_sizes[ $_size ]['crop'],
 				);
 			}
-		} 
+		}
 		// Get only 1 size if found
 		if ( $size ) {
-			if( isset( $sizes[ $size ] ) ) {
+			if ( isset( $sizes[ $size ] ) ) {
 				return $sizes[ $size ];
 			} else {
 				return false;
@@ -451,19 +453,20 @@ if( ! function_exists( 'paddle__get_image_sizes' ) ) :
 		return $sizes;
 	}
 	endif;
-	
-	if ( ! function_exists( 'paddle__get_fallback_svg' ) ) :    
+
+if ( ! function_exists( 'paddle__get_fallback_svg' ) ) :
 	/**
 	 * Get Fallback SVG
-	*/
+	 */
 	function paddle_get_fallback_svg( $post_thumbnail ) {
-		if( ! $post_thumbnail ){
+		if ( ! $post_thumbnail ) {
 			return;
 		}
-		
+
 		$image_size = paddle_get_image_sizes( $post_thumbnail );
-		 
-		if( $image_size ){ ?>
+
+		if ( $image_size ) {
+			?>
 			<div class="svg-holder">
 				 <svg class="fallback-svg" viewBox="0 0 <?php echo esc_attr( $image_size['width'] ); ?> <?php echo esc_attr( $image_size['height'] ); ?>" preserveAspectRatio="none">
 						<rect width="<?php echo esc_attr( $image_size['width'] ); ?>" height="<?php echo esc_attr( $image_size['height'] ); ?>" style="fill:#f2f2f2;"></rect>
@@ -474,21 +477,22 @@ if( ! function_exists( 'paddle__get_image_sizes' ) ) :
 	}
 	endif;
 
-if ( ! function_exists( 'paddle_thumbnail_svg_fallback' ) ) :    
+if ( ! function_exists( 'paddle_thumbnail_svg_fallback' ) ) :
 	/**
 	 * Get Fallback Thumbnail SVG.
-	*/
+	 */
 	function paddle_thumbnail_svg_fallback() {
-		if ( ! has_post_thumbnail() &&  1 ===  absint( get_theme_mod('paddle_placeholder_image', PADDLE_DEFAULT_OPTION['paddle_placeholder_image']) ) ) {
-			if(  is_front_page() || is_archive() ) { ?>
+		if ( ! has_post_thumbnail() && 1 === absint( get_theme_mod( 'paddle_placeholder_image', PADDLE_DEFAULT_OPTION['paddle_placeholder_image'] ) ) ) {
+			if ( is_front_page() || is_archive() ) {
+				?>
 				<div class="post-thumbnail">
 					<div class="thumbnail-container">
 						<?php paddle_get_fallback_svg( 'thumbnail' ); ?>
 					</div>
 				</div>
-			<?php }
-			
+				<?php
+			}
 		}
 	}
-	
+
 endif;

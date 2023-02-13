@@ -39,10 +39,14 @@
 			</p>
 
 			<?php if ( ! empty( $paddle_banner_btn_1 ) || ! empty( $paddle_banner_btn_2 ) ) : ?>
-			<div class="home-banner-cta-button-container <?php if (! empty( $paddle_banner_btn_2 ) ) : ?> group-btn <?php endif; ?>  <?php echo esc_attr( paddle_banner_btncss() ); ?>">
+			<div class="home-banner-cta-button-container 
+				<?php
+				if ( ! empty( $paddle_banner_btn_2 ) ) :
+					?>
+				 group-btn <?php endif; ?>  <?php echo esc_attr( paddle_banner_btncss() ); ?>">
 
 				<?php if ( ! empty( $paddle_banner_btn_1 ) ) : ?>
-				<a title="<?php echo esc_attr( $paddle_banner_btn_1 );?>" href="<?php echo ( esc_url_raw( $paddle_banner_btn_1_link ) ? esc_attr( $paddle_banner_btn_1_link ) : '#' ); ?>"
+				<a title="<?php echo esc_attr( $paddle_banner_btn_1 ); ?>" href="<?php echo ( esc_url_raw( $paddle_banner_btn_1_link ) ? esc_attr( $paddle_banner_btn_1_link ) : '#' ); ?>"
 					class="btn btn-primary no-rounded-right">
 					<?php echo esc_attr( $paddle_banner_btn_1 ); ?>
 				</a>

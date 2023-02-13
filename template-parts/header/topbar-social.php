@@ -6,7 +6,7 @@ $paddle_social_icons = paddle_generate_social_urls();
 foreach ( $paddle_social_urls as $key => $value ) {
 	if ( ! empty( $value ) ) {
 		$paddle_domain = str_ireplace( 'www.', '', parse_url( $value, PHP_URL_HOST ) );
-		$index  = array_search( strtolower( $paddle_domain ), array_column( $paddle_social_icons, 'url' ) );
+		$index         = array_search( strtolower( $paddle_domain ), array_column( $paddle_social_icons, 'url' ) );
 		if ( false !== $index ) {
 			$social_name  = $paddle_social_icons[ $index ]['class'];
 			$social_title = $paddle_social_icons[ $index ]['title'];

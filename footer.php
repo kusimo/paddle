@@ -28,7 +28,7 @@ if ( $paddle_search_modal->isSearchEnable() ) {
 
 <div class="clearfix"></div>
 
-<?php do_action('paddle_before_main_footer'); ?>
+<?php do_action( 'paddle_before_main_footer' ); ?>
 
 
 <footer id="paddle-footer-colophon" class="site-footer">

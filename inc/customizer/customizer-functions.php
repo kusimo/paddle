@@ -3,7 +3,7 @@
 /**
  * Customizer additions.
  */
-//require get_template_directory() . '/inc/customizer.php';
+// require get_template_directory() . '/inc/customizer.php';
 
 
 /**
@@ -66,10 +66,10 @@ if ( ! function_exists( 'paddle_add_search_menu_item' ) ) {
 }
 add_filter( 'wp_nav_menu_items', 'paddle_add_search_menu_item', 10, 2 );
 
-if( ! function_exists( 'paddle_get_default_footer_copyright' ) ) :
+if ( ! function_exists( 'paddle_get_default_footer_copyright' ) ) :
 	/**
 	 * Prints footer copyright
-	*/
+	 */
 	function paddle_get_default_footer_copyright() { ?>
 		<span class="site-copyright">&copy; 
 			<?php
@@ -80,7 +80,8 @@ if( ! function_exists( 'paddle_get_default_footer_copyright' ) ) :
 			?>
 			<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php bloginfo( 'name' ); ?></a>
 		</span><!-- .site-copy-right -->
- 	<?php }
+		<?php
+	}
 
 endif;
 

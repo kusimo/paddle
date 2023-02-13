@@ -3,10 +3,10 @@
    ========================================================================== */
 li#accordion-section-colors,
 li#accordion-section-header_image {
-    display: none!important;
+	display: none!important;
 }
 li#accordion-section-background_image {
-    margin-top: 20px;
+	margin-top: 20px;
 }
 
 /* ==========================================================================
@@ -14,14 +14,14 @@ li#accordion-section-background_image {
    ========================================================================== */
 
 #customize-theme-controls .control-section.open {
-    height: 100%;
-    padding: 12px 24px 25px 24px;
+	height: 100%;
+	padding: 12px 24px 25px 24px;
 }
 .customize-section-title {
-    margin: -12px -24px 0 -24px;
+	margin: -12px -24px 0 -24px;
 }
  #customize-theme-controls .accordion-section-content .customize-control-title{
-    color: #1e293b;
+	color: #1e293b;
 	font-weight: normal;
 }
 /* ==========================================================================
@@ -107,7 +107,7 @@ input[type="number"]:focus {
 	line-height: 1.6;
 	font-style: normal;
 	gap: 7px;
-	
+
 }
 .simple-notice-custom-control .customize-control-description .dashicons-info{
 	color: #2196f3;
@@ -212,58 +212,58 @@ span.customize-control-description.info_2_alert .dashicons-info {
 
 li[id$="_font_weight"] .customize-control-title {
 	font-weight: normal;
-    margin-bottom: 16px;
-    text-transform: capitalize;
+	margin-bottom: 16px;
+	text-transform: capitalize;
 }
 
 /* ==========================================================================
-   Text Radio Buttons 2 
+   Text Radio Buttons 2
    ========================================================================== */
    /*
 .text_radio_button_control.option_radio_button_control::before {
-    content: '';
-    position: absolute;
-    left: -100%;
-    background-color: #D1D5D7;
-    width: 500%;
-    height: 1px;
-    top: -1px;
+	content: '';
+	position: absolute;
+	left: -100%;
+	background-color: #D1D5D7;
+	width: 500%;
+	height: 1px;
+	top: -1px;
 }
 */
 .text_radio_button_control.option_radio_button_control {
 	margin-bottom: 15px;
 }
 .input-wrapper.paddle-control-wrapper.option-radio-button {
-    display: flex;
+	display: flex;
 }
 .text_radio_button_control.option_radio_button_title_control .input-wrapper.paddle-control-wrapper.option-radio-button {
-    margin: 0 -24px 15px;
-    border-width: 1px 0;
-    border-style: solid;
-    border-color: transparent;
-    background-color: transparent;
+	margin: 0 -24px 15px;
+	border-width: 1px 0;
+	border-style: solid;
+	border-color: transparent;
+	background-color: transparent;
 	border-top: 1px solid gainsboro;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase!important;
-    margin-top: -20px;
+	font-size: 12px;
+	font-weight: 600;
+	letter-spacing: 1px;
+	text-transform: uppercase!important;
+	margin-top: -20px;
 }
 label.radio-button-label.radio-button-option {
 	width: 100%;
-    height: 100%;
-    text-align: center;
-    justify-content: center;
+	height: 100%;
+	text-align: center;
+	justify-content: center;
 	flex: 1 1 auto;
-    display: flex;
+	display: flex;
 }
 
 .paddle-control-wrapper.option-radio-button .radio-button-label span {
-    width: 100%; 
+	width: 100%;
 	padding: 9px 0;
 	border: 1px solid #D1D5D7;
 	font-size: 12px;
-    font-weight: normal;
+	font-weight: normal;
 }
 .text_radio_button_control.option_radio_button_title_control .option-radio-button .radio-button-label span {
 	position: relative;
@@ -277,7 +277,7 @@ label.radio-button-label.radio-button-option {
 	border-radius: 3px 0 0 3px;
 }
 .paddle-control-wrapper.option-radio-button .radio-button-label > input + span {
-    border-radius: 0 3px 3px 0;
+	border-radius: 0 3px 3px 0;
 	margin-left: -1px;
 }
 
@@ -293,20 +293,20 @@ label.radio-button-label.radio-button-option {
 }
 /*
 li[id^="customize-control-paddle_"]
-span.customize-control-title, 
+span.customize-control-title,
 span.paddle-label.customize-control-description {
-    margin: 0 -24px 15px;
-    display: block;
-    padding: 15px 24px;
-    border-width: 1px 0;
-    border-style: solid;
-    border-color: gainsboro;
-    background-color: white;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    line-height: 1;
-    text-transform: uppercase!important;
+	margin: 0 -24px 15px;
+	display: block;
+	padding: 15px 24px;
+	border-width: 1px 0;
+	border-style: solid;
+	border-color: gainsboro;
+	background-color: white;
+	font-size: 12px;
+	font-weight: 600;
+	letter-spacing: 2px;
+	line-height: 1;
+	text-transform: uppercase!important;
 }
 */
 li[id^="customize-control-paddle_"]
@@ -317,29 +317,29 @@ li[id*="-paragraph_margin_bottom"]
 span.paddle-label, #sub-accordion-section-paddle_theme_color_section li[id*="_color"].customize-control-color
 span.customize-control-title
 {
-    margin: 0 -24px 15px;
-    display: block;
-    padding: 15px 24px;
-    border-width: 1px 0;
-    border-style: solid;
-    border-color: gainsboro;
-    background-color: white;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    line-height: 1.5;
-    text-transform: uppercase!important;
+	margin: 0 -24px 15px;
+	display: block;
+	padding: 15px 24px;
+	border-width: 1px 0;
+	border-style: solid;
+	border-color: gainsboro;
+	background-color: white;
+	font-size: 12px;
+	font-weight: 600;
+	letter-spacing: 2px;
+	line-height: 1.5;
+	text-transform: uppercase!important;
 }
 span.customize-control-title.paddle-simple-header-title-2 {
-    margin: 0 -24px 15px;
-    padding: 5px 24px;
-    line-height: 1;
-    border-top: 1px solid gainsboro;
-    margin-bottom: 0;
-    padding-top: 30px;
+	margin: 0 -24px 15px;
+	padding: 5px 24px;
+	line-height: 1;
+	border-top: 1px solid gainsboro;
+	margin-bottom: 0;
+	padding-top: 30px;
 }
 
-span + span.customize-control-title, 
+span + span.customize-control-title,
 .slider-custom-control .customize-control-title
  {
 	font-weight: normal;
@@ -351,11 +351,11 @@ span.paddle-label.customize-control-description {
 }
 
 .image_radio_button_control.paddle-section-spacing label.radio-button-label {
-    width: 46%;
-    float: left;
-    display: inline;
+	width: 46%;
+	float: left;
+	display: inline;
 	text-align: center;
-    padding: 0 2%;
+	padding: 0 2%;
 	padding-left: 0;
 }
 li.customize-control-image_radio_button .paddle-fw-label label.radio-button-label {
@@ -365,16 +365,16 @@ li.customize-control-image_radio_button .paddle-fw-label label.radio-button-labe
 }
 li.customize-control-image_radio_button .paddle-fw-label label.radio-button-label>span.number {
 	position: absolute;
-    left: -16px;
-    padding: 5px;
-    background: gainsboro;
-    font-weight: 700;
+	left: -16px;
+	padding: 5px;
+	background: gainsboro;
+	font-weight: 700;
 }
 .image_radio_button_control.paddle-section-spacing {
-    margin-top: 0px;
+	margin-top: 0px;
 }
 .image_radio_button_control.paddle-section-spacing>span {
-    margin-bottom: 12px;
+	margin-bottom: 12px;
 }
 
 
@@ -408,7 +408,7 @@ li.customize-control-image_radio_button .paddle-fw-label label.radio-button-labe
    Pill Checkboxes
    ========================================================================== */
 .sortable_pills {
-    margin-top: 15px;
+	margin-top: 15px;
 }
 .pill_checkbox_control .checkbox-label > input {
 	display: none;
@@ -433,12 +433,12 @@ li.customize-control-image_radio_button .paddle-fw-label label.radio-button-labe
 	cursor: pointer;
 }
 
-.pill_checkbox_control .checkbox-label > input:checked + .sortable-pill-title { 
+.pill_checkbox_control .checkbox-label > input:checked + .sortable-pill-title {
 	background-color: #2084bd;
 	color: #fff;
 }
 
-.pill_checkbox_control .checkbox-label > input:checked + .sortable-pill-title:before { 
+.pill_checkbox_control .checkbox-label > input:checked + .sortable-pill-title:before {
 	display: inline-block;
 	font-style: normal;
 	font-variant: normal;
@@ -451,17 +451,17 @@ li.customize-control-image_radio_button .paddle-fw-label label.radio-button-labe
 	margin-left: -4px;
 	vertical-align: bottom;
 	margin-right: 15px;
-    background-color: #4caf50;
-    border-radius: 50%;
-    height: 20px;
-    width: 20px;
+	background-color: #4caf50;
+	border-radius: 50%;
+	height: 20px;
+	width: 20px;
 }
 
 .pill_checkbox_control .fullwidth_pills .checkbox-label > .sortable-pill-title {
 	width: 100%;
 	font-size: 15px;
-    display: flex;
-    border-radius: 5px;
+	display: flex;
+	border-radius: 5px;
 }
 
 .pill_checkbox_control .sortable.fullwidth_pills .checkbox-label > .sortable-pill-title {
@@ -637,11 +637,11 @@ li.customize-control-image_radio_button .paddle-fw-label label.radio-button-labe
 }
 
 .slider-custom-control span.opacity-image {
-    float: right;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    margin-left: 10px;
+	float: right;
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	margin-left: 10px;
 }
 .checked-background {
 	background-image: linear-gradient(
@@ -661,13 +661,13 @@ li.customize-control-image_radio_button .paddle-fw-label label.radio-button-labe
 }
 /*
 .slider-custom-control::after {
-    border-bottom: 1px dashed #cccccc;
-    content: "";
-    width: 100%;
-    height: 2px;
-    position: absolute;
-    left: 0;
-    bottom: -65px;
+	border-bottom: 1px dashed #cccccc;
+	content: "";
+	width: 100%;
+	height: 2px;
+	position: absolute;
+	left: 0;
+	bottom: -65px;
 }
 */
 ul#sub-accordion-section-paddle_post_and_pages .slider-custom-control:first-child::after {
@@ -678,9 +678,9 @@ ul#sub-accordion-section-paddle_post_and_pages .slider-custom-control:first-chil
    Toggle Switch
    ========================================================================== */
 .toggle-switch-control.paddle-item {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row-reverse;
+	display: flex;
+	justify-content: space-between;
+	flex-direction: row-reverse;
 }
 
 .toggle-switch-control .customize-control-title {
@@ -777,20 +777,20 @@ li[id^="customize-control-paddle_"]
 }
 
 .toggle-switch-control.toggle-switch-control-v2 {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: space-between;
 	justify-items: center;
-    border: 1px solid #e3e7ec;
-    background: #fff;
-    margin: 0 0 10px;
-    border-radius: 4px;
-    padding: 6px 12px;   
+	border: 1px solid #e3e7ec;
+	background: #fff;
+	margin: 0 0 10px;
+	border-radius: 4px;
+	padding: 6px 12px;
 }
 .toggle-switch-control.toggle-switch-control-v2 .toggle-switch-label {
 	width: 64px;
 }
-li#customize-control-paddle_blog_section_header_2 ~ li  .toggle-switch-control.toggle-switch-control-v2, 
+li#customize-control-paddle_blog_section_header_2 ~ li  .toggle-switch-control.toggle-switch-control-v2,
 li#customize-control-paddle_blog_section_header_4 ~ li  .toggle-switch-control.toggle-switch-control-v2
  {
 	margin-bottom: 0;
@@ -813,8 +813,8 @@ li#customize-control-paddle_enable_blog_tag .toggle-switch-control.toggle-switch
 
 .toggle-switch-control-v2 span i {
 	position: absolute;
-    top: -4px;
-    right: -1px;
+	top: -4px;
+	right: -1px;
 	opacity: .7;
 }
 
@@ -824,27 +824,27 @@ li#customize-control-paddle_enable_blog_tag .toggle-switch-control.toggle-switch
 }
 
 .toggle-switch-control-v2 .toggle-switch-checkbox + .toggle-switch-label .toggle-switch-switch i::after {
-    opacity: .7;
-    position: absolute;
-    content: '';
-    width: 21px;
-    height: 2px;
-    top: 10px;
-    left: 1px;
-    background: #656565;
-    border-radius: 5px;
-    transform: rotate(-45deg);
-    box-shadow: 0 0 0 1px #fff;
-    transition: opacity .2s ease;
-    background-repeat: no-repeat;
+	opacity: .7;
+	position: absolute;
+	content: '';
+	width: 21px;
+	height: 2px;
+	top: 10px;
+	left: 1px;
+	background: #656565;
+	border-radius: 5px;
+	transform: rotate(-45deg);
+	box-shadow: 0 0 0 1px #fff;
+	transition: opacity .2s ease;
+	background-repeat: no-repeat;
 }
 
 .toggle-switch-control-v2  .toggle-switch-checkbox:checked + .toggle-switch-label .toggle-switch-switch i::after {
 	display: none
 }
 .toggle-switch-control-v2  .toggle-switch-inner:before {
-    background-color: transparent;
-    color: currentColor;
+	background-color: transparent;
+	color: currentColor;
 }
 .toggle-switch-control-v2 .toggle-switch-inner:before, .toggle-switch-control-v2 .toggle-switch-inner:after {
 	font-size: 10px;
@@ -910,14 +910,14 @@ li#customize-control-paddle_enable_blog_tag .toggle-switch-control.toggle-switch
 	cursor: pointer;
 	clear: both;
 	padding: 5px 15px;
-    text-align: center;
-    border: 1px solid #cecece;
-    background: #ffffff;
+	text-align: center;
+	border: 1px solid #cecece;
+	background: #ffffff;
 	transition: .2s;
 }
 .single-accordion-toggle:hover {
 	background: #2885bb;
-    color: white;
+	color: white;
 }
 
 .accordion-icon-toggle {
@@ -966,7 +966,7 @@ li#customize-control-paddle_enable_blog_tag .toggle-switch-control.toggle-switch
 .single-accordion-toggle.single-accordion-toggle-rotate .label-title,
 .single-accordion-toggle.single-accordion-toggle-rotate .count-total
  {
-    display: none;
+	display: none;
 }
 
 /* ==========================================================================
@@ -1196,25 +1196,25 @@ li#customize-control-paddle_enable_blog_tag .toggle-switch-control.toggle-switch
 	text-decoration: none;
 }
 
-li[id^="customize-control-paddle_theme_color"], 
+li[id^="customize-control-paddle_theme_color"],
 li[id^="customize-control-paddle_primary_color"] {
 	position: relative;
 	gap: 15px;
-    align-items: center;
-    width: 100%;
+	align-items: center;
+	width: 100%;
 }
-li[id^="customize-control-paddle_theme_color"] .wp-picker-container span, 
+li[id^="customize-control-paddle_theme_color"] .wp-picker-container span,
 li[id^="customize-control-paddle_primary_color"] .wp-picker-container span {
 	margin-top: 0px;
 	background: #f0f0f1;
-    margin-left: 5px;
+	margin-left: 5px;
 }
 
-li[id^="customize-control-paddle_theme_color"] .wp-picker-container .wp-color-result.button, 
+li[id^="customize-control-paddle_theme_color"] .wp-picker-container .wp-color-result.button,
 li[id^="customize-control-paddle_primary_color"] .wp-picker-container .wp-color-result.button
 {
-    width: 30px;
-    height: 30px; 
+	width: 30px;
+	height: 30px;
 }
 li[id^="customize-control-paddle_theme_color"]  input[type=text].wp-color-picker,
 li[id^="customize-control-paddle_primary_color"]  input[type=text].wp-color-picker
@@ -1226,18 +1226,18 @@ li[id^="customize-control-paddle_primary_color"]  input[type=text].wp-color-pick
 /** Text */
 ul[id^="sub-accordion-section-paddle"] li.customize-control input[type=text],
 ul[id^="sub-accordion-section-paddle"] li.customize-control input[type=url] {
-    background-color: white;
-    position: relative;
-    text-align: left;
-    padding: 20px 12px;
-    border-radius: 3px;
-    margin-top: 9px;
-    border: 1px solid gainsboro;
+	background-color: white;
+	position: relative;
+	text-align: left;
+	padding: 20px 12px;
+	border-radius: 3px;
+	margin-top: 9px;
+	border: 1px solid gainsboro;
 }
 
 ul[id^="sub-accordion-section-paddle"] li.customize-control-text label,
 ul[id^="sub-accordion-section-paddle"] li.customize-control-url label {
-    font-weight: normal;
+	font-weight: normal;
 }
 
 
@@ -1250,52 +1250,52 @@ ul[id*="section-paddle_"]  .paddle-last-item {
 	margin-bottom: 40px;
 }
 ul[id*="section-paddle_"]  .paddle-last-item::after {
-    content: '';
-    position: absolute;
-    left: -100%;
-    background-color: gainsboro;
-    width: 500%;
-    height: 1px;
-    bottom: -15px;
+	content: '';
+	position: absolute;
+	left: -100%;
+	background-color: gainsboro;
+	width: 500%;
+	height: 1px;
+	bottom: -15px;
 }
 
 /* ==========================================================================
    Previews
 ========================================================================== */
-   
+
 .sample-container {
-    position: fixed;
-    bottom: 0;
-    position: fixed !important;
-    top: auto;
-    left: 300px;
-    right: 0;
-    bottom: 0;
-    visibility: visible;
-    height: auto;
-    width: auto;
-    padding: 0;
-    max-height: 60%;
-    overflow: auto;
-    transition: all 0.2s;
-    transform: translateY(100%); 
-    backface-visibility: hidden;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
+	position: fixed;
+	bottom: 0;
+	position: fixed !important;
+	top: auto;
+	left: 300px;
+	right: 0;
+	bottom: 0;
+	visibility: visible;
+	height: auto;
+	width: auto;
+	padding: 0;
+	max-height: 60%;
+	overflow: auto;
+	transition: all 0.2s;
+	transform: translateY(100%);
+	backface-visibility: hidden;
+	padding-top: 2rem;
+	padding-bottom: 2rem;
 	display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
 	transition: all 0.3s;
-    background: #eeeeee;
-    border-top: 1px solid #dddddd;
+	background: #eeeeee;
+	border-top: 1px solid #dddddd;
 }
 
 
 .sample-container>span {
-    position: absolute;
-    top: 7px;
-    left: 7px;
-    text-transform: uppercase;
-    font-size: 11px;
+	position: absolute;
+	top: 7px;
+	left: 7px;
+	text-transform: uppercase;
+	font-size: 11px;
 }

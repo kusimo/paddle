@@ -1,7 +1,6 @@
 <?php
 /**
  * Paddle Customizer Custom Controls
- *
  */
 
 use Paddle_Custom_Control as GlobalPaddle_Custom_Control;
@@ -31,12 +30,12 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 	}
 
 		/**
-	 * Image Radio Button Custom Control
-	 *
-	 * @author Anthony Hortin <http://maddisondesigns.com>
-	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @link https://github.com/maddisondesigns
-	 */
+		 * Image Radio Button Custom Control
+		 *
+		 * @author Anthony Hortin <http://maddisondesigns.com>
+		 * @license http://www.gnu.org/licenses/gpl-2.0.html
+		 * @link https://github.com/maddisondesigns
+		 */
 	class Paddle_Image_Radio_Button_Custom_Control extends Paddle_Custom_Control {
 		/**
 		 * The type of control being rendered
@@ -92,7 +91,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 			if ( isset( $this->input_attrs['fullwidth_label'] ) && $this->input_attrs['fullwidth_label'] ) {
 				$this->fullwidth_label = true;
 			}
-		}		
+		}
 		/**
 		 * Enqueue our scripts and styles
 		 */
@@ -105,7 +104,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		public function render_content() {
 			$counter = 0;
 			?>
-			<div class="image_radio_button_control paddle-section-spacing paddle-item<?php echo esc_html( $this->fullwidth_label ? ' paddle-fw-label': '' );?>">
+			<div class="image_radio_button_control paddle-section-spacing paddle-item<?php echo esc_html( $this->fullwidth_label ? ' paddle-fw-label' : '' ); ?>">
 				<?php if ( ! empty( $this->label ) ) { ?>
 					<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
 				<?php } ?>
@@ -113,31 +112,47 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 					<span class="customize-control-description"><?php echo esc_html( $this->description ); ?></span>
 				<?php } ?>
 
-				<?php foreach ( $this->choices as $key => $value ) { 
-					
+				<?php
+				foreach ( $this->choices as $key => $value ) {
+
 					if ( $this->visible_items && $counter >= $this->visible_items && $this->toggle ) :
-						if ($counter === $this->visible_items) { ?> <div class="single-accordion"> <?php }
-					?>
+						if ( $counter === $this->visible_items ) {
+
+							?>
+						 <div class="single-accordion"> 
+							<?php
+						}
+						?>
 					<label class="radio-button-label paddle-toggle-item">
 						<input type="radio" name="<?php echo esc_attr( $this->id ); ?>" value="<?php echo esc_attr( $key ); ?>" <?php $this->link(); ?> <?php checked( esc_attr( $key ), $this->value() ); ?>/>
 						<img src="<?php echo esc_attr( $value['image'] ); ?>" alt="<?php echo esc_attr( $value['name'] ); ?>" title="<?php echo esc_attr( $value['name'] ); ?>" />
-						<?php if ($this->show_number) { ?> <span class="number"><?php echo esc_attr($counter+1);?></span> <?php } ?>
+						<?php
+						if ( $this->show_number ) {
+							?>
+							 <span class="number"><?php echo esc_attr( $counter + 1 ); ?></span> <?php } ?>
 					</label>
-					<?php if ($counter === count($this->choices) - 1) { ?> </div> <?php } ?>
+						<?php
+						if ( $counter === count( $this->choices ) - 1 ) {
+							?>
+							 </div> <?php } ?>
 				<?php else : ?>
 					<label class="radio-button-label">
 						<input type="radio" name="<?php echo esc_attr( $this->id ); ?>" value="<?php echo esc_attr( $key ); ?>" <?php $this->link(); ?> <?php checked( esc_attr( $key ), $this->value() ); ?>/>
 						<img src="<?php echo esc_attr( $value['image'] ); ?>" alt="<?php echo esc_attr( $value['name'] ); ?>" title="<?php echo esc_attr( $value['name'] ); ?>" />
-						<?php if ($this->show_number) { ?> <span class="number"><?php echo esc_attr($counter+1);?></span> <?php } ?>
+						<?php
+						if ( $this->show_number ) {
+							?>
+							 <span class="number"><?php echo esc_attr( $counter + 1 ); ?></span> <?php } ?>
 					</label>
 					<?php
 					endif;
 
 					$counter++;
-				} 
-				if ( $this->toggle ) { ?>
+				}
+				if ( $this->toggle ) {
+					?>
 					<div class="single-accordion-toggle">
-						<span class="count-total"><?php echo esc_attr($counter - $this->visible_items);?></span>
+						<span class="count-total"><?php echo esc_attr( $counter - $this->visible_items ); ?></span>
 						<span>
 							<span class="label-title"><?php echo esc_html( $this->toggle_label ); ?></span>
 							<span class="accordion-icon-toggle dashicons dashicons-plus"></span>
@@ -486,73 +501,75 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		/**
 		 * Array of info to display
 		 */
-		private $infos = array();
+		private $infos      = array();
 		private $show_label = false;
-		private $show_desc = false;
+		private $show_desc  = false;
 
 		/**
 		 * Constructor
 		 */
 		public function __construct( $manager, $id, $args = array(), $options = array() ) {
 			parent::__construct( $manager, $id, $args );
-			
+
 			if ( isset( $this->input_attrs['show_label'] ) && $this->input_attrs['show_label'] ) {
 				$this->show_label = true;
 			}
-			
-			if ( isset( $this->input_attrs['show_desc'] ) &&  $this->input_attrs['show_desc'] ) {
+
+			if ( isset( $this->input_attrs['show_desc'] ) && $this->input_attrs['show_desc'] ) {
 				$this->show_desc = true;
 			}
 			// Label for toggle
-			if ( isset( $this->input_attrs['infos'] ) && !empty( $this->input_attrs['infos'] ) ) {
+			if ( isset( $this->input_attrs['infos'] ) && ! empty( $this->input_attrs['infos'] ) ) {
 				$this->infos = $this->input_attrs['infos'];
 			}
-			
-		}	
+
+		}
 		/**
 		 * Render the control in the customizer
 		 */
 		public function render_content() {
 			$allowed_html = array(
-				'a' => array(
-					'href' => array(),
-					'title' => array(),
-					'class' => array(),
+				'a'      => array(
+					'href'   => array(),
+					'title'  => array(),
+					'class'  => array(),
 					'target' => array(),
 				),
-				'br' => array(),
-				'em' => array(),
+				'br'     => array(),
+				'em'     => array(),
 				'strong' => array(),
-				'i' => array(
-					'class' => array()
-				),
-				'span' => array(
+				'i'      => array(
 					'class' => array(),
 				),
-				'code' => array(),
+				'span'   => array(
+					'class' => array(),
+				),
+				'code'   => array(),
 			);
-		?>
+			?>
 			<div class="simple-notice-custom-control">
-				<?php if( !empty( $this->label ) && $this->show_label) { ?>
+				<?php if ( ! empty( $this->label ) && $this->show_label ) { ?>
 					<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
 				<?php } ?>
-				<?php if( !empty( $this->description ) && $this->show_desc ) { ?>
+				<?php if ( ! empty( $this->description ) && $this->show_desc ) { ?>
 					<span class="customize-control-description"><?php echo wp_kses( $this->description, $allowed_html ); ?></span>
 				<?php } ?>
 
-				<?php if( !empty ($this->infos) ) {
+				<?php
+				if ( ! empty( $this->infos ) ) {
 					$html_info = '';
-					foreach( $this->infos as $key => $value ) {?>
-						<span class="customize-control-description <?php echo esc_html($key);?>">
+					foreach ( $this->infos as $key => $value ) {
+						?>
+						<span class="customize-control-description <?php echo esc_html( $key ); ?>">
 							<span class="dashicons dashicons-info"></span>
 							<span><?php echo wp_kses( $value, $allowed_html ); ?></span>
 						</span>
-					 <?php }
-					
+						<?php
+					}
 				}
 				?>
 			</div>
-		<?php
+			<?php
 		}
 	}
 
@@ -570,33 +587,33 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 */
 		public function render_content() {
 			$allowed_html = array(
-				'a' => array(
-					'href' => array(),
-					'title' => array(),
-					'class' => array(),
+				'a'      => array(
+					'href'   => array(),
+					'title'  => array(),
+					'class'  => array(),
 					'target' => array(),
 				),
-				'br' => array(),
-				'em' => array(),
+				'br'     => array(),
+				'em'     => array(),
 				'strong' => array(),
-				'i' => array(
-					'class' => array()
-				),
-				'span' => array(
+				'i'      => array(
 					'class' => array(),
 				),
-				'code' => array(),
+				'span'   => array(
+					'class' => array(),
+				),
+				'code'   => array(),
 			);
-		?>
+			?>
 			<div class="simple-notice-custom-control">
-				<?php if( !empty( $this->label ) ) { ?>
+				<?php if ( ! empty( $this->label ) ) { ?>
 					<span class="customize-control-title paddle-simple-header-title"><?php echo esc_html( $this->label ); ?></span>
 				<?php } ?>
-				<?php if( !empty( $this->description ) ) { ?>
+				<?php if ( ! empty( $this->description ) ) { ?>
 					<span class="customize-control-description"><?php echo wp_kses( $this->description, $allowed_html ); ?></span>
 				<?php } ?>
 			</div>
-		<?php
+			<?php
 		}
 	}
 
@@ -614,43 +631,43 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 */
 		public function render_content() {
 			$allowed_html = array(
-				'a' => array(
-					'href' => array(),
-					'title' => array(),
-					'class' => array(),
+				'a'      => array(
+					'href'   => array(),
+					'title'  => array(),
+					'class'  => array(),
 					'target' => array(),
 				),
-				'br' => array(),
-				'em' => array(),
+				'br'     => array(),
+				'em'     => array(),
 				'strong' => array(),
-				'i' => array(
-					'class' => array()
-				),
-				'span' => array(
+				'i'      => array(
 					'class' => array(),
 				),
-				'code' => array(),
+				'span'   => array(
+					'class' => array(),
+				),
+				'code'   => array(),
 			);
-		?>
+			?>
 			<div class="simple-notice-custom-control">
-				<?php if( !empty( $this->label ) ) { ?>
+				<?php if ( ! empty( $this->label ) ) { ?>
 					<span class="customize-control-title paddle-simple-header-title-2"><?php echo esc_html( $this->label ); ?></span>
 				<?php } ?>
-				<?php if( !empty( $this->description ) ) { ?>
+				<?php if ( ! empty( $this->description ) ) { ?>
 					<span class="customize-control-description"><?php echo wp_kses( $this->description, $allowed_html ); ?></span>
 				<?php } ?>
 			</div>
-		<?php
+			<?php
 		}
 	}
 
 		/**
-	 * Sortable Pill Checkbox Custom Control
-	 *
-	 * @author Anthony Hortin <http://maddisondesigns.com>
-	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @link https://github.com/maddisondesigns
-	 */
+		 * Sortable Pill Checkbox Custom Control
+		 *
+		 * @author Anthony Hortin <http://maddisondesigns.com>
+		 * @license http://www.gnu.org/licenses/gpl-2.0.html
+		 * @link https://github.com/maddisondesigns
+		 */
 	class Paddle_Pill_Checkbox_Custom_Control extends Paddle_Custom_Control {
 		/**
 		 * The type of control being rendered
@@ -685,7 +702,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 			if ( isset( $this->input_attrs['sample'] ) && '' !== $this->input_attrs['sample'] ) {
 				$this->sample = $this->input_attrs['sample'];
 			}
-		}		
+		}
 		/**
 		 * Enqueue our scripts and styles
 		 */
@@ -698,27 +715,26 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 */
 		public function render_content() {
 			$reordered_choices = array();
-			$saved_choices = explode( ',', esc_attr( $this->value() ) );
+			$saved_choices     = explode( ',', esc_attr( $this->value() ) );
 
 			// Order the checkbox choices based on the saved order
-			if( $this->sortable ) {
+			if ( $this->sortable ) {
 				foreach ( $saved_choices as $key => $value ) {
-					if( isset( $this->choices[$value] ) ) {
-						$reordered_choices[$value] = $this->choices[$value];
+					if ( isset( $this->choices[ $value ] ) ) {
+						$reordered_choices[ $value ] = $this->choices[ $value ];
 					}
 				}
 				$reordered_choices = array_merge( $reordered_choices, array_diff_assoc( $this->choices, $reordered_choices ) );
-			}
-			else {
+			} else {
 				$reordered_choices = $this->choices;
 			}
-		?>
+			?>
 			<div class="pill_checkbox_control">
-				<?php if( !empty( $this->label ) ) { ?>
+				<?php if ( ! empty( $this->label ) ) { ?>
 					<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
 				<?php } ?>
 
-				<?php if(!empty( $this->sample )) { ?>
+				<?php if ( ! empty( $this->sample ) ) { ?>
 					<div class="sample-container type-<?php echo esc_attr( $this->sample ); ?>">
 						<span><?php echo esc_attr( $this->sample ); ?> preview</span>
 						<a class="button" a href="#">
@@ -733,20 +749,20 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 					<label class="checkbox-label">
 						<input type="checkbox" name="<?php echo esc_attr( $key ); ?>" value="<?php echo esc_attr( $key ); ?>" <?php checked( in_array( esc_attr( $key ), $saved_choices, true ), true ); ?> class="sortable-pill-checkbox"/>
 						<span class="sortable-pill-title"><?php echo esc_attr( $value ); ?></span>
-						<?php if( $this->sortable && $this->fullwidth ) { ?>
+						<?php if ( $this->sortable && $this->fullwidth ) { ?>
 							<span class="dashicons dashicons-sort"></span>
 						<?php } ?>
 					</label>
 				<?php	} ?>
 				</div>
-				<?php if( !empty( $this->description ) ) { ?>
+				<?php if ( ! empty( $this->description ) ) { ?>
 					<span class="customize-control-description"><?php echo esc_html( $this->description ); ?></span>
 				<?php } ?>
 			</div>
-		<?php
+			<?php
 		}
 	}
-	
+
 	/**
 	 * Upsell section
 	 */
@@ -897,7 +913,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 	 */
 	if ( ! function_exists( 'paddle_radio_sanitization' ) ) {
 		function paddle_radio_sanitization( $input, $setting ) {
-			//get the list of possible radio box or select options
+			// get the list of possible radio box or select options
 			$choices = $setting->manager->get_control( $setting->id )->choices;
 
 			if ( array_key_exists( $input, $choices ) ) {
@@ -1059,7 +1075,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 * @return bool Whether the control is active to the current preview.
 		 */
 		function paddle_using_header_1_4( $control ) {
-			$style_array = ['paddle-header-1', 'paddle-header-2', 'paddle-header-3', 'paddle-header-4'];
+			$style_array = array( 'paddle-header-1', 'paddle-header-2', 'paddle-header-3', 'paddle-header-4' );
 			if ( in_array( $control->manager->get_setting( 'paddle_header_layout_style' )->value(), $style_array ) ) {
 				return true;
 			} else {
@@ -1080,10 +1096,10 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 * @return bool Whether the control is active to the current preview.
 		 */
 		function paddle_using_header_1_4_desktop_selected( $control ) {
-			$style_array = ['paddle-header-1', 'paddle-header-2', 'paddle-header-3', 'paddle-header-4'];
-			if ( in_array( $control->manager->get_setting( 'paddle_header_layout_style' )->value(), $style_array ) 
-			&&  'desktop' === $control->manager->get_setting( 'title_options_header' )->value() 
-			&& 1 === $control->manager->get_setting( 'paddle_header_search_button' )->value()) {
+			$style_array = array( 'paddle-header-1', 'paddle-header-2', 'paddle-header-3', 'paddle-header-4' );
+			if ( in_array( $control->manager->get_setting( 'paddle_header_layout_style' )->value(), $style_array )
+			&& 'desktop' === $control->manager->get_setting( 'title_options_header' )->value()
+			&& 1 === $control->manager->get_setting( 'paddle_header_search_button' )->value() ) {
 				return true;
 			} else {
 				return false;
@@ -1458,8 +1474,8 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 */
 		function paddle_blog_design_archive_selected_grid_selected( $control ) {
 
-			if ( 'design' === $control->manager->get_setting( 'title_options_blog' )->value() 
-				&& 'grid' === $control->manager->get_setting( 'post_archive_layout' )->value()) {
+			if ( 'design' === $control->manager->get_setting( 'title_options_blog' )->value()
+				&& 'grid' === $control->manager->get_setting( 'post_archive_layout' )->value() ) {
 				return true;
 			} else {
 				return false;
@@ -1506,8 +1522,8 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 */
 		function paddle_blog_general_archive_selected_excerpt_enabled( $control ) {
 
-			if ( 'general' === $control->manager->get_setting( 'title_options_blog' )->value() 
-				&& 1 === $control->manager->get_setting( 'enable_blog_excerpt' )->value()) {
+			if ( 'general' === $control->manager->get_setting( 'title_options_blog' )->value()
+				&& 1 === $control->manager->get_setting( 'enable_blog_excerpt' )->value() ) {
 				return true;
 			} else {
 				return false;
@@ -1529,8 +1545,8 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 */
 		function paddle_blog_general_archive_selected_custom_width_enabled( $control ) {
 
-			if ( 'general' === $control->manager->get_setting( 'title_options_blog' )->value() 
-				&& 'custom' === $control->manager->get_setting( 'custom_container' )->value()) {
+			if ( 'general' === $control->manager->get_setting( 'title_options_blog' )->value()
+				&& 'custom' === $control->manager->get_setting( 'custom_container' )->value() ) {
 				return true;
 			} else {
 				return false;
@@ -1552,9 +1568,9 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 */
 		function paddle_check_header_border_is_active( $control ) {
 
-			if ( 1 === $control->manager->get_setting( 'menu_border_bottom' )->value() 
+			if ( 1 === $control->manager->get_setting( 'menu_border_bottom' )->value()
 			&& 'desktop' === $control->manager->get_setting( 'title_options_header' )->value()
-			|| 
+			||
 			1 === $control->manager->get_setting( 'menu_border_top' )->value()
 			&& 'desktop' === $control->manager->get_setting( 'title_options_header' )->value()
 			) {
@@ -1620,7 +1636,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 */
 		function paddle_header_desktop_selected_search_enab( $control ) {
 
-			if ( 'desktop' === $control->manager->get_setting( 'title_options_header' )->value() 
+			if ( 'desktop' === $control->manager->get_setting( 'title_options_header' )->value()
 			&& 1 === $control->manager->get_setting( 'paddle_header_search_button' )->value() ) {
 				return true;
 			} else {
@@ -1642,7 +1658,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 */
 		function paddle_header_desktop_selected_header_6( $control ) {
 
-			if ( 'desktop' === $control->manager->get_setting( 'title_options_header' )->value() 
+			if ( 'desktop' === $control->manager->get_setting( 'title_options_header' )->value()
 			&& 'paddle-header-6' === $control->manager->get_setting( 'paddle_header_layout_style' )->value() ) {
 				return true;
 			} else {
@@ -1664,7 +1680,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 */
 		function paddle_header_desktop_selected_header_5( $control ) {
 
-			if ( 'desktop' === $control->manager->get_setting( 'title_options_header' )->value() 
+			if ( 'desktop' === $control->manager->get_setting( 'title_options_header' )->value()
 			&& 'paddle-header-5' === $control->manager->get_setting( 'paddle_header_layout_style' )->value() ) {
 				return true;
 			} else {
@@ -1686,8 +1702,8 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 */
 		function paddle_header_desktop_selected_header_5_6( $control ) {
 
-			if ( paddle_header_desktop_selected_header_5($control)
-			|| paddle_header_desktop_selected_header_6($control) ) {
+			if ( paddle_header_desktop_selected_header_5( $control )
+			|| paddle_header_desktop_selected_header_6( $control ) ) {
 				return true;
 			} else {
 				return false;
@@ -1709,7 +1725,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 */
 		function paddle_using_header_1_4_5_desktop_selected( $control ) {
 
-			if ( paddle_using_header_1_4_desktop_selected($control) 
+			if ( paddle_using_header_1_4_desktop_selected( $control )
 			|| 'paddle-header-5' === $control->manager->get_setting( 'paddle_header_layout_style' )->value() ) {
 				return true;
 			} else {
@@ -1731,7 +1747,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 */
 		function paddle_header_desktop_selected_cta_enab( $control ) {
 
-			if ( 'desktop' === $control->manager->get_setting( 'title_options_header' )->value() 
+			if ( 'desktop' === $control->manager->get_setting( 'title_options_header' )->value()
 			&& 1 === $control->manager->get_setting( 'paddle_header_cta' )->value() ) {
 				return true;
 			} else {
@@ -1739,8 +1755,4 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 			}
 		}
 	}
-
-
-
-
 }

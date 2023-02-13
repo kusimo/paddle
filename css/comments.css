@@ -4,11 +4,11 @@
  */
 @media (min-width: 768px) {
   .comments-area li.comment {
-    padding: 2em 1rem 0;
-    background: white;
-    margin-bottom: 1rem;
-    border: 1px solid #e7e7e7;
-    border-radius: 9px;
+	padding: 2em 1rem 0;
+	background: white;
+	margin-bottom: 1rem;
+	border: 1px solid #e7e7e7;
+	border-radius: 9px;
   }
 }
 .comments-area .comment-content a {
@@ -18,7 +18,7 @@
   .comments-area input[type=text],
   .comments-area input[type=email],
   .comments-area input[type=url] {
-    width: 100%;
+	width: 100%;
   }
 }
 .comments-area p {
@@ -60,21 +60,21 @@ footer.comment-meta {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+	  flex-wrap: wrap;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+	  -ms-flex-direction: column;
+		  flex-direction: column;
 }
 @media (min-width: 768px) {
   footer.comment-meta {
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: row;
-            flex-direction: row;
-    -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+		-ms-flex-direction: row;
+			flex-direction: row;
+	-webkit-box-pack: justify;
+		-ms-flex-pack: justify;
+			justify-content: space-between;
   }
 }
 
@@ -83,12 +83,12 @@ footer.comment-meta {
 }
 @media (min-width: 768px) {
   .comment-author.vcard {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+		-ms-flex-align: center;
+			align-items: center;
   }
 }
 .comment-author.vcard .says {
@@ -173,19 +173,19 @@ ol.comment-list .children::before,
   background-size: 24px;
   position: absolute;
   -webkit-transform: rotate(90deg);
-          transform: rotate(90deg);
+		  transform: rotate(90deg);
   top: 10px;
   left: 0;
 }
 @media (max-width: 575px) {
   ol.comment-list,
   .pings-list {
-    padding-left: 0;
+	padding-left: 0;
   }
   ol.comment-list .children,
   .pings-list .children {
-    margin-left: 0;
-    padding-left: 1.7rem;
+	margin-left: 0;
+	padding-left: 1.7rem;
   }
 }
 ol.comment-list li:last-child > article,
@@ -231,7 +231,7 @@ article.comment-body {
 }
 @media (min-width: 768px) {
   article.comment-body {
-    border-bottom: 0;
+	border-bottom: 0;
   }
 }
 

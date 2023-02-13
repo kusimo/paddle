@@ -15,7 +15,12 @@ $paddle_grid_option = get_theme_mod( 'paddle_grid_columns', PADDLE_DEFAULT_OPTIO
 while ( have_posts() ) :
 	$paddle_grid = ( 0 === get_theme_mod( 'paddle_page_layout_sidebar' ) ) ? 'col-12 col-sm-12 col-md-6 col-lg-4 pb-4 d-flex' : 'col-12 col-sm-12 col-md-6 col-lg-6 pb-4 d-flex';
 	?>
-	<div class="<?php echo esc_attr( $paddle_grid ); echo esc_attr( '3-columns' === $paddle_grid_option ? ' col-xl-4 grid-xtra' : '');  ?>">
+	<div class="
+	<?php
+	echo esc_attr( $paddle_grid );
+	echo esc_attr( '3-columns' === $paddle_grid_option ? ' col-xl-4 grid-xtra' : '' );
+	?>
+	">
 
 	<?php
 		the_post();

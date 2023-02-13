@@ -71,23 +71,23 @@ else :  // Right sidebar option is in use.
 	}
 
 	// Post date.
-	if ('before' === get_theme_mod( 'paddle_blog_date_position', PADDLE_DEFAULT_OPTION['paddle_blog_date_position'] )) {
+	if ( 'before' === get_theme_mod( 'paddle_blog_date_position', PADDLE_DEFAULT_OPTION['paddle_blog_date_position'] ) ) {
 		paddle_posted_on();
 	}
 
 	$paddle_enable_blog_comment = get_theme_mod( 'paddle_enable_blog_comment', PADDLE_DEFAULT_OPTION['paddle_enable_blog_comment'] );
 
 	// Comment.
-	paddle_get_post_comment($paddle_enable_blog_comment);
-	
+	paddle_get_post_comment( $paddle_enable_blog_comment );
+
 
 	?>
 
 	<figure class="thumbnail-post-single position-relative overflow-hidden">
 
 		<?php
-		$paddle_post_thumbnail_size =get_theme_mod( 'paddle_thumbnail_size', PADDLE_DEFAULT_OPTION['paddle_thumbnail_size'] );  
-		paddle_post_thumbnail($paddle_post_thumbnail_size);
+		$paddle_post_thumbnail_size = get_theme_mod( 'paddle_thumbnail_size', PADDLE_DEFAULT_OPTION['paddle_thumbnail_size'] );
+		paddle_post_thumbnail( $paddle_post_thumbnail_size );
 
 		$paddle_caption = get_the_post_thumbnail_caption();
 

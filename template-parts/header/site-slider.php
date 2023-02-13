@@ -14,7 +14,7 @@
 	$slide_total = 0;
 	$i           = 0;
 
-	?>
+?>
 	<div id="paddle-slider" class="home-banner vh paddle-front-page-slider">
 	<?php
 
@@ -33,7 +33,7 @@
 
 			// Custom Text and Links.
 			$slider_button_url[ $i ] = get_theme_mod( 'paddle_slider_button_url' . $i );
-			
+
 			?>
 
 		<div class="home-banner-overlay vh d-none"></div>
@@ -51,7 +51,8 @@
 						</h1>
 					</header>
 					<?php
-					/* @todo add options to show category list.
+					/*
+					 @todo add options to show category list.
 					<div class="banner-tags">
 						<?php paddle_category_list_by_id( $pid ); ?>
 					</div>

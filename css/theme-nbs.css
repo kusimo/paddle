@@ -30,13 +30,13 @@
 */
 /*
 :root {
-    --paddle-color-0: #182230; // H1 - H6
-    --paddle-color-1 : #016edb; // button background, body link colour
-    --paddle-color-2 : #0357ab; // Link hover color, Button bg color
-    --paddle-color-3 : #2a3a51; // Body text color
-    --paddle-color-4 : #e7e7e7; // border, input
-    --paddle-color-5 : #FFFFFF; // body background color
-    --paddle-color-6 : #f1f1f1; // focus, accesibility
+	--paddle-color-0: #182230; // H1 - H6
+	--paddle-color-1 : #016edb; // button background, body link colour
+	--paddle-color-2 : #0357ab; // Link hover color, Button bg color
+	--paddle-color-3 : #2a3a51; // Body text color
+	--paddle-color-4 : #e7e7e7; // border, input
+	--paddle-color-5 : #FFFFFF; // body background color
+	--paddle-color-6 : #f1f1f1; // focus, accesibility
 
 }
 */
@@ -593,7 +593,7 @@ h1, h1.entry-title, h1.page-title, .entry-content h1,
   .entry-summary h1,
   .comment-content h1,
   .textwidget h1 {
-    line-height: 1.2;
+	line-height: 1.2;
   }
 }
 @media screen and (min-width: 68.75em) {
@@ -604,7 +604,7 @@ h1, h1.entry-title, h1.page-title, .entry-content h1,
   .entry-summary h1,
   .comment-content h1,
   .textwidget h1 {
-    line-height: 1.2308;
+	line-height: 1.2308;
   }
 }
 
@@ -619,7 +619,7 @@ h2, h2.entry-title, .entry-content h2,
   .entry-summary h2,
   .comment-content h2,
   .textwidget h2 {
-    line-height: 1.2;
+	line-height: 1.2;
   }
 }
 @media screen and (min-width: 68.75em) {
@@ -627,7 +627,7 @@ h2, h2.entry-title, .entry-content h2,
   .entry-summary h2,
   .comment-content h2,
   .textwidget h2 {
-    line-height: 1.2;
+	line-height: 1.2;
   }
 }
 h2 a, h2.entry-title a, .entry-content h2 a,
@@ -648,7 +648,7 @@ h1, .entry-content h1,
   .entry-summary h1,
   .comment-content h1,
   .textwidget h1 {
-    line-height: 1.2308;
+	line-height: 1.2308;
   }
 }
 
@@ -667,7 +667,7 @@ h2, .entry-content h2,
   .entry-summary h2,
   .comment-content h2,
   .textwidget h2, .page-content h2 {
-    line-height: 1.2069;
+	line-height: 1.2069;
   }
 }
 @media screen and (min-width: 77.5em) {
@@ -675,7 +675,7 @@ h2, .entry-content h2,
   .entry-summary h2,
   .comment-content h2,
   .textwidget h2, .page-content h2 {
-    line-height: 1.25;
+	line-height: 1.25;
   }
 }
 
@@ -690,7 +690,7 @@ h3, .entry-content h3,
   .entry-summary h3,
   .comment-content h3,
   .textwidget h3 {
-    margin-top: 0;
+	margin-top: 0;
   }
 }
 @media screen and (min-width: 68.75em) {
@@ -698,7 +698,7 @@ h3, .entry-content h3,
   .entry-summary h3,
   .comment-content h3,
   .textwidget h3 {
-    margin-top: 0;
+	margin-top: 0;
   }
 }
 
@@ -709,7 +709,7 @@ h3, .entry-content h3,
 }
 @media screen and (min-width: 768px) {
   .page-header .archive-description {
-    margin-bottom: 30px;
+	margin-bottom: 30px;
   }
 }
 
@@ -730,7 +730,7 @@ body.boxed-header header:not(.no-bgcolor) > h1 {
 }
 @media (max-width: 400px) {
   body.boxed-header header:not(.no-bgcolor) > h1 {
-    font-size: 18px;
+	font-size: 18px;
   }
 }
 
@@ -800,12 +800,12 @@ body #page.site {
 @media screen and (min-width: 800px) {
   body.left-sidebar .content-area,
   body.left-sidebar-woocommerce .content-area {
-    order: 1;
+	order: 1;
   }
 }
 @media screen and (min-width: 800px) {
   .left-sidebar-woocommerce.woocommerce-active aside#secondary {
-    padding-right: 5rem;
+	padding-right: 5rem;
   }
 }
 /**
@@ -865,7 +865,7 @@ ol {
 @media (min-width: 992px) {
   ul,
   ol {
-    margin: 0 0 1.5em 3em;
+	margin: 0 0 1.5em 3em;
   }
 }
 
@@ -935,7 +935,7 @@ a:active {
 
 /*
 a:not([class*="wp-block-"]):not(.author-link):not(.post-entry-link) {
-    text-decoration: underline;
+	text-decoration: underline;
 }
 */
 .widget-area a, .widget a {
@@ -1141,7 +1141,7 @@ label > input {
 
 @media (min-width: 768px) {
   label > input {
-    max-width: 60%;
+	max-width: 60%;
   }
 }
 /*--------------------------------------------------------------
