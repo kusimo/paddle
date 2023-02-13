@@ -16,9 +16,16 @@
     <?php
 
        // $paddle_menu::getMenu($paddle_menu->has_separated_cta() ? 'sep-header-cta' : '');
-       $paddle_menu->splitMenu(false);
+      // $paddle_menu->splitMenu(false);
 
     ?>
+    <nav id="main-header-navigation" class="nav-primary" data-header-style="1-4" data-nav="1-4" role="navigation">
+    <?php
+
+    $paddle_menu::getMenu($paddle_menu->has_separated_cta() ? 'sep-header-cta' : '');
+
+    ?>
+    </nav><!-- #site-navigation -->
 
     <div class="toggler">
         <button aria-label="<?php echo esc_attr__('Open Menu', 'paddle'); ?>" class="open-dialog btn navbar-toggler navbar-toggler-right collapsed offcanvas-toggle pl-0">

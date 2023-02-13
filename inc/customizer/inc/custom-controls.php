@@ -1673,6 +1673,29 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		}
 	}
 
+	if ( ! function_exists( 'paddle_header_desktop_selected_header_5_6' ) ) {
+
+		/**
+		 * Check if Desktop Header section is active and header 5/6 is selected.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param WP_Customize_Control $control WP_Customize_Control instance.
+		 *
+		 * @return bool Whether the control is active to the current preview.
+		 */
+		function paddle_header_desktop_selected_header_5_6( $control ) {
+
+			if ( paddle_header_desktop_selected_header_5($control)
+			|| paddle_header_desktop_selected_header_6($control) ) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
+
 	if ( ! function_exists( 'paddle_using_header_1_4_5_desktop_selected' ) ) {
 
 		/**

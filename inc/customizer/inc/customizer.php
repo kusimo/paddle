@@ -711,9 +711,7 @@ class paddle_initialise_customizer_settings {
 						'show_label' => false,
 						'show_desc' => false,
 						'infos'	=> array(
-							'info_1' => __( 'Sub menu is not supported ', 'paddle' ),
-							'info_2_alert' => __( 'Max of 6 menu items ', 'paddle' ),
-							'info_3' => __( 'Use header 1 to 4 for large menu ', 'paddle' ),
+							'info_1' => __( 'Use header 1 to 4 for large menu ', 'paddle' ),
 						),
 					),
 				)
@@ -756,7 +754,6 @@ class paddle_initialise_customizer_settings {
 					'sample'	=> '',
 				),
 				'choices' => array(
-					'search' => __( 'Show Search', 'paddle' ),
 					'cta' => __( 'Show CTA', 'paddle' ),
 					'padding' => __( 'Disable CTA Margin', 'paddle'  ),
 				)
@@ -1289,7 +1286,7 @@ class paddle_initialise_customizer_settings {
 					'label'   => __( 'Search Type (Desktop)', 'paddle' ),
 					//'description' => esc_html__( 'Align the menu items', 'paddle' ),
 					'section' => 'paddle_theme_header_options',
-					'active_callback' => 'paddle_using_header_1_4_5_desktop_selected',
+					//'active_callback' => 'paddle_using_header_1_4_5_desktop_selected',
 					'choices' => array(
 						'icon'     => __( 'Icon Only', 'paddle' ),
 						'input' => __( 'Input and Icon', 'paddle' ),

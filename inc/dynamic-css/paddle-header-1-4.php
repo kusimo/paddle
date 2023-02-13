@@ -235,7 +235,7 @@ if ( ! function_exists('paddle_header_st2' ) ) {
               [data-nav="1-4"] li li.menu-item-has-children ul.sub-menu,
               [data-nav="1-4"] li li.page_item_has_children ul.children {
                 margin-left: 0px;
-                left: auto;
+                /*left: auto;*/
                 top: 0; }
               [data-nav="1-4"] li .menu-item-has-children > a,
               [data-nav="1-4"] li .page_item_has_children > a {
@@ -253,6 +253,7 @@ if ( ! function_exists('paddle_header_st2' ) ) {
                 left: auto;
                 opacity: 1;
                 padding: 0; }
+              #main-header-navigation ul .sub-menu .menu-item>a {width: 100%}
               [data-nav="1-4"] li.menu-item-has-children > a,
               [data-nav="1-4"] li.menu_item_has_children > a {
                 padding-right: 26px; }
@@ -273,8 +274,8 @@ if ( ! function_exists('paddle_header_st2' ) ) {
               [data-nav="1-4"] li.page_item_has_children:hover ul {
                 -webkit-animation: move-right 400ms ease both;
                         animation: move-right 400ms ease both; }
-              [data-nav="1-4"] li.menu-item-has-children li:hover ul,
-              [data-nav="1-4"] li.page_item_has_children li:hover > ul {
+              [data-nav="1-4"] li.menu-item-has-children li:hover button + ul.sub-menu,
+              [data-nav="1-4"] li.page_item_has_children li:hover > button + ul.sub-menu {
                 left: -100%; }
             [data-nav="1-4"] .sub-menu,
             [data-nav="1-4"] .children {
@@ -290,6 +291,7 @@ if ( ! function_exists('paddle_header_st2' ) ) {
               -webkit-transition: all 0.5s ease;
               transition: all 0.5s ease;
               top: calc(100% - 1px); }
+              [data-nav="1-4"] li.menu-item-has-children li button + ul.sub-menu { left: -150%;}
               [data-nav="1-4"] .sub-menu li,
               [data-nav="1-4"] .children li {
                 float: none;
@@ -349,6 +351,24 @@ if ( ! function_exists('paddle_header_st2' ) ) {
                       transform: rotate(-270deg); }
             [data-nav="1-4"] button.toggle.submenu-expand {
               background-color: transparent !important; }';
+
+        // Full width search / centered search when WooCommerce is active.
+        if('paddle-header-1' === $paddle_default_header_style 
+          &&  'input' === $paddle_header_search_button_type 
+          && class_exists( 'WooCommerce' )
+          ) {
+          $css .='
+          @media screen and (min-width: 992px) {
+            .site-branding .header-content-2nd {
+              flex-basis: 60%;
+            }
+            .site-branding .woo-header-utilities {
+              flex-basis: 20%;
+              justify-content: end;
+            }
+          }
+          ';
+        }
 
 
         // Header Mobile Layout

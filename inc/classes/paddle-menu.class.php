@@ -167,27 +167,19 @@ class PaddleMenu {
  
                         $link = $menu_item->url;
                         $title = $menu_item->title;
+
+                        $has_child = '';
+
+            
                         
                         if ( !$menu_item->menu_item_parent ) {
                             $parent_id = $menu_item->ID;
 							$count_parent_menu++;
 							
-
-                            // Insert Search
-                            /*
-                            if( 0 === $counter && $this->isSearchEnable() && strpos($menu_options, 'search') !== false 
-                                && 'paddle-header-6' === $this->current_header() ) {
-                                $menu_list .= '<li class="item upper-menu-item header-link">' ."\n";
-                                $menu_list .= '<div id="search-glass">' ."\n";
-                                $menu_list .= '<button class="btn button-search" data-bs-toggle="modal" data-bs-target="#searchModal">' ."\n";
-                                $menu_list .='<span class="screen-reader-text">Search</span>' ."\n";
-                                $menu_list .='</button>' ."\n";
-                                $menu_list .='</div>' ."\n";
-                                $menu_list .= '</li">' ."\n";
-                            }
-                            */
                             
                             if($count_parent_menu <= $max_menu_item) :
+
+                              
                             $menu_list .= '<li class="item upper-menu-item header-link">' ."\n";
                             $menu_list .= '<a href="'.$link.'" class="title">'.$title.'</a>' ."\n";
                             endif;
@@ -212,6 +204,7 @@ class PaddleMenu {
                             }
 							
                         }
+                        /* @todo add SUB MENU support - wp_get_nav_menu_items
             
                         if ( $parent_id == $menu_item->menu_item_parent ) {
 							// Check if the max menu is reached
@@ -219,11 +212,22 @@ class PaddleMenu {
             
                                 if ( !$submenu ) {
                                     $submenu = true;
+                                    ob_start(); ?>
+                                    <button class="toggle submenu-expand" data-toggle-target="sub-menu" aria-expanded="false">
+                                        <span class="screen-reader-text">Show sub menu</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                            <path fill-rule="evenodd" d="M11.9932649,19.500812 C11.3580307,19.501631 10.7532316,19.2174209 10.3334249,18.720812 L0.91486487,7.56881201 C0.295732764,6.80022105 0.378869031,5.6573388 1.10211237,4.99470263 C1.82535571,4.33206645 2.92415989,4.39205385 3.57694487,5.12981201 L11.8127849,14.881812 C11.8583553,14.9359668 11.9241311,14.9670212 11.9932649,14.9670212 C12.0623986,14.9670212 12.1281745,14.9359668 12.1737449,14.881812 L20.4095849,5.12981201 C20.8230992,4.61647509 21.4710943,4.37671194 22.1028228,4.50330101 C22.7345513,4.62989008 23.2509019,5.10297096 23.4520682,5.73948081 C23.6532345,6.37599067 23.5076557,7.07606812 23.0716649,7.56881201 L13.6559849,18.716812 C13.2354593,19.214623 12.6298404,19.5001823 11.9932649,19.500812 Z" />
+                                        </svg>
+                                    </button>
+                                    <?php
+                                    
+                                    $menu_list .=  ob_get_clean();
+                                    
                                     $menu_list .= '<ul class="sub-menu">' ."\n";
                                 }
                 
                                 $menu_list .= '<li class="item">' ."\n";
-                                $menu_list .= '<a href="'.$link.'" class="title">'.$title.'( '.$count_parent_menu.')</a>' ."\n";
+                                $menu_list .= '<a href="'.$link.'" class="title">'.$title.'</a>' ."\n";
                                 $menu_list .= '</li>' ."\n";
                                     
                 
@@ -234,6 +238,7 @@ class PaddleMenu {
                             endif;
 							
                         }
+                        */
                         
                         if($count_parent_menu <= $max_menu_item) :
                         if( count( $menu_items ) !== count( $menu_items) ) {
@@ -312,6 +317,22 @@ class PaddleMenu {
             'i' => array(
                 'class' => array()
             ),
+            'svg'   => array(
+                'class'           => true,
+                'aria-hidden'     => true,
+                'aria-labelledby' => true,
+                'role'            => true,
+                'xmlns'           => true,
+                'width'           => true,
+                'height'          => true,
+                'viewbox'         => true // <= Must be lower case!
+            ),
+            'g'     => array( 'fill' => true ),
+            'title' => array( 'title' => true ),
+            'path'  => array( 
+                'd'               => true, 
+                'fill'            => true  
+            )
         );
         return $allowed_html;
     }

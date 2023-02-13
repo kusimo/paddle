@@ -22,7 +22,8 @@ add_filter('paddle_dynamic_theme_css', 'paddle_frontend_css', 1);
 function paddle_frontend_css($dynamic_css)
 {
 	// Color
-	$paddle_theme_color_accent = paddle_theme_get_color('paddle_primary_color');
+	$primary_color = sanitize_hex_color(get_theme_mod('paddle_primary_color', PADDLE_PRIMARY_COLOR));
+	$paddle_theme_color_accent = '' === paddle_theme_get_color('paddle_primary_color') ? paddle_theme_get_color('paddle_theme_color_buttons') : paddle_theme_get_color('paddle_primary_color');
 	$paddle_theme_color_headings = paddle_theme_get_color('paddle_theme_color_headings');
 	$paddle_theme_color_body_text = paddle_theme_get_color('paddle_theme_color_body_text');
 	$paddle_theme_color_headings_hover = paddle_theme_get_color('paddle_theme_color_headings_hover');
@@ -31,7 +32,7 @@ function paddle_frontend_css($dynamic_css)
 	$paddle_theme_color_links = paddle_theme_get_color('paddle_theme_color_links');
 	$paddle_theme_color_links_hover = paddle_theme_get_color('paddle_theme_color_links_hover');
 	$paddle_theme_color_border = paddle_theme_get_color('paddle_theme_color_border');
-	$primary_color = sanitize_hex_color(get_theme_mod('paddle_primary_color', PADDLE_PRIMARY_COLOR));
+	
 	$paddle_navlink_text_color_hover = paddle_theme_get_color('paddle_navlink_text_color_hover');
 
 	// Mobile Mobile Header Layout
@@ -120,7 +121,7 @@ function paddle_frontend_css($dynamic_css)
 	input[type='reset']:not(.btn),
 	input[type='submit']:not(.btn),
 	.btn-primary {
-	background-color: <?php echo esc_attr($paddle_theme_color_accent) !== esc_attr($paddle_theme_color_buttons) ? esc_attr($paddle_theme_color_accent) : esc_attr($paddle_theme_color_buttons); ?>
+	background-color: <?php echo esc_attr($paddle_theme_color_accent) !== esc_attr($paddle_theme_color_buttons) ? esc_attr($paddle_theme_color_accent) : esc_attr($paddle_theme_color_buttons); ?>;
 	}
 	button:not(.btn):hover,
 	button:not(.btn-close):hover,
@@ -522,7 +523,7 @@ function paddle_header_css_for_woocommerce() {
 			.site-header .woo-header-utilities>ul.site-header-login { display:block}
 		  }
 			.site-header .woo-header-utilities>ul a.nav-link, .site-header .woo-header-utilities>ul>li span {width: 32px;height: 32px;display: block;position: relative;}
-			.site-header .woo-header-utilities span.woo-my-item {width: 22px; height: 22px; left: 22px}
+			.site-header .woo-header-utilities span.woo-my-item {width: 22px; height: 22px; left: 22px; z-index: 2}
 			.site-header .woo-header-utilities span.woo-my-account {
 			  display: none;
 		  }';
@@ -576,7 +577,7 @@ function paddle_header_css_for_search_input() {
 					align-items: center;
 				}
 				div#search-glass>button {position: relative;}
-				.site-header .button-search {
+				 .site-header .button-search {
 					display: block;
 					width: 40px;
 					height: 40px;
@@ -589,6 +590,7 @@ function paddle_header_css_for_search_input() {
 				.site-header .button-search:focus {
 				  border: 1px solid var(--paddle-color-4);
 				}
+				.site-header .button-search:hover { background: unset;}
 				';
 			endif;
 	
@@ -672,7 +674,7 @@ function paddle_header_css_for_search_input() {
 					}
 				  
 					.full-width-search-container.icon-with-input form>div  {
-					  filter: drop-shadow(0px 4px 8px rgba(8, 35, 48, 0.24));
+					  filter: drop-shadow(0px 4px 8px rgba(8, 35, 48, 0.14));
 					  background: white;
 				  }
 					.full-width-search-container.icon-with-input button.searchsubmit,
@@ -1016,7 +1018,7 @@ function paddle_header_css_for_navigation() {
 		  #main-header-navigation li li.menu-item-has-children ul.sub-menu,
 		  #main-header-navigation li li.page_item_has_children ul.children {
 			margin-left: 0px;
-			left: auto;
+			/*left: auto;*/
 			top: 0; }
 		  #main-header-navigation li .menu-item-has-children > a,
 		  #main-header-navigation li .page_item_has_children > a {
@@ -1034,6 +1036,7 @@ function paddle_header_css_for_navigation() {
 			left: auto;
 			opacity: 1;
 			padding: 0; }
+		#main-header-navigation ul .sub-menu .menu-item>a {width: 100%}
 		  #main-header-navigation li.menu-item-has-children > a,
 		  #main-header-navigation li.menu_item_has_children > a {
 			padding-right: 26px; }
@@ -1054,9 +1057,9 @@ function paddle_header_css_for_navigation() {
 		  #main-header-navigation li.page_item_has_children:hover ul {
 			-webkit-animation: move-right 400ms ease both;
 					animation: move-right 400ms ease both; }
-		  #main-header-navigation li.menu-item-has-children li:hover ul,
-		  #main-header-navigation li.page_item_has_children li:hover > ul {
-			left: -100%; }
+			#main-header-navigation li.menu-item-has-children li:hover button + ul.sub-menu,
+			#main-header-navigation li.page_item_has_children li:hover > button + ul.sub-menu {
+			  left: -100%; }
 		#main-header-navigation .sub-menu,
 		#main-header-navigation .children {
 		  left: -9999px;
@@ -1071,6 +1074,7 @@ function paddle_header_css_for_navigation() {
 		  -webkit-transition: all 0.5s ease;
 		  transition: all 0.5s ease;
 		  top: calc(100% - 1px); }
+		  #main-header-navigation li.menu-item-has-children li button + ul.sub-menu { left: -150%;}
 		  #main-header-navigation .sub-menu li,
 		  #main-header-navigation .children li {
 			float: none;

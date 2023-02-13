@@ -24,6 +24,7 @@ if ( ! function_exists('paddle_header_6' ) ) {
         $site_title_font_size	   = absint(get_theme_mod('site_title_font_size', PADDLE_DEFAULT_OPTION['site_title_font_size']));
         $site_has_search           = absint( get_theme_mod( 'paddle_header_search_button', PADDLE_DEFAULT_OPTION['paddle_header_search_button'] ) );
         $paddle_cta_enable         = absint(get_theme_mod('paddle_header_cta', PADDLE_DEFAULT_OPTION['paddle_header_cta']));
+        $menu_options = get_theme_mod('paddle_split_menu_options',  PADDLE_DEFAULT_OPTION['paddle_split_menu_options']);
         $paddle_cta_padding_left   = absint(get_theme_mod('header_cta_padding_left', PADDLE_DEFAULT_OPTION['header_cta_padding_left']));
 
         $paddle_header_search_button_type = get_theme_mod('paddle_header_search_button_type', PADDLE_DEFAULT_OPTION['paddle_header_search_button_type']);
@@ -41,24 +42,96 @@ if ( ! function_exists('paddle_header_6' ) ) {
         } 
         $css = '';
 
+        // WooCommerce Active.
+        if(class_exists( 'WooCommerce' )) {
+        
+          $css  .= '@media (min-width: 992px) {'; // Media Query.
+          $css .= '
+          #main-header-navigation ul#primary-menu {position: relative;}
+          #main-header-navigation ul#primary-menu::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 15px;
+            width:  100vw;
+            max-width:  100vw;
+            margin-left:  calc(50% - 50vw);
+            height: 1px;
+            background-color: '.$header_border_color.';
+            z-index: 1;
+          }';
+          $css .= '}'; // End Media Query.
+
+
+          if ('icon' === $paddle_header_search_button_type ) {
+            $css .='
+
+            @media (min-width: 992px) {
+              #main-header-navigation {
+                flex-basis: 100%;
+              }
+            }
+             
+              #search-glass::after {
+                content: "";
+                position: absolute;
+                width: 2px;
+                background-color: '.$header_border_color.';
+                left: calc(50% + 40px);
+                margin-right: 40px;
+                height: 40px;
+                border-radius: 0;
+                z-index: -1;
+                transform: rotate(19deg);
+            }';
+
+            $css .='
+            div#search-glass>button {position: relative;}
+            #search-glass {
+              position: relative;
+              flex-basis: 80%;
+              margin-bottom: 15px;
+            }
+            
+            ';
+          }
+          if ('input' === $paddle_header_search_button_type )  {
+            $css .= '
+             @media (min-width: 992px) {
+              .full-width-search-container.icon-with-input {
+                flex-basis: 80%;
+                padding-top:0;
+              }
+              #main-header-navigation ul#primary-menu::after { bottom: 15px}
+            }';
+          }
+        } else {
+          // WooCommerce is not active - arrange search icon if enable
+          if ( $site_has_search &&  $paddle_cta_enable 
+          && 'icon' === $paddle_header_search_button_type && strpos($menu_options, 'cta') !== false) {
+            $css .= '
+            @media (min-width: 992px) {
+              #search-glass {
+                order: -1;
+                padding-right: 15px;
+              }
+            }';
+          } else {
+            $css .= ' @media (min-width: 992px) { 
+              #search-glass {padding-left: 22px;}
+              .full-width-search-container.icon-with-input { width: unset; padding-left: 22px;}
+            }';
+
+          }
+        }
+
          // Header Border Top / Bottom.
          $site_header_border = '';
          if($border_bottom_enable || $border_top_enable) {
           $site_header_border .= '@media (min-width: 992px) {';
-            $site_header_border .= '
-            #main-header-navigation ul#primary-menu {position: relative;}
-            #main-header-navigation ul#primary-menu::after {
-              content: "";
-              position: absolute;
-              left: 0;
-              bottom: 15px;
-              width:  100vw;
-              max-width:  100vw;
-              margin-left:  calc(50% - 50vw);
-              height: 1px;
-              background-color: '.$header_border_color.';
-            }';
-          $site_header_border .= '}';
+          
+          $site_header_border .= '}'; // End media query
+
            $site_header_border .= '.site-header {';
             $site_header_border .= $border_bottom_enable ? 'border-bottom: 1px solid '.$header_border_color.';' : '';
             $site_header_border .= $border_top_enable ? 'border-top: 1px solid '.$header_border_color.';' : '';
@@ -66,14 +139,19 @@ if ( ! function_exists('paddle_header_6' ) ) {
            $css .= $site_header_border;
          }
 
-        $css .= '#header-style-6 {display: flex; flex-wrap: wrap}
+         if ( class_exists( 'WooCommerce' ) ) {
+          $flex_wrap = ' flex-wrap: wrap;';
+         } else {
+          $flex_wrap = ' flex-wrap: nowrap;';
+         }
+
+        $css .= '#header-style-6 {display: flex; align-items: center; justify-content: center; '.$flex_wrap.'}
+
         @media (min-width: 992px) {
           #main-header-navigation {
             display: flex;
-            flex-basis: 100%;
-          }
-        }
-           
+          } 
+        }   
         ';
         
         $css .= '
@@ -89,7 +167,7 @@ if ( ! function_exists('paddle_header_6' ) ) {
             align-self: center;
         }';
         $css .= '.site-branding-wrap {
-            padding: 8px 0;
+            padding: 8px 16px;
             display: -webkit-inline-box;
             display: -ms-inline-flexbox;
             display: inline-flex;
@@ -116,6 +194,8 @@ if ( ! function_exists('paddle_header_6' ) ) {
             $css .='.custom-logo-link {
                 display: inline-block;
                 align-self: ' . $paddle_header_logo_align . ';
+                max-width:  ' . $paddle_header_logo_size . 'px;
+                width: ' . $paddle_header_logo_size . 'px;
             }';
             $css .= '.site-header .site-logo img {
                 display: inline-block;
@@ -160,7 +240,7 @@ if ( ! function_exists('paddle_header_6' ) ) {
         $header_1 = '';
         $header_1 .= '@media screen and (max-width:992px) {';   // Start media query.
       
-        $header_1 .= 'div[id="header-style-6"] {
+        $header_1 .= 'div[id="header-style-6"], #header-style-6 {
             display: flex;
             flex-wrap: wrap;
         }

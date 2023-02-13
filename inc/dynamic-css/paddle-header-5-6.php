@@ -78,6 +78,8 @@ if ( ! function_exists('paddle_header_5_6' ) ) {
             $css .='.custom-logo-link {
                 display: inline-block;
                 align-self: ' . $paddle_header_logo_align . ';
+                max-width:  ' . $paddle_header_logo_size . 'px;
+                width: ' . $paddle_header_logo_size . 'px;
             }';
             $css .= '.site-header .site-logo img {
                 display: inline-block;
@@ -114,7 +116,12 @@ if ( ! function_exists('paddle_header_5_6' ) ) {
         }';
 
         // Navigation
+        
         $css .= paddle_header_css_for_navigation();
+
+        $css .='@media (min-width: 992px) {
+          #main-header-navigation { flex: 1;}
+        }';
 
         // Header Mobile Layout
         $css .='.toggler{ display: flex}

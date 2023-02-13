@@ -460,6 +460,10 @@ document.addEventListener('DOMContentLoaded', function (event) {
 					li.classList.remove('menu-item');
 					li.classList.add('nav-menu');
 				}
+				// For header 6
+				if (li.classList.contains('nav-logo')) {
+					li.remove();
+				}
 			});
 		}
 
