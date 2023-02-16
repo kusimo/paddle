@@ -176,6 +176,21 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 * The type of control being rendered
 		 */
 		public $type = 'text_radio_button';
+
+		/**
+		 * Full width label
+		 */
+		private $fullwidth_label = false;
+		/**
+		 * Constructor
+		 */
+		public function __construct( $manager, $id, $args = array(), $options = array() ) {
+			parent::__construct( $manager, $id, $args );
+
+			if ( isset( $this->input_attrs['fullwidth_label'] ) && $this->input_attrs['fullwidth_label'] ) {
+				$this->fullwidth_label = true;
+			}
+		}
 		/**
 		 * Enqueue our scripts and styles
 		 */
@@ -187,7 +202,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 */
 		public function render_content() {
 			?>
-			<div class="text_radio_button_control  paddle-item">
+			<div class="text_radio_button_control  paddle-item  paddle-item<?php echo esc_html( $this->fullwidth_label ? ' paddle-fw-label' : '' ); ?>">
 				<?php if ( ! empty( $this->label ) ) { ?>
 					<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
 				<?php } ?>
@@ -823,6 +838,12 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 * Button labels
 		 */
 		public $button_labels = array();
+
+		/**
+		 * Multiple input
+		 */
+		private $multiple_input = false;
+
 		/**
 		 * Constructor
 		 */
@@ -835,12 +856,15 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 					'add' => __( 'Add', 'paddle' ),
 				)
 			);
+			if ( isset( $this->input_attrs['multiple_input'] ) && $this->input_attrs['multiple_input'] ) {
+				$this->multiple_input = true;
+			}
 		}
 		/**
 		 * Enqueue our scripts and styles
 		 */
 		public function enqueue() {
-			wp_enqueue_script( 'paddle-custom-controls-js', $this->get_paddle_resource_url() . 'js/customizer.js', array( 'jquery', 'jquery-ui-core' ), '1.0', true );
+			wp_enqueue_script( 'paddle-custom-controls-js', $this->get_paddle_resource_url() . 'js/customizer.js', array( 'jquery', 'jquery-ui-core' ), '1.3.2', true );
 			wp_enqueue_style( 'paddle-custom-controls-css', $this->get_paddle_resource_url() . 'css/customizer.css', array(), '1.0', 'all' );
 		}
 		/**
@@ -856,14 +880,119 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 					<span class="customize-control-description"><?php echo esc_html( $this->description ); ?></span>
 				<?php } ?>
 				<input type="hidden" id="<?php echo esc_attr( $this->id ); ?>" name="<?php echo esc_attr( $this->id ); ?>" value="<?php echo esc_attr( $this->value() ); ?>" class="customize-control-sortable-repeater" <?php $this->link(); ?> />
-				<div class="sortable_repeater sortable">
+				<div class="sortable_repeater sortable<?php if ( $this->multiple_input ) { echo esc_html(' is-multiple-input');} else { echo esc_html(' is-single-input');} ?>">
 					<div class="repeater">
-						<input type="text" value="" class="repeater-input" placeholder="https://" /><span class="dashicons dashicons-sort"></span><a class="customize-control-sortable-repeater-delete" href="#"><span class="dashicons dashicons-no-alt"></span></a>
+						<?php if ( $this->multiple_input ) : ?>
+						<input type="text" value="" class="repeater-input is-text" placeholder="title" />
+						<?php endif; ?>
+						<input type="url" value="" class="repeater-input is-url" placeholder="https://" />
+						<span class="dashicons dashicons-sort"></span><a class="customize-control-sortable-repeater-delete" href="#"><span class="dashicons dashicons-no-alt"></span></a>
 					</div>
 				</div>
 				<button class="button customize-control-sortable-repeater-add" type="button"><?php echo esc_html( $this->button_labels['add'] ); ?></button>
 			</div>
 			<?php
+		}
+	}
+
+	/**
+	 * Dropdown Posts Custom Control
+	 *
+	 * @author Anthony Hortin <http://maddisondesigns.com>
+	 * @license http://www.gnu.org/licenses/gpl-2.0.html
+	 * @link https://github.com/maddisondesigns
+	 */
+	class Paddle_Dropdown_Menu_Custom_Control extends Paddle_Custom_Control {
+		/**
+		 * The type of control being rendered
+		 */
+		public $type = 'dropdown_menu';
+		/**
+		 * Posts
+		 */
+		private $posts = array();
+		/**
+		 * Constructor
+		 */
+		public function __construct( $manager, $id, $args = array(), $options = array() ) {
+			parent::__construct( $manager, $id, $args );
+			// Get our Posts
+			$this->posts = paddle_get_registered_menu();
+		}
+		/**
+		 * Render the control in the customizer
+		 */
+		public function render_content() {
+		?>
+			<div class="dropdown_menu_control">
+				<?php if( !empty( $this->label ) ) { ?>
+					<label for="<?php echo esc_attr( $this->id ); ?>" class="customize-control-title">
+						<?php echo esc_html( $this->label ); ?>
+					</label>
+				<?php } ?>
+				<?php if( !empty( $this->description ) ) { ?>
+					<span class="customize-control-description"><?php echo esc_html( $this->description ); ?></span>
+				<?php } ?>
+				<select name="<?php echo $this->id; ?>" id="<?php echo $this->id; ?>" <?php $this->link(); ?>>
+					<?php
+						if( !empty( $this->posts ) ) {
+							foreach ( $this->posts as $post ) {
+								printf( '<option value="%s" %s>%s</option>',
+									$post,
+									selected( $this->value(), $post, false ),
+									$post
+								);
+							}
+						}
+					?>
+				</select>
+			</div>
+		<?php
+		}
+	}
+
+	/**
+	 * TinyMCE Custom Control
+	 *
+	 * @author Anthony Hortin <http://maddisondesigns.com>
+	 * @license http://www.gnu.org/licenses/gpl-2.0.html
+	 * @link https://github.com/maddisondesigns
+	 */
+	class Paddle_TinyMCE_Custom_control extends Paddle_Custom_Control {
+		/**
+		 * The type of control being rendered
+		 */
+		public $type = 'tinymce_editor';
+		/**
+		 * Enqueue our scripts and styles
+		 */
+		public function enqueue(){
+			wp_enqueue_script( 'paddle-custom-controls-js', $this->get_paddle_resource_url() . 'inc/customizer/js/customizer.js', array( 'jquery', 'jquery-ui-core' ), '1.2.5', true );
+			wp_enqueue_style( 'paddle-custom-controls-css', $this->get_paddle_resource_url() . 'inc/customizer/css/customizer.css', array(), '1.0.3', 'all' );
+			wp_enqueue_editor();
+		}
+		/**
+		 * Pass our TinyMCE toolbar string to JavaScript
+		 */
+		public function to_json() {
+			parent::to_json();
+			$this->json['paddletinymcetoolbar1'] = isset( $this->input_attrs['toolbar1'] ) ? esc_attr( $this->input_attrs['toolbar1'] ) : 'bold italic bullist numlist alignleft aligncenter alignright link';
+			$this->json['paddletinymcetoolbar2'] = isset( $this->input_attrs['toolbar2'] ) ? esc_attr( $this->input_attrs['toolbar2'] ) : '';
+			$this->json['paddlemediabuttons'] = isset( $this->input_attrs['mediaButtons'] ) && ( $this->input_attrs['mediaButtons'] === true ) ? true : false;
+		}
+		/**
+		 * Render the control in the customizer
+		 */
+		public function render_content(){
+		?>
+			<div class="tinymce-control">
+				<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
+				<?php if( !empty( $this->description ) ) { ?>
+					<span class="customize-control-description"><?php echo esc_html( $this->description ); ?></span>
+				<?php } ?>
+				<textarea id="<?php echo esc_attr( $this->id ); ?>" class="customize-control-tinymce-editor" <?php $this->link(); ?>><?php echo wp_kses_post( $this->value() ); ?></textarea>
+			</div>
+		<?php
 		}
 	}
 	/**
@@ -1755,4 +1884,248 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 			}
 		}
 	}
+
+	/**
+	 * FOOTER
+	 */
+	if ( ! function_exists( 'paddle_footer_logo_enab' ) ) {
+
+		/**
+		 * Check if Desktop Header section is active.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param WP_Customize_Control $control WP_Customize_Control instance.
+		 *
+		 * @return bool Whether the control is active to the current preview.
+		 */
+		function paddle_footer_logo_enab( $control ) {
+
+			if ( 1 === $control->manager->get_setting( 'paddle_footer_logo' )->value() ) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
+	if ( ! function_exists( 'paddle_footer_1_content_type_editor' ) ) {
+
+		/**
+		 * Check if selected content type is editor.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param WP_Customize_Control $control WP_Customize_Control instance.
+		 *
+		 * @return bool Whether the control is active to the current preview.
+		 */
+		function paddle_footer_1_content_type_editor( $control ) {
+
+			if ( 'editor' === $control->manager->get_setting( 'footer_1_content_type' )->value() ) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
+	function paddle_footer_1_content_type_html( $control ) {
+
+		if ( 'html' === $control->manager->get_setting( 'footer_1_content_type' )->value() ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	function paddle_footer_1_content_type_menu( $control ) {
+
+		if ( 'menu' === $control->manager->get_setting( 'footer_1_content_type' )->value() ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	function paddle_footer_1_content_type_menu_enabled( $control ) {
+
+		if ( 'menu' === $control->manager->get_setting( 'footer_1_content_type' )->value() 
+			&& 1 === $control->manager->get_setting( 'footer_1_menu_enable' )->value() ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	if ( ! function_exists( 'paddle_footer_2_content_type_editor' ) ) {
+
+		/**
+		 * Check if selected content type is editor.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param WP_Customize_Control $control WP_Customize_Control instance.
+		 *
+		 * @return bool Whether the control is active to the current preview.
+		 */
+		function paddle_footer_2_content_type_editor( $control ) {
+
+			if ( 'editor' === $control->manager->get_setting( 'footer_2_content_type' )->value() ) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
+	function paddle_footer_2_content_type_html( $control ) {
+
+		if ( 'html' === $control->manager->get_setting( 'footer_2_content_type' )->value() ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	function paddle_footer_2_content_type_menu( $control ) {
+
+		if ( 'menu' === $control->manager->get_setting( 'footer_2_content_type' )->value() ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	function paddle_footer_2_content_type_menu_enabled( $control ) {
+
+		if ( 'menu' === $control->manager->get_setting( 'footer_2_content_type' )->value() 
+			&& 1 === $control->manager->get_setting( 'footer_2_menu_enable' )->value() ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	if ( ! function_exists( 'paddle_footer_3_content_type_editor' ) ) {
+
+		/**
+		 * Check if selected content type is editor.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param WP_Customize_Control $control WP_Customize_Control instance.
+		 *
+		 * @return bool Whether the control is active to the current preview.
+		 */
+		function paddle_footer_3_content_type_editor( $control ) {
+
+			if ( 'editor' === $control->manager->get_setting( 'footer_3_content_type' )->value() ) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
+	function paddle_footer_3_content_type_html( $control ) {
+
+		if ( 'html' === $control->manager->get_setting( 'footer_3_content_type' )->value() ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	function paddle_footer_3_content_type_menu( $control ) {
+
+		if ( 'menu' === $control->manager->get_setting( 'footer_3_content_type' )->value() ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	function paddle_footer_3_content_type_menu_enabled( $control ) {
+
+		if ( 'menu' === $control->manager->get_setting( 'footer_3_content_type' )->value() 
+			&& 1 === $control->manager->get_setting( 'footer_3_menu_enable' )->value() ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+		
+	if ( ! function_exists( 'paddle_footer_4_content_type_editor' ) ) {
+
+		/**
+		 * Check if selected content type is editor.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param WP_Customize_Control $control WP_Customize_Control instance.
+		 *
+		 * @return bool Whether the control is active to the current preview.
+		 */
+		function paddle_footer_4_content_type_editor( $control ) {
+
+			if ( 'editor' === $control->manager->get_setting( 'footer_4_content_type' )->value() ) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
+	function paddle_footer_4_content_type_html( $control ) {
+
+		if ( 'html' === $control->manager->get_setting( 'footer_4_content_type' )->value() ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	function paddle_footer_4_content_type_menu( $control ) {
+
+		if ( 'menu' === $control->manager->get_setting( 'footer_4_content_type' )->value() ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	function paddle_footer_4_content_type_menu_enabled( $control ) {
+
+		if ( 'menu' === $control->manager->get_setting( 'footer_4_content_type' )->value() 
+			&& 1 === $control->manager->get_setting( 'footer_4_menu_enable' )->value() ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	if ( ! function_exists( 'paddle_footer_about_enab' ) ) {
+
+		/**
+		 * Check if about us is  active.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param WP_Customize_Control $control WP_Customize_Control instance.
+		 *
+		 * @return bool Whether the control is active to the current preview.
+		 */
+		function paddle_footer_about_enab( $control ) {
+
+			if ( 1 === $control->manager->get_setting( 'paddle_footer_about_enable' )->value() ) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
+	
 }

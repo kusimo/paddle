@@ -344,37 +344,37 @@ if ( ! function_exists( 'paddle_generate_social_urls' ) ) {
 			array(
 				'url'   => 'facebook.com',
 				'icon'  => 'fab fa-facebook-f',
-				'title' => esc_html__( 'Like me on Facebook', 'paddle' ),
+				'title' => esc_html__( 'Like on Facebook', 'paddle' ),
 				'class' => 'facebook',
 			),
 			array(
 				'url'   => 'flickr.com',
 				'icon'  => 'fab fa-flickr',
-				'title' => esc_html__( 'Connect with me on Flickr', 'paddle' ),
+				'title' => esc_html__( 'Connect on Flickr', 'paddle' ),
 				'class' => 'flickr',
 			),
 			array(
 				'url'   => 'foursquare.com',
 				'icon'  => 'fab fa-foursquare',
-				'title' => esc_html__( 'Follow me on Foursquare', 'paddle' ),
+				'title' => esc_html__( 'Follow on Foursquare', 'paddle' ),
 				'class' => 'foursquare',
 			),
 			array(
 				'url'   => 'github.com',
 				'icon'  => 'fab fa-github',
-				'title' => esc_html__( 'Fork me on GitHub', 'paddle' ),
+				'title' => esc_html__( 'Follow on GitHub', 'paddle' ),
 				'class' => 'github',
 			),
 			array(
 				'url'   => 'instagram.com',
 				'icon'  => 'fab fa-instagram',
-				'title' => esc_html__( 'Follow me on Instagram', 'paddle' ),
+				'title' => esc_html__( 'Follow on Instagram', 'paddle' ),
 				'class' => 'instagram',
 			),
 			array(
 				'url'   => 'kickstarter.com',
 				'icon'  => 'fab fa-kickstarter-k',
-				'title' => esc_html__( 'Back me on Kickstarter', 'paddle' ),
+				'title' => esc_html__( 'Back on Kickstarter', 'paddle' ),
 				'class' => 'kickstarter',
 			),
 			array(
@@ -386,13 +386,13 @@ if ( ! function_exists( 'paddle_generate_social_urls' ) ) {
 			array(
 				'url'   => 'linkedin.com',
 				'icon'  => 'fab fa-linkedin-in',
-				'title' => esc_html__( 'Connect with me on LinkedIn', 'paddle' ),
+				'title' => esc_html__( 'Connect on LinkedIn', 'paddle' ),
 				'class' => 'linkedin',
 			),
 			array(
 				'url'   => 'medium.com',
 				'icon'  => 'fab fa-medium-m',
-				'title' => esc_html__( 'Follow me on Medium', 'paddle' ),
+				'title' => esc_html__( 'Follow on Medium', 'paddle' ),
 				'class' => 'medium',
 			),
 			array(
@@ -404,7 +404,7 @@ if ( ! function_exists( 'paddle_generate_social_urls' ) ) {
 			array(
 				'url'   => 'pinterest.com',
 				'icon'  => 'fab fa-pinterest-p',
-				'title' => esc_html__( 'Follow me on Pinterest', 'paddle' ),
+				'title' => esc_html__( 'Follow on Pinterest', 'paddle' ),
 				'class' => 'pinterest',
 			),
 			array(
@@ -470,7 +470,7 @@ if ( ! function_exists( 'paddle_generate_social_urls' ) ) {
 			array(
 				'url'   => 'twitter.com',
 				'icon'  => 'fab fa-twitter',
-				'title' => esc_html__( 'Follow me on Twitter', 'paddle' ),
+				'title' => esc_html__( 'Follow on Twitter', 'paddle' ),
 				'class' => 'twitter',
 			),
 			array(
@@ -488,7 +488,7 @@ if ( ! function_exists( 'paddle_generate_social_urls' ) ) {
 			array(
 				'url'   => 'youtube.com',
 				'icon'  => 'fab fa-youtube',
-				'title' => esc_html__( 'Subscribe to me on YouTube', 'paddle' ),
+				'title' => esc_html__( 'Subscribe on YouTube', 'paddle' ),
 				'class' => 'youtube',
 			),
 		);
@@ -506,7 +506,8 @@ if ( ! function_exists( 'paddle_social_menu ' ) ) :
 	 */
 	function paddle_social_menu() {
 		$footer_has_social = get_theme_mod( 'paddle_footer_social', PADDLE_DEFAULT_OPTION['paddle_footer_social'] );
-		if ( 1 === $footer_has_social ) {
+		$paddle_social_column = get_theme_mod( 'footer_social_column', PADDLE_DEFAULT_OPTION['footer_social_column'] );
+		if ( 1 === $footer_has_social && 'none' === $paddle_social_column ) {
 			get_template_part( 'template-parts/footer/social', 'items' );
 		}
 
@@ -597,7 +598,7 @@ if ( ! function_exists( 'paddle_footer_copyrights' ) ) :
 				<?php
 				$copyright = get_theme_mod( 'paddle_footer_copyright_text' );
 				if ( $copyright && '' !== wp_kses_post( $copyright ) ) :
-					echo wp_kses_post( get_theme_mod( 'paddle_footer_copyright_text' ) );
+					echo wp_kses_post( paddle_filter_footer_copyright($copyright) );
 
 				else :
 					paddle_get_default_footer_copyright();
@@ -611,7 +612,7 @@ if ( ! function_exists( 'paddle_footer_copyrights' ) ) :
 	}
 endif;
 add_action( 'paddle_action_footer', 'paddle_footer_copyrights', 9 );
-add_action( 'paddle_action_footer', 'paddle_privacy_policy_link', 13 );
+add_action( 'paddle_action_footer', 'paddle_footer_extra_links', 13);
 add_action( 'paddle_action_footer', 'paddle_theme_credit', 15 );
 add_action( 'paddle_action_footer', 'paddle_social_menu', 18 );
 
@@ -621,18 +622,53 @@ if ( ! function_exists( 'paddle_theme_credit' ) ) {
 	function paddle_theme_credit() {
 		if ( get_theme_mod( 'paddle_theme_credit', PADDLE_DEFAULT_OPTION['paddle_theme_credit'] ) ) :
 			?>
-			<div class="theme-credit"><?php esc_html_e( 'Powered by ', 'paddle' ); ?><?php esc_html_e( 'WordPress. Designed by A. Kusimo', 'paddle' ); ?></div>
+			<div class="theme-credit">
+			<a href="<?php echo esc_url( __( 'https://wordpress.org/themes/paddle/', 'zara' ) ); ?>" rel="nofollow" target="_blank">
+				<?php esc_html_e( 'Paddle ', 'paddle' ); ?><?php esc_html_e( 'with', 'paddle' ); ?> 
+				<sup>&hearts;</sup>
+			</a>
+			</div>
 			<?php
 		endif;
 	}
 }
 
-if ( ! function_exists( 'paddle_privacy_policy_link ' ) ) {
-	function paddle_privacy_policy_link() {
+
+if (! function_exists('paddle_footer_extra_links')) {	
+	/**
+	 * This add extra links to the bottom footer, includes privacy policy.
+	 * paddle_footer_extra_links
+	 *
+	 * @return void
+	 */
+	function paddle_footer_extra_links() {
+
 		$policy = get_theme_mod( 'paddle_privacy_policy', PADDLE_DEFAULT_OPTION['paddle_privacy_policy'] );
-		if ( function_exists( 'the_privacy_policy_link' ) && 1 === $policy ) {
-			the_privacy_policy_link( '<div class="bottom-footer-link policy">', '</div>' );
+		$show_privacy_link = function_exists( 'the_privacy_policy_link' ) && 1 === $policy;
+
+		$footer_links = paddle_comma_string_to_obj(get_theme_mod( 'footer_urls', PADDLE_DEFAULT_OPTION['footer_urls'] ), 'title', 'url');
+
+	    if($show_privacy_link || !empty($footer_links)) : ?>
+			<div class="footer-link-content">
+		<?php endif;
+
+		if(!empty($footer_links)) { 
+			for ($i = 0; $i < count($footer_links); $i++) {
+				$title = $footer_links[$i]['title'];
+				$url = $footer_links[$i]['url'];
+				printf('<a class="footer-bottom-link" href="%s">%s</a>', esc_url($url) , esc_attr($title) );
+			}
+	    }
+
+		// Add privacy policy link
+		if($show_privacy_link) {
+			the_privacy_policy_link();
 		}
+
+		if($show_privacy_link || !empty($footer_links)) : ?>
+			</div>
+		<?php endif;
+		
 	}
 }
 
@@ -972,4 +1008,36 @@ if ( ! function_exists( 'paddle_search_layout' ) ) {
 		endif;
 	}
 }
+
+function paddle_get_registered_menu() {
+	$list = array();
+
+	$menus = wp_get_nav_menus();
+
+	if( ! empty( $menus ) && count($menus) > 0 ) :
+		foreach ( $menus as $menu ) {
+			array_push($list, $menu->slug); // $menu->name
+		}
+	endif;
+
+	return $list;
+}
+
+/**
+ * Filter the Footer Credits to insert the Current Year and Copyright, Registered & Trademark symbols
+ *
+ * @since Paddle 1.0
+ *
+ * @return string Filtered footer credits string
+ */
+function paddle_filter_footer_copyright( $credits ) {
+	$credits = str_ireplace ( '%currentyear%' , date( 'Y' ) , $credits );
+	$credits = str_ireplace ( '%copy%' , '&copy;' , $credits );
+	$credits = str_ireplace ( '%reg%' , '&reg;' , $credits );
+	$credits = str_ireplace ( '%trade%' , '&trade;' , $credits );
+
+	return $credits;
+}
+
+
 

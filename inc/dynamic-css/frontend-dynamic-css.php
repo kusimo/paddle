@@ -31,6 +31,7 @@ function paddle_frontend_css( $dynamic_css ) {
 	$paddle_theme_color_links          = paddle_theme_get_color( 'paddle_theme_color_links' );
 	$paddle_theme_color_links_hover    = paddle_theme_get_color( 'paddle_theme_color_links_hover' );
 	$paddle_theme_color_border         = paddle_theme_get_color( 'paddle_theme_color_border' );
+	
 
 	$paddle_navlink_text_color_hover = paddle_theme_get_color( 'paddle_navlink_text_color_hover' );
 
@@ -163,48 +164,9 @@ function paddle_frontend_css( $dynamic_css ) {
 	// Site header
 	$css .= '.custom-logo-link {display: inline-block;}';
 
-	// Site header 3
-
-	if ( 'logo-left-style-3' === $paddle_header_style ) {
-		$css .= '#header-style-3 .NavHeader__menu {
-				flex-grow: 1;
-			}';
-		$css .= '#header-style-3 #main-header-navigation {
-				display: flex; align-items: center; flex-grow: 1;
-			}';
-		$css .= '#header-style-3>div {
-				height: 60px;
-			}';
-		$css .= '#header-style-3 #primary-menu {
-				margin-bottom: 0; display: flex; list-style: none; align-items: center;
-			}';
-		$css .= '#header-style-3 .menu>.menu-item>a{
-				text-decoration: none;
-			}';
-	}
 
 	// HEADER
 
-	// Menu
-	$css .= 'ul#primary-menu a {
-		text-transform: ' . $paddle_menu_capitalization . ';
-	}';
-
-	// Logo
-	$css .= '
-		  @media screen and (max-width:500px) {
-			/*.site-header .site-logo img {max-height:60px}*/
-		  }
-		';
-
-	// Social icon background color
-	if ( 0 === $paddle_enable_icon_bg ) {
-		$css .= '
-			#topbar ul.social-items li .bg-transform {
-				background-color: transparent!important;
-			}
-			';
-	}
 
 	// CTA BUTTON
 
@@ -242,243 +204,16 @@ function paddle_frontend_css( $dynamic_css ) {
 
 	// *
 
-	// Colors
-	$css .= '#main-header-navigation .menu-item span svg {
-                fill: ' . $primary_color . ';
-        }';
 
-	$css .= 'article.sticky .thumbnail-container::after {
-			box-shadow: -25px 20px 0 ' . $primary_color . ';
-			background: ' . $primary_color . ';
-		}';
-
-	// Nav Menu background color.
-		$css .= '#main-header-navigation, #main-header-navigation .sub-menu { background-color: ' . $paddle_menu_bgcolor_check . '; border-bottom: none; } ';
-		$css .= '#masthead #main-header-navigation li a:hover,  #main-header-navigation .sub-menu li a:hover { color: ' . $paddle_navlink_text_color_hover . ';  } ';
-
-	// Headings H1 background.
-	if ( '#000000' !== $paddle_h1bg_color_check ) {
-		$css .= 'body.boxed-header header:not(.no-bgcolor)>h1 { background-color: ' . $paddle_h1bg_color_check . '; } ';
-	}
-
-	// Post thumbnail
-	$css .= 'figure.thumbnail-post-single .thumbnail-container {text-align: ' . $paddle_thumbnail_alignment . ' ;}';
-
-	// Home and Category page Card
-	if ( 1 === $enable_image_before_site_title ) {
-		$css .= '.archive-grid article .post-thumbnail, .archive.category .thumbnail-container {
-				order: -1;
-				width: 100%;
-				display: block;
-			}';
-		$css .= '.has-post-thumbnail h2.entry-title, .has-placeholder-image h2.entry-title {
-				margin-top: 18px;
-			}';
-		$css .= ' .archive-grid.row h2.entry-title {margin-bottom: 24px;}';
-	}
-
-	if ( 1 === $enable_same_height_image ) {
-		$css .= '.category-grid-layout .thumbnail-container {
-				display: block;
-				clear: both;
-				position: relative;
-				margin: 0 auto 15px 0;
-				min-height: 1px;
-				width: 100%;
-				height: 100%;
-				padding-top: 0!important;
-				padding-bottom: 66.4815%;
-				overflow: hidden;
-			}
-			
-			.category-grid-layout .thumbnail-container img {
-				height: auto;
-				max-width: 100%;
-				width: 100%;
-				max-width: unset!important;
-				width: 100%;
-				height: 100%;
-				top: 0;
-				left: 0;
-				position: absolute;
-				-o-object-fit: cover;
-				object-fit: cover;
-			}
-			.home.blog .thumbnail-container, .archive.category .thumbnail-container {
-				margin-right: 0; margin-left:0;
-				position: relative;
-				width: 100%;
-			}
-			';
-	}
-
-	if ( 1 === $paddle_expand_grid_image ) {
-		$css .= '.archive-grid.row article {padding: 0; padding-bottom: 50px;}
-			.archive-grid.row .entry-content, .archive-grid.row h2.entry-title, .archive-grid.row article .entry-meta, .archive-grid.row article .entry-footer {padding: 0 22px;}
-			.archive-grid.row article .thumbnail-container a.post-thumbnail, .archive-grid.row article .thumbnail-container .svg-holder {
-				clear: both;
-				position: relative;
-				margin: 0 auto 0px 0;
-				min-height: 1px;
-				width: 100%;
-				height: 100%;
-				padding-top: 0!important;
-				padding-bottom: 66.4815%!important;
-				overflow: hidden;
-			}
-			.archive-grid.row article img.wp-post-image, .archive-grid.row article .thumbnail-container .svg-holder svg.fallback-svg {
-				width: 100%;
-				object-fit: cover;
-				max-width: unset!important;
-				width: 100%;
-				height: 100%;
-				top: 0;
-				left: 0;
-				position: absolute;
-				-o-object-fit: cover;
-				object-fit: cover;
-			}
-			.archive-grid.row article .entry-footer.grid-category-list {padding-right: 0; padding-left: 0; padding-bottom:22px; padding-top:5px }
-			';
-	}
-
-	// Banner Height. @todo check if banner enable before adding CSS
-	if ( 60 !== $header_media_height ) {
-		$css .= '.home-banner  { height : ' . $header_media_height . 'vh } ';
-	}
-
-	// Banner Overlay
-	$css .= '
-		.home-banner .home-banner-overlay {
-			background: rgba(0, 0, 0, 0.' . absint( paddle_banner_opacity() ) . ');
-		}
-		';
-	// Grundge image.
-	$css .= '.paddle-front-page-slider .slideshow-content:before {opacity: .' . absint( paddle_banner_opacity() ) . ' ; }';
-
-	// Banner Image
-	if ( '' !== paddle_get_header_image_url() && ! empty( paddle_get_header_image_url() ) ) {
-		$css .= '#home-header-image .home-banner-image {
-				background-image: url(' . esc_url( paddle_get_header_image_url() ) . ')!important; 
-				z-index: 1;
-			}
-			.home-banner .home-banner-overlay {z-index: 2;}
-			';
-	}
-
-	// Banner Header Background Color.
-	if ( 0 === $paddle_enable_banner_bgcolor ) {
-		$css .= '.home-banner .home-banner-content .board  { background: transparent!important } ';
-	} else {
-		$css .= '.home-banner .home-banner-content .board  { background: ' . $paddle_banner_header_bgcolor . ' } ';
-	}
-
-	// Set the background color opacity.
-	if ( 10 !== $banner_content_bg_opacity ) {
-		$css .= '.home-banner .home-banner-content .board  { background: ' . paddle_rgba( $paddle_banner_header_bgcolor, $banner_content_bg_opacity ) . ' } ';
-		$css .= '#paddle-slider .light-box-shadow  { background: ' . paddle_rgba( $paddle_banner_header_bgcolor, $banner_content_bg_opacity ) . ' } ';
-	}
-
-	// Banner button align
-	$css .= '.home-banner .home-banner-content .board .home-banner-cta-button-container {justify-content: ' . $banner_button_align . '}';
-
-	$css .= '.home-banner .home-banner-content .board .home-banner-cta-button-container>a {text-transform: ' . $banner_button_transform . '}';
-
-	// Hide show arrow icon in button
-	if ( 1 !== get_theme_mod( 'banner_arrow_button', PADDLE_DEFAULT_OPTION['banner_arrow_button'] ) ) {
-		$css .= '.home-banner-cta-button-container>a:before {display:none;}
-			';
-	}
-
-	if ( 0 !== get_theme_mod( 'paddle_banner_box_shadow', PADDLE_DEFAULT_OPTION['paddle_banner_box_shadow'] ) ) {
-		$css .= '#paddle-slider .light-box-shadow, #hero .board  { box-shadow: 0 0 10px 1px ' . $paddle_banner_header_bgcolor . '; } ';
-	}
-
-	if ( 0 === get_theme_mod( 'paddle_banner_box_shadow', PADDLE_DEFAULT_OPTION['paddle_banner_box_shadow'] ) ) {
-		$css .= ' #paddle-slider .light-box-shadow, #hero .board  { box-shadow: none; } ';
-	}
-
-	// Banner Text Color
-	// if ( '#ffffff' !== $paddle_banner_header_color ) {
-	$css .= ' .home-banner .home-banner-content .board { color: ' . $paddle_banner_header_color . '; } ';
-	$css .= ' .home-banner .home-banner-content .board p { color: ' . $paddle_banner_header_color . '; } ';
-
-	// }
-
-	// Set banner text content border radius;
-	if ( 1 === $paddle_banner_border_radius ) {
-		$css .= '.home-banner .home-banner-content .board  { border-radius: 15px } ';
-	}
-
-	// Shift home .row up
-	if ( paddle_content_over_banner() ) {
-		$css .= '
-			@media screen and (min-width: 992px) {
-				.row.main-row {
-					position: relative;
-					margin-top: -' . $content_over_banner_position . 'px;
-					background: #fff;
-					z-index: 2;
-					padding-top: 3.2rem;
-					padding-left: 2rem;
-					padding-right: 2rem;
-				}
-			  }
-			';
-	}
-
-	if ( 'center' === get_theme_mod( 'paddle_h1_alignment', PADDLE_DEFAULT_OPTION['paddle_h1_alignment'] ) ) {
-		$css .= '.single article h1.entry-title, header.entry-header, .archive h1.page-title, .page-header .archive-description, 
-			header .term-description, article .by-author,article .entry-meta, nav.woocommerce-breadcrumb {
-				text-align: center;
-			}
-			header .term-description p, .page-header .archive-description p  {
-				width:100%;
-			}
-			';
-	}
-
-	// Headings solid lines H1 and H2 . @todo Remove this feature.
-	if ( 1 === $paddle_title_headings_solid_lines_check ) {
-		$css .= '
-			.row.main-row h1:not(.noline-title):before, .row.main-row h2:not(.noline-title):before, .headline.heading-line:before {
-				background: $color__primary;
-				content: "\020";
-				display: block;
-				height: 3px;
-				margin: 1rem 0;
-				width: 1em;
-			  }
-			  .row.main-row h2:not(.noline-title):before {
-				width: 0.67em;
-			  }
-			  .entry-content h1:before, .entry-content h2:before, .woo-page h1:before, .woo-page h2:before {
-				content: unset;
-			  }
-			';
-	} // End Function.
-
-	// The CSS below should be in main CSS style file. @Todo move to main file. This shows in CATEGORY/Achive and Home Page.
-	$css .= '@media screen and (min-width: 768px) {
-				article .entry-footer span.cat-links + span.tags-links {
-					margin-left: 50px;
-				}
-			}
-			.thumbnail-post-single figcaption {width: ' . $paddle_caption_width . '; margin: 0.8075em 0;}
-
-			 @media (min-width: 992px) {
-				.category-classic a.post-thumbnail, .home.blog a.post-thumbnail {
-					width: 100%!important;
-				}
-			 }
-			
-			';
-	// */
 
 	$css .= paddle_header_css_for_woocommerce();
 	$css .= paddle_header_css_for_search_input();
 	$css .= paddle_header_css_for_toggler();
 	$css .= paddle_header_css_for_cta();
+
+	// Footer
+	$css .= paddle_footer_css();
+	$css .= paddle_footer_social_icons();
 	// Retrun all css
 
 	return paddle_minimize_css( $css );
@@ -1141,4 +876,291 @@ function paddle_header_css_for_cta() {
 		  ';
 	}
 	  return $css;
+}
+
+function paddle_footer_css() {
+	$footer_bg_color = paddle_theme_get_color( 'footer_bgcolor' );
+	$overlay_color = paddle_theme_get_color( 'footer_bg_image_overlay' );
+	$link_color = paddle_theme_get_color( 'footer_navlink_text_color' );
+	$text_color = paddle_theme_get_color( 'footer_text_color' );
+	$hover_color = paddle_theme_get_color( 'footer_navlink_text_color_hover' );
+	$footer_bottom_bgcolor = '' !== paddle_theme_get_color( 'footer_bottom_bgcolor' ) ? paddle_theme_get_color( 'footer_bottom_bgcolor' ) : 'transparent';
+	$footer_bottom_border_top  = 1 === absint( get_theme_mod( 'footer_bottom_border_top', PADDLE_DEFAULT_OPTION['footer_bottom_border_top'] ) ) ? '1px solid var(--paddle-color-4)' : '1px solid transparent';
+	$footer_bg_image = '' !== get_theme_mod( 'footer_bg_image', PADDLE_DEFAULT_OPTION['footer_bg_image'] ) ?  esc_url_raw( get_theme_mod( 'footer_bg_image' ) ) : '';
+	$bg_attachment  = get_theme_mod( 'footer_bg_image_attachment', PADDLE_DEFAULT_OPTION['footer_bg_image_attachment'] );
+	$overlay_opacity  = absint( get_theme_mod( 'footer_bg_overlay_opacity', PADDLE_DEFAULT_OPTION['footer_bg_overlay_opacity'] ) );
+	$logo_width  = absint( get_theme_mod( 'footer_image_width', PADDLE_DEFAULT_OPTION['footer_image_width'] ) );
+	$opacity = 0 === $overlay_opacity ? 0 : '0.'.$overlay_opacity;
+	if ( 100 === $overlay_opacity ) { 
+		$opacity = 1;
+	}
+	
+	
+
+	$css = '';
+	if ('' !== $footer_bg_image ) {
+		$bg_image = '
+		background-image: url("'.$footer_bg_image.'");
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-attachment: '.$bg_attachment.';
+		background-position: center center;
+		';
+	} else {
+		$bg_image = '';
+	}
+
+	$css .='.site-footer {
+		position: relative;
+		padding: 0 0;
+		color: '.$text_color.';
+		background-color: '.$footer_bg_color.';
+	}';
+	$css .='.footer-wrap {
+		position: relative;
+		'.$bg_image.'
+	}
+	.footer-main ul#menu-social-items {justify-content: left!important; max-width: 256px;}
+	.footer-main.container {
+		flex-direction: column;
+		padding-top: 2.5rem;
+	}
+	@media (min-width:992px) {		
+		.footer-main.container {
+			flex-direction: row;
+			padding: 2.5rem 0;
+		}
+	}
+	';
+
+	if (0 !== $opacity) :	
+		$css .= '.footer-wrap:after {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			pointer-events: none;
+			background-color: '.$overlay_color.';
+			opacity: '.$opacity.';
+		}';
+	endif;
+
+	// @todo Check if logo is enabled
+	$css .='#footer-logo>a, #footer-logo>img {
+		display: inline-block;
+		max-width: '.$logo_width.'px;
+		width: '.$logo_width.'px;
+	}';
+
+	// @todo Check if footer about enabled.
+	$css .='.site-footer .footer-tagline {
+		max-width: 256px;
+		margin: 20px 0;
+	}';
+
+
+	$css .='
+	.site-footer a {color: '.$link_color.';}
+	.site-footer a:hover {color: '.$hover_color.';}
+		.site-footer p:last-child {
+		  margin-bottom: 0; 
+		}
+		.site-footer .theme-credit {
+		  font-size: .99rem; 
+		}
+		  .site-footer .theme-credit a {
+			color: '.$text_color.';
+			text-decoration: underline; 
+		}
+		@media (min-width:992px) {
+			.site-footer .theme-credit a {
+				float: right;
+				padding-right: 15px;
+			}
+		}
+			.site-footer .site-info {
+				position: relative;
+				z-index: 1;
+				color: '.$text_color.';
+				border-top: '.$footer_bottom_border_top.';
+    			background-color: '.$footer_bottom_bgcolor.';
+			}
+			.site-footer .site-info a, .site-footer .site-info {
+				font-size: 15px;
+			}
+			.footer-link-content {display: flex; flex-wrap: wrap; justify-content: center;}
+			.footer-link-content a:first-of-type {padding-left: 0px;}
+			@media (min-width:992px) {
+				.footer-link-content {justify-content: left;}
+				.footer-link-content a:first-of-type {
+					padding-left: 15px;
+				}
+			}
+			.footer-link-content>a {padding-left: 15px;}
+
+			.site-footer .site-info a:hover {
+				color: '.$hover_color.';
+			}
+			
+		/*
+		.site-footer .site-info {
+		  border-top: 1px solid transparent;
+		  background-color:'.$footer_bg_color.';
+		}
+		*/
+		  .site-footer .site-info > .container {
+			display: flex;
+			width: 100%;
+			justify-content: space-between;
+			flex-direction: column;
+			align-items: center; 
+		}
+		@media (min-width: 992px) {
+			  .site-footer .site-info > .container {
+				flex-direction: row; } 
+			}
+			.site-footer .site-info > .container > div {
+			  flex-grow: 1; 
+			}
+		  .site-footer .site-info .footer-copyrights {
+			font-size: 100%; order: 3 
+		}
+		@media (min-width: 992px) {
+			.site-footer .site-info .footer-copyrights {
+			text-align: left; order: 0 } 
+		}
+		.site-footer .site-info .footer-copyrights a {
+			text-decoration: none !important;
+			color: currentColor; 
+		}';
+
+			  // @todo Check site footer has widget
+			  $css.= ' 
+			  .widget-container  {
+				position: relative;
+				width: 100%;
+				z-index: 1;
+			}
+			.footer-branding {position: relative; z-index: 1}
+			  .footer-widgets .container, .footer-widgets .container-fluid {
+				padding-top: 20px;
+				padding-bottom: 50px; 
+			}
+				@media (min-width: 992px) {
+				  .footer-widgets .container, .footer-widgets .container-fluid, .footer-branding {
+					padding: 20px 0px 50px 0; } 
+			}
+			  
+			
+			section.widget>h2, section.widget>h3, section.widget>h4 {
+				margin-top: 0;
+				margin-bottom: 16px;
+				font-size: 18px;
+			}
+			  
+			  .footer-widgets ul {
+				list-style: none;
+				margin: 0;
+				padding-left: 0; }
+				.footer-widgets ul li {
+				  margin-bottom: 12px;
+				  font-size: 16px;
+				  letter-spacing: 1px;
+				  line-height: 20px; }
+				  .footer-widgets ul li > a {
+					color: '.$link_color.'; }
+			  
+			  .footer-widgets div[class*=" col-"] {
+				padding-bottom: 2.5rem;
+				padding-right: 0;
+				 }
+				
+				 @media (min-width:992px) {
+					.site-footer .footer-widgets .col-content:first-child {
+						padding-left: 60px;
+					}
+				 }
+				
+			  
+			  @media screen and (max-width: 992px) {
+				.footer-widgets div[class*=" col-"]:not(:last-child) {
+				  border-bottom: 1px dashed var(--paddle-color-4); } 
+				}
+			  
+			  .footer-widgets #footer-logo {
+				padding-bottom: 0;
+				padding-left: 0; }
+				.footer-widgets #footer-logo .custom-logo-link {
+				  max-width: 200px; }';
+
+				  
+
+		  return $css;
+}
+
+function paddle_footer_social_icons() {
+	//@todo Check social media is enabled
+	$link_color = paddle_theme_get_color( 'footer_navlink_text_color' );
+	$text_color = paddle_theme_get_color( 'footer_text_color' );
+	$hover_color = paddle_theme_get_color( 'footer_navlink_text_color_hover' );
+	
+	$css = '';
+	ob_start();
+	?>
+	.footer-widgets ul#menu-social-items {justify-content: left!important}
+	ul#menu-social-items {margin: 0;}
+	 @media screen and (max-width: 992px) {
+    ul#menu-social-items {
+      margin-top: 10px;
+      margin-bottom: 20px; } }
+
+		ul#menu-social-items li,
+		.social-items.topbar-social li {
+		min-width: 40px;
+		min-height: 40px;
+		overflow: hidden;
+		display: contents; }
+
+		ul#menu-social-items li a,
+		ul#menu-social-items li .icon,
+		.social-items.topbar-social li a,
+		.social-items.topbar-social li .icon {
+			position: relative;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			min-width: 40px;
+			height: 40px;
+			margin-right: 5px;
+			border-radius: 5px;
+			background-color: transparent; 
+		}
+
+			a.bottom-social>svg {width: 20px; fill: <?php echo esc_attr( $text_color ) ?>; }
+			
+			ul#menu-social-items li a:hover svg {fill: <?php echo esc_attr( $hover_color ) ?>; transition: .1s}
+
+	<?php
+
+	$css .= ob_get_clean();
+
+	$footer_urls_position = get_theme_mod( 'footer_urls_position', PADDLE_DEFAULT_OPTION['footer_urls_position'] );
+		if ( 'left' === $footer_urls_position ) {
+			$css .= '@media (min-width: 992px) {
+				.site-footer .site-info .footer-copyrights {flex-grow: unset!important; margin-right: 15px}
+			}';
+		} elseif('right' === $footer_urls_position ) {
+			$css .= '@media (min-width: 992px) {
+				.site-footer .site-info .footer-copyrights {flex-grow: unset!important; margin-right: 15px}
+				.footer-link-content {
+					justify-content: right;
+					padding-right: 15px;
+				}
+			}';
+		}
+
+	return $css;
+
 }

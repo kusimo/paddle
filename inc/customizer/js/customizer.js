@@ -13,16 +13,50 @@ jQuery( document ).ready(function($) {
 	$('.sortable_repeater_control').each(function() {
 		// If there is an existing customizer value, populate our rows
 		var defaultValuesArray = $(this).find('.customize-control-sortable-repeater').val().split(',');
+		let sortableHaveMultiple = false;
 		var numRepeaterItems = defaultValuesArray.length;
 
 		if(numRepeaterItems > 0) {
 			// Add the first item to our existing input field
-			$(this).find('.repeater-input').val(defaultValuesArray[0]);
+			var isMultipleInput = $(this).find('.is-multiple-input')
+			
+			if(isMultipleInput.length) {
+				sortableHaveMultiple = true;
+				$(this).find('.repeater-input.is-text').val(defaultValuesArray[0]);
+				$(this).find('.repeater-input.is-url').val(defaultValuesArray[1]);
+			} else {
+				$(this).find('.repeater-input.is-url').val(defaultValuesArray[0]);
+			}
+
+			
+
 			// Create a new row for each new value
-			if(numRepeaterItems > 1) {
+			if(sortableHaveMultiple) {
+				//numRepeaterItems = numRepeaterItems / 2;
+			}
+
+			// Repeater with no multiple inputs
+			if(numRepeaterItems > 1 && !sortableHaveMultiple) {
 				var i;
 				for (i = 1; i < numRepeaterItems; ++i) {
 					paddleAppendRow($(this), defaultValuesArray[i]);
+				}
+			} else {
+				// Loop through multiple inputs
+				var i;
+				
+				for (i = 1; i < numRepeaterItems / 2; ++i) {
+					paddleAppendRow($(this), defaultValuesArray[i], defaultValuesArray[i]);
+				}
+
+				// Update the value of each input with the array
+				// count the number of input fields
+				var inputFields = $(this).find('.repeater-input');
+				// update the input fields with text
+				var c;
+				for (c = 0; c < inputFields.length; c++) {
+					console.log(defaultValuesArray[c])
+					inputFields[c].setAttribute('value',defaultValuesArray[c])
 				}
 			}
 		}
@@ -69,19 +103,39 @@ jQuery( document ).ready(function($) {
 	$('.sortable_repeater.sortable').on('blur', '.repeater-input', function() {
 		var url = $(this);
 		var val = url.val();
-		if(val && !val.match(/^.+:\/\/.*/)) {
+		
+		if(val && !val.match(/^.+:\/\/.*/) && !url.hasClass('is-text')) {
 			// Important! Make sure to trigger change event so Customizer knows it has to save the field
-			url.val('https://' + val).trigger('change');
+			//url.val('https://' + val.replace(/\s+/g, '')).trigger('change');
+			url.val(val.replace(/\s+/g, '')).trigger('change');
 		}
+		
+	});
+
+	// Save changes on blur
+	$('.sortable_repeater.sortable').on('blur', '.repeater-input.is-text', function() {
+		var url = $(this);
+		var val = url.val();
+			// Important! Make sure to trigger change event so Customizer knows it has to save the field
+			//url.val(val.replace('https://', '')).trigger('change');
 	});
 
 	// Append a new row to our list of elements
-	function paddleAppendRow($element, defaultValue = '') {
-		var newRow = '<div class="repeater" style="display:none"><input type="text" value="' + defaultValue + '" class="repeater-input" placeholder="https://" /><span class="dashicons dashicons-sort"></span><a class="customize-control-sortable-repeater-delete" href="#"><span class="dashicons dashicons-no-alt"></span></a></div>';
+	function paddleAppendRow($element, defaultValue = '', defaultValue2 = '') {
+		var isMultipleInput = $element.find('.is-multiple-input') //$('.is-multiple-input');
+		var multipleInput = '';
+		if(isMultipleInput.length) {
+			multipleInput = `<input type="text" value="${defaultValue2}" class="repeater-input is-text" placeholder="title" />`;
+		}
+		var newRow = `<div class="repeater" style="display:none">
+		${multipleInput}
+		<input type="text" value="${defaultValue}" class="repeater-input is-url" placeholder="https://" />
+		<span class="dashicons dashicons-sort"></span>
+		<a class="customize-control-sortable-repeater-delete" href="#"><span class="dashicons dashicons-no-alt"></span></a></div>`;
 
 		$element.find('.sortable').append(newRow);
 		$element.find('.sortable').find('.repeater:last').slideDown('slow', function(){
-			$(this).find('input').focus();
+			$(this).find('input:first').focus();
 		});
 	}
 
@@ -92,6 +146,7 @@ jQuery( document ).ready(function($) {
 		}).toArray();
 		// Add all the values from our repeater fields to the hidden field (which is the one that actually gets saved)
 		$element.find('.customize-control-sortable-repeater').val(inputValues);
+		
 		// Important! Make sure to trigger change event so Customizer knows it has to save the field
 		$element.find('.customize-control-sortable-repeater').trigger('change');
 	}
@@ -99,9 +154,7 @@ jQuery( document ).ready(function($) {
 	/**
 	 * Slider Custom Control
 	 *
-	 * @author Anthony Hortin <http://maddisondesigns.com>
-	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @link https://github.com/maddisondesigns
+	 * @author Anthony Hortin
 	 */
 
 	// Add event listener to secondary color value change
@@ -243,13 +296,40 @@ jQuery( document ).ready(function($) {
 		$(this).parent().find('.slider').slider('value', resetValue);
 	});
 
+	/**
+	 * TinyMCE Custom Control
+	 *
+	 * @author Anthony Hortin 
+	 */
+
+	$('.customize-control-tinymce-editor').each(function(){
+		// Get the toolbar strings that were passed from the PHP Class
+		var tinyMCEToolbar1String = _wpCustomizeSettings.controls[$(this).attr('id')].paddletinymcetoolbar1;
+		var tinyMCEToolbar2String = _wpCustomizeSettings.controls[$(this).attr('id')].paddletinymcetoolbar2;
+		var tinyMCEMediaButtons = _wpCustomizeSettings.controls[$(this).attr('id')].paddlemediabuttons;
+
+		wp.editor.initialize( $(this).attr('id'), {
+			tinymce: {
+				wpautop: true,
+				toolbar1: tinyMCEToolbar1String,
+				toolbar2: tinyMCEToolbar2String
+			},
+			quicktags: true,
+			mediaButtons: tinyMCEMediaButtons
+		});
+	});
+	$(document).on( 'tinymce-editor-init', function( event, editor ) {
+		editor.on('change', function(e) {
+			tinyMCE.triggerSave();
+			$('#'+editor.id).trigger('change');
+		});
+	});
+
 
  	/**
 	 * Theme Slider Custom Control
 	 *
-	 * @author Anthony Hortin <http://maddisondesigns.com>
-	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @link https://github.com/maddisondesigns
+	 * @author Anthony Hortin
 	 * .slider-custom-control = .theme-slider-control
 	 * .slider-control-slider-value = theme-slider-control-slider-value
 	 * .slider =  .theme-slider
@@ -310,9 +390,7 @@ jQuery( document ).ready(function($) {
 	/** @todo Remove this not using it
 	 * Single Accordion Custom Control
 	 *
-	 * @author Anthony Hortin <http://maddisondesigns.com>
-	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @link https://github.com/maddisondesigns
+	 * @author Anthony Hortin 
 	 */
 
 	$('.single-accordion-toggle').click(function() {
@@ -325,9 +403,7 @@ jQuery( document ).ready(function($) {
 	/** @todo Remove this not using it
 	 * Image Checkbox Custom Control
 	 *
-	 * @author Anthony Hortin <http://maddisondesigns.com>
-	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @link https://github.com/maddisondesigns
+	 * @author Anthony Hortin
 	 */
 
 	$('.multi-image-checkbox').on('change', function () {
@@ -348,9 +424,7 @@ jQuery( document ).ready(function($) {
 	/** @todo Remove this not using it
 	 * Pill Checkbox Custom Control
 	 *
-	 * @author Anthony Hortin <http://maddisondesigns.com>
-	 * @license http://www.gnu.org/licenses/gpl-2.0.html
-	 * @link https://github.com/maddisondesigns
+	 * @author Anthony Hortin 
 	 */
 
 	$( ".pill_checkbox_control .sortable" ).sortable({

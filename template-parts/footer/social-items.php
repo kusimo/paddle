@@ -3,7 +3,7 @@ $paddle_social_footer_urls = explode( ',', get_theme_mod( 'footer_social_urls', 
 $paddle_social_icons       = paddle_generate_social_urls();
 
 if ( ! empty( $paddle_social_footer_urls[0] ) ) { ?>
-<ul id="menu-social-items" class="footer-social">
+<ul id="menu-social-items" class="d-flex justify-content-center list-unstyled footer-social">
 	<?php
 }
 
@@ -17,7 +17,8 @@ foreach ( $paddle_social_footer_urls as $key => $value ) {
 			$social_title = $paddle_social_icons[ $index ]['title'];
 			?>
 	   <li class="social-item">
-				<a rel="noopener" href="<?php echo esc_url( $value ); ?>" title="<?php echo esc_attr( $social_title ); ?>" target="_blank">
+				<a rel="noopener" class="bottom-social" href="<?php echo esc_url( $value ); ?>" title="<?php echo esc_attr( $social_title ); ?>" target="_blank">
+					<?php echo wp_kses( paddle_theme_get_social_icon($social_name), paddle_svg_allowedHtml() ); ?>
 					<span class="screen-reader-text"><?php echo esc_html( $social_name ); ?></span>
 				</a>
 		</li>
@@ -28,6 +29,7 @@ foreach ( $paddle_social_footer_urls as $key => $value ) {
 			?>
 		<li class="social-item no-social">
 			<a class="icon icon-globe" href="<?php echo esc_url( $value ); ?>" title="<?php echo esc_attr( $social_title ); ?>" target="_blank">
+				<?php echo wp_kses( paddle_theme_get_social_icon($social_name), paddle_svg_allowedHtml() ); ?>
 				<span class="screen-reader-text"><?php echo esc_html( $social_name ); ?></span>
 			</a>
 		</li>

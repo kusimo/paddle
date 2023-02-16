@@ -529,6 +529,11 @@ foreach ( glob( get_template_directory() . '/inc/classes/*.php' ) as $file ) {
 }
 
 /**
+ * Helpers.
+ */
+require get_template_directory() . '/inc/helpers.php';
+
+/**
  * Implement the Custom Header feature.
  */
 require get_template_directory() . '/inc/custom-header.php';

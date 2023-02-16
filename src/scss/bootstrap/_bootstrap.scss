@@ -814,28 +814,6 @@ img {
   width: 100%;
 }
 
-.db {
-  display: block !important;
-}
-
-.dn {
-  display: none;
-}
-
-@media (min-width: 1025px) {
-  .db-lg {
-    display: block !important;
-  }
-
-  .dib-lg {
-    display: inline-block !important;
-  }
-
-  .dn-lg {
-    display: none;
-  }
-}
-
 .position-absolute {
   position: absolute;
 }
@@ -846,6 +824,24 @@ img {
 
 .overflow-hidden {
   overflow: hidden!important;
+}
+.m-0 {
+  margin: 0 !important;
+}
+.py-3 {
+  padding-top: 1rem!important;
+  padding-bottom: 1rem!important;
+}
+
+.fade {
+  transition: opacity .15s linear;
+}
+
+//______________________________________ End Boostrap CSS.
+
+/* Made up */
+.no-padding {
+  padding: 0!important;
 }
 
 /* buttons */
@@ -876,10 +872,4 @@ img {
 .button:not(.button-color-dark).has-icon .icon-wrap svg,
 .button:not(.button-color-dark).has-icon .icon-wrap svg path {
   fill: #FFF;
-}
-.fade {
-  transition: opacity .15s linear;
-}
-.no-padding {
-  padding: 0!important;
 }
