@@ -43,9 +43,13 @@ if ( $paddle_search_modal->isSearchEnable() ) {
 				$paddle_footer_about_active = absint(get_theme_mod( 'paddle_footer_about_enable', PADDLE_DEFAULT_OPTION['paddle_footer_about_enable'] ));
 				$paddle_footer_about = get_theme_mod( 'paddle_footer_about', PADDLE_DEFAULT_OPTION['paddle_footer_about'] );
 				$paddle_social_column = get_theme_mod( 'footer_social_column', PADDLE_DEFAULT_OPTION['footer_social_column'] );
-				$paddle_footer_social_position = get_theme_mod( 'footer_social_position', PADDLE_DEFAULT_OPTION['footer_social_position'] );
 				$paddle_footer_has_social = get_theme_mod( 'paddle_footer_social', PADDLE_DEFAULT_OPTION['paddle_footer_social'] );
-
+				$paddle_enable_payment_badge = absint(get_theme_mod( 'enable_payment_badge', PADDLE_DEFAULT_OPTION['enable_payment_badge'] ));
+				$paddle_payment_badge_source = get_theme_mod( 'payment_badge_source', PADDLE_DEFAULT_OPTION['payment_badge_source'] );
+				$paddle_payment_badge_image = get_theme_mod( 'payment_badge_image', PADDLE_DEFAULT_OPTION['payment_badge_image'] ) > 0 ?  absint( get_theme_mod( 'payment_badge_image' ) ) : 0;
+				$paddle_payment_badge_textarea_svg = get_theme_mod( 'payment_badge_textarea', PADDLE_DEFAULT_OPTION['payment_badge_textarea'] );
+				$paddle_payment_badge_color = get_theme_mod( 'payment_badge_color', PADDLE_DEFAULT_OPTION['payment_badge_color'] );
+				$paddle_payment_badge_column = get_theme_mod( 'footer_payment_badge_column', PADDLE_DEFAULT_OPTION['footer_payment_badge_column'] );
 			
 			 if( 1 === $paddle_footer_logo_active && $paddle_footer_logo_id > 0 ) { ?>
 					<div id="footer-logo">
@@ -98,6 +102,17 @@ if ( $paddle_search_modal->isSearchEnable() ) {
 		<?php endif; ?>
 
 		<div class="site-info">
+			<?php 
+			if ( paddle_is_woocommerce_active() 
+				&& 'top' === $paddle_payment_badge_column
+				&& 1 === $paddle_enable_payment_badge
+				&& !empty($paddle_payment_badge_textarea_svg) ) {  ?>
+				<div class="container">
+					<div class="col-lg-12 col-md-12 col-12 col_3 bt_payment_trust">
+					<?php paddle_payment_badge() ;?>
+					</div>
+				</div>
+			<?php } ?>
 			<div class="container py-3 text-center">
 				<?php
 				/**
@@ -106,6 +121,9 @@ if ( $paddle_search_modal->isSearchEnable() ) {
 				 * @hooked paddle_footer_copyrights - 10
 				 */
 				do_action( 'paddle_action_footer' );
+				if ('bottom' === $paddle_payment_badge_column) {
+					paddle_payment_badge() ;
+				}
 				?>
 			</div><!-- .container -->
 		</div><!-- .site-info -->

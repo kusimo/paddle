@@ -24,7 +24,6 @@ for ( $i = 1; $i <= 4; $i++ ) {
 			 */
 				$paddle_footer_logo_active = get_theme_mod( 'paddle_footer_logo', PADDLE_DEFAULT_OPTION['paddle_footer_logo'] );
 				$paddle_social_column = get_theme_mod( 'footer_social_column', PADDLE_DEFAULT_OPTION['footer_social_column'] );
-				$paddle_footer_social_position = get_theme_mod( 'footer_social_position', PADDLE_DEFAULT_OPTION['footer_social_position'] );
 				$paddle_footer_has_social = get_theme_mod( 'paddle_footer_social', PADDLE_DEFAULT_OPTION['paddle_footer_social'] );
 				$paddle_show_social = 'none' !== $paddle_social_column || 'with-logo' !== $paddle_social_column;
 		

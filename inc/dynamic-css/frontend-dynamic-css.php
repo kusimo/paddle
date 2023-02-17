@@ -890,10 +890,15 @@ function paddle_footer_css() {
 	$bg_attachment  = get_theme_mod( 'footer_bg_image_attachment', PADDLE_DEFAULT_OPTION['footer_bg_image_attachment'] );
 	$overlay_opacity  = absint( get_theme_mod( 'footer_bg_overlay_opacity', PADDLE_DEFAULT_OPTION['footer_bg_overlay_opacity'] ) );
 	$logo_width  = absint( get_theme_mod( 'footer_image_width', PADDLE_DEFAULT_OPTION['footer_image_width'] ) );
+	$paddle_payment_badge_image_height = absint(get_theme_mod( 'payment_badge_image_h', PADDLE_DEFAULT_OPTION['payment_badge_image_h'] ));
+	$paddle_payment_badge_color = get_theme_mod( 'payment_badge_color', PADDLE_DEFAULT_OPTION['payment_badge_color'] );
+	$paddle_payment_badge_column = get_theme_mod( 'footer_payment_badge_column', PADDLE_DEFAULT_OPTION['footer_payment_badge_column'] );
+
 	$opacity = 0 === $overlay_opacity ? 0 : '0.'.$overlay_opacity;
 	if ( 100 === $overlay_opacity ) { 
 		$opacity = 1;
 	}
+	$footer_bottom_layout  = get_theme_mod( 'footer_bottom_layout', PADDLE_DEFAULT_OPTION['footer_bottom_layout'] );
 	
 	
 
@@ -986,6 +991,8 @@ function paddle_footer_css() {
 				color: '.$text_color.';
 				border-top: '.$footer_bottom_border_top.';
     			background-color: '.$footer_bottom_bgcolor.';
+				padding-top: 20px;
+    			padding-bottom: 20px;
 			}
 			.site-footer .site-info a, .site-footer .site-info {
 				font-size: 15px;
@@ -1035,6 +1042,41 @@ function paddle_footer_css() {
 			text-decoration: none !important;
 			color: currentColor; 
 		}';
+
+		$payment_svg_width = 'color' === $paddle_payment_badge_color ? 'width : '.$paddle_payment_badge_image_height.'px;' : 'fill: #303030;';
+		$payment_svg_fill = 'color' === $paddle_payment_badge_color ? 'var(--paddle-color-4)' : '#3f3f3f';
+
+		$css .='
+		.bt_payment_trust {
+			text-align: center;
+		}
+		 .payment-badge-wrap { display:inline-block }
+		 .payment-badge-wrap svg {
+			height: '.$paddle_payment_badge_image_height.'px;
+			'.$payment_svg_width.'
+			padding: 2.5px;
+			fill: '.$payment_svg_fill.';
+		}';
+		if ('bottom' === $paddle_payment_badge_column) {
+			$css .= '	@media (min-width: 992px) {
+				.site-footer .site-info > .container { flex-wrap: wrap;}
+				.payment-badge-wrap { text-align: right; }
+			}';
+		}
+
+		if ('center' === $footer_bottom_layout) {
+			$css .='
+			@media (min-width: 992px) {
+				.site-footer .site-info>.container {
+				  flex-direction: column; 
+				  padding-bottom:0!important;
+				} 
+				.site-footer .bt_payment_trust {text-align: center;}
+				.site-footer .site-info .footer-copyrights { order: 4}
+				
+			  }
+			';
+		}
 
 			  // @todo Check site footer has widget
 			  $css.= ' 
@@ -1105,6 +1147,7 @@ function paddle_footer_social_icons() {
 	$link_color = paddle_theme_get_color( 'footer_navlink_text_color' );
 	$text_color = paddle_theme_get_color( 'footer_text_color' );
 	$hover_color = paddle_theme_get_color( 'footer_navlink_text_color_hover' );
+	$icon_width = absint( get_theme_mod( 'social_icon_width', PADDLE_DEFAULT_OPTION['social_icon_width'] ) ); //social_icon_width
 	
 	$css = '';
 	ob_start();
@@ -1138,7 +1181,7 @@ function paddle_footer_social_icons() {
 			background-color: transparent; 
 		}
 
-			a.bottom-social>svg {width: 20px; fill: <?php echo esc_attr( $text_color ) ?>; }
+			a.bottom-social>svg {width: <?php echo esc_attr($icon_width);?>px; fill: <?php echo esc_attr( $text_color ) ?>; }
 			
 			ul#menu-social-items li a:hover svg {fill: <?php echo esc_attr( $hover_color ) ?>; transition: .1s}
 

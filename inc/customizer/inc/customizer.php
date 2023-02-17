@@ -206,7 +206,7 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_section(
 			'paddle_footer_top',
 			array(
-				'title'       => esc_html__( 'General', 'paddle' ),
+				'title'       => esc_html__( 'Footer Top', 'paddle' ),
 				'panel'       => 'paddle_theme_footer_option',
 			)
 		);
@@ -1768,6 +1768,7 @@ class paddle_initialise_customizer_settings {
 			)
 		);
 
+
 		// Icon Background Bar Switch.
 		$wp_customize->add_setting(
 			'enable_icon_bg',
@@ -2291,6 +2292,32 @@ class paddle_initialise_customizer_settings {
 						'add' => __( 'Add Social Link', 'paddle' ),
 					),
 					'active_callback' => 'paddle_footer_select_social',
+				)
+			)
+		);
+
+		//_____ Social icons width.
+		$wp_customize->add_setting(
+			'social_icon_width',
+			array(
+				'default'           => $this->defaults['social_icon_width'],
+				'transport'         => 'refresh',
+				'sanitize_callback' => 'paddle_range_sanitization',
+			)
+		);
+		$wp_customize->add_control(
+			new Paddle_Slider_Custom_Control(
+				$wp_customize,
+				'social_icon_width',
+				array(
+					'label'           => __( 'Icon Width', 'paddle' ),
+					'section'         => 'paddle_footer_top',
+					'active_callback' => 'paddle_footer_select_social',
+					'input_attrs'     => array(
+						'min'  => 15,
+						'max'  => 30,
+						'step' => 1,
+					),
 				)
 			)
 		);
@@ -3315,6 +3342,34 @@ class paddle_initialise_customizer_settings {
 			)
 		);
 
+		/**
+		 * Bottom Footer
+		 ****************************************************/
+
+		 //__ Layout
+		$wp_customize->add_setting(
+			'footer_bottom_layout',
+			array(
+				'default'           => $this->defaults['footer_bottom_layout'],
+				'transport'         => 'refresh',
+				'sanitize_callback' => 'paddle_radio_sanitization',
+			)
+		);
+		$wp_customize->add_control(
+			new Paddle_Text_Radio_Button_Custom_Control(
+				$wp_customize,
+				'footer_bottom_layout',
+				array(
+					'label'           => __( '(Copyright) Layout', 'paddle' ),
+					'section'         => 'paddle_footer_settings',
+					'choices'         => array(
+						'column'   => __( 'Columns', 'paddle' ),
+						'center' => __( 'Centered', 'paddle' ),
+					),
+				)
+			)
+		);
+
 		// Privacy Policy.
 		$wp_customize->add_setting(
 			'paddle_privacy_policy',
@@ -3406,6 +3461,26 @@ class paddle_initialise_customizer_settings {
 			)
 		);
 
+		// ___Footer Bottom Menu.
+		$wp_customize->add_setting(
+			'paddle_footer_bottom_title_1',
+			array(
+				'transport'         => 'postMessage',
+				'sanitize_callback' => 'paddle_text_sanitization',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Paddle_Simple_Header_Title_Control(
+				$wp_customize,
+				'paddle_footer_bottom_title_1',
+				array(
+					'label'           => __( 'Menu', 'paddle' ),
+					'section'         => 'paddle_footer_settings',
+				)
+			)
+		);
+
 		//__Extra footer links
 		$wp_customize->add_setting(
 			'footer_urls',
@@ -3415,12 +3490,13 @@ class paddle_initialise_customizer_settings {
 				'sanitize_callback' => 'wp_kses_post',
 			)
 		);
+
 		$wp_customize->add_control(
 			new Paddle_Sortable_Repeater_Control(
 				$wp_customize,
 				'footer_urls',
 				array(
-					'label'           => __( 'Footer URLs', 'paddle' ),
+					'label'           => __( 'Footer Menu', 'paddle' ),
 					'section'         => 'paddle_footer_settings',
 					'button_labels'   => array(
 						'add' => __( 'Add Link', 'paddle' ),
@@ -3446,7 +3522,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'footer_urls_position',
 				array(
-					'label'           => __( 'Align', 'paddle' ),
+					'label'           => __( 'Menu Position', 'paddle' ),
 					'section'         => 'paddle_footer_settings',
 					'choices'         => array(
 						'left'   => __( 'Left', 'paddle' ),
@@ -3456,8 +3532,220 @@ class paddle_initialise_customizer_settings {
 			)
 		);
 
-		// @Todo: add JS partial refresh to copyright
 
+		// ___Footer Bottom Menu.
+		$wp_customize->add_setting(
+			'paddle_footer_bottom_title_2',
+			array(
+				'transport'         => 'postMessage',
+				'sanitize_callback' => 'paddle_text_sanitization',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Paddle_Simple_Header_Title_Control(
+				$wp_customize,
+				'paddle_footer_bottom_title_2',
+				array(
+					'label'           => __( 'Payment Badge', 'paddle' ),
+					'section'         => 'paddle_footer_settings',
+					'active_callback' => 'paddle_is_woocommerce_active',
+				)
+			)
+		);
+
+		//__ Enable Trust Image
+
+		$wp_customize->add_setting(
+			'enable_payment_badge',
+			array(
+				'default'           => $this->defaults['enable_payment_badge'],
+				'sanitize_callback' => 'paddle_switch_sanitization',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Paddle_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'enable_payment_badge',
+				array(
+					'label'   => __( 'Trust Image', 'paddle' ),
+					'section' => 'paddle_footer_settings',
+				)
+			)
+		);
+
+		//__ Source Image 
+		$wp_customize->add_setting(
+			'payment_badge_source',
+			array(
+				'default'           => $this->defaults['payment_badge_source'],
+				'transport'         => 'refresh',
+				'sanitize_callback' => 'paddle_radio_sanitization',
+			)
+		);
+		$wp_customize->add_control(
+			new Paddle_Text_Radio_Button_Custom_Control(
+				$wp_customize,
+				'payment_badge_source',
+				array(
+					'label'           => __( 'Source Image', 'paddle' ),
+					'section'         => 'paddle_footer_settings_premium',
+					'choices'         => array(
+						'image'   => __( 'Image', 'paddle' ),
+						'svg' => __( 'SVG', 'paddle' ),
+					),
+				)
+			)
+		);
+
+		//_____ Cropped Image Control
+		$wp_customize->add_setting( 'payment_badge_image',
+			array(
+				'default' => $this->defaults['payment_badge_image'],
+				'transport' => 'refresh',
+				'sanitize_callback' => 'absint'
+			)
+		);
+		$wp_customize->add_control( new WP_Customize_Cropped_Image_Control( $wp_customize, 'payment_badge_image',
+			array(
+				'label' => __( 'Trust Seal Image', 'paddle' ),
+				'section'         => 'paddle_footer_settings_premium',
+				'active_callback' => 'paddle_is_woocommerce_active',
+				'flex_width' => true,
+				'flex_height' => true,
+				'width' => 500,
+				'height' => 100
+			)
+		) );
+		
+		//___ Textarea field for SVG list
+		$wp_customize->add_setting( 'payment_badge_textarea',
+			array(
+				'default' => $this->defaults['payment_badge_textarea'],
+				'transport' => 'refresh',
+				'sanitize_callback' => 'wp_filter_nohtml_kses'
+			)
+		);
+		$wp_customize->add_control( 'payment_badge_textarea',
+			array(
+				'label' => __( 'Badge Icons', 'paddle' ),
+				'section'         => 'paddle_footer_settings',
+				'active_callback' => 'paddle_is_woocommerce_active',
+				'type' => 'textarea',
+				'input_attrs' => array(
+					'class' => 'list-custom-class',
+					'placeholder' => __( 'master,paypal,visa', 'paddle' ),
+				),
+			)
+		);
+
+		// More payment option info
+		$wp_customize->add_setting(
+			'payment_badge_info',
+			array(
+				'transport'         => 'postMessage',
+				'sanitize_callback' => 'paddle_text_sanitization',
+			)
+		);
+		$wp_customize->add_control(
+			new Paddle_Simple_Notice_Custom_control(
+				$wp_customize,
+				'payment_badge_info',
+				array(
+					'label'           => __( 'Header 5.', 'paddle' ),
+					'section'         => 'paddle_footer_settings',
+				'active_callback' => 'paddle_is_woocommerce_active',
+					'input_attrs'     => array(
+						'show_label' => false,
+						'show_desc'  => false,
+						'infos'      => array(
+							'info_1' => __( 'amazon_payments,american_express,apple_pay,bitcoin,dinners_club,discover,interac,google_pay,jcb,klarna,maestro,master,paypal,sofort,visa', 'paddle' ),
+						),
+					),
+				)
+			)
+		);
+
+		//__ Source Image 
+		$wp_customize->add_setting(
+			'payment_badge_color',
+			array(
+				'default'           => $this->defaults['payment_badge_color'],
+				'transport'         => 'refresh',
+				'sanitize_callback' => 'paddle_radio_sanitization',
+			)
+		);
+		$wp_customize->add_control(
+			new Paddle_Text_Radio_Button_Custom_Control(
+				$wp_customize,
+				'payment_badge_color',
+				array(
+					'label'           => __( 'Image Color', 'paddle' ),
+					'section'         => 'paddle_footer_settings',
+					'choices'         => array(
+						'gray'   => __( 'Gray', 'paddle' ),
+						'color' => __( 'Color', 'paddle' ),
+					),
+				)
+			)
+		);
+
+
+		//_____ Payment image height.
+		$wp_customize->add_setting(
+			'payment_badge_image_h',
+			array(
+				'default'           => $this->defaults['payment_badge_image_h'],
+				'transport'         => 'refresh',
+				'sanitize_callback' => 'paddle_range_sanitization',
+			)
+		);
+		$wp_customize->add_control(
+			new Paddle_Slider_Custom_Control(
+				$wp_customize,
+				'payment_badge_image_h',
+				array(
+					'label'           => __( 'Height', 'paddle' ),
+					'section'         => 'paddle_footer_settings',
+					'active_callback' => 'paddle_is_woocommerce_active',
+					'input_attrs'     => array(
+						'min'  => 1,
+						'max'  => 100,
+						'step' => 1,
+					),
+				)
+			)
+		);
+
+		//___ Payment Badge Appearance
+		$wp_customize->add_setting(
+			'footer_payment_badge_column',
+			array(
+				'default'           => $this->defaults['footer_payment_badge_column'],
+				'transport'         => 'refresh',
+				'sanitize_callback' => 'paddle_radio_sanitization',
+			)
+		);
+		$wp_customize->add_control(
+			new Paddle_Text_Radio_Button_Custom_Control(
+				$wp_customize,
+				'footer_payment_badge_column',
+				array(
+					'label'           => __( 'Trust Icons Column', 'paddle' ),
+					'section'         => 'paddle_footer_settings',
+					'active_callback' => 'paddle_is_woocommerce_active',
+					'description'	  => 'Select the column where you want the payment icons to appear. Default is at the top. ',
+					'choices'         => array(
+						'top' => __( 'Top', 'paddle' ),
+						'bottom' => __( 'Bottom', 'paddle' ),
+					),
+				)
+			)
+		);
+
+
+		// @Todo: add JS partial refresh to copyright
 		// Footer credit.
 		$wp_customize->add_setting(
 			'paddle_theme_credit',
@@ -3477,6 +3765,8 @@ class paddle_initialise_customizer_settings {
 				)
 			)
 		);
+
+
 
 		/*
 		---------------------------------------------------------------------------------------*/
@@ -5503,3 +5793,10 @@ require_once trailingslashit( dirname( __FILE__ ) ) . 'custom-controls.php';
  * Initialise our Customizer settings
  */
 $paddle_settings = new paddle_initialise_customizer_settings();
+
+/**
+ * Initialise WooCommerce Customiser
+ */
+if (paddle_is_woocommerce_active()) {
+	require_once trailingslashit( dirname( __FILE__ ) ) . 'customizer-woocommerce.php';
+}

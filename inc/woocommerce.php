@@ -464,4 +464,32 @@ function paddle_woocommerce_product_meta_end() {
 	endif;
 };
 
-	add_action( 'woocommerce_product_meta_end', 'paddle_woocommerce_product_meta_end', 10, 0 );
+add_action( 'woocommerce_product_meta_end', 'paddle_woocommerce_product_meta_end', 10, 0 );
+
+//* WooCommerce Assets Optimisation.
+add_action( 'wp_enqueue_scripts', 'paddle_optimise_disable_woocommerce_loading_css_js' );
+function paddle_optimise_disable_woocommerce_loading_css_js() {
+    // Check if WooCommerce plugin is active
+    if( paddle_is_woocommerce_active() ){
+        // Check if it's any of WooCommerce page
+       if(! is_woocommerce() && ! is_cart() && ! is_checkout() ) {         
+            
+            ## Dequeue WooCommerce styles
+            wp_dequeue_style('woocommerce-layout'); 
+            wp_dequeue_style('woocommerce-general'); 
+            wp_dequeue_style('woocommerce-smallscreen');  
+		
+            ## Dequeue Paddle WooCommerce styles 
+            wp_dequeue_style('paddle-woocommerce-style');     
+            ## Dequeue WooCommerce scripts
+            wp_dequeue_script('wc-cart-fragments');
+            wp_dequeue_script('woocommerce'); 
+            wp_dequeue_script('wc-add-to-cart'); 
+        
+            wp_deregister_script( 'js-cookie' );
+            wp_dequeue_script( 'js-cookie' );
+            
+
+        }
+    }    
+}

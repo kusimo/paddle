@@ -126,8 +126,13 @@ if ( ! function_exists( 'paddle_generate_defaults' ) ) {
 			'topbar_header_button_text'               => '',
 			'paddle_privacy_policy'                   => 0,
 			'footer_social_urls'                      => '',
+			'social_icon_width'						  => 20,
 			'footer_urls'							  => '',
 			'footer_urls_position'					  => 'left',
+			'payment_badge_source'					  => 'svg',
+			'payment_badge_image' 					  => '',
+			'enable_payment_badge'					  => 1,
+			'payment_badge_color'					  => 'gray',
 			'hero_image'                              => 0,
 			'paddle_slider_custom_url'                => 0,
 			'header_banner_title'                     => 'Build Your Dream Website with Paddle',
@@ -227,6 +232,10 @@ if ( ! function_exists( 'paddle_generate_defaults' ) ) {
 			'footer_widget_position' => 'bottom',
 			'footer_social_column' => 'none',
 			'footer_social_position' => 'bottom',
+			'footer_bottom_layout' => 'column',
+			'payment_badge_textarea' => 'master,paypal,visa',
+			'payment_badge_image_h' => 30,
+			'footer_payment_badge_column' => 'top',
 		);
 
 		return apply_filters( 'paddle_customizer_defaults', $customizer_defaults );

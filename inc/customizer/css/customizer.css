@@ -107,6 +107,8 @@ input[type="number"]:focus {
 	line-height: 1.6;
 	font-style: normal;
 	gap: 7px;
+	word-break: break-all;
+    padding-right: 5px;
 
 }
 .simple-notice-custom-control .customize-control-description .dashicons-info{

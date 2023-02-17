@@ -672,6 +672,31 @@ if (! function_exists('paddle_footer_extra_links')) {
 	}
 }
 
+if (! function_exists('paddle_payment_badge')) {
+	function paddle_payment_badge() {
+		$paddle_enable_payment_badge = absint(get_theme_mod( 'enable_payment_badge', PADDLE_DEFAULT_OPTION['enable_payment_badge'] ));
+		$paddle_payment_badge_textarea_svg = get_theme_mod( 'payment_badge_textarea', PADDLE_DEFAULT_OPTION['payment_badge_textarea'] );
+		$paddle_payment_badge_column = get_theme_mod( 'footer_payment_badge_column', PADDLE_DEFAULT_OPTION['footer_payment_badge_column'] );
+		$paddle_payment_badge_color = get_theme_mod( 'payment_badge_color', PADDLE_DEFAULT_OPTION['payment_badge_color'] );
+
+		if ( paddle_is_woocommerce_active() 
+				&& 1 === $paddle_enable_payment_badge 
+				&& !empty($paddle_payment_badge_textarea_svg) ) { ?>
+				<div class="payment-badge-wrap">
+					<?php 
+					$paddle_payment_badge_arrays = explode(',',$paddle_payment_badge_textarea_svg);
+					if(!empty($paddle_payment_badge_arrays)) {
+						foreach($paddle_payment_badge_arrays as $payment_icon) {
+							echo wp_kses( paddle_theme_get_payment_icons($payment_icon, $paddle_payment_badge_color), paddle_svg_allowedHtml() ); 
+						}
+					}
+					?>
+					</div>
+			
+			<?php } 
+	}
+}
+
 if ( ! function_exists( 'paddle_drawer_nav_close' ) ) :
 	function paddle_drawer_nav_close() {
 		?>
