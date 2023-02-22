@@ -18,6 +18,7 @@ if ( ! function_exists( 'paddle_header_st2' ) ) {
 		$paddle_cta_padding_left                 = absint( get_theme_mod( 'header_cta_padding_left', PADDLE_DEFAULT_OPTION['header_cta_padding_left'] ) );
 		$border_top_enable                       = absint( get_theme_mod( 'menu_border_top', PADDLE_DEFAULT_OPTION['menu_border_top'] ) );
 		$border_bottom_enable                    = absint( get_theme_mod( 'menu_border_bottom', PADDLE_DEFAULT_OPTION['menu_border_bottom'] ) );
+    $paddle_header_mobile_layout = get_theme_mod( 'paddle_header_mobile_layout', PADDLE_DEFAULT_OPTION['paddle_header_mobile_layout'] );
 		$header_border_color                     = paddle_theme_get_color( 'paddle_header_border_color' );
 		$paddle_header_logo_padding              = absint( get_theme_mod( 'header_logo_padding', PADDLE_DEFAULT_OPTION['header_logo_padding'] ) );
 		$menu_wrap                               = get_theme_mod( 'paddle_menu_spacing', PADDLE_DEFAULT_OPTION['paddle_menu_spacing'] ); // paddle_menu_spacing
@@ -370,9 +371,15 @@ if ( ! function_exists( 'paddle_header_st2' ) ) {
 		// Header Mobile Layout
 		$css   .= '.toggler{ display: flex}
         ';
+      $logo_padding_left = '';
+  
+      if ( 'input' === $paddle_header_search_button_type_mobile && $site_has_search && 'mobile-header-2' === $paddle_header_mobile_layout ) {
+        //
+        $logo_padding_left = 'padding-left: 42px;';
+      }
 		$css   .= '@media screen and (max-width:992px) {';
 		  $css .= '.site-branding .header-content-2nd { order: 0 }
-          .site-branding .site-logo, .site-branding .site-logo .site-description {text-align: center;}
+          .site-branding .site-logo, .site-branding .site-logo .site-description {text-align: center; '.$logo_padding_left.'}
 
           .site-header button.searchsubmit::after,.btn.button-search::after {
             border-color: ' . $icon_color_mobile . ';
@@ -382,10 +389,19 @@ if ( ! function_exists( 'paddle_header_st2' ) ) {
           }
           ';
 		$css   .= '}'; // End media query.
+
+    $logo_padding_right = '';
+		if('mobile-header-1' === $paddle_header_mobile_layout && 'input' === $paddle_header_search_button_type_mobile) {
+			$logo_padding_right = 'padding-right: 42px;';
+		}
 		// ________ WooCommerce
 		$search_button_order = '0';
 		if ( class_exists( 'WooCommerce' ) ) {
 			$search_button_order = '4';
+      $logo_padding_right = '';
+		}
+    if($site_has_search && 'mobile-header-1' === $paddle_header_mobile_layout) {
+			$logo_padding_left = '';
 		}
 
 		$header_1  = '';
@@ -413,6 +429,7 @@ if ( ! function_exists( 'paddle_header_st2' ) ) {
 		$header_1 .= '
         .site-logo.header-content-left {
             order: -1;
+            '.$logo_padding_right.'
         }
         ';
 
@@ -434,6 +451,14 @@ if ( ! function_exists( 'paddle_header_st2' ) ) {
       }
      ';
 
+      // Check if no search and woocommerce
+	 if('mobile-header-2' === $paddle_header_mobile_layout && !class_exists( 'WooCommerce' ) && !$site_has_search) {
+      $header_2 .= '.site-logo {padding-left: 0px; text-align: left!important}';
+    }
+    if('mobile-header-2' === $paddle_header_mobile_layout && class_exists( 'WooCommerce' ) && !$site_has_search) {
+    $header_2 .= '.site-logo {padding-left: 0px; text-align: left!important}';
+    }
+
 		if ( 'input' === $paddle_header_search_button_type_mobile ) {
 			$header_2 .= '
           .header-content-2nd.d-flex.flex-row {
@@ -445,6 +470,12 @@ if ( ! function_exists( 'paddle_header_st2' ) ) {
 		}
 		if ( 'input' === $paddle_header_search_button_type_mobile && class_exists( 'WooCommerce' ) ) {
 			$header_2 .= ' .site-branding .site-logo,  .header-content-2nd.d-flex.flex-row {flex-basis: 80%;}';
+		}
+
+    if('mobile-header-2' === $paddle_header_mobile_layout && !$site_has_search) {
+			$header_2 .= '.header-content-2nd {display: none!important}
+			.site-logo{flex-basis: unset!important;}
+			';
 		}
 
 		$search_button_order = '-1';
@@ -459,7 +490,15 @@ if ( ! function_exists( 'paddle_header_st2' ) ) {
         ';
 		$header_2 .= '}'; // End media query.
 
-		$css .= $header_2;
+    switch ( $paddle_header_mobile_layout ) {
+			case 'mobile-header-1':
+				$css .= $header_1;
+				break;
+			case 'mobile-header-2';
+				$css .= $header_2;
+			break;
+
+		}
 
 		return paddle_minimize_css( $css );
 	}

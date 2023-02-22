@@ -55,7 +55,6 @@ jQuery( document ).ready(function($) {
 				// update the input fields with text
 				var c;
 				for (c = 0; c < inputFields.length; c++) {
-					console.log(defaultValuesArray[c])
 					inputFields[c].setAttribute('value',defaultValuesArray[c])
 				}
 			}
@@ -252,7 +251,7 @@ jQuery( document ).ready(function($) {
 
 	// Reset slider and input field back to the default value
 	$('.slider-reset').on('click', function() {
-		var resetValue = $(this).parent().find('.slider').attr('slider-min-value'); //$(this).attr('slider-reset-value');
+		var resetValue = $(this).attr('slider-reset-value');//$(this).parent().find('.slider').attr('slider-min-value'); 
 		$(this).parent().find('.customize-control-slider-value').val(resetValue);
 		$(this).parent().find('.slider').slider('value', resetValue);
 		let ImageOpacity = $(this).parent().find('.opacity-image');
@@ -482,6 +481,7 @@ jQuery( document ).ready(function($) {
 	['.customize-control-toggle_switch_2', 
 	'.customize-control-toggle_switch', 
 	'#customize-control-paddle_sidebar_position',
+	'#customize-control-paddle_sidebar_position_page',
 	'.customize-control-image_radio_button'
 	];
 	paddleCustomControlsClass.forEach(elem => {

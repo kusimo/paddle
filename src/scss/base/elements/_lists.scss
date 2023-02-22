@@ -1,14 +1,11 @@
 ul,
 ol {
-	margin: 0 0 1.5em .5em;
-	@media (min-width: 992px) {
-		margin: 0 0 1.5em 3em;
-	}
+	margin: 0;
 
 }
 
-ul {
-	list-style: disc;
+.widget ul {
+	list-style: none;
 }
 
 ol {
@@ -27,4 +24,8 @@ dt {
 
 dd {
 	margin: 0 1.5em 1.5em;
+}
+.entry-content ul, .entry-content ol {
+    padding: revert;
+    margin: revert;
 }

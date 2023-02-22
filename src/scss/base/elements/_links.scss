@@ -44,7 +44,24 @@ a:not([class*="wp-block-"]):not(.author-link):not(.post-entry-link) {
 /*
 pagination links
 */
-.post-page-numbers {
+@media (min-width:768px) {
+    .navigation.pagination .nav-links {
+        display: flex;
+        justify-content: center;
+    } 
+}
+
+.prev.page-numbers, .next.page-numbers {
+    width: unset;
+    flex-basis: 40%;
+    padding-right: 5px;
+    padding-left: 5px;
+    text-decoration: none;
+    border-color: var(--paddle-color-1);
+    color: var(--paddle-color-1);
+    font-weight: 600;
+}
+.post-page-numbers, .page-numbers {
     padding: 0;
     margin: 0 0 0.3em 0.3em;
     font-size: .8em;
@@ -55,13 +72,16 @@ pagination links
     text-align: center;
     transition: all .2s linear;
 }
-a.post-page-numbers {
-    border: 2px solid gainsboro;
-    color: #000;
+a.post-page-numbers, a.page-numbers {
+    border: 2px solid var(--paddle-color-4);
+    color: var(--paddle-color-0);
     background: 0 0;
+    border-radius: 12px;
+    text-decoration: none;
 }
-span.post-page-numbers.current {
+span.post-page-numbers.current, span.page-numbers.current {
     border: 2px solid transparent;
+    border-radius: 12px;
     color: white;
     background: var(--paddle-color-1);
 }

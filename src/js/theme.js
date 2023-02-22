@@ -1,44 +1,58 @@
 /**
  * Theme JavaScript
  */
-(function () {
-	'use strict';
 
-	/*	-----------------------------------------------------------------------------------------------
-	  Replace commas in tags and category list link
-  --------------------------------------------------------------------------------------------------- */
+['click', 'scroll', 'mousemove', 'touchstart'].forEach(function(e) {
+    window.addEventListener(e, firstInteraction, {
+        once: true
+    });
+});
+var userInteracted = false;
 
-	function replaceCommas(divClass) {
-		// Get the class name.
-		let itemContainer = document.querySelectorAll(divClass);
+function firstInteraction() {
+    if (!userInteracted) {
+        userInteracted = true;
+        window.dataLayer = window.dataLayer || [];
+        dataLayer.push({
+            'event': 'firstInteraction',
+			'userInteracted': true
+        });
+    }
+	if(userInteracted) {
+		//replaceCommas('.cat-links');
+		//replaceCommas('.tags-links');
+	}
+	
+}
 
-		itemContainer.forEach(function (linksArray) {
-			// Check if class exist on the page.
-			if (!linksArray || undefined === linksArray) {
-				return;
-			}
-			// Get the inner html.
-			let linksArrayHtml = linksArray.innerHTML;
-			// Check if the inner html has ',' if not bail.
-			if (!linksArrayHtml.includes(',')) {
-				return;
-			}
-			// Replace commas with empty.
-			linksArray.innerHTML = linksArrayHtml.replace(/,/g, '');
-		}); // Foreach.
-	} // replaceCommas.
+  function replaceCommas(divClass) {
+	// Get the class name.
+	let itemContainer = document.querySelectorAll(divClass);
 
-	replaceCommas('.cat-links');
-	replaceCommas('.tags-links');
-})();
+	itemContainer.forEach(function (linksArray) {
+		// Check if class exist on the page.
+		if (!linksArray || undefined === linksArray) {
+			return;
+		}
+		// Get the inner html.
+		let linksArrayHtml = linksArray.innerHTML;
+		// Check if the inner html has ',' if not bail.
+		if (!linksArrayHtml.includes(',')) {
+			return;
+		}
+		// Replace commas with empty.
+		linksArray.innerHTML = linksArrayHtml.replace(/,/g, ' <span> </span> ');
+	}); // Foreach.
+} // replaceCommas.
 
 
 
-document.addEventListener('DOMContentLoaded', function (event) {
 
-	/*-----------------------------------------------------------------------------------------------
+/*-----------------------------------------------------------------------------------------------
 	  Change Zoom image Magnifier
 	------------------------------------------------------------------------------------------------- */
+	/*
+document.addEventListener('DOMContentLoaded', function (event) {
 
 	(function () {
 		"use strict";
@@ -61,71 +75,12 @@ document.addEventListener('DOMContentLoaded', function (event) {
 	}());
 
 });
-
-/*	-----------------------------------------------------------------------------------------------
-	Set focus on modal search input on button clicked.
---------------------------------------------------------------------------------------------------- */
-
-(function () {
-	"use strict";
-	// Set focus
-	/*
-	let searchBtnContainer = document.getElementById('search-glass');
-  
-	if( null !== searchBtnContainer ) {
-	  searchBtnContainer.addEventListener('click', function (e) {
-		if (!searchBtnContainer) return;
-  
-		let searchFormContainer = document
-		  .getElementById('searchModal')
-		  .getElementsByTagName('form');
-		if (!searchFormContainer) return;
-  
-		//if( textBox ) return;
-		setTimeout(function () {
-		  const inputs = searchFormContainer[0].elements;
-		  if (!inputs) return;
-		  inputs[0].focus();
-		}, 500); // End set time out.
-	  });
-	}
-	*/
-
-
-	// Tab key navigation
-	/*
-	let searchModal = document.getElementById('searchModal');
-	if( ! searchModal ) return;
-	searchModal.addEventListener('keyup', checkTabPress);
-  
-	function checkTabPress(e) {
-	  e = e || event;
-	  var activeElement;
-	  if (e.keyCode == 9) {
-		activeElement = document.activeElement;
-		let btnClose = document.querySelector('#searchModal .btn-close')
-		if( !btnClose ) return;
-		if(activeElement.tabIndex === -1) {
-		  if(e.shiftKey) {								
-			btnClose.focus();
-			} 
-		}
-		if(activeElement.className.includes('fade') && !e.shiftKey) {
-			let inp = document.querySelector('#searchModal #s')
-			if (! inp ) return;
-			inp.focus()
-		  }
-	  }
-	}
-	*/
-
-})();
-
-
+*/
 
 /*	-----------------------------------------------------------------------------------------------
 	Homepage Slider
 --------------------------------------------------------------------------------------------------- */
+/*
 (function () {
 	"use strict";
 	var paddleSlider = document.querySelector('.paddle-front-page-slider');
@@ -247,13 +202,13 @@ document.addEventListener('DOMContentLoaded', function (event) {
 		plusSlides(-1);
 	};
 })();
-
+*/
+/*-----------------------------------------------------------------------------------------------
+	Browsing history product navigation
+------------------------------------------------------------------------------------------------- */
+/*
 (function () {
 	"use strict";
-
-	/*-----------------------------------------------------------------------------------------------
-		Browsing history product navigation
-	------------------------------------------------------------------------------------------------- */
 
 	let recentHistorySection = document.getElementsByClassName(
 		'woocommerce widget_recently_viewed_products'
@@ -362,9 +317,8 @@ document.addEventListener('DOMContentLoaded', function (event) {
 		}
 	}
 }());
-
+*/
 /**
- * File navigation.js.
  *
  * Handles toggling the navigation menu for small screens and enables TAB key
  * navigation support for dropdown menus.
@@ -425,15 +379,14 @@ const primaryMenu = {
 	},
 }; // primaryMenu
 
+/*-----------------------------------------------------------------------------------------------
+Offcanvas Menu 
+------------------------------------------------------------------------------------------------- */
 document.addEventListener('DOMContentLoaded', function (event) {
 	/*-----------------------------------------------------------------------------------------------
 	Activate Keyboard Navigation in the Primary Menu 
 	------------------------------------------------------------------------------------------------- */
 	primaryMenu.init();
-
-	/*-----------------------------------------------------------------------------------------------
-	Offcanvas Menu 
-	------------------------------------------------------------------------------------------------- */
 
 	(function () {
 		"use strict";
@@ -694,7 +647,14 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
 	}());
 
-})
+	/*	-----------------------------------------------------------------------------------------------
+	  Replace commas in tags and category list link
+	--------------------------------------------------------------------------------------------------- */
+	//replaceCommas('.cat-links');
+		//replaceCommas('.tags-links');
+	
+
+	})
 
 /*-----------------------------------------------------------------------------------------------
 Search Modal

@@ -14,7 +14,9 @@
 		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 	</header><!-- .entry-header -->
 
-	<?php paddle_post_thumbnail(); ?>
+	<?php 
+	$paddle_post_thumbnail_size = get_theme_mod( 'paddle_thumbnail_size', PADDLE_DEFAULT_OPTION['paddle_thumbnail_size'] );
+	paddle_post_thumbnail($paddle_post_thumbnail_size); ?>
 
 	<div class="entry-content">
 		<?php

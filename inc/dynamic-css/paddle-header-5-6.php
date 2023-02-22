@@ -84,7 +84,7 @@ if ( ! function_exists( 'paddle_header_5_6' ) ) {
             }';
 			$css .= '.site-header .site-logo img {
                 display: inline-block;
-                max-height: 80px;
+                max-height: fit-content;
                 width: 100%;
                 max-width: 516px;
                 height: auto;
@@ -127,9 +127,15 @@ if ( ! function_exists( 'paddle_header_5_6' ) ) {
 		// Header Mobile Layout
 		$css   .= '.toggler{ display: flex}
         ';
+		$logo_padding_left = '';
+		
+		if ( 'input' === $paddle_header_search_button_type_mobile && $site_has_search && 'mobile-header-2' === $paddle_header_mobile_layout ) {
+			$logo_padding_left = 'padding-left: 42px;';
+		}
+		
 		$css   .= '@media screen and (max-width:992px) {';
 		  $css .= ' .header-content-2nd { order: 0 }
-          .site-logo {flex: 1; order: 2}
+          .site-logo {flex: 1; order: 2; '.$logo_padding_left.'}
           .site-logo,  .site-logo .site-description {text-align: center; }
 
           .site-header button.searchsubmit::after,.btn.button-search::after {
@@ -140,13 +146,24 @@ if ( ! function_exists( 'paddle_header_5_6' ) ) {
           }
           ';
 		$css   .= '}'; // End media query.
+
+		$logo_padding_right = '';
+		if('mobile-header-1' === $paddle_header_mobile_layout && 'input' === $paddle_header_search_button_type_mobile) {
+			$logo_padding_right = 'padding-right: 42px;';
+		}
 		// ________ WooCommerce
+		
 		$search_button_order = '0';
-		if ( class_exists( 'WooCommerce' ) ) {
+		if ( class_exists( 'WooCommerce' )) {
 			$search_button_order = '4';
+			$logo_padding_right = '';
+		}
+		if($site_has_search && 'mobile-header-1' === $paddle_header_mobile_layout) {
+			$logo_padding_left = '';
 		}
 
 		$header_1  = '';
+		
 		$header_1 .= '@media screen and (max-width:992px) {';   // Start media query.
 
 		$header_1 .= 'div[id="header-style-2"] {
@@ -171,6 +188,7 @@ if ( ! function_exists( 'paddle_header_5_6' ) ) {
 		$header_1 .= '
         .site-logo.header-content-left {
             order: 0;
+			'.$logo_padding_right.'
         }
         ';
 
@@ -179,8 +197,7 @@ if ( ! function_exists( 'paddle_header_5_6' ) ) {
 		// Avoid the small screen dropping shopping cart on a new line
 		$header_1 .= '@media screen and (max-width:360px) { .header-content-2nd {padding: 0}}';
 
-		// If using header 1.
-		// $css .= $header_1;
+		
 
 		// If using mobile header 2
 		// ___________HEADER 2_____________
@@ -191,6 +208,14 @@ if ( ! function_exists( 'paddle_header_5_6' ) ) {
           flex-wrap: wrap;
       }
      ';
+
+	 // Check if no search and woocommerce
+	 if('mobile-header-2' === $paddle_header_mobile_layout && !class_exists( 'WooCommerce' ) && !$site_has_search) {
+		 $header_2 .= '.site-logo {padding-left: 0px; text-align: left}';
+	 }
+	 if('mobile-header-2' === $paddle_header_mobile_layout && class_exists( 'WooCommerce' ) && !$site_has_search) {
+		$header_2 .= '.site-logo {padding-left: 0px; text-align: left}';
+	 }
 
 		if ( 'input' === $paddle_header_search_button_type_mobile ) {
 			$header_2 .= '
@@ -203,6 +228,11 @@ if ( ! function_exists( 'paddle_header_5_6' ) ) {
 		}
 		if ( 'input' === $paddle_header_search_button_type_mobile && class_exists( 'WooCommerce' ) ) {
 			$header_2 .= '  .site-logo,  .header-content-2nd {flex-basis: 80%;}';
+		}
+		if('mobile-header-2' === $paddle_header_mobile_layout && !$site_has_search) {
+			$header_2 .= '.header-content-2nd {display: none;}
+			.site-logo{flex-basis: unset;}
+			';
 		}
 
 		$search_button_order = '-1';

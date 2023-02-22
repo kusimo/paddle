@@ -43,7 +43,7 @@
 				 <?php endif; ?>
 
 			 </div><!-- .brand-wrap -->
-		 </div><!-- .container.py-3 -->
+		 </div><!-- .container -->
 	 </div><!-- .site-branding -->
 
 	 <nav id="main-header-navigation" class="nav-primary" data-header-style="1" role="navigation">

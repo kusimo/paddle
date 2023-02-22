@@ -32,7 +32,6 @@ if ( $paddle_search_modal->isSearchEnable() ) {
 
 <?php do_action( 'paddle_before_main_footer' ); ?>
 
-
 <footer id="paddle-footer-colophon" class="site-footer">
 	<div class="footer-wrap">
 		<div class="footer-main d-flex container">
@@ -113,7 +112,7 @@ if ( $paddle_search_modal->isSearchEnable() ) {
 					</div>
 				</div>
 			<?php } ?>
-			<div class="container py-3 text-center">
+			<div class="container text-center">
 				<?php
 				/**
 				 * Hook - paddle_action_footer.

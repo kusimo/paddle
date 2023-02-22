@@ -8,7 +8,10 @@
  * @package paddle
  */
 
-if ( ! is_active_sidebar( 'sidebar-1' ) || 'no-sidebar' === get_theme_mod( 'paddle_sidebar_position', PADDLE_DEFAULT_OPTION['paddle_sidebar_position'] ) ) {
+ $sidebar_layout = '';
+
+if ( ! is_active_sidebar( 'sidebar-1' ) 
+|| 'no-sidebar' === paddle_get_sidebar_option() ) {
 	return;
 }
 ?>

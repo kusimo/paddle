@@ -26,10 +26,11 @@ get_header();
 			if ( ! is_page() ) :
 				the_post_navigation(
 					array(
-						'prev_text' => '<span class="nav-subtitle">' . esc_html__( 'Previous:', 'paddle' ) . '</span> <span class="nav-title">%title</span>',
+						'prev_text' => '<span class="nav-subtitle mm">' . esc_html__( 'Previous:', 'paddle' ) . '</span> <span class="nav-title">%title</span>',
 						'next_text' => '<span class="nav-subtitle">' . esc_html__( 'Next:', 'paddle' ) . '</span> <span class="nav-title">%title</span>',
 					)
 				);
+
 			endif;
 
 

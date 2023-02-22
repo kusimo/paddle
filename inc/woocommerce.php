@@ -335,7 +335,7 @@ if ( ! function_exists( ' paddle_single_excerpt_custom_replacement' ) ) :
 				<div class="card">
 					<div class="card-header p-0" id="headingOne">
 						<h5 class="my-0">
-							<button class="btn btn-light w-100 btn-toggle-icon" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+							<button class="btn btn-light btn-toggle-icon" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
 								<?php echo esc_html_e( 'Short Description', 'paddle' ); ?>
 							</button>
 						</h5>
@@ -357,7 +357,7 @@ if ( ! function_exists( ' paddle_single_excerpt_custom_replacement' ) ) :
 				<div class="card">
 					<div class="card-header p-0" id="headingTwo">
 						<h5 class="my-0">
-							<button class="btn btn-light w-100 btn-toggle-icon collapsed" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+							<button class="btn btn-light btn-toggle-icon collapsed" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
 								<?php echo esc_html_e( 'Additional Information', 'paddle' ); ?>
 							</button>
 						</h5>
@@ -373,7 +373,7 @@ if ( ! function_exists( ' paddle_single_excerpt_custom_replacement' ) ) :
 				<div class="card">
 					<div class="card-header p-0" id="headingThree">
 						<h5 class="my-0">
-							<button class="btn btn-light w-100 btn-toggle-icon collapsed" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+							<button class="btn btn-light btn-toggle-icon collapsed" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
 			<?php
 			// Get the widget title.
 			$sidebar_id       = 'product-area-collapse';
@@ -466,8 +466,8 @@ function paddle_woocommerce_product_meta_end() {
 
 add_action( 'woocommerce_product_meta_end', 'paddle_woocommerce_product_meta_end', 10, 0 );
 
-//* WooCommerce Assets Optimisation.
-add_action( 'wp_enqueue_scripts', 'paddle_optimise_disable_woocommerce_loading_css_js' );
+//* WooCommerce Assets Optimisation. @Todo uncomment add_action and test.
+//add_action( 'wp_enqueue_scripts', 'paddle_optimise_disable_woocommerce_loading_css_js' );
 function paddle_optimise_disable_woocommerce_loading_css_js() {
     // Check if WooCommerce plugin is active
     if( paddle_is_woocommerce_active() ){

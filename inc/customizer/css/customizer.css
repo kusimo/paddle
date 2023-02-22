@@ -1268,6 +1268,7 @@ li[id^="customize-control-paddle_primary_color"]  input[type=text].wp-color-pick
 
 /** Text */
 ul[id^="sub-accordion-section-paddle"] li.customize-control input[type=text],
+ul[id^="sub-accordion-section-paddle"] li.customize-control input[type=email],
 ul[id^="sub-accordion-section-paddle"] li.customize-control input[type=url] {
 	background-color: white;
 	position: relative;

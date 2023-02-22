@@ -41,7 +41,7 @@ $has_woocommerce = $paddle_menu->hasWooCommerce();
 			<?php endif; ?>
 
 		</div><!-- .brand-wrap -->
-	</div><!-- .container.py-3 -->
+	</div><!-- .container -->
 </div><!-- .site-branding -->
 
 <nav id="main-header-navigation" class="nav-primary" data-header-style="1-4" data-nav="1-4" role="navigation">

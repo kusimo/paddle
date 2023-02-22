@@ -44,7 +44,7 @@
 				 <?php endif; ?>
 
 			 </div><!-- .brand-wrap -->
-		 </div><!-- .container.py-3 -->
+		 </div><!-- .container -->
 	 </div><!-- .site-branding -->
 
 	 <nav id="main-header-navigation" class="nav-primary" data-header-style="2" data-nav="<?php echo esc_attr( paddle_get_default_header_number( $paddle_menu->current_header() ) ); ?>" role="navigation">

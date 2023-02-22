@@ -1,4 +1,4 @@
-<ul class="social-items topbar-social">
+<ul class="list-unstyled m-0 social-items topbar-social">
 <?php
 $paddle_social_urls  = explode( ',', get_theme_mod( 'social_urls', '' ) );
 $paddle_social_icons = paddle_generate_social_urls();

@@ -47,7 +47,6 @@ CUSTOM BOOTSTRAP PREFIX WITH .ADP
 }
 
 @media (min-width: 576px) {
-
   .container,
   .container-sm {
     max-width: 540px;
@@ -55,7 +54,6 @@ CUSTOM BOOTSTRAP PREFIX WITH .ADP
 }
 
 @media (min-width: 768px) {
-
   .container,
   .container-md,
   .container-sm {
@@ -64,7 +62,6 @@ CUSTOM BOOTSTRAP PREFIX WITH .ADP
 }
 
 @media (min-width: 992px) {
-
   .container,
   .container-lg,
   .container-md,
@@ -74,7 +71,6 @@ CUSTOM BOOTSTRAP PREFIX WITH .ADP
 }
 
 @media (min-width: 1200px) {
-
   .container,
   .container-lg,
   .container-md,
@@ -278,6 +274,7 @@ CUSTOM BOOTSTRAP PREFIX WITH .ADP
   max-width: 100%;
 }
 
+/*
 .order-first {
   -ms-flex-order: -1;
   order: -1;
@@ -307,7 +304,9 @@ CUSTOM BOOTSTRAP PREFIX WITH .ADP
   -ms-flex-order: 4;
   order: 4;
 }
+*/
 
+/*
 @media (min-width: 576px) {
   .col-sm {
     -ms-flex-preferred-size: 0;
@@ -324,10 +323,13 @@ CUSTOM BOOTSTRAP PREFIX WITH .ADP
     max-width: 100%;
   }
 }
+*/
 
+/*
 .col-xs-6 {
   width: 50%;
 }
+*/
 
 @media (min-width: 768px) {
   .col-md {
@@ -523,6 +525,7 @@ CUSTOM BOOTSTRAP PREFIX WITH .ADP
   display: block !important;
 }
 
+/*
 @media (min-width: 576px) {
   .d-sm-none {
     display: none !important;
@@ -550,7 +553,9 @@ CUSTOM BOOTSTRAP PREFIX WITH .ADP
     display: inline-flex !important;
   }
 }
+*/
 
+/*
 @media (min-width: 768px) {
   .d-md-none {
     display: none !important;
@@ -568,22 +573,12 @@ CUSTOM BOOTSTRAP PREFIX WITH .ADP
     display: block !important;
   }
 
-  .d-md-flex {
-    display: flex !important;
-  }
 }
+*/
 
 @media (min-width: 992px) {
   .d-lg-none {
     display: none !important;
-  }
-
-  .d-lg-inline {
-    display: inline !important;
-  }
-
-  .d-lg-inline-block {
-    display: inline-block !important;
   }
 
   .d-lg-block {
@@ -593,39 +588,6 @@ CUSTOM BOOTSTRAP PREFIX WITH .ADP
   .d-lg-flex {
     display: -ms-flexbox !important;
     display: flex !important;
-  }
-
-  .d-lg-inline-flex {
-    display: -ms-inline-flexbox !important;
-    display: inline-flex !important;
-  }
-}
-
-@media (min-width: 1200px) {
-  .d-xl-none {
-    display: none !important;
-  }
-
-  .d-xl-inline {
-    display: inline !important;
-  }
-
-  .d-xl-inline-block {
-    display: inline-block !important;
-  }
-
-  .d-xl-block {
-    display: block !important;
-  }
-
-  .d-xl-flex {
-    display: -ms-flexbox !important;
-    display: flex !important;
-  }
-
-  .d-xl-inline-flex {
-    display: -ms-inline-flexbox !important;
-    display: inline-flex !important;
   }
 }
 
@@ -652,36 +614,6 @@ CUSTOM BOOTSTRAP PREFIX WITH .ADP
   flex-direction: row !important;
 }
 
-.flex-column {
-  -ms-flex-direction: column !important;
-  flex-direction: column !important;
-}
-
-.flex-row-reverse {
-  -ms-flex-direction: row-reverse !important;
-  flex-direction: row-reverse !important;
-}
-
-.flex-column-reverse {
-  -ms-flex-direction: column-reverse !important;
-  flex-direction: column-reverse !important;
-}
-
-.flex-wrap-reverse {
-  -ms-flex-wrap: wrap-reverse !important;
-  flex-wrap: wrap-reverse !important;
-}
-
-.justify-content-start {
-  -ms-flex-pack: start !important;
-  justify-content: flex-start !important;
-}
-
-.justify-content-end {
-  -ms-flex-pack: end !important;
-  justify-content: flex-end !important;
-}
-
 .justify-content-center {
   -ms-flex-pack: center !important;
   justify-content: center !important;
@@ -690,116 +622,6 @@ CUSTOM BOOTSTRAP PREFIX WITH .ADP
 .justify-content-between {
   -ms-flex-pack: justify !important;
   justify-content: space-between !important;
-}
-
-.justify-content-around {
-  -ms-flex-pack: distribute !important;
-  justify-content: space-around !important;
-}
-
-.align-items-start {
-  -ms-flex-align: start !important;
-  align-items: flex-start !important;
-}
-
-.align-items-end {
-  -ms-flex-align: end !important;
-  align-items: flex-end !important;
-}
-
-.align-items-baseline {
-  -ms-flex-align: baseline !important;
-  align-items: baseline !important;
-}
-
-.align-items-stretch {
-  -ms-flex-align: stretch !important;
-  align-items: stretch !important;
-}
-
-.align-content-start {
-  -ms-flex-line-pack: start !important;
-  align-content: flex-start !important;
-}
-
-.align-content-end {
-  -ms-flex-line-pack: end !important;
-  align-content: flex-end !important;
-}
-
-.align-content-center {
-  -ms-flex-line-pack: center !important;
-  align-content: center !important;
-}
-
-.align-content-between {
-  -ms-flex-line-pack: justify !important;
-  align-content: space-between !important;
-}
-
-.align-content-around {
-  -ms-flex-line-pack: distribute !important;
-  align-content: space-around !important;
-}
-
-.align-content-stretch {
-  -ms-flex-line-pack: stretch !important;
-  align-content: stretch !important;
-}
-
-.align-self-auto {
-  -ms-flex-item-align: auto !important;
-  align-self: auto !important;
-}
-
-.align-self-start {
-  -ms-flex-item-align: start !important;
-  align-self: flex-start !important;
-}
-
-.align-self-end {
-  -ms-flex-item-align: end !important;
-  align-self: flex-end !important;
-}
-
-.align-self-center {
-  -ms-flex-item-align: center !important;
-  align-self: center !important;
-}
-
-.align-self-baseline {
-  -ms-flex-item-align: baseline !important;
-  align-self: baseline !important;
-}
-
-.align-self-stretch {
-  -ms-flex-item-align: stretch !important;
-  align-self: stretch !important;
-}
-
-.float-left {
-  float: left !important;
-}
-
-.float-right {
-  float: right !important;
-}
-
-.float-none {
-  float: none !important;
-}
-
-.btn-toolbar {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
-}
-
-.btn-toolbar .input-group {
-  width: auto;
 }
 
 img {
@@ -814,34 +636,27 @@ img {
   width: 100%;
 }
 
-.position-absolute {
-  position: absolute;
-}
-
 .position-relative {
   position: relative;
 }
 
 .overflow-hidden {
-  overflow: hidden!important;
+  overflow: hidden !important;
 }
+
 .m-0 {
   margin: 0 !important;
 }
-.py-3 {
-  padding-top: 1rem!important;
-  padding-bottom: 1rem!important;
-}
 
 .fade {
-  transition: opacity .15s linear;
+  transition: opacity 0.15s linear;
 }
 
 //______________________________________ End Boostrap CSS.
 
 /* Made up */
 .no-padding {
-  padding: 0!important;
+  padding: 0 !important;
 }
 
 /* buttons */
@@ -855,7 +670,7 @@ img {
   padding-right: 20px;
   line-height: 18px;
   text-transform: uppercase;
-  letter-spacing: .3px;
+  letter-spacing: 0.3px;
   border-radius: 0px;
   border: 1px solid;
   position: relative;
@@ -864,12 +679,12 @@ img {
   -o-transition: all 0.25s ease-in-out;
   transition: all 0.25s ease-in-out;
   background-color: rgb(var(--adp-primary-color));
-  color: #FFF;
+  color: #fff;
   border-color: rgb(var(--adp-primary-color));
   cursor: pointer;
 }
 
 .button:not(.button-color-dark).has-icon .icon-wrap svg,
 .button:not(.button-color-dark).has-icon .icon-wrap svg path {
-  fill: #FFF;
+  fill: #fff;
 }

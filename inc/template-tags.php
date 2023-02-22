@@ -13,7 +13,7 @@ if ( ! function_exists( 'paddle_posted_on' ) ) :
 	 */
 	function paddle_posted_on() {
 		$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
-		if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
+		if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) && is_singular()) {
 			$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
 		}
 
@@ -31,7 +31,7 @@ if ( ! function_exists( 'paddle_posted_on' ) ) :
 			'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
 		);
 
-		echo '<span class="posted-on text-muted">' . $posted_on . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo '<span class="posted-on">' . $posted_on . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 	}
 endif;
@@ -64,13 +64,13 @@ if ( ! function_exists( 'paddle_grid_category_list' ) ) :
 		if ( 'post' === get_post_type() && 1 === $enable_archive_category ) {
 			/* translators: used between list items, there is a space after the comma */
 			$categories_list = get_the_category_list( esc_html__( ', ', 'paddle' ) );
-			if ( $categories_list ) { ?>
-			<div class="entry-footer grid-category-list">
+			if ( $categories_list ) { 
+				?>
 				<?php
 				/* translators: 1: list of categories. */
 				printf( '<span class="cat-links"  title="' . __( 'Posted in', 'paddle' ) . '">%1$s</span>', $categories_list ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				?>
-			</div>
+	
 				<?php
 			}   //End if categories_list.
 		}   // End if post type.
@@ -321,10 +321,11 @@ function paddle_excerpt_more( $link ) {
 	}
 
 	$link = sprintf(
-		'<div class="article-more-link"><a href="%1$s" class="read-more">%2$s</a></div><div class="clearfix"></div>',
+		'<div class="article-more-link"><a href="%1$s" class="read-more" aria-label="Read %2$s">%3$s</a></div><div class="clearfix"></div>',
 		esc_url( get_permalink( get_the_ID() ) ),
+		esc_attr(get_the_title( get_the_ID() )),
 		/* translators: %s: Name of current post */
-		sprintf( $readmore, get_the_title( get_the_ID() ) )
+		sprintf( $readmore, get_the_title( get_the_ID() ) ),
 	);
 	return ' &hellip; ' . $link;
 }
@@ -415,7 +416,7 @@ if ( ! function_exists( 'paddle_replaceCategoryName' ) ) :
 	}
 endif;
 
-add_action( 'paddle_before_archive_excerpt', 'paddle_grid_category_list', 10 );
+//add_action( 'paddle_before_archive_excerpt', 'paddle_grid_category_list', 10 );
 
 if ( ! function_exists( 'paddle__get_image_sizes' ) ) :
 	/**

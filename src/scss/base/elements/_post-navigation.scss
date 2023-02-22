@@ -1,0 +1,106 @@
+/* Post Navigation, Comment Navigation, Mobile Nav */
+.comment-navigation,
+.posts-navigation,
+.post-navigation {
+
+    .site-main & {
+        margin: 0 0 1.5em;
+    }
+
+    .nav-links {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 4rem;
+        font-weight: 500;
+        padding-top: 2rem;
+        border-top: 1px solid var(--paddle-color-4);
+
+        @media screen and (min-width: 992px) {
+            flex-direction: row;
+        }
+
+        a::before {
+            background-repeat: no-repeat;
+            background-size: contain;
+            content: '';
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            height: 100%;
+            transform: translateY(calc(50% - 10px));
+        }
+    }
+    .nav-previous,
+    .nav-next {
+        display: flex;
+        align-items: center;
+    }
+    .nav-next { justify-content: end;}
+
+    .nav-previous a,
+    .nav-next a {
+        display: block;
+        text-decoration: none !important;
+        position: relative;
+    }
+
+    .nav-previous {
+
+        a {
+            margin-left: 30px;
+            margin-bottom: 30px;
+            float: left;
+
+            @media screen and (min-width: 992px) {
+                margin-bottom: 0;
+            }
+        }
+
+        ::before {
+            left: -30px;
+            transform: rotate(180deg);
+            background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' xmlns='http://www.w3.org/2000/svg' fill-rule='evenodd' clip-rule='evenodd'%3E%3Cpath d='M2.117 12l7.527 6.235-.644.765-9-7.521 9-7.479.645.764-7.529 6.236h21.884v1h-21.883z'/%3E%3C/svg%3E");
+        }
+
+        @media screen and (min-width: 992px) {
+            flex: 1 0 50%;
+            position: relative;
+            max-width: 50%;
+        }
+
+    }
+
+    .nav-next {
+
+        a {
+            margin-right: 30px;
+            margin-left: 30px;
+            float: right;
+
+            @media screen and (min-width: 992px) {
+                margin-left: 0;
+            }
+
+        }
+
+        ::before {
+            right: -30px;
+            background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' xmlns='http://www.w3.org/2000/svg' fill-rule='evenodd' clip-rule='evenodd'%3E%3Cpath d='M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z'/%3E%3C/svg%3E");
+        }
+
+        @media screen and (min-width: 992px) {
+            text-align: end;
+            flex: 1 0 50%;
+            position: relative;
+            max-width: 50%;
+        }
+
+    }
+
+}
+
+.post-navigation {
+    .nav-links {
+        border-top: 1px dotted var(--paddle-color-4);
+    }
+}

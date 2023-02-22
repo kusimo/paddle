@@ -73,8 +73,25 @@ if ( ! function_exists( 'paddle_generate_defaults' ) ) {
 			'paddle_menu_items_alignment'             => 'centered',
 			'enable_top_bar'                          => 0,
 			'enable_top_bar_on_mobile'                => 0,
+			'topbar_border_bottom' 					  => 1,
+			'topbar_bgcolor' 						  => '',
+			'topbar_text_color'						  => get_theme_mod( 'paddle_theme_color_body_text', '#2a3a51' ),
+			'topbar_link_color'						  => get_theme_mod( 'paddle_theme_color_links', '#2a3a51' ),
+			'topbar_link_color_hover'			      => get_theme_mod( 'paddle_theme_color_links_hover', '#0357ab' ),
+			'topbar_border_color'					  => get_theme_mod( 'paddle_theme_color_border', '#e7e7e7' ),
+			'topbar_height'                           => 40,
+			'topbar_font_size'						  => 14,
 			'paddle_contact_phone'                    => '',
 			'topbar_select'                           => 'button',
+			'top_bar_info_align'					  => 'left',
+			'top_bar_content_align'					  => 'center',
+			'top_bar_social_align'					  => 'right',
+			'hide_top_bar_info_mobile'				  => 0,
+			'hide_top_bar_social_mobile'			  => 1,
+			'hide_top_bar_menu_mobile'				  => 1,
+			'hide_top_bar_content_mobile'			  => 1,
+			'topbar_content_menu' 					  => '',
+			'topbar_content_select'					  => 'content',
 			'enable_icon_bg'                          => 0,
 			'paddle_enable_banner_bgcolor'            => 1,
 			'paddle_banner_border_radius'             => 1,
@@ -108,6 +125,9 @@ if ( ! function_exists( 'paddle_generate_defaults' ) ) {
 			'paddle_footer_about'					  => get_bloginfo("description"),
 			'hide_archive_meta'                       => 0,
 			'paddle_sidebar_position'                 => 'no-sidebar',
+			'paddle_sidebar_position_page'            => 'no-sidebar',
+			'paddle_sidebar_position_archive'         => 'no-sidebar',
+			'paddle_sidebar_position_home'            => 'no-sidebar',
 			'paddle_footer_social'                    => 1,
 			'banner_align_position'                   => 'none',
 			'banner_content_align'                    => 'left',
@@ -298,7 +318,7 @@ if ( ! function_exists( 'paddle_static_header_css' ) ) {
 
 		// Variables.
 
-		$css     .= ':root {';
+		$css.= ':root {';
 			$css .= '
 			--paddle-color-0: ' . $paddle_theme_color_headings . ';
 			--paddle-color-1 : ' . $paddle_theme_color_buttons . ';
@@ -343,13 +363,8 @@ if ( ! function_exists( 'paddle_static_header_css' ) ) {
  */
 function paddle_output_header_css() {
 	if ( ! empty( paddle_static_header_css() ) ) : ?>
-<style type="text/css" id="paddle-dynamic-css">
-		<?php
-		/* Static html */
-			echo paddle_static_header_css();
-		?>
-</style>
-		<?php
+<style type="text/css" id="paddle-dynamic-css"><?php /* Static html */ echo paddle_static_header_css();?> </style>
+	<?php
 	endif;
 }
 add_action( 'wp_head', 'paddle_output_header_css', 5 );

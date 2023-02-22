@@ -933,7 +933,8 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 				<?php if( !empty( $this->description ) ) { ?>
 					<span class="customize-control-description"><?php echo esc_html( $this->description ); ?></span>
 				<?php } ?>
-				<select name="<?php echo $this->id; ?>" id="<?php echo $this->id; ?>" <?php $this->link(); ?>>
+				<select class="customize-control-select-dropdown-menu" name="<?php echo $this->id; ?>" id="<?php echo $this->id; ?>" <?php $this->link(); ?>>
+					<option value=""> -- </option>
 					<?php
 						if( !empty( $this->posts ) ) {
 							foreach ( $this->posts as $post ) {
@@ -1263,6 +1264,118 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 			}
 
 			return $counter;
+		}
+	}
+
+
+	if ( ! function_exists( 'paddle_top_header_option_contact' ) ) {
+		/**
+		 * Check the contact option is selected
+		 *
+		 * @param  mixed $control
+		 * @return void
+		 */
+		function paddle_top_header_option_contact( $control ) {
+			if ( true == $control->manager->get_setting( 'enable_top_bar' )->value()
+			&& 'contact' == $control->manager->get_setting( 'top_bar_options_header' )->value()
+			) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
+	if ( ! function_exists( 'paddle_top_header_option_content' ) ) {
+		/**
+		 * Check the links option is selected
+		 *
+		 * @param  mixed $control
+		 * @return void
+		 */
+		function paddle_top_header_option_content( $control ) {
+			if ( true == $control->manager->get_setting( 'enable_top_bar' )->value()
+			&& 'content' == $control->manager->get_setting( 'top_bar_options_header' )->value()
+			) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
+	if ( ! function_exists( 'paddle_top_header_option_content_is_menu' ) ) {
+		/**
+		 * Check the links option is selected
+		 *
+		 * @param  mixed $control
+		 * @return void
+		 */
+		function paddle_top_header_option_content_is_menu( $control ) {
+			if ( true == $control->manager->get_setting( 'enable_top_bar' )->value()
+			&& 'menu' === $control->manager->get_setting( 'topbar_content_select' )->value()
+			&& 'content' == $control->manager->get_setting( 'top_bar_options_header' )->value()
+			) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
+	if ( ! function_exists( 'paddle_top_header_option_content_is_content' ) ) {
+		/**
+		 * Check the links option is selected
+		 *
+		 * @param  mixed $control
+		 * @return void
+		 */
+		function paddle_top_header_option_content_is_content( $control ) {
+			if ( true == $control->manager->get_setting( 'enable_top_bar' )->value()
+			&& 'content' === $control->manager->get_setting( 'topbar_content_select' )->value()
+			&& 'content' == $control->manager->get_setting( 'top_bar_options_header' )->value()
+			) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
+
+	if ( ! function_exists( 'paddle_top_header_option_settings' ) ) {
+		/**
+		 * Check the links option is selected
+		 *
+		 * @param  mixed $control
+		 * @return void
+		 */
+		function paddle_top_header_option_settings( $control ) {
+			if ( true == $control->manager->get_setting( 'enable_top_bar' )->value()
+			&& 'settings' == $control->manager->get_setting( 'top_bar_options_header' )->value()
+			) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
+	if ( ! function_exists( 'paddle_top_header_border_active' ) ) {
+		/**
+		 * Check the links option is selected
+		 *
+		 * @param  mixed $control
+		 * @return void
+		 */
+		function paddle_top_header_border_active( $control ) {
+			if ( true == $control->manager->get_setting( 'enable_top_bar' )->value()
+			&& 1 === $control->manager->get_setting( 'topbar_border_bottom' )->value()
+			) {
+				return true;
+			} else {
+				return false;
+			}
 		}
 	}
 
@@ -1661,7 +1774,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 
 	endif;
 
-	if ( ! function_exists( 'paddle_blog_general_archive_selected_custom_width_enabled' ) ) :
+	if ( ! function_exists( 'paddle_selected_custom_width' ) ) :
 
 		/**
 		 * Check if blog general section is selected and custom width is enable is enabled
@@ -1672,10 +1785,9 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 *
 		 * @return bool Whether the control is active to the current preview.
 		 */
-		function paddle_blog_general_archive_selected_custom_width_enabled( $control ) {
+		function paddle_selected_custom_width( $control ) {
 
-			if ( 'general' === $control->manager->get_setting( 'title_options_blog' )->value()
-				&& 'custom' === $control->manager->get_setting( 'custom_container' )->value() ) {
+			if ('custom' === $control->manager->get_setting( 'custom_container' )->value() ) {
 				return true;
 			} else {
 				return false;

@@ -42,22 +42,6 @@ input[type='submit']:not(.btn) {
   text-align: center;
   background-color: var(--paddle-color-1);
 }
-.btn-primary.r-50 {
-  border-radius: 50px;
-}
-.btn-primary.r-none {
-  border-radius: 0px;
-}
-
-.btn-uppercase {
-  font-weight: 600;
-  letter-spacing: 0.0333em;
-  text-transform: uppercase;
-}
-
-a.btn.btn-primary.btn-lg {
-  padding: 15px 25px;
-}
 a.btn.btn-primary:hover,
 a.btn.btn-primary:focus {
   background-color: var(--paddle-color-2);
@@ -74,11 +58,6 @@ a.btn.btn-primary:focus {
   color: #fff;
   background-color: var(--paddle-color-1);
   border-color: var(--paddle-color-1);
-}
-
-.btn-rounded {
-  border-radius: 40px;
-  border: 2px solid transparent;
 }
 
 

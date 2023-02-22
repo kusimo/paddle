@@ -145,7 +145,7 @@ add_filter( 'nav_menu_css_class', 'paddle_add_additional_class_on_li', 1, 3 );
 function paddle_search_form( $form ) {
 	$form = '<form role="search" method="get" class="search--form d-inline-flex w-100" action="' . home_url( '/' ) . '" >
     <div class="d-flex w-100 align-items-center"><label class="screen-reader-text" for="s">' . esc_attr__( 'Search for:', 'paddle' ) . '</label>
-    <input type="text" value="' . get_search_query() . '" name="s" id="s" placeholder="' . esc_attr__( 'Search for:', 'paddle' ) . '" />
+    <input type="search" value="' . get_search_query() . '" name="s" id="paddle-s" placeholder="' . esc_attr__( 'Search for:', 'paddle' ) . '" required/>
 	<button type="submit" class="btn searchsubmit" title="' . esc_attr__( 'Search', 'paddle' ) . '">
 	</button>
     </div>
@@ -175,9 +175,8 @@ function paddle_minimize_css( $css ) {
  * @return void
  */
 function paddle_layout_container( $layout = '' ) {
-	$paddle_sidebar_position      = get_theme_mod( 'paddle_sidebar_position', PADDLE_DEFAULT_OPTION['paddle_sidebar_position'] );
 	$paddle_sidebar_layout_option = 0;
-	if ( 'no-sidebar' === $paddle_sidebar_position ) {
+	if ( 'no-sidebar' === paddle_get_sidebar_option() ) {
 		$paddle_sidebar_layout_option = 0;
 	} else {
 		$paddle_sidebar_layout_option = 1;
@@ -212,14 +211,28 @@ function paddle_layout_container( $layout = '' ) {
  * @return void
  */
 function paddle_layout_width() {
-	$paddle_sidebar_position  = get_theme_mod( 'paddle_sidebar_position', PADDLE_DEFAULT_OPTION['paddle_sidebar_position'] );
+	
 	$paddle_page_width_option = '';
-	if ( 'no-sidebar' === $paddle_sidebar_position ) {
+	if ( 'no-sidebar' === paddle_get_sidebar_option() ) {
 		$paddle_page_width_option = 'full-width-content';
 	}
 	return $paddle_page_width_option;
 }
 
+function paddle_get_sidebar_option() {
+	$sidebar_layout = '';
+
+	if (is_home() || is_front_page()) {
+		$sidebar_layout = strtolower( get_theme_mod( 'paddle_sidebar_position_home', PADDLE_DEFAULT_OPTION['paddle_sidebar_position_home']  ) );
+	}elseif (is_post_type_archive() || is_category() || is_tag() || is_tax()) {
+		$sidebar_layout = strtolower( get_theme_mod( 'paddle_sidebar_position_archive', PADDLE_DEFAULT_OPTION['paddle_sidebar_position_archive']  ) );
+	} elseif ( is_page() ) {
+		$sidebar_layout = strtolower( get_theme_mod( 'paddle_sidebar_position_page', PADDLE_DEFAULT_OPTION['paddle_sidebar_position_page'] ) );
+	} elseif ( is_singular( 'post' ) ) {
+		$sidebar_layout = strtolower( get_theme_mod( 'paddle_sidebar_position', PADDLE_DEFAULT_OPTION['paddle_sidebar_position'] ) );
+	} 
+	return $sidebar_layout;
+}
 /**
  * paddle_add_cta_menu
  * Add extra list item to menu items
@@ -697,21 +710,6 @@ if (! function_exists('paddle_payment_badge')) {
 	}
 }
 
-if ( ! function_exists( 'paddle_drawer_nav_close' ) ) :
-	function paddle_drawer_nav_close() {
-		?>
-		<div class="drawer__header d-flex justify-content-end mt-2">
-			<div class="drawer__close">
-				<button type="button" class="off-canvas-button-close close mb-2" aria-label="<?php esc_attr_e( 'Close', 'paddle' ); ?>">
-					<span aria-hidden="true">×</span>
-					<span class="sr-only"><?php echo esc_html__( 'Close', 'paddle' ); ?></span>
-				</button>
-			</div>
-		</div>
-		<?php
-	}
-endif;
-
 if ( ! function_exists( 'paddle_rgba' ) ) :
 	/**
 	 * paddle_rgba
@@ -851,47 +849,75 @@ if ( ! function_exists( 'paddle_header_top_bar' ) ) {
 		$topbar = new Paddle_Header_TopBar();
 		if ( ! $topbar::$active ) {
 			return;
+			
 		}
+		$hide_info_mobile = absint( get_theme_mod( 'hide_top_bar_info_mobile', PADDLE_DEFAULT_OPTION['hide_top_bar_info_mobile'] ) );
+		$hide_social_mobile = absint( get_theme_mod( 'hide_top_bar_social_mobile', PADDLE_DEFAULT_OPTION['hide_top_bar_social_mobile'] ) );
+		$hide_content_mobile = absint( get_theme_mod( 'hide_top_bar_content_mobile', PADDLE_DEFAULT_OPTION['hide_top_bar_content_mobile'] ) );
+		$selected_content_menu = get_theme_mod( 'topbar_content_menu', PADDLE_DEFAULT_OPTION['topbar_content_menu'] );
+		$selected_content_content = get_theme_mod( 'topbar_content', '' );
+		$topbar_active_content_selected = get_theme_mod( 'topbar_content_select', PADDLE_DEFAULT_OPTION['topbar_content_select'] ); 
+		$social_urls = get_theme_mod( 'social_urls', PADDLE_DEFAULT_OPTION['social_urls'] ); 
+		$have_socials_url = array();
+
+		if(!empty($social_urls) && '' !== $social_urls) {
+			$have_socials_url = explode(',',  $social_urls);
+		}
+
+		$hide_all_on_mobile = false;
+		if($hide_info_mobile && $hide_social_mobile && $hide_content_mobile) {
+			$hide_all_on_mobile = true;
+		}
+		
 		?>
-		<div id="topbar" class="d-none d-lg-flex align-items-center">
-			<div class="container d-flex align-items-center">
-			<?php if ( $topbar->is_left_panel_active() ) : ?>
-			<div class="topbar-left col-sm">
-				<ul>
-				<?php if ( '' !== $topbar->get_contact_number() ) : ?>
-				<li><i class="icon-phone"></i>
-				<a href="tel:<?php echo esc_attr( $topbar->get_contact_number() ); ?>">
-					<?php echo esc_html( $topbar->get_contact_number() ); ?>
-				</a>
-				<span></span>
-				</li>
-				<?php endif; ?>
-				<?php if ( '' !== $topbar->get_contact_email() ) : ?>
-				<li><i class="icon-email"></i>
-				<a href="mailto:<?php echo esc_attr( $topbar->get_contact_email() ); ?>">
-					<?php echo esc_html( $topbar->get_contact_email() ); ?>
-				</a>
-				<span></span>
-				</li>
-				<?php endif; ?>
-				</ul>
-			</div><!-- .topbar-left -->
-			<?php endif; // End is_left_panel_active. ?>
+		<div id="top-bar-v1" class="has-border-bottom<?php echo esc_attr($hide_all_on_mobile ? ' d-none d-lg-block' : ''); ?>">
+			<div class="container top-bar--container">
+			<div class="top-bar--wrapper">
+				<?php if ('' !== $topbar->get_contact_email() ||  '' !== $topbar->get_contact_number() ) : ?>
+					<div class="top-bar--wrapper-main-info<?php echo esc_attr(1 === $hide_info_mobile ? ' d-none d-lg-block' : '') ;?>">
+						<ul class="d-flex list-inline m-0">
+							
+						<?php if ( '' !== $topbar->get_contact_number() ) : ?>
+						<li class="list-inline-item has-icon"><?php echo wp_kses(paddle_get_svg_icon('phone'), paddle_svg_allowedHtml() ); ?>
+						<a href="tel:<?php echo esc_attr( $topbar->get_contact_number() ); ?>">
+							<?php echo esc_html( $topbar->get_contact_number() ); ?>
+						</a>
+						<span></span>
+						</li>
+						<?php endif; ?>
+						<?php if ( '' !== $topbar->get_contact_email() ) : ?>
+						<li class="list-inline-item has-icon"><?php echo wp_kses(paddle_get_svg_icon('email'), paddle_svg_allowedHtml() ); ?>
+						<a href="mailto:<?php echo esc_attr( $topbar->get_contact_email() ); ?>">
+							<?php echo esc_html( $topbar->get_contact_email() ); ?>
+						</a>
+						<span></span>
+						</li>
+						
+						<?php endif; ?>
+						</ul>
+					</div><!-- .topbar-left -->
+				<?php endif; // End is_left_panel_active. ?>
 
-			<div class="topbar-right col-sm">
-			<?php if ( '' !== $topbar::$contactText && 'button' === $topbar::$topbar_select ) : ?>				
-				<div class="cta">
-					<a href="<?php echo esc_url_raw( $topbar->contactUrl ); ?>" class="topbar-cta-btn">
-					<?php echo esc_html( $topbar::$contactText ); ?>
-					</a>
+				<?php if( $topbar->have_menu() || strlen(trim($selected_content_content))) : ?>
+					<div class="top-bar--wrapper-main-content<?php echo esc_attr(1 === $hide_content_mobile ? ' d-none d-lg-block' : '') ;?>">
+						<?php if ('menu' === $topbar_active_content_selected ) {
+							$topbar->get_menu();
+						} else { ?>
+							<div class="topbar-par-content"> <?php echo wp_kses_post($selected_content_content) ;?> </div>
+
+						<?php } ?>
+					</div>
+				<?php endif; ?>
+				
+				<?php if (!empty($have_socials_url) ) : ?>
+				<div class="top-bar--wrapper-main-social<?php echo esc_attr(1 === $hide_social_mobile ? ' d-none d-lg-block' : '');?>">
+					<?php if ( 'social' === $topbar::$topbar_select ) :  $paddle_social_urls  = explode( ',', get_theme_mod( 'social_urls', '' ) ); ?>	
+						<?php paddle_social_menu_list($paddle_social_urls); ?>
+					<?php endif; ?>
 				</div>
-			<?php endif; ?>
-			<?php if ( 'social' === $topbar::$topbar_select ) : ?>	
-				<?php get_template_part( 'template-parts/header/topbar', 'social' ); ?>
-			<?php endif; ?>
+				<?php endif; ?>
 			</div>
-
-			</div>
+			</div><!--.container-->
 		</div>
 		<?php
 	}
@@ -1063,6 +1089,71 @@ function paddle_filter_footer_copyright( $credits ) {
 
 	return $credits;
 }
+
+
+if (! function_exists( 'paddle_social_menu_list ')) {	
+	/**
+	 * paddle_social_menu_list - Display social icon list
+	 *
+	 * @param  mixed $menu
+	 * @return void
+	 */
+	function paddle_social_menu_list($menu) {
+		if ( ! empty( $menu[0] ) ) { ?>
+			<ul id="menu-social-items" class="d-flex justify-content-center list-unstyled footer-social">
+				<?php
+				$paddle_social_icons = paddle_generate_social_urls();
+			}
+			
+			
+			foreach ( $menu as $key => $value ) {
+				if ( ! empty( $value ) ) {
+					$paddle_domain = str_ireplace( 'www.', '', parse_url( $value, PHP_URL_HOST ) );
+					$index         = array_search( strtolower( $paddle_domain ), array_column( $paddle_social_icons, 'url' ) );
+					if ( false !== $index ) {
+						$social_name  = $paddle_social_icons[ $index ]['class'];
+						$social_title = $paddle_social_icons[ $index ]['title'];
+						?>
+				   <li class="social-item">
+							<a rel="noopener" class="bottom-social" href="<?php echo esc_url( $value ); ?>" title="<?php echo esc_attr( $social_title ); ?>" target="_blank">
+								<?php echo wp_kses( paddle_theme_get_social_icon($social_name), paddle_svg_allowedHtml() ); ?>
+								<span class="screen-reader-text"><?php echo esc_html( $social_name ); ?></span>
+							</a>
+					</li>
+						<?php
+			
+					} else {
+						$social_name = 'globe';
+						?>
+					<li class="social-item no-social">
+						<a class="icon icon-globe" href="<?php echo esc_url( $value ); ?>" title="<?php echo esc_html( $social_name ); ?>" target="_blank">
+							<?php echo wp_kses( paddle_theme_get_social_icon($social_name), paddle_svg_allowedHtml() ); ?>
+							<span class="screen-reader-text"><?php echo esc_html( $social_name ); ?></span>
+						</a>
+					</li>
+						<?php
+					}
+				}
+			}
+			if ( ! empty( $paddle_social_footer_urls[0] ) ) {
+				?>
+			</ul><!-- .footer-social -->
+				<?php
+			}
+	}
+}
+
+/**
+ * Remove H2 header from the post navigation
+ */
+
+ function paddle_remove_header_from_post_nav($content) {
+	// Remove h2 tag
+	$content = preg_replace('#<h2.*?>(.*?)<\/h2>#si', '', $content);
+	return $content;
+  }
+  
+  add_action('navigation_markup_template', 'paddle_remove_header_from_post_nav');
 
 
 
