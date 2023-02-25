@@ -7,33 +7,36 @@
 /**
  * Adds the individual sections, settings, and controls to the theme customizer
  */
-class paddle_initialise_customizer_settings {
+class paddle_initialise_customizer_settings
+{
 
 	// Get our default values
 	private $defaults;
 
-	public function __construct() {
-		 // Get our Customizer defaults
+	public function __construct()
+	{
+		// Get our Customizer defaults
 		$this->defaults = paddle_generate_defaults();
 
 		// Register Theme panel
-		add_action( 'customize_register', array( $this, 'paddle_add_theme_panels' ) );
+		add_action('customize_register', array($this, 'paddle_add_theme_panels'));
 
 		// Register Theme sections
-		add_action( 'customize_register', array( $this, 'paddle_add_theme_sections' ) );
+		add_action('customize_register', array($this, 'paddle_add_theme_sections'));
 
 		// Register our Theme Custom Control controls
-		add_action( 'customize_register', array( $this, 'paddle_register_theme_custom_controls' ) );
+		add_action('customize_register', array($this, 'paddle_register_theme_custom_controls'));
 
 		// Register our sample default controls
-		add_action( 'customize_register', array( $this, 'paddle_register_theme_default_controls' ) );
-
+		add_action('customize_register', array($this, 'paddle_register_theme_default_controls'));
 	}
+
 
 	/**
 	 * Register the theme panel
 	 */
-	public function paddle_add_theme_panels( $wp_customize ) {
+	public function paddle_add_theme_panels($wp_customize)
+	{
 		/**
 		 * Add our Header & Navigation Panel
 		 */
@@ -41,31 +44,31 @@ class paddle_initialise_customizer_settings {
 			'paddle_theme_option_panel',
 			array(
 				'priority' => 50,
-				'title'    => __( 'General', 'paddle' ),
+				'title'    => __('General', 'paddle'),
 			)
 		);
 
 		$wp_customize->add_panel(
 			'paddle_theme_global_option',
 			array(
-				'priority' => 20,
-				'title'    => __( 'Global', 'paddle' ),
+				'priority' => 18,
+				'title'    => __('Global', 'paddle'),
 			)
 		);
 
 		$wp_customize->add_panel(
 			'paddle_theme_header_option',
 			array(
-				'priority' => 20,
-				'title'    => __( 'Header', 'paddle' ),
+				'priority' => 18,
+				'title'    => __('Header', 'paddle'),
 			)
 		);
 
 		$wp_customize->add_panel(
 			'paddle_theme_blog_option',
 			array(
-				'priority' => 20,
-				'title'    => __( 'Blog', 'paddle' ),
+				'priority' => 19,
+				'title'    => __('Blog', 'paddle'),
 			)
 		);
 
@@ -73,7 +76,7 @@ class paddle_initialise_customizer_settings {
 			'paddle_theme_page_option',
 			array(
 				'priority' => 20,
-				'title'    => __( 'Page', 'paddle' ),
+				'title'    => __('Page', 'paddle'),
 			)
 		);
 
@@ -81,10 +84,9 @@ class paddle_initialise_customizer_settings {
 			'paddle_theme_footer_option',
 			array(
 				'priority' => 20,
-				'title'    => __( 'Footer', 'paddle' ),
+				'title'    => __('Footer', 'paddle'),
 			)
 		);
-
 	}
 
 
@@ -92,7 +94,8 @@ class paddle_initialise_customizer_settings {
 	/**
 	 * Register the theme section
 	 */
-	public function paddle_add_theme_sections( $wp_customize ) {
+	public function paddle_add_theme_sections($wp_customize)
+	{
 
 		/**
 		 * Container Panel/Section
@@ -102,7 +105,7 @@ class paddle_initialise_customizer_settings {
 			array(
 				'name'               => 'section-site-layout',
 				'type'               => 'section',
-				'title'              => __( 'Site Layout', 'paddle' ),
+				'title'              => __('Site Layout', 'paddle'),
 				'priority'           => 14,
 				'description_hidden' => true,
 				'panel'              => 'paddle_theme_global_option',
@@ -118,7 +121,7 @@ class paddle_initialise_customizer_settings {
 			array(
 				'name'               => 'section-typography',
 				'type'               => 'section',
-				'title'              => __( 'Typography', 'paddle' ),
+				'title'              => __('Typography', 'paddle'),
 				'priority'           => 15,
 				'description_hidden' => true,
 				'panel'              => 'paddle_theme_global_option',
@@ -134,7 +137,7 @@ class paddle_initialise_customizer_settings {
 			array(
 				'name'               => 'section-color',
 				'type'               => 'section',
-				'title'              => __( 'Colors', 'paddle' ),
+				'title'              => __('Colors', 'paddle'),
 				'priority'           => 16,
 				'description_hidden' => true,
 				'panel'              => 'paddle_theme_global_option',
@@ -149,7 +152,7 @@ class paddle_initialise_customizer_settings {
 			array(
 				'name'               => 'section-container',
 				'type'               => 'section',
-				'title'              => __( 'Container', 'paddle' ),
+				'title'              => __('Container', 'paddle'),
 				'priority'           => 17,
 				'description_hidden' => true,
 				'panel'              => 'paddle_theme_global_option',
@@ -164,7 +167,7 @@ class paddle_initialise_customizer_settings {
 			array(
 				'name'               => 'section-button',
 				'type'               => 'section',
-				'title'              => __( 'Buttons', 'paddle' ),
+				'title'              => __('Buttons', 'paddle'),
 				'priority'           => 17,
 				'description_hidden' => true,
 				'panel'              => 'paddle_theme_global_option',
@@ -172,12 +175,28 @@ class paddle_initialise_customizer_settings {
 		);
 
 		/**
+		 * Navigation Panel/Section
+		 */
+		$wp_customize->add_section(
+			'paddle_theme_navigation_section',
+			array(
+				'name'               => 'section-navigation',
+				'type'               => 'section',
+				'title'              => __('Archive Navigation', 'paddle'),
+				'priority'           => 17,
+				'description_hidden' => true,
+				'panel'              => 'paddle_theme_global_option',
+			)
+		);
+
+
+		/**
 		 * Add Header Layout Section
 		 */
 		$wp_customize->add_section(
 			'paddle_theme_header_options',
 			array(
-				'title' => __( 'Desktop / Mobile', 'paddle' ),
+				'title' => __('Desktop / Mobile', 'paddle'),
 				'panel' => 'paddle_theme_header_option',
 			)
 		);
@@ -188,8 +207,8 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_section(
 			'paddle_theme_header_buttons_options',
 			array(
-				'title'       => __( 'CTA Button', 'paddle' ),
-				'description' => esc_html__( 'Header Buttons', 'paddle' ),
+				'title'       => __('CTA Button', 'paddle'),
+				'description' => esc_html__('Header Buttons', 'paddle'),
 				'panel'       => 'paddle_theme_header_option',
 			)
 		);
@@ -200,8 +219,8 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_section(
 			'paddle_theme_header_logo_options',
 			array(
-				'title'       => __( 'Header Logo Size', 'paddle' ),
-				'description' => esc_html__( 'Header Logo Size and Padding. To add a logo image, navigate to the Site Identity section.', 'paddle' ),
+				'title'       => __('Header Logo Size', 'paddle'),
+				'description' => esc_html__('Header Logo Size and Padding. To add a logo image, navigate to the Site Identity section.', 'paddle'),
 				'panel'       => 'paddle_theme_header_option',
 			)
 		);
@@ -212,8 +231,8 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_section(
 			'paddle_header_menu',
 			array(
-				'title'       => __( 'Header Menu', 'paddle' ),
-				'description' => esc_html__( 'Header Menu & Colours', 'paddle' ),
+				'title'       => __('Header Menu', 'paddle'),
+				'description' => esc_html__('Header Menu & Colours', 'paddle'),
 				'panel'       => 'paddle_theme_header_option',
 			)
 		);
@@ -222,7 +241,7 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_section(
 			'paddle_header_top_bar',
 			array(
-				'title'       => __( 'Top Bar', 'paddle' ),
+				'title'       => __('Top Bar', 'paddle'),
 				'panel'       => 'paddle_theme_header_option',
 			)
 		);
@@ -231,8 +250,8 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_section(
 			'paddle_hero_and_slider',
 			array(
-				'title'       => __( 'Hero & Slider', 'paddle' ),
-				'description' => esc_html__( 'Add Hero or Slider.', 'paddle' ),
+				'title'       => __('Hero & Slider', 'paddle'),
+				'description' => esc_html__('Add Hero or Slider.', 'paddle'),
 				'panel'       => 'paddle_theme_option_panel',
 			)
 		);
@@ -240,11 +259,11 @@ class paddle_initialise_customizer_settings {
 		/**
 		 * Add Footer Sections 
 		 */
-		
+
 		$wp_customize->add_section(
 			'paddle_footer_top',
 			array(
-				'title'       => esc_html__( 'Footer Top', 'paddle' ),
+				'title'       => esc_html__('Footer Top', 'paddle'),
 				'panel'       => 'paddle_theme_footer_option',
 			)
 		);
@@ -252,7 +271,7 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_section(
 			'paddle_footer_1_premium',
 			array(
-				'title'       => esc_html__( 'Footer 1', 'paddle' ),
+				'title'       => esc_html__('Footer 1', 'paddle'),
 				'panel'       => 'paddle_theme_footer_option',
 			)
 		);
@@ -260,7 +279,7 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_section(
 			'paddle_footer_2_premium',
 			array(
-				'title'       => esc_html__( 'Footer 2', 'paddle' ),
+				'title'       => esc_html__('Footer 2', 'paddle'),
 				'panel'       => 'paddle_theme_footer_option',
 			)
 		);
@@ -268,7 +287,7 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_section(
 			'paddle_footer_3_premium',
 			array(
-				'title'       => esc_html__( 'Footer 3', 'paddle' ),
+				'title'       => esc_html__('Footer 3', 'paddle'),
 				'panel'       => 'paddle_theme_footer_option',
 			)
 		);
@@ -276,7 +295,7 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_section(
 			'paddle_footer_4_premium',
 			array(
-				'title'       => esc_html__( 'Footer 4', 'paddle' ),
+				'title'       => esc_html__('Footer 4', 'paddle'),
 				'panel'       => 'paddle_theme_footer_option',
 			)
 		);
@@ -284,7 +303,7 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_section(
 			'paddle_footer_widget',
 			array(
-				'title'       => esc_html__( 'Footer Widget', 'paddle' ),
+				'title'       => esc_html__('Footer Widget', 'paddle'),
 				'panel'       => 'paddle_theme_footer_option',
 			)
 		);
@@ -292,7 +311,7 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_section(
 			'paddle_footer_settings',
 			array(
-				'title'       => esc_html__( 'Footer Bottom', 'paddle' ),
+				'title'       => esc_html__('Footer Bottom', 'paddle'),
 				'panel'       => 'paddle_theme_footer_option',
 			)
 		);
@@ -300,12 +319,12 @@ class paddle_initialise_customizer_settings {
 
 
 		/**
-		* Theme Featured image section
-		*/
+		 * Theme Featured image section
+		 */
 		$wp_customize->add_section(
 			'paddle_featured_image_options',
 			array(
-				'title'      => __( 'Featured Image', 'paddle' ),
+				'title'      => __('Featured Image', 'paddle'),
 				'capability' => 'edit_theme_options',
 				'panel'      => 'paddle_theme_option_panel',
 			)
@@ -317,7 +336,7 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_section(
 			'paddle_blog_post',
 			array(
-				'title'      => __( 'Blog / Archive', 'paddle' ),
+				'title'      => __('Blog / Archive', 'paddle'),
 				'capability' => 'edit_theme_options',
 				'panel'      => 'paddle_theme_blog_option',
 			)
@@ -329,7 +348,7 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_section(
 			'paddle_post_single',
 			array(
-				'title'      => __( 'Single Post', 'paddle' ),
+				'title'      => __('Single Post', 'paddle'),
 				'capability' => 'edit_theme_options',
 				'panel'      => 'paddle_theme_blog_option',
 			)
@@ -341,9 +360,9 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_section(
 			'paddle_page',
 			array(
-				'title'      => __( 'Page Layout', 'paddle' ),
+				'title'      => __('Page', 'paddle'),
 				'capability' => 'edit_theme_options',
-				'panel'      => 'paddle_theme_page_option',
+				'priority' => 19,
 			)
 		);
 
@@ -353,7 +372,7 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_section(
 			'paddle_placeholder_text',
 			array(
-				'title'      => __( 'Placeholder / Text', 'paddle' ),
+				'title'      => __('Placeholder / Text', 'paddle'),
 				'capability' => 'edit_theme_options',
 				'panel'      => 'paddle_theme_blog_option',
 			)
@@ -365,12 +384,11 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_section(
 			'paddle_bootstrap',
 			array(
-				'title'      => __( 'Bootstrap Option', 'paddle' ),
+				'title'      => __('Bootstrap Option', 'paddle'),
 				'capability' => 'edit_theme_options',
 				'panel'      => 'paddle_theme_option_panel',
 			)
 		);
-
 	}
 
 	/*
@@ -379,7 +397,8 @@ class paddle_initialise_customizer_settings {
 	/**
 	 * Header and Navigation controls
 	 */
-	public function paddle_register_theme_custom_controls( $wp_customize ) {
+	public function paddle_register_theme_custom_controls($wp_customize)
+	{
 		/**
 		 * Typography Preset
 		 */
@@ -396,40 +415,40 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_typography_preset',
 				array(
-					'label'   => __( 'Presets', 'paddle' ),
+					'label'   => __('Presets', 'paddle'),
 					'section' => 'paddle_theme_typography_section',
 					'choices' => array(
 						'system-font'     => array(
-							'image' => trailingslashit( get_template_directory_uri() ) . 'inc/customizer/images/header-layout-style-1-logo-left.jpg',
-							'name'  => __( "'System Font', sans-serif", 'paddle' ),
+							'image' => trailingslashit(get_template_directory_uri()) . 'inc/customizer/images/header-layout-style-1-logo-left.jpg',
+							'name'  => __("'System Font', sans-serif", 'paddle'),
 						),
 						'roboto'          => array(
-							'image' => trailingslashit( get_template_directory_uri() ) . 'inc/customizer/images/header-layout-style-1-logo-center.jpg',
-							'name'  => __( "'Roboto', sans-serif", 'paddle' ),
+							'image' => trailingslashit(get_template_directory_uri()) . 'inc/customizer/images/header-layout-style-1-logo-center.jpg',
+							'name'  => __("'Roboto', sans-serif", 'paddle'),
 						),
 						'open-sans'       => array(
-							'image' => trailingslashit( get_template_directory_uri() ) . 'inc/customizer/images/header-layout-style-1-logo-right.jpg',
-							'name'  => __( "'Open Sans', sans-serif", 'paddle' ),
+							'image' => trailingslashit(get_template_directory_uri()) . 'inc/customizer/images/header-layout-style-1-logo-right.jpg',
+							'name'  => __("'Open Sans', sans-serif", 'paddle'),
 						),
 						'lato'            => array(
-							'image' => trailingslashit( get_template_directory_uri() ) . 'inc/customizer/images/header-layout-style-1-logo-left-search.jpg',
-							'name'  => __( "'Lato', sans-serif", 'paddle' ),
+							'image' => trailingslashit(get_template_directory_uri()) . 'inc/customizer/images/header-layout-style-1-logo-left-search.jpg',
+							'name'  => __("'Lato', sans-serif", 'paddle'),
 						),
 						'montserrat'      => array(
-							'image' => trailingslashit( get_template_directory_uri() ) . 'inc/customizer/images/header-layout-style-2.jpg',
-							'name'  => __( "'Montserrat', sans-serif", 'paddle' ),
+							'image' => trailingslashit(get_template_directory_uri()) . 'inc/customizer/images/header-layout-style-2.jpg',
+							'name'  => __("'Montserrat', sans-serif", 'paddle'),
 						),
 						'raleway'         => array(
-							'image' => trailingslashit( get_template_directory_uri() ) . 'inc/customizer/images/header-layout-style-2.jpg',
-							'name'  => __( "'Raleway', sans-serif", 'paddle' ),
+							'image' => trailingslashit(get_template_directory_uri()) . 'inc/customizer/images/header-layout-style-2.jpg',
+							'name'  => __("'Raleway', sans-serif", 'paddle'),
 						),
 						'source-sans-pro' => array(
-							'image' => trailingslashit( get_template_directory_uri() ) . 'inc/customizer/images/header-layout-style-1-logo-right.jpg',
-							'name'  => __( "'Source Sans Pro', sans-serif", 'paddle' ),
+							'image' => trailingslashit(get_template_directory_uri()) . 'inc/customizer/images/header-layout-style-1-logo-right.jpg',
+							'name'  => __("'Source Sans Pro', sans-serif", 'paddle'),
 						),
 						'poppins'         => array(
-							'image' => trailingslashit( get_template_directory_uri() ) . 'inc/customizer/images/header-layout-style-1-logo-right.jpg',
-							'name'  => __( "'Poppins', sans-serif", 'paddle' ),
+							'image' => trailingslashit(get_template_directory_uri()) . 'inc/customizer/images/header-layout-style-1-logo-right.jpg',
+							'name'  => __("'Poppins', sans-serif", 'paddle'),
 						),
 					),
 				)
@@ -453,8 +472,8 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'base_font_size',
 				array(
-					'label'       => __( 'Font size', 'paddle' ),
-					'description' => __( 'Body font' ),
+					'label'       => __('Font size', 'paddle'),
+					'description' => __('Body font'),
 					'section'     => 'paddle_theme_typography_section',
 					'input_attrs' => array(
 						'min'  => 14,
@@ -482,8 +501,8 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'h1_font_size',
 				array(
-					'label'       => __( 'H1 font size', 'paddle' ),
-					'description' => __( 'Heading fonts' ),
+					'label'       => __('H1 font size', 'paddle'),
+					'description' => __('Heading fonts'),
 					'section'     => 'paddle_theme_typography_section',
 					'input_attrs' => array(
 						'min'  => 14,
@@ -506,18 +525,18 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'h1_font_weight',
 				array(
-					'label'   => __( 'H1 font weight', 'paddle' ),
+					'label'   => __('H1 font weight', 'paddle'),
 					'section' => 'paddle_theme_typography_section',
 					'choices' => array(
-						'100' => __( 'Thin 100', 'paddle' ),
-						'200' => __( 'Extra Light 200', 'paddle' ),
-						'300' => __( 'Light 300', 'paddle' ),
-						'400' => __( 'Regular 400', 'paddle' ),
-						'500' => __( 'Medium 500', 'paddle' ),
-						'600' => __( 'Semi-Bold 600', 'paddle' ),
-						'700' => __( 'Bold 700', 'paddle' ),
-						'800' => __( 'Extra-Bold 800', 'paddle' ),
-						'900' => __( 'Ultra-Bold 900', 'paddle' ),
+						'100' => __('Thin 100', 'paddle'),
+						'200' => __('Extra Light 200', 'paddle'),
+						'300' => __('Light 300', 'paddle'),
+						'400' => __('Regular 400', 'paddle'),
+						'500' => __('Medium 500', 'paddle'),
+						'600' => __('Semi-Bold 600', 'paddle'),
+						'700' => __('Bold 700', 'paddle'),
+						'800' => __('Extra-Bold 800', 'paddle'),
+						'900' => __('Ultra-Bold 900', 'paddle'),
 					),
 				)
 			)
@@ -536,7 +555,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'h2_font_size',
 				array(
-					'label'       => __( 'H2 font size', 'paddle' ),
+					'label'       => __('H2 font size', 'paddle'),
 					'section'     => 'paddle_theme_typography_section',
 					'input_attrs' => array(
 						'min'  => 14,
@@ -559,18 +578,18 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'h2_font_weight',
 				array(
-					'label'   => __( 'H2 font weight', 'paddle' ),
+					'label'   => __('H2 font weight', 'paddle'),
 					'section' => 'paddle_theme_typography_section',
 					'choices' => array(
-						'100' => __( 'Thin 100', 'paddle' ),
-						'200' => __( 'Extra Light 200', 'paddle' ),
-						'300' => __( 'Light 300', 'paddle' ),
-						'400' => __( 'Regular 400', 'paddle' ),
-						'500' => __( 'Medium 500', 'paddle' ),
-						'600' => __( 'Semi-Bold 600', 'paddle' ),
-						'700' => __( 'Bold 700', 'paddle' ),
-						'800' => __( 'Extra-Bold 800', 'paddle' ),
-						'900' => __( 'Ultra-Bold 900', 'paddle' ),
+						'100' => __('Thin 100', 'paddle'),
+						'200' => __('Extra Light 200', 'paddle'),
+						'300' => __('Light 300', 'paddle'),
+						'400' => __('Regular 400', 'paddle'),
+						'500' => __('Medium 500', 'paddle'),
+						'600' => __('Semi-Bold 600', 'paddle'),
+						'700' => __('Bold 700', 'paddle'),
+						'800' => __('Extra-Bold 800', 'paddle'),
+						'900' => __('Ultra-Bold 900', 'paddle'),
 					),
 				)
 			)
@@ -589,7 +608,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'h3_font_size',
 				array(
-					'label'       => __( 'H3 font size', 'paddle' ),
+					'label'       => __('H3 font size', 'paddle'),
 					'section'     => 'paddle_theme_typography_section',
 					'input_attrs' => array(
 						'min'  => 14,
@@ -613,7 +632,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'h4_font_size',
 				array(
-					'label'       => __( 'H4 font size', 'paddle' ),
+					'label'       => __('H4 font size', 'paddle'),
 					'section'     => 'paddle_theme_typography_section',
 					'input_attrs' => array(
 						'min'  => 14,
@@ -636,7 +655,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'h5_font_size',
 				array(
-					'label'       => __( 'H5 font size', 'paddle' ),
+					'label'       => __('H5 font size', 'paddle'),
 					'section'     => 'paddle_theme_typography_section',
 					'input_attrs' => array(
 						'min'  => 14,
@@ -660,7 +679,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'h6_font_size',
 				array(
-					'label'       => __( 'H6 font size', 'paddle' ),
+					'label'       => __('H6 font size', 'paddle'),
 					'section'     => 'paddle_theme_typography_section',
 					'input_attrs' => array(
 						'min'  => 14,
@@ -687,8 +706,8 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paragraph_margin_bottom',
 				array(
-					'description' => __( 'Paragraph', 'paddle' ),
-					'label'       => __( 'Margin bottom', 'paddle' ),
+					'description' => __('Paragraph', 'paddle'),
+					'label'       => __('Margin bottom', 'paddle'),
 					'section'     => 'paddle_theme_typography_section',
 					'input_attrs' => array(
 						'min'  => 14,
@@ -714,13 +733,13 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'title_options_header',
 				array(
-					'label'    => __( 'General', 'paddle' ),
+					'label'    => __('General', 'paddle'),
 					'section'  => 'paddle_theme_header_options',
 					'type'     => 'select',
 					'priority' => 1,
 					'choices'  => array(
-						'desktop' => __( 'Desktop', 'paddle' ),
-						'mobile'  => __( 'Mobile', 'paddle' ),
+						'desktop' => __('Desktop', 'paddle'),
+						'mobile'  => __('Mobile', 'paddle'),
 					),
 				)
 			)
@@ -739,7 +758,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_header_layout_style',
 				array(
-					'label'           => __( 'Header Layout', 'paddle' ),
+					'label'           => __('Header Layout', 'paddle'),
 					'section'         => 'paddle_theme_header_options',
 					'active_callback' => 'paddle_header_desktop_selected',
 					'input_attrs'     => array(
@@ -751,28 +770,28 @@ class paddle_initialise_customizer_settings {
 					),
 					'choices'         => array(
 						'paddle-header-1' => array(
-							'image' => trailingslashit( get_template_directory_uri() ) . 'inc/customizer/images/header-layout-style-1-logo-left.jpg',
-							'name'  => __( 'Logo Left', 'paddle' ),
+							'image' => trailingslashit(get_template_directory_uri()) . 'inc/customizer/images/header-layout-style-1-logo-left.jpg',
+							'name'  => __('Logo Left', 'paddle'),
 						),
 						'paddle-header-2' => array(
-							'image' => trailingslashit( get_template_directory_uri() ) . 'inc/customizer/images/header-layout-style-1-logo-center.jpg',
-							'name'  => __( 'Logo Center', 'paddle' ),
+							'image' => trailingslashit(get_template_directory_uri()) . 'inc/customizer/images/header-layout-style-1-logo-center.jpg',
+							'name'  => __('Logo Center', 'paddle'),
 						),
 						'paddle-header-3' => array(
-							'image' => trailingslashit( get_template_directory_uri() ) . 'inc/customizer/images/header-layout-style-1-logo-right.jpg',
-							'name'  => __( 'Logo Right', 'paddle' ),
+							'image' => trailingslashit(get_template_directory_uri()) . 'inc/customizer/images/header-layout-style-1-logo-right.jpg',
+							'name'  => __('Logo Right', 'paddle'),
 						),
 						'paddle-header-4' => array(
-							'image' => trailingslashit( get_template_directory_uri() ) . 'inc/customizer/images/header-layout-style-1-logo-left-search.jpg',
-							'name'  => __( 'Logo Left & Search Left', 'paddle' ),
+							'image' => trailingslashit(get_template_directory_uri()) . 'inc/customizer/images/header-layout-style-1-logo-left-search.jpg',
+							'name'  => __('Logo Left & Search Left', 'paddle'),
 						),
 						'paddle-header-5' => array(
-							'image' => trailingslashit( get_template_directory_uri() ) . 'inc/customizer/images/header-layout-style-2.jpg',
-							'name'  => __( 'Logo Left & Menu Left', 'paddle' ),
+							'image' => trailingslashit(get_template_directory_uri()) . 'inc/customizer/images/header-layout-style-2.jpg',
+							'name'  => __('Logo Left & Menu Left', 'paddle'),
 						),
 						'paddle-header-6' => array(
-							'image' => trailingslashit( get_template_directory_uri() ) . 'inc/customizer/images/header-layout-style-2.jpg',
-							'name'  => __( 'Logo Left & Menu Right', 'paddle' ),
+							'image' => trailingslashit(get_template_directory_uri()) . 'inc/customizer/images/header-layout-style-2.jpg',
+							'name'  => __('Logo Left & Menu Right', 'paddle'),
 						),
 					),
 				)
@@ -792,7 +811,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_header_section_title_5',
 				array(
-					'label'           => __( 'Header 5', 'paddle' ),
+					'label'           => __('Header 5', 'paddle'),
 					'section'         => 'paddle_theme_header_options',
 					'active_callback' => 'paddle_header_desktop_selected_header_5',
 				)
@@ -811,14 +830,14 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'header_5_info',
 				array(
-					'label'           => __( 'Header 5.', 'paddle' ),
+					'label'           => __('Header 5.', 'paddle'),
 					'section'         => 'paddle_theme_header_options',
 					'active_callback' => 'paddle_header_desktop_selected_header_5',
 					'input_attrs'     => array(
 						'show_label' => false,
 						'show_desc'  => false,
 						'infos'      => array(
-							'info_1' => __( 'Use header 1 to 4 for large menu ', 'paddle' ),
+							'info_1' => __('Use header 1 to 4 for large menu ', 'paddle'),
 						),
 					),
 				)
@@ -839,7 +858,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_header_section_title_6',
 				array(
-					'label'           => __( 'Split Menu', 'paddle' ),
+					'label'           => __('Split Menu', 'paddle'),
 					'section'         => 'paddle_theme_header_options',
 					'active_callback' => 'paddle_header_desktop_selected_header_6',
 				)
@@ -860,7 +879,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_split_menu_options',
 				array(
-					'label'           => __( 'Show / Hide / Disable', 'paddle' ),
+					'label'           => __('Show / Hide / Disable', 'paddle'),
 					'section'         => 'paddle_theme_header_options',
 					'active_callback' => 'paddle_header_desktop_selected_header_6',
 					'input_attrs'     => array(
@@ -869,8 +888,8 @@ class paddle_initialise_customizer_settings {
 						'sample'    => '',
 					),
 					'choices'         => array(
-						'cta'     => __( 'Show CTA', 'paddle' ),
-						'padding' => __( 'Disable CTA Margin', 'paddle' ),
+						'cta'     => __('Show CTA', 'paddle'),
+						'padding' => __('Disable CTA Margin', 'paddle'),
 					),
 				)
 			)
@@ -889,17 +908,17 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'header_6_info',
 				array(
-					'label'           => __( 'Header 6.', 'paddle' ),
+					'label'           => __('Header 6.', 'paddle'),
 					'section'         => 'paddle_theme_header_options',
 					'active_callback' => 'paddle_header_desktop_selected_header_6',
 					'input_attrs'     => array(
 						'show_label' => false,
 						'show_desc'  => false,
 						'infos'      => array(
-							'info_1'       => __( 'Sub menu is not supported ', 'paddle' ),
-							'info_2_alert' => __( 'Max of 6 menu items ', 'paddle' ),
-							'info_3'       => __( 'Use menu that are even ', 'paddle' ),
-							'info_4'       => __( 'Use header 1 to 4 for large menu ', 'paddle' ),
+							'info_1'       => __('Sub menu is not supported ', 'paddle'),
+							'info_2_alert' => __('Max of 6 menu items ', 'paddle'),
+							'info_3'       => __('Use menu that are even ', 'paddle'),
+							'info_4'       => __('Use header 1 to 4 for large menu ', 'paddle'),
 						),
 					),
 				)
@@ -920,7 +939,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_header_section_title_3',
 				array(
-					'label'           => __( 'Border', 'paddle' ),
+					'label'           => __('Border', 'paddle'),
 					'section'         => 'paddle_theme_header_options',
 					'active_callback' => 'paddle_header_desktop_selected',
 				)
@@ -941,7 +960,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'menu_border_top',
 				array(
-					'label'           => __( 'Border Top', 'paddle' ),
+					'label'           => __('Border Top', 'paddle'),
 					'section'         => 'paddle_theme_header_options',
 					'active_callback' => 'paddle_header_desktop_selected',
 				)
@@ -962,7 +981,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'menu_border_bottom',
 				array(
-					'label'           => __( 'Border Bottom', 'paddle' ),
+					'label'           => __('Border Bottom', 'paddle'),
 					'section'         => 'paddle_theme_header_options',
 					'active_callback' => 'paddle_header_desktop_selected',
 				)
@@ -985,7 +1004,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_header_border_color',
 				array(
-					'label'           => __( 'Border Color', 'paddle' ),
+					'label'           => __('Border Color', 'paddle'),
 					'section'         => 'paddle_theme_header_options',
 					'settings'        => 'paddle_header_border_color',
 					'active_callback' => 'paddle_check_header_border_is_active',
@@ -1007,7 +1026,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_header_section_title_1',
 				array(
-					'label'           => __( 'Logo', 'paddle' ),
+					'label'           => __('Logo', 'paddle'),
 					'section'         => 'paddle_theme_header_options',
 					'active_callback' => 'paddle_header_desktop_selected',
 				)
@@ -1028,7 +1047,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'header_logo_size',
 				array(
-					'label'           => __( 'Adjust Logo Size', 'paddle' ),
+					'label'           => __('Adjust Logo Size', 'paddle'),
 					'section'         => 'paddle_theme_header_options',
 					'active_callback' => 'paddle_header_desktop_selected',
 					'input_attrs'     => array(
@@ -1055,7 +1074,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'header_logo_padding',
 				array(
-					'label'           => __( 'Adjust Logo Padding', 'paddle' ),
+					'label'           => __('Adjust Logo Padding', 'paddle'),
 					'section'         => 'paddle_theme_header_options',
 					'active_callback' => 'paddle_header_desktop_selected',
 					'input_attrs'     => array(
@@ -1080,13 +1099,13 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_header_logo_align',
 				array(
-					'label'           => __( 'Logo Align', 'paddle' ),
+					'label'           => __('Logo Align', 'paddle'),
 					'section'         => 'paddle_theme_header_options',
 					'active_callback' => 'paddle_header_desktop_selected_header_6',
 					'choices'         => array(
-						'self-start' => __( 'Left', 'paddle' ),
-						'center'     => __( 'Center', 'paddle' ),
-						'end'        => __( 'Right', 'paddle' ),
+						'self-start' => __('Left', 'paddle'),
+						'center'     => __('Center', 'paddle'),
+						'end'        => __('Right', 'paddle'),
 					),
 				)
 			)
@@ -1106,7 +1125,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_header_section_title_2',
 				array(
-					'label'           => __( 'Menu', 'paddle' ),
+					'label'           => __('Menu', 'paddle'),
 					'section'         => 'paddle_theme_header_options',
 					'active_callback' => 'paddle_header_desktop_selected',
 				)
@@ -1127,12 +1146,12 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_menu_spacing',
 				array(
-					'label'           => __( 'Spacing', 'paddle' ),
+					'label'           => __('Spacing', 'paddle'),
 					'section'         => 'paddle_theme_header_options',
 					'active_callback' => 'paddle_header_desktop_selected',
 					'choices'         => array(
-						'wrap'   => __( 'Maximum', 'paddle' ),
-						'nowrap' => __( 'Minimum', 'paddle' ),
+						'wrap'   => __('Maximum', 'paddle'),
+						'nowrap' => __('Minimum', 'paddle'),
 					),
 				)
 			)
@@ -1152,7 +1171,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'header_menu_padding',
 				array(
-					'label'           => __( 'Padding Top/Bottom', 'paddle' ),
+					'label'           => __('Padding Top/Bottom', 'paddle'),
 					'section'         => 'paddle_theme_header_options',
 					'active_callback' => 'paddle_header_desktop_selected',
 					'input_attrs'     => array(
@@ -1178,7 +1197,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'menu_item_margin',
 				array(
-					'label'           => __( 'Item Margin Right', 'paddle' ),
+					'label'           => __('Item Margin Right', 'paddle'),
 					'section'         => 'paddle_theme_header_options',
 					'active_callback' => 'paddle_header_desktop_selected',
 					'input_attrs'     => array(
@@ -1204,15 +1223,15 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_menu_items_alignment',
 				array(
-					'label'           => __( 'Menu Items Position', 'paddle' ),
+					'label'           => __('Menu Items Position', 'paddle'),
 					// 'description' => esc_html__( 'Align the menu items', 'paddle' ),
 					'section'         => 'paddle_theme_header_options',
 					'active_callback' => 'paddle_header_desktop_selected',
 					'choices'         => array(
-						'left'    => __( 'Left', 'paddle' ),
-						'center'  => __( 'Centered', 'paddle' ),
-						'right'   => __( 'Right', 'paddle' ),
-						'justify' => __( 'Justify', 'paddle' ),
+						'left'    => __('Left', 'paddle'),
+						'center'  => __('Centered', 'paddle'),
+						'right'   => __('Right', 'paddle'),
+						'justify' => __('Justify', 'paddle'),
 					),
 				)
 			)
@@ -1232,18 +1251,18 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_menu_capitalization',
 				array(
-					'label'           => __( 'Capitalization', 'paddle' ),
+					'label'           => __('Capitalization', 'paddle'),
 					'section'         => 'paddle_theme_header_options',
 					'active_callback' => 'paddle_header_desktop_selected',
 					'choices'         => array(
-						'none'       => __( 'None', 'paddle' ),
-						'capitalize' => __( 'Capitalize', 'paddle' ),
-						'uppercase'  => __( 'Uppercase', 'paddle' ),
+						'none'       => __('None', 'paddle'),
+						'capitalize' => __('Capitalize', 'paddle'),
+						'uppercase'  => __('Uppercase', 'paddle'),
 					),
 				)
 			)
 		);
-		
+
 
 		// Menu background colour.
 		$wp_customize->add_setting(
@@ -1261,7 +1280,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_menu_bgcolor',
 				array(
-					'label'           => __( 'Background', 'paddle' ),
+					'label'           => __('Background', 'paddle'),
 					'section'         => 'paddle_theme_header_options',
 					'active_callback' => 'paddle_header_desktop_selected',
 					'settings'        => 'paddle_menu_bgcolor',
@@ -1286,7 +1305,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_navlink_text_color',
 				array(
-					'label'           => __( 'Link', 'paddle' ),
+					'label'           => __('Link', 'paddle'),
 					'section'         => 'paddle_theme_header_options',
 					'active_callback' => 'paddle_header_desktop_selected',
 					'settings'        => 'paddle_navlink_text_color',
@@ -1311,7 +1330,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_navlink_text_color_hover',
 				array(
-					'label'           => __( 'Hover', 'paddle' ),
+					'label'           => __('Hover', 'paddle'),
 					'section'         => 'paddle_theme_header_options',
 					'active_callback' => 'paddle_header_desktop_selected',
 					'settings'        => 'paddle_navlink_text_color_hover',
@@ -1332,8 +1351,8 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'theme_using_header_two',
 				array(
-					'label'           => __( 'Menu background colour other than the default (#ffffff) is not recommended for Header Layout 5.', 'paddle' ),
-					'description'     => esc_html__( 'If your upper menu items are more than 6 and you are using the Header Layout 5,  menu items will not be on the same line on medium screen. Please consider switching back to the default background menu color or minimize your menu items. REASONS: Background not looking good with menu more then 6 on medium screen, e.g, Ipad pro.', 'paddle' ),
+					'label'           => __('Menu background colour other than the default (#ffffff) is not recommended for Header Layout 5.', 'paddle'),
+					'description'     => esc_html__('If your upper menu items are more than 6 and you are using the Header Layout 5,  menu items will not be on the same line on medium screen. Please consider switching back to the default background menu color or minimize your menu items. REASONS: Background not looking good with menu more then 6 on medium screen, e.g, Ipad pro.', 'paddle'),
 					'section'         => 'paddle_theme_header_options',
 					'active_callback' => 'paddle_check_theme_header_options',
 				)
@@ -1354,7 +1373,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_header_section_title_4',
 				array(
-					'label'           => __( 'Search', 'paddle' ),
+					'label'           => __('Search', 'paddle'),
 					'section'         => 'paddle_theme_header_options',
 					'active_callback' => 'paddle_header_desktop_selected',
 				)
@@ -1375,7 +1394,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_header_search_button',
 				array(
-					'label'           => __( 'Enable Search', 'paddle' ),
+					'label'           => __('Enable Search', 'paddle'),
 					'section'         => 'paddle_theme_header_options',
 					'active_callback' => 'paddle_header_desktop_selected',
 				)
@@ -1396,13 +1415,13 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_header_search_button_type',
 				array(
-					'label'   => __( 'Search Type (Desktop)', 'paddle' ),
+					'label'   => __('Search Type (Desktop)', 'paddle'),
 					// 'description' => esc_html__( 'Align the menu items', 'paddle' ),
 					'section' => 'paddle_theme_header_options',
 					// 'active_callback' => 'paddle_using_header_1_4_5_desktop_selected',
 					'choices' => array(
-						'icon'  => __( 'Icon Only', 'paddle' ),
-						'input' => __( 'Input and Icon', 'paddle' ),
+						'icon'  => __('Icon Only', 'paddle'),
+						'input' => __('Input and Icon', 'paddle'),
 					),
 				)
 			)
@@ -1425,7 +1444,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_header_search_icon_color',
 				array(
-					'label'           => __( 'Icon Color', 'paddle' ),
+					'label'           => __('Icon Color', 'paddle'),
 					'section'         => 'paddle_theme_header_options',
 					'active_callback' => 'paddle_header_desktop_selected_search_enab',
 					'settings'        => 'paddle_header_search_icon_color',
@@ -1434,7 +1453,7 @@ class paddle_initialise_customizer_settings {
 		);
 
 		// ____________CTA_______________
-				// Header Menu - Title.
+		// Header Menu - Title.
 		$wp_customize->add_setting(
 			'paddle_header_section_title_7',
 			array(
@@ -1448,136 +1467,136 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_header_section_title_7',
 				array(
-					'label'           => __( 'Call To Action', 'paddle' ),
+					'label'           => __('Call To Action', 'paddle'),
 					'section'         => 'paddle_theme_header_options',
 					'active_callback' => 'paddle_header_desktop_selected',
 				)
 			)
 		);
-			$wp_customize->add_setting(
+		$wp_customize->add_setting(
+			'paddle_header_cta',
+			array(
+				'default'           => $this->defaults['paddle_header_cta'],
+				'transport'         => 'refresh',
+				'sanitize_callback' => 'paddle_switch_sanitization',
+			)
+		);
+		$wp_customize->add_control(
+			new Paddle_Toggle_Switch_Custom_control(
+				$wp_customize,
 				'paddle_header_cta',
 				array(
-					'default'           => $this->defaults['paddle_header_cta'],
-					'transport'         => 'refresh',
-					'sanitize_callback' => 'paddle_switch_sanitization',
+					'label'           => __('CTA Button', 'paddle'),
+					'section'         => 'paddle_theme_header_options',
+					'active_callback' => 'paddle_header_desktop_selected',
 				)
-			);
-			$wp_customize->add_control(
-				new Paddle_Toggle_Switch_Custom_control(
-					$wp_customize,
-					'paddle_header_cta',
-					array(
-						'label'           => __( 'CTA Button', 'paddle' ),
-						'section'         => 'paddle_theme_header_options',
-						'active_callback' => 'paddle_header_desktop_selected',
-					)
-				)
-			); // CTA Button
+			)
+		); // CTA Button
 
-			$wp_customize->add_setting(
+		$wp_customize->add_setting(
+			'cta_separated',
+			array(
+				'default'           => $this->defaults['cta_separated'],
+				'transport'         => 'refresh',
+				'sanitize_callback' => 'paddle_switch_sanitization',
+			)
+		);
+		$wp_customize->add_control(
+			new Paddle_Toggle_Switch_Custom_control(
+				$wp_customize,
 				'cta_separated',
 				array(
-					'default'           => $this->defaults['cta_separated'],
-					'transport'         => 'refresh',
-					'sanitize_callback' => 'paddle_switch_sanitization',
+					'label'           => __('Separated', 'paddle'),
+					'section'         => 'paddle_theme_header_options',
+					'active_callback' => 'paddle_using_header_1_4_desktop_selected',
 				)
-			);
-			$wp_customize->add_control(
-				new Paddle_Toggle_Switch_Custom_control(
-					$wp_customize,
-					'cta_separated',
-					array(
-						'label'           => __( 'Separated', 'paddle' ),
-						'section'         => 'paddle_theme_header_options',
-						'active_callback' => 'paddle_using_header_1_4_desktop_selected',
-					)
-				)
-			); // CTA Margin left
+			)
+		); // CTA Margin left
 
-			// CTA margin.
-			$wp_customize->add_setting(
+		// CTA margin.
+		$wp_customize->add_setting(
+			'header_cta_padding_left',
+			array(
+				'default'           => $this->defaults['header_cta_padding_left'],
+				'transport'         => 'refresh',
+				'sanitize_callback' => 'paddle_range_sanitization',
+			)
+		);
+		$wp_customize->add_control(
+			new Paddle_Slider_Custom_Control(
+				$wp_customize,
 				'header_cta_padding_left',
 				array(
-					'default'           => $this->defaults['header_cta_padding_left'],
-					'transport'         => 'refresh',
-					'sanitize_callback' => 'paddle_range_sanitization',
-				)
-			);
-			$wp_customize->add_control(
-				new Paddle_Slider_Custom_Control(
-					$wp_customize,
-					'header_cta_padding_left',
-					array(
-						'label'           => __( 'Padding Left', 'paddle' ),
-						'section'         => 'paddle_theme_header_options',
-						'active_callback' => 'paddle_header_desktop_selected_cta_enab',
-						'input_attrs'     => array(
-							'min'  => 0,
-							'max'  => 25,
-							'step' => 1,
-						),
-					)
-				)
-			);
-
-			// CTA URL.
-			$wp_customize->add_setting(
-				'paddle_header_cta_url',
-				array(
-					'default'           => home_url(),
-					'sanitize_callback' => 'esc_url_raw',
-				)
-			);
-
-			$wp_customize->add_control(
-				'paddle_header_cta_url',
-				array(
-					'label'           => esc_html__( 'CTA URL', 'paddle' ),
+					'label'           => __('Padding Left', 'paddle'),
 					'section'         => 'paddle_theme_header_options',
-					'type'            => 'url',
-					'input_attrs'     => array(
-						'style'       => 'border: 2px solid #e6e6e6',
-						'placeholder' => __( 'Enter URL Link...', 'paddle' ),
-					),
 					'active_callback' => 'paddle_header_desktop_selected_cta_enab',
-				)
-			);
-
-			// Setting CTA Text.
-			$wp_customize->add_setting(
-				'paddle_header_cta_text',
-				array(
-					'default'           => $this->defaults['paddle_header_cta_text'],
-					'sanitize_callback' => 'sanitize_text_field',
-				)
-			);
-
-			$wp_customize->add_control(
-				'paddle_header_cta_text',
-				array(
-					'label'           => esc_html__( 'CTA Text', 'paddle' ),
-					'section'         => 'paddle_theme_header_options',
-					'type'            => 'text',
-					'priority'        => 50,
 					'input_attrs'     => array(
-						'style'       => 'border: 2px solid #e6e6e6',
-						'placeholder' => __( 'Enter Text...', 'paddle' ),
+						'min'  => 0,
+						'max'  => 25,
+						'step' => 1,
 					),
-					'active_callback' => 'paddle_header_desktop_selected_cta_enab',
 				)
-			);
+			)
+		);
 
-			$wp_customize->selective_refresh->add_partial(
-				'paddle_header_cta_text',
-				array(
-					'selector'            => '#header-btn-cta a.btn',
-					'container_inclusive' => false,
-					'render_callback'     => function () {
-						return get_theme_mod( 'paddle_header_cta_text', $this->defaults['paddle_header_cta_text'] );
-					},
-					'fallback_refresh'    => true,
-				)
-			);
+		// CTA URL.
+		$wp_customize->add_setting(
+			'paddle_header_cta_url',
+			array(
+				'default'           => home_url(),
+				'sanitize_callback' => 'esc_url_raw',
+			)
+		);
+
+		$wp_customize->add_control(
+			'paddle_header_cta_url',
+			array(
+				'label'           => esc_html__('CTA URL', 'paddle'),
+				'section'         => 'paddle_theme_header_options',
+				'type'            => 'url',
+				'input_attrs'     => array(
+					'style'       => 'border: 2px solid #e6e6e6',
+					'placeholder' => __('Enter URL Link...', 'paddle'),
+				),
+				'active_callback' => 'paddle_header_desktop_selected_cta_enab',
+			)
+		);
+
+		// Setting CTA Text.
+		$wp_customize->add_setting(
+			'paddle_header_cta_text',
+			array(
+				'default'           => $this->defaults['paddle_header_cta_text'],
+				'sanitize_callback' => 'sanitize_text_field',
+			)
+		);
+
+		$wp_customize->add_control(
+			'paddle_header_cta_text',
+			array(
+				'label'           => esc_html__('CTA Text', 'paddle'),
+				'section'         => 'paddle_theme_header_options',
+				'type'            => 'text',
+				'priority'        => 50,
+				'input_attrs'     => array(
+					'style'       => 'border: 2px solid #e6e6e6',
+					'placeholder' => __('Enter Text...', 'paddle'),
+				),
+				'active_callback' => 'paddle_header_desktop_selected_cta_enab',
+			)
+		);
+
+		$wp_customize->selective_refresh->add_partial(
+			'paddle_header_cta_text',
+			array(
+				'selector'            => '#header-btn-cta a.btn',
+				'container_inclusive' => false,
+				'render_callback'     => function () {
+					return get_theme_mod('paddle_header_cta_text', $this->defaults['paddle_header_cta_text']);
+				},
+				'fallback_refresh'    => true,
+			)
+		);
 
 		/****************************************************************
 		 * Mobile Header Layout
@@ -1595,7 +1614,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_header_mobile_layout',
 				array(
-					'label'           => __( 'Mobile Header Layout', 'paddle' ),
+					'label'           => __('Mobile Header Layout', 'paddle'),
 					'section'         => 'paddle_theme_header_options',
 					'active_callback' => 'paddle_header_mobile_selected',
 					'priority'        => 3,
@@ -1608,12 +1627,12 @@ class paddle_initialise_customizer_settings {
 					),
 					'choices'         => array(
 						'mobile-header-1' => array(
-							'image' => trailingslashit( get_template_directory_uri() ) . 'inc/customizer/images/header-layout-style-1-logo-left.jpg',
-							'name'  => __( 'Logo Left', 'paddle' ),
+							'image' => trailingslashit(get_template_directory_uri()) . 'inc/customizer/images/header-layout-style-1-logo-left.jpg',
+							'name'  => __('Logo Left', 'paddle'),
 						),
 						'mobile-header-2' => array(
-							'image' => trailingslashit( get_template_directory_uri() ) . 'inc/customizer/images/header-layout-style-1-logo-center.jpg',
-							'name'  => __( 'Logo Center', 'paddle' ),
+							'image' => trailingslashit(get_template_directory_uri()) . 'inc/customizer/images/header-layout-style-1-logo-center.jpg',
+							'name'  => __('Logo Center', 'paddle'),
 						),
 					),
 				)
@@ -1633,13 +1652,13 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_header_search_button_type_mobile',
 				array(
-					'label'           => __( 'Search Type (Mobile)', 'paddle' ),
+					'label'           => __('Search Type (Mobile)', 'paddle'),
 					// 'description' => esc_html__( 'Align the menu items', 'paddle' ),
 					'section'         => 'paddle_theme_header_options',
 					'active_callback' => 'paddle_header_mobile_selected',
 					'choices'         => array(
-						'icon'  => __( 'Icon Only', 'paddle' ),
-						'input' => __( 'Input and Icon', 'paddle' ),
+						'icon'  => __('Icon Only', 'paddle'),
+						'input' => __('Input and Icon', 'paddle'),
 					),
 				)
 			)
@@ -1661,14 +1680,14 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'top_bar_options_header',
 				array(
-					'label'    => __( 'General', 'paddle' ),
+					'label'    => __('General', 'paddle'),
 					'section' => 'paddle_header_top_bar',
 					'type'     => 'select',
 					'priority' => 1,
 					'choices'  => array(
-						'settings' => __( 'Settings', 'paddle' ),
-						'contact' => __( 'Info', 'paddle' ),
-						'content'  => __( 'Content', 'paddle' ),
+						'settings' => __('Settings', 'paddle'),
+						'contact' => __('Info', 'paddle'),
+						'content'  => __('Content', 'paddle'),
 					),
 				)
 			)
@@ -1688,7 +1707,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'enable_top_bar',
 				array(
-					'label'   => __( 'Top Bar', 'paddle' ),
+					'label'   => __('Top Bar', 'paddle'),
 					'section' => 'paddle_header_top_bar',
 				)
 			)
@@ -1708,7 +1727,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'topbar_height',
 				array(
-					'label'           => __( 'Min Height', 'paddle' ),
+					'label'           => __('Min Height', 'paddle'),
 					'section'         => 'paddle_theme_header_options',
 					'section'         => 'paddle_header_top_bar',
 					'active_callback' => 'paddle_top_header_option_settings',
@@ -1736,7 +1755,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'topbar_border_bottom',
 				array(
-					'label'   => __( 'Border Bottom', 'paddle' ),
+					'label'   => __('Border Bottom', 'paddle'),
 					'section'         => 'paddle_header_top_bar',
 					'active_callback' => 'paddle_top_header_option_settings',
 				)
@@ -1760,7 +1779,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'topbar_border_color',
 				array(
-					'label'           => __( 'Border Color', 'paddle' ),
+					'label'           => __('Border Color', 'paddle'),
 					'section'         => 'paddle_header_top_bar',
 					'active_callback' => 'paddle_top_header_option_settings',
 					'settings'        => 'topbar_border_color',
@@ -1785,7 +1804,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'topbar_bgcolor',
 				array(
-					'label'           => __( 'Background Color', 'paddle' ),
+					'label'           => __('Background Color', 'paddle'),
 					'section'         => 'paddle_header_top_bar',
 					'active_callback' => 'paddle_top_header_option_settings',
 					'settings'        => 'topbar_bgcolor',
@@ -1810,7 +1829,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'topbar_text_color',
 				array(
-					'label'           => __( 'Text Color', 'paddle' ),
+					'label'           => __('Text Color', 'paddle'),
 					'section'         => 'paddle_header_top_bar',
 					'active_callback' => 'paddle_top_header_option_settings',
 					'settings'        => 'topbar_text_color',
@@ -1835,7 +1854,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'topbar_link_color',
 				array(
-					'label'           => __( 'Link Color', 'paddle' ),
+					'label'           => __('Link Color', 'paddle'),
 					'section'         => 'paddle_header_top_bar',
 					'active_callback' => 'paddle_top_header_option_settings',
 					'settings'        => 'topbar_link_color',
@@ -1860,7 +1879,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'topbar_link_color_hover',
 				array(
-					'label'           => __( 'Link Hover', 'paddle' ),
+					'label'           => __('Link Hover', 'paddle'),
 					'section'         => 'paddle_header_top_bar',
 					'active_callback' => 'paddle_top_header_option_settings',
 					'settings'        => 'topbar_link_color_hover',
@@ -1882,7 +1901,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'topbar_font_size',
 				array(
-					'label'           => __( 'Font Size', 'paddle' ),
+					'label'           => __('Font Size', 'paddle'),
 					'section'         => 'paddle_theme_header_options',
 					'section'         => 'paddle_header_top_bar',
 					'active_callback' => 'paddle_top_header_option_settings',
@@ -1894,7 +1913,7 @@ class paddle_initialise_customizer_settings {
 				)
 			)
 		);
-		
+
 		// Title
 		$wp_customize->add_setting(
 			'paddle_header_top_bar_title_1',
@@ -1909,7 +1928,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_header_top_bar_title_1',
 				array(
-					'label'           => __( 'Info', 'paddle' ),
+					'label'           => __('Info', 'paddle'),
 					'section'         => 'paddle_header_top_bar',
 					'active_callback' => 'paddle_top_header_option_contact',
 				)
@@ -1929,7 +1948,7 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_control(
 			'paddle_contact_phone',
 			array(
-				'label'           => __( 'Phone number', 'paddle' ),
+				'label'           => __('Phone number', 'paddle'),
 				'type'            => 'text',
 				'section'         => 'paddle_header_top_bar',
 				'active_callback' => 'paddle_top_header_option_contact',
@@ -1947,7 +1966,7 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_control(
 			'paddle_top_email',
 			array(
-				'label'           => esc_html__( 'Email', 'paddle' ),
+				'label'           => esc_html__('Email', 'paddle'),
 				'section'         => 'paddle_header_top_bar',
 				'type'            => 'email',
 				'active_callback' => 'paddle_top_header_option_contact',
@@ -1964,13 +1983,13 @@ class paddle_initialise_customizer_settings {
 				'sanitize_callback' => 'paddle_switch_sanitization',
 			)
 		);
-		
+
 		$wp_customize->add_control(
 			new Paddle_Toggle_Switch_Custom_control(
 				$wp_customize,
 				'hide_top_bar_info_mobile',
 				array(
-					'label'           => __( 'Hide on tablet, mobile?', 'paddle' ),
+					'label'           => __('Hide on tablet, mobile?', 'paddle'),
 					'section'         => 'paddle_header_top_bar',
 					'active_callback' => 'paddle_top_header_option_contact',
 				)
@@ -1991,13 +2010,13 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'top_bar_info_align',
 				array(
-					'label'           => __( 'Position', 'paddle' ),
+					'label'           => __('Position', 'paddle'),
 					'section'         => 'paddle_header_top_bar',
 					'active_callback' => 'paddle_top_header_option_contact',
 					'choices'         => array(
-						'left'   => __( 'Left', 'paddle' ),
-						'center' => __( 'Center', 'paddle' ),
-						'right' => __( 'Right', 'paddle' ),
+						'left'   => __('Left', 'paddle'),
+						'center' => __('Center', 'paddle'),
+						'right' => __('Right', 'paddle'),
 					),
 				)
 			)
@@ -2017,7 +2036,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_header_top_bar_title_2',
 				array(
-					'label'           => __( 'Socials', 'paddle' ),
+					'label'           => __('Socials', 'paddle'),
 					'section'         => 'paddle_header_top_bar',
 					'active_callback' => 'paddle_top_header_option_contact',
 				)
@@ -2040,11 +2059,11 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'social_urls',
 				array(
-					'label'           => __( 'Social URLs', 'paddle' ),
-					'description'     => esc_html__( 'Add your social media links.', 'paddle' ),
+					'label'           => __('Social URLs', 'paddle'),
+					'description'     => esc_html__('Add your social media links.', 'paddle'),
 					'section'         => 'paddle_header_top_bar',
 					'button_labels'   => array(
-						'add' => __( 'Add Social Link', 'paddle' ),
+						'add' => __('Add Social Link', 'paddle'),
 					),
 					'active_callback' => 'paddle_top_header_option_contact',
 				)
@@ -2060,13 +2079,13 @@ class paddle_initialise_customizer_settings {
 				'sanitize_callback' => 'paddle_switch_sanitization',
 			)
 		);
-		
+
 		$wp_customize->add_control(
 			new Paddle_Toggle_Switch_Custom_control(
 				$wp_customize,
 				'hide_top_bar_social_mobile',
 				array(
-					'label'           => __( 'Hide on tablet, mobile?', 'paddle' ),
+					'label'           => __('Hide on tablet, mobile?', 'paddle'),
 					'section'         => 'paddle_header_top_bar',
 					'active_callback' => 'paddle_top_header_option_contact',
 				)
@@ -2088,13 +2107,13 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'top_bar_social_align',
 				array(
-					'label'           => __( 'Position', 'paddle' ),
+					'label'           => __('Position', 'paddle'),
 					'section'         => 'paddle_header_top_bar',
 					'active_callback' => 'paddle_top_header_option_contact',
 					'choices'         => array(
-						'left'   => __( 'Left', 'paddle' ),
-						'center' => __( 'Center', 'paddle' ),
-						'right' => __( 'Right', 'paddle' ),
+						'left'   => __('Left', 'paddle'),
+						'center' => __('Center', 'paddle'),
+						'right' => __('Right', 'paddle'),
 					),
 				)
 			)
@@ -2115,13 +2134,13 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'topbar_content_select',
 				array(
-					'label'   => __( 'Content / Menu', 'paddle' ),
+					'label'   => __('Content / Menu', 'paddle'),
 					'section'         => 'paddle_header_top_bar',
 					'active_callback' => 'paddle_top_header_option_content',
 					'type'    => 'select',
 					'choices' => array(
-						'menu'   => __( 'Menu', 'paddle' ),
-						'content' => __( 'Content', 'paddle' ),
+						'menu'   => __('Menu', 'paddle'),
+						'content' => __('Content', 'paddle'),
 					),
 				)
 			)
@@ -2142,27 +2161,29 @@ class paddle_initialise_customizer_settings {
 				'section'         => 'paddle_header_top_bar',
 				'active_callback' => 'paddle_top_header_option_content_is_content',
 				'type'        => 'textarea',
-				'label'       => esc_html__( 'Content', 'paddle' ),
-				'description' => esc_html__( 'You can use HTML. Note not all HTML tags are allowed.', 'paddle' ),
+				'label'       => esc_html__('Content', 'paddle'),
+				'description' => esc_html__('You can use HTML. Note not all HTML tags are allowed.', 'paddle'),
 			)
 		);
 
 		// Topbar Menu
-		$wp_customize->add_setting( 'topbar_content_menu',
+		$wp_customize->add_setting(
+			'topbar_content_menu',
 			array(
 				'default' => $this->defaults['topbar_content_menu'],
 				'transport' => 'refresh',
 				'sanitize_callback' => 'sanitize_text_field'
 			)
 		);
-		$wp_customize->add_control( new Paddle_Dropdown_Menu_Custom_Control( $wp_customize, 
+		$wp_customize->add_control(new Paddle_Dropdown_Menu_Custom_Control(
+			$wp_customize,
 			'topbar_content_menu',
 			array(
-				'label' => __( 'Menu Slug', 'paddle' ),
+				'label' => __('Menu Slug', 'paddle'),
 				'section'         => 'paddle_header_top_bar',
 				'active_callback' => 'paddle_top_header_option_content_is_menu',
 			)
-		) );
+		));
 
 		// Content -Hide on mobile
 		$wp_customize->add_setting(
@@ -2173,13 +2194,13 @@ class paddle_initialise_customizer_settings {
 				'sanitize_callback' => 'paddle_switch_sanitization',
 			)
 		);
-		
+
 		$wp_customize->add_control(
 			new Paddle_Toggle_Switch_Custom_control(
 				$wp_customize,
 				'hide_top_bar_content_mobile',
 				array(
-					'label'           => __( 'Hide on tablet, mobile?', 'paddle' ),
+					'label'           => __('Hide on tablet, mobile?', 'paddle'),
 					'section'         => 'paddle_header_top_bar',
 					'active_callback' => 'paddle_top_header_option_content',
 				)
@@ -2200,13 +2221,13 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'top_bar_content_align',
 				array(
-					'label'           => __( 'Position', 'paddle' ),
+					'label'           => __('Position', 'paddle'),
 					'section'         => 'paddle_header_top_bar',
 					'active_callback' => 'paddle_top_header_option_content',
 					'choices'         => array(
-						'left'   => __( 'Left', 'paddle' ),
-						'center' => __( 'Center', 'paddle' ),
-						'right' => __( 'Right', 'paddle' ),
+						'left'   => __('Left', 'paddle'),
+						'center' => __('Center', 'paddle'),
+						'right' => __('Right', 'paddle'),
 					),
 				)
 			)
@@ -2231,7 +2252,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_footer_general_title_5',
 				array(
-					'label'           => __( 'Footer Branding', 'paddle' ),
+					'label'           => __('Footer Branding', 'paddle'),
 					'section'         => 'paddle_footer_top',
 				)
 			)
@@ -2251,23 +2272,26 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_footer_logo',
 				array(
-					'label'       => __( 'Logo', 'paddle' ),
+					'label'       => __('Logo', 'paddle'),
 					'section'     => 'paddle_footer_top',
 				)
 			)
 		);
 
-			//_____ Cropped Image Control
-			$wp_customize->add_setting( 'footer_logo_image',
+		//_____ Cropped Image Control
+		$wp_customize->add_setting(
+			'footer_logo_image',
 			array(
 				'default' => $this->defaults['footer_logo_image'],
 				'transport' => 'refresh',
 				'sanitize_callback' => 'absint'
 			)
 		);
-		$wp_customize->add_control( new WP_Customize_Cropped_Image_Control( $wp_customize, 'footer_logo_image',
+		$wp_customize->add_control(new WP_Customize_Cropped_Image_Control(
+			$wp_customize,
+			'footer_logo_image',
 			array(
-				'label' => __( 'Footer Logo', 'paddle' ),
+				'label' => __('Footer Logo', 'paddle'),
 				'section' => 'paddle_footer_top',
 				'active_callback' => 'paddle_footer_logo_enab',
 				'flex_width' => true,
@@ -2275,7 +2299,7 @@ class paddle_initialise_customizer_settings {
 				'width' => 300,
 				'height' => 300
 			)
-		) );
+		));
 
 		//_____ Logo width.
 		$wp_customize->add_setting(
@@ -2291,7 +2315,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'footer_image_width',
 				array(
-					'label'           => __( 'Custom logo width', 'paddle' ),
+					'label'           => __('Custom logo width', 'paddle'),
 					'section'         => 'paddle_footer_top',
 					'active_callback' => 'paddle_footer_logo_enab',
 					'input_attrs'     => array(
@@ -2316,24 +2340,27 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_footer_about_enable',
 				array(
-					'label'       => __( 'About', 'paddle' ),
+					'label'       => __('About', 'paddle'),
 					'section'     => 'paddle_footer_top',
 				)
 			)
 		);
 
 		//___ Footer About TinyMCE
-		$wp_customize->add_setting( 'paddle_footer_about',
-		array(
-			'default' => $this->defaults['paddle_footer_about'],
-			'transport' => 'postMessage',
-			'sanitize_callback' => 'wp_kses_post'
-		)
-		);
-		$wp_customize->add_control( new Paddle_TinyMCE_Custom_control( $wp_customize, 'paddle_footer_about',
+		$wp_customize->add_setting(
+			'paddle_footer_about',
 			array(
-				'label' => __( 'About', 'paddle' ),
-				'description' => __( 'Add short summary and link to the full about us page.'),
+				'default' => $this->defaults['paddle_footer_about'],
+				'transport' => 'postMessage',
+				'sanitize_callback' => 'wp_kses_post'
+			)
+		);
+		$wp_customize->add_control(new Paddle_TinyMCE_Custom_control(
+			$wp_customize,
+			'paddle_footer_about',
+			array(
+				'label' => __('About', 'paddle'),
+				'description' => __('Add short summary and link to the full about us page.'),
 				'section' => 'paddle_footer_top',
 				'active_callback' => 'paddle_footer_about_enab',
 				'input_attrs' => array(
@@ -2341,9 +2368,9 @@ class paddle_initialise_customizer_settings {
 					'mediaButtons' => false,
 				)
 			)
-		) );
+		));
 
-	
+
 
 		// ___Header Title.
 		$wp_customize->add_setting(
@@ -2359,7 +2386,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_footer_general_title_1',
 				array(
-					'label'           => __( 'Color', 'paddle' ),
+					'label'           => __('Color', 'paddle'),
 					'section'         => 'paddle_footer_top',
 				)
 			)
@@ -2381,7 +2408,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'footer_bgcolor',
 				array(
-					'label'           => __( 'Background', 'paddle' ),
+					'label'           => __('Background', 'paddle'),
 					'section'         => 'paddle_footer_top',
 					'settings'        => 'footer_bgcolor',
 				)
@@ -2405,7 +2432,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'footer_text_color',
 				array(
-					'label'           => __( 'Text Color', 'paddle' ),
+					'label'           => __('Text Color', 'paddle'),
 					'section'         => 'paddle_footer_top',
 					'settings'        => 'footer_text_color',
 				)
@@ -2430,7 +2457,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'footer_navlink_text_color',
 				array(
-					'label'           => __( 'Link', 'paddle' ),
+					'label'           => __('Link', 'paddle'),
 					'section'         => 'paddle_footer_top',
 					'settings'        => 'footer_navlink_text_color',
 				)
@@ -2454,7 +2481,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'footer_navlink_text_color_hover',
 				array(
-					'label'           => __( 'Link Hover', 'paddle' ),
+					'label'           => __('Link Hover', 'paddle'),
 					'section'         => 'paddle_footer_top',
 					'settings'        => 'footer_navlink_text_color_hover',
 				)
@@ -2475,35 +2502,38 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_footer_general_title_2',
 				array(
-					'label'           => __( 'Image', 'paddle' ),
+					'label'           => __('Image', 'paddle'),
 					'section'         => 'paddle_footer_top',
 				)
 			)
 		);
 
 		// Footer Bg Image.
-		$wp_customize->add_setting( 'footer_bg_image',
+		$wp_customize->add_setting(
+			'footer_bg_image',
 			array(
 				'default' => $this->defaults['footer_bg_image'],
 				'transport' => 'refresh',
 				'sanitize_callback' => 'esc_url_raw'
 			)
 		);
-		$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'footer_bg_image',
+		$wp_customize->add_control(new WP_Customize_Image_Control(
+			$wp_customize,
+			'footer_bg_image',
 			array(
-				'label' => __( 'Background Image', 'paddle' ),
+				'label' => __('Background Image', 'paddle'),
 				'section' => 'paddle_footer_top',
 				'button_labels' => array(
-					'select' => __( 'Select Image', 'paddle' ),
-					'change' => __( 'Change Image', 'paddle' ),
-					'remove' => __( 'Remove', 'paddle' ),
-					'default' => __( 'Default', 'paddle' ),
-					'placeholder' => __( 'No image selected', 'paddle' ),
-					'frame_title' => __( 'Select Image', 'paddle' ),
-					'frame_button' => __( 'Choose Image', 'paddle' ),
+					'select' => __('Select Image', 'paddle'),
+					'change' => __('Change Image', 'paddle'),
+					'remove' => __('Remove', 'paddle'),
+					'default' => __('Default', 'paddle'),
+					'placeholder' => __('No image selected', 'paddle'),
+					'frame_title' => __('Select Image', 'paddle'),
+					'frame_button' => __('Choose Image', 'paddle'),
 				)
 			)
-		) );
+		));
 
 		//__ Bg Attachment
 		$wp_customize->add_setting(
@@ -2519,15 +2549,15 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'footer_bg_image_attachment',
 				array(
-					'label'           => __( 'Background Attachment', 'paddle' ),
+					'label'           => __('Background Attachment', 'paddle'),
 					'section'         => 'paddle_footer_top',
 					'input_attrs'     => array(
 						'fullwidth_label' => true,
 					),
 					'choices'         => array(
-						'fixed'        => __( 'Fixed', 'paddle' ),
-						'scroll'      => __( 'Scroll', 'paddle' ),
-						'inherit'        => __( 'Inherit', 'paddle' ),
+						'fixed'        => __('Fixed', 'paddle'),
+						'scroll'      => __('Scroll', 'paddle'),
+						'inherit'        => __('Inherit', 'paddle'),
 					),
 				)
 			)
@@ -2550,7 +2580,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'footer_bg_image_overlay',
 				array(
-					'label'           => __( 'Background Overlay', 'paddle' ),
+					'label'           => __('Background Overlay', 'paddle'),
 					'section'         => 'paddle_footer_top',
 					'settings'        => 'footer_bg_image_overlay',
 				)
@@ -2571,7 +2601,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'footer_bg_overlay_opacity',
 				array(
-					'label'           => __( 'Overlay Opacity', 'paddle' ),
+					'label'           => __('Overlay Opacity', 'paddle'),
 					'section'         => 'paddle_footer_top',
 					'input_attrs'     => array(
 						'min'  => 0,
@@ -2596,7 +2626,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_footer_general_title_3',
 				array(
-					'label'           => __( 'Widget', 'paddle' ),
+					'label'           => __('Widget', 'paddle'),
 					'section'         => 'paddle_footer_top',
 				)
 			)
@@ -2616,14 +2646,14 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'footer_widget_column',
 				array(
-					'label'           => __( 'Column', 'paddle' ),
+					'label'           => __('Column', 'paddle'),
 					'section'         => 'paddle_footer_top',
 					'description'	  => 'Select column where you want the block widget to appear.',
 					'choices'         => array(
-						'1' => __( 'Footer 1', 'paddle' ),
-						'2' => __( 'Footer 2', 'paddle' ),
-						'3' => __( 'Footer 3', 'paddle' ),
-						'4' => __( 'Footer 4', 'paddle' ),
+						'1' => __('Footer 1', 'paddle'),
+						'2' => __('Footer 2', 'paddle'),
+						'3' => __('Footer 3', 'paddle'),
+						'4' => __('Footer 4', 'paddle'),
 					),
 				)
 			)
@@ -2643,11 +2673,11 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'footer_widget_position',
 				array(
-					'label'           => __( 'Position', 'paddle' ),
+					'label'           => __('Position', 'paddle'),
 					'section'         => 'paddle_footer_top',
 					'choices'         => array(
-						'top' => __( 'Top', 'paddle' ),
-						'bottom' => __( 'Bottom', 'paddle' ),
+						'top' => __('Top', 'paddle'),
+						'bottom' => __('Bottom', 'paddle'),
 					),
 				)
 			)
@@ -2668,7 +2698,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_footer_general_title_4',
 				array(
-					'label'           => __( 'Social URLs', 'paddle' ),
+					'label'           => __('Social URLs', 'paddle'),
 					'section'         => 'paddle_footer_top',
 				)
 			)
@@ -2688,7 +2718,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_footer_social',
 				array(
-					'label'   => __( 'Enable', 'paddle' ),
+					'label'   => __('Enable', 'paddle'),
 					'section' => 'paddle_footer_top',
 				)
 			)
@@ -2708,11 +2738,11 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'footer_social_urls',
 				array(
-					'label'           => __( 'Social URLs', 'paddle' ),
-					'description'     => esc_html__( 'Add your social media links.', 'paddle' ),
+					'label'           => __('Social URLs', 'paddle'),
+					'description'     => esc_html__('Add your social media links.', 'paddle'),
 					'section'         => 'paddle_footer_top',
 					'button_labels'   => array(
-						'add' => __( 'Add Social Link', 'paddle' ),
+						'add' => __('Add Social Link', 'paddle'),
 					),
 					'active_callback' => 'paddle_footer_select_social',
 				)
@@ -2733,7 +2763,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'social_icon_width',
 				array(
-					'label'           => __( 'Icon Width', 'paddle' ),
+					'label'           => __('Icon Width', 'paddle'),
 					'section'         => 'paddle_footer_top',
 					'active_callback' => 'paddle_footer_select_social',
 					'input_attrs'     => array(
@@ -2759,17 +2789,17 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'footer_social_column',
 				array(
-					'label'           => __( 'Column', 'paddle' ),
+					'label'           => __('Column', 'paddle'),
 					'section'         => 'paddle_footer_top',
 					'active_callback' => 'paddle_footer_select_social',
 					'description'	  => 'Select the column where you want the social icons to appear. Default is at the bottom of page. ',
 					'choices'         => array(
-						'with-logo' => __( 'Logo Area', 'paddle' ),
-						'1' => __( 'Footer 1', 'paddle' ),
-						'2' => __( 'Footer 2', 'paddle' ),
-						'3' => __( 'Footer 3', 'paddle' ),
-						'4' => __( 'Footer 4', 'paddle' ),
-						'none' => __( 'Default', 'paddle' ),
+						'with-logo' => __('Logo Area', 'paddle'),
+						'1' => __('Footer 1', 'paddle'),
+						'2' => __('Footer 2', 'paddle'),
+						'3' => __('Footer 3', 'paddle'),
+						'4' => __('Footer 4', 'paddle'),
+						'none' => __('Default', 'paddle'),
 					),
 				)
 			)
@@ -2779,7 +2809,7 @@ class paddle_initialise_customizer_settings {
 
 		/*********************************************************************
 		 * footer_1
-		 */ 
+		 */
 
 		//___ Footer Header.
 		$wp_customize->add_setting(
@@ -2795,7 +2825,7 @@ class paddle_initialise_customizer_settings {
 			array(
 				'type'    => 'text',
 				'section' => 'paddle_footer_1',
-				'label'   => __( 'Header', 'paddle' ),
+				'label'   => __('Header', 'paddle'),
 			)
 		);
 
@@ -2813,7 +2843,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_footer_1_header_title_1',
 				array(
-					'label'           => __( 'Content', 'paddle' ),
+					'label'           => __('Content', 'paddle'),
 					'section'         => 'paddle_footer_1',
 				)
 			)
@@ -2833,15 +2863,15 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'footer_1_content_type',
 				array(
-					'label'           => __( 'Type', 'paddle' ),
+					'label'           => __('Type', 'paddle'),
 					'section'         => 'paddle_footer_1',
 					'input_attrs'     => array(
 						'fullwidth_label' => true,
 					),
 					'choices'         => array(
-						'menu'        => __( 'Menu', 'paddle' ),
-						'editor'      => __( 'Editor', 'paddle' ),
-						'html'        => __( 'HTML', 'paddle' ),
+						'menu'        => __('Menu', 'paddle'),
+						'editor'      => __('Editor', 'paddle'),
+						'html'        => __('HTML', 'paddle'),
 					),
 				)
 			)
@@ -2861,7 +2891,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'footer_1_menu_enable',
 				array(
-					'label'           => __( 'Menu', 'paddle' ),
+					'label'           => __('Menu', 'paddle'),
 					'section' => 'paddle_footer_1',
 					'active_callback' => 'paddle_footer_1_content_type_menu'
 				)
@@ -2869,21 +2899,23 @@ class paddle_initialise_customizer_settings {
 		);
 
 		// Footer (footer_1) Menu
-		$wp_customize->add_setting( 'footer_1_menu',
+		$wp_customize->add_setting(
+			'footer_1_menu',
 			array(
 				'default' => $this->defaults['footer_1_menu'],
 				'transport' => 'postMessage',
 				'sanitize_callback' => 'sanitize_text_field'
 			)
 		);
-		$wp_customize->add_control( new Paddle_Dropdown_Menu_Custom_Control( $wp_customize, 
+		$wp_customize->add_control(new Paddle_Dropdown_Menu_Custom_Control(
+			$wp_customize,
 			'footer_1_menu',
 			array(
-				'label' => __( 'Menu Slug', 'paddle' ),
+				'label' => __('Menu Slug', 'paddle'),
 				'section' => 'paddle_footer_1',
 				'active_callback' => 'paddle_footer_1_content_type_menu_enabled'
 			)
-		) );
+		));
 
 		//_____ Menu Column Count (footer_1).
 		$wp_customize->add_setting(
@@ -2899,7 +2931,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'footer_1_menu_count',
 				array(
-					'label'           => __( 'Column Count', 'paddle' ),
+					'label'           => __('Column Count', 'paddle'),
 					'section'         => 'paddle_footer_1',
 					'active_callback' => 'paddle_footer_1_content_type_menu_enabled',
 					'input_attrs'     => array(
@@ -2912,16 +2944,19 @@ class paddle_initialise_customizer_settings {
 		);
 
 		//___ Footer (footer_1) TinyMCE control
-		$wp_customize->add_setting( 'footer_1_editor',
-		array(
-			'default' => $this->defaults['footer_1_editor'],
-			'transport' => 'postMessage',
-			'sanitize_callback' => 'wp_kses_post'
-		)
-		);
-		$wp_customize->add_control( new Paddle_TinyMCE_Custom_control( $wp_customize, 'footer_1_editor',
+		$wp_customize->add_setting(
+			'footer_1_editor',
 			array(
-				'label' => __( 'Editor', 'paddle' ),
+				'default' => $this->defaults['footer_1_editor'],
+				'transport' => 'postMessage',
+				'sanitize_callback' => 'wp_kses_post'
+			)
+		);
+		$wp_customize->add_control(new Paddle_TinyMCE_Custom_control(
+			$wp_customize,
+			'footer_1_editor',
+			array(
+				'label' => __('Editor', 'paddle'),
 				'section' => 'paddle_footer_1',
 				'active_callback' => 'paddle_footer_1_content_type_editor',
 				'input_attrs' => array(
@@ -2929,7 +2964,7 @@ class paddle_initialise_customizer_settings {
 					'mediaButtons' => false,
 				)
 			)
-		) );
+		));
 
 		//___ Footer (footer_1) HTML.
 		$wp_customize->add_setting(
@@ -2945,8 +2980,8 @@ class paddle_initialise_customizer_settings {
 			array(
 				'section'     => 'paddle_footer_1',
 				'type'        => 'textarea',
-				'label'       => esc_html__( 'HTML', 'paddle' ),
-				'description' => esc_html__( 'See Allowed HTML tag lists.', 'paddle' ),
+				'label'       => esc_html__('HTML', 'paddle'),
+				'description' => esc_html__('See Allowed HTML tag lists.', 'paddle'),
 				'active_callback' => 'paddle_footer_1_content_type_html'
 			)
 		);
@@ -2965,12 +3000,12 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'footer_1_content_align',
 				array(
-					'label'           => __( 'Align', 'paddle' ),
+					'label'           => __('Align', 'paddle'),
 					'section'         => 'paddle_footer_1',
 					'choices'         => array(
-						'left'   => __( 'Left', 'paddle' ),
-						'center' => __( 'Center', 'paddle' ),
-						'right' => __( 'Right', 'paddle' ),
+						'left'   => __('Left', 'paddle'),
+						'center' => __('Center', 'paddle'),
+						'right' => __('Right', 'paddle'),
 					),
 				)
 			)
@@ -2990,7 +3025,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_footer_1_header_title_2',
 				array(
-					'label'           => __( 'Width Setting', 'paddle' ),
+					'label'           => __('Width Setting', 'paddle'),
 					'section'         => 'paddle_footer_1',
 				)
 			)
@@ -3011,14 +3046,14 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'footer_1_container_width',
 				array(
-					'label'           => __( 'Container Width', 'paddle' ),
+					'label'           => __('Container Width', 'paddle'),
 					'section'         => 'paddle_footer_1',
 					'choices'         => array(
-						'100' => __( '100%', 'paddle' ),
-						'66' => __( '66%', 'paddle' ),
-						'50' => __( '50%', 'paddle' ),
-						'33' => __( '33%', 'paddle' ),
-						'25'   => __( '25%', 'paddle' ),	
+						'100' => __('100%', 'paddle'),
+						'66' => __('66%', 'paddle'),
+						'50' => __('50%', 'paddle'),
+						'33' => __('33%', 'paddle'),
+						'25'   => __('25%', 'paddle'),
 					),
 				)
 			)
@@ -3026,7 +3061,7 @@ class paddle_initialise_customizer_settings {
 
 		/*********************************************************************
 		 * footer_2
-		 */ 
+		 */
 
 		//___ Footer Header.
 		$wp_customize->add_setting(
@@ -3042,7 +3077,7 @@ class paddle_initialise_customizer_settings {
 			array(
 				'type'    => 'text',
 				'section' => 'paddle_footer_2',
-				'label'   => __( 'Header', 'paddle' ),
+				'label'   => __('Header', 'paddle'),
 			)
 		);
 
@@ -3060,7 +3095,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_footer_2_header_title_1',
 				array(
-					'label'           => __( 'Content', 'paddle' ),
+					'label'           => __('Content', 'paddle'),
 					'section'         => 'paddle_footer_2',
 				)
 			)
@@ -3080,15 +3115,15 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'footer_2_content_type',
 				array(
-					'label'           => __( 'Type', 'paddle' ),
+					'label'           => __('Type', 'paddle'),
 					'section'         => 'paddle_footer_2',
 					'input_attrs'     => array(
 						'fullwidth_label' => true,
 					),
 					'choices'         => array(
-						'menu'        => __( 'Menu', 'paddle' ),
-						'editor'      => __( 'Editor', 'paddle' ),
-						'html'        => __( 'HTML', 'paddle' ),
+						'menu'        => __('Menu', 'paddle'),
+						'editor'      => __('Editor', 'paddle'),
+						'html'        => __('HTML', 'paddle'),
 					),
 				)
 			)
@@ -3108,7 +3143,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'footer_2_menu_enable',
 				array(
-					'label'           => __( 'Menu', 'paddle' ),
+					'label'           => __('Menu', 'paddle'),
 					'section' => 'paddle_footer_2',
 					'active_callback' => 'paddle_footer_2_content_type_menu'
 				)
@@ -3116,21 +3151,23 @@ class paddle_initialise_customizer_settings {
 		);
 
 		// Footer (footer_2) Menu
-		$wp_customize->add_setting( 'footer_2_menu',
+		$wp_customize->add_setting(
+			'footer_2_menu',
 			array(
 				'default' => $this->defaults['footer_2_menu'],
 				'transport' => 'postMessage',
 				'sanitize_callback' => 'sanitize_text_field'
 			)
 		);
-		$wp_customize->add_control( new Paddle_Dropdown_Menu_Custom_Control( $wp_customize, 
+		$wp_customize->add_control(new Paddle_Dropdown_Menu_Custom_Control(
+			$wp_customize,
 			'footer_2_menu',
 			array(
-				'label' => __( 'Menu Slug', 'paddle' ),
+				'label' => __('Menu Slug', 'paddle'),
 				'section' => 'paddle_footer_2',
 				'active_callback' => 'paddle_footer_2_content_type_menu_enabled'
 			)
-		) );
+		));
 
 		//_____ Menu Column Count (footer_2).
 		$wp_customize->add_setting(
@@ -3146,7 +3183,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'footer_2_menu_count',
 				array(
-					'label'           => __( 'Column Count', 'paddle' ),
+					'label'           => __('Column Count', 'paddle'),
 					'section'         => 'paddle_footer_2',
 					'active_callback' => 'paddle_footer_2_content_type_menu_enabled',
 					'input_attrs'     => array(
@@ -3159,16 +3196,19 @@ class paddle_initialise_customizer_settings {
 		);
 
 		//___ Footer (footer_2) TinyMCE control
-		$wp_customize->add_setting( 'footer_2_editor',
-		array(
-			'default' => $this->defaults['footer_2_editor'],
-			'transport' => 'postMessage',
-			'sanitize_callback' => 'wp_kses_post'
-		)
-		);
-		$wp_customize->add_control( new Paddle_TinyMCE_Custom_control( $wp_customize, 'footer_2_editor',
+		$wp_customize->add_setting(
+			'footer_2_editor',
 			array(
-				'label' => __( 'Editor', 'paddle' ),
+				'default' => $this->defaults['footer_2_editor'],
+				'transport' => 'postMessage',
+				'sanitize_callback' => 'wp_kses_post'
+			)
+		);
+		$wp_customize->add_control(new Paddle_TinyMCE_Custom_control(
+			$wp_customize,
+			'footer_2_editor',
+			array(
+				'label' => __('Editor', 'paddle'),
 				'section' => 'paddle_footer_2',
 				'active_callback' => 'paddle_footer_2_content_type_editor',
 				'input_attrs' => array(
@@ -3176,7 +3216,7 @@ class paddle_initialise_customizer_settings {
 					'mediaButtons' => false,
 				)
 			)
-		) );
+		));
 
 		//___ Footer (footer_2) HTML.
 		$wp_customize->add_setting(
@@ -3192,8 +3232,8 @@ class paddle_initialise_customizer_settings {
 			array(
 				'section'     => 'paddle_footer_2',
 				'type'        => 'textarea',
-				'label'       => esc_html__( 'HTML', 'paddle' ),
-				'description' => esc_html__( 'See Allowed HTML tag lists.', 'paddle' ),
+				'label'       => esc_html__('HTML', 'paddle'),
+				'description' => esc_html__('See Allowed HTML tag lists.', 'paddle'),
 				'active_callback' => 'paddle_footer_2_content_type_html'
 			)
 		);
@@ -3212,12 +3252,12 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'footer_2_content_align',
 				array(
-					'label'           => __( 'Align', 'paddle' ),
+					'label'           => __('Align', 'paddle'),
 					'section'         => 'paddle_footer_2',
 					'choices'         => array(
-						'left'   => __( 'Left', 'paddle' ),
-						'center' => __( 'Center', 'paddle' ),
-						'right' => __( 'Right', 'paddle' ),
+						'left'   => __('Left', 'paddle'),
+						'center' => __('Center', 'paddle'),
+						'right' => __('Right', 'paddle'),
 					),
 				)
 			)
@@ -3237,7 +3277,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_footer_2_header_title_2',
 				array(
-					'label'           => __( 'Width Setting', 'paddle' ),
+					'label'           => __('Width Setting', 'paddle'),
 					'section'         => 'paddle_footer_2',
 				)
 			)
@@ -3258,14 +3298,14 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'footer_2_container_width',
 				array(
-					'label'           => __( 'Container Width', 'paddle' ),
+					'label'           => __('Container Width', 'paddle'),
 					'section'         => 'paddle_footer_2',
 					'choices'         => array(
-						'100' => __( '100%', 'paddle' ),
-						'66' => __( '66%', 'paddle' ),
-						'50' => __( '50%', 'paddle' ),
-						'33' => __( '33%', 'paddle' ),
-						'25'   => __( '25%', 'paddle' ),	
+						'100' => __('100%', 'paddle'),
+						'66' => __('66%', 'paddle'),
+						'50' => __('50%', 'paddle'),
+						'33' => __('33%', 'paddle'),
+						'25'   => __('25%', 'paddle'),
 					),
 				)
 			)
@@ -3273,7 +3313,7 @@ class paddle_initialise_customizer_settings {
 
 		/*********************************************************************
 		 * footer_3
-		 */ 
+		 */
 
 		//___ Footer Header.
 		$wp_customize->add_setting(
@@ -3289,7 +3329,7 @@ class paddle_initialise_customizer_settings {
 			array(
 				'type'    => 'text',
 				'section' => 'paddle_footer_3',
-				'label'   => __( 'Header', 'paddle' ),
+				'label'   => __('Header', 'paddle'),
 			)
 		);
 
@@ -3307,7 +3347,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_footer_3_header_title_1',
 				array(
-					'label'           => __( 'Content', 'paddle' ),
+					'label'           => __('Content', 'paddle'),
 					'section'         => 'paddle_footer_3',
 				)
 			)
@@ -3327,15 +3367,15 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'footer_3_content_type',
 				array(
-					'label'           => __( 'Type', 'paddle' ),
+					'label'           => __('Type', 'paddle'),
 					'section'         => 'paddle_footer_3',
 					'input_attrs'     => array(
 						'fullwidth_label' => true,
 					),
 					'choices'         => array(
-						'menu'        => __( 'Menu', 'paddle' ),
-						'editor'      => __( 'Editor', 'paddle' ),
-						'html'        => __( 'HTML', 'paddle' ),
+						'menu'        => __('Menu', 'paddle'),
+						'editor'      => __('Editor', 'paddle'),
+						'html'        => __('HTML', 'paddle'),
 					),
 				)
 			)
@@ -3355,7 +3395,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'footer_3_menu_enable',
 				array(
-					'label'           => __( 'Menu', 'paddle' ),
+					'label'           => __('Menu', 'paddle'),
 					'section' => 'paddle_footer_3',
 					'active_callback' => 'paddle_footer_3_content_type_menu'
 				)
@@ -3363,21 +3403,23 @@ class paddle_initialise_customizer_settings {
 		);
 
 		// Footer (footer_3) Menu
-		$wp_customize->add_setting( 'footer_3_menu',
+		$wp_customize->add_setting(
+			'footer_3_menu',
 			array(
 				'default' => $this->defaults['footer_3_menu'],
 				'transport' => 'postMessage',
 				'sanitize_callback' => 'sanitize_text_field'
 			)
 		);
-		$wp_customize->add_control( new Paddle_Dropdown_Menu_Custom_Control( $wp_customize, 
+		$wp_customize->add_control(new Paddle_Dropdown_Menu_Custom_Control(
+			$wp_customize,
 			'footer_3_menu',
 			array(
-				'label' => __( 'Menu Slug', 'paddle' ),
+				'label' => __('Menu Slug', 'paddle'),
 				'section' => 'paddle_footer_3',
 				'active_callback' => 'paddle_footer_3_content_type_menu_enabled'
 			)
-		) );
+		));
 
 		//_____ Menu Column Count (footer_3).
 		$wp_customize->add_setting(
@@ -3393,7 +3435,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'footer_3_menu_count',
 				array(
-					'label'           => __( 'Column Count', 'paddle' ),
+					'label'           => __('Column Count', 'paddle'),
 					'section'         => 'paddle_footer_3',
 					'active_callback' => 'paddle_footer_3_content_type_menu_enabled',
 					'input_attrs'     => array(
@@ -3406,16 +3448,19 @@ class paddle_initialise_customizer_settings {
 		);
 
 		//___ Footer (footer_3) TinyMCE control
-		$wp_customize->add_setting( 'footer_3_editor',
-		array(
-			'default' => $this->defaults['footer_3_editor'],
-			'transport' => 'postMessage',
-			'sanitize_callback' => 'wp_kses_post'
-		)
-		);
-		$wp_customize->add_control( new Paddle_TinyMCE_Custom_control( $wp_customize, 'footer_3_editor',
+		$wp_customize->add_setting(
+			'footer_3_editor',
 			array(
-				'label' => __( 'Editor', 'paddle' ),
+				'default' => $this->defaults['footer_3_editor'],
+				'transport' => 'postMessage',
+				'sanitize_callback' => 'wp_kses_post'
+			)
+		);
+		$wp_customize->add_control(new Paddle_TinyMCE_Custom_control(
+			$wp_customize,
+			'footer_3_editor',
+			array(
+				'label' => __('Editor', 'paddle'),
 				'section' => 'paddle_footer_3',
 				'active_callback' => 'paddle_footer_3_content_type_editor',
 				'input_attrs' => array(
@@ -3423,7 +3468,7 @@ class paddle_initialise_customizer_settings {
 					'mediaButtons' => false,
 				)
 			)
-		) );
+		));
 
 		//___ Footer (footer_3) HTML.
 		$wp_customize->add_setting(
@@ -3439,8 +3484,8 @@ class paddle_initialise_customizer_settings {
 			array(
 				'section'     => 'paddle_footer_3',
 				'type'        => 'textarea',
-				'label'       => esc_html__( 'HTML', 'paddle' ),
-				'description' => esc_html__( 'See Allowed HTML tag lists.', 'paddle' ),
+				'label'       => esc_html__('HTML', 'paddle'),
+				'description' => esc_html__('See Allowed HTML tag lists.', 'paddle'),
 				'active_callback' => 'paddle_footer_3_content_type_html'
 			)
 		);
@@ -3459,12 +3504,12 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'footer_3_content_align',
 				array(
-					'label'           => __( 'Align', 'paddle' ),
+					'label'           => __('Align', 'paddle'),
 					'section'         => 'paddle_footer_3',
 					'choices'         => array(
-						'left'   => __( 'Left', 'paddle' ),
-						'center' => __( 'Center', 'paddle' ),
-						'right' => __( 'Right', 'paddle' ),
+						'left'   => __('Left', 'paddle'),
+						'center' => __('Center', 'paddle'),
+						'right' => __('Right', 'paddle'),
 					),
 				)
 			)
@@ -3484,7 +3529,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_footer_3_header_title_2',
 				array(
-					'label'           => __( 'Width Setting', 'paddle' ),
+					'label'           => __('Width Setting', 'paddle'),
 					'section'         => 'paddle_footer_3',
 				)
 			)
@@ -3505,14 +3550,14 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'footer_3_container_width',
 				array(
-					'label'           => __( 'Container Width', 'paddle' ),
+					'label'           => __('Container Width', 'paddle'),
 					'section'         => 'paddle_footer_3',
 					'choices'         => array(
-						'100' => __( '100%', 'paddle' ),
-						'66' => __( '66%', 'paddle' ),
-						'50' => __( '50%', 'paddle' ),
-						'33' => __( '33%', 'paddle' ),
-						'25'   => __( '25%', 'paddle' ),	
+						'100' => __('100%', 'paddle'),
+						'66' => __('66%', 'paddle'),
+						'50' => __('50%', 'paddle'),
+						'33' => __('33%', 'paddle'),
+						'25'   => __('25%', 'paddle'),
 					),
 				)
 			)
@@ -3520,7 +3565,7 @@ class paddle_initialise_customizer_settings {
 
 		/*********************************************************************
 		 * footer_4
-		 */ 
+		 */
 
 		//___ Footer Header.
 		$wp_customize->add_setting(
@@ -3536,7 +3581,7 @@ class paddle_initialise_customizer_settings {
 			array(
 				'type'    => 'text',
 				'section' => 'paddle_footer_4',
-				'label'   => __( 'Header', 'paddle' ),
+				'label'   => __('Header', 'paddle'),
 			)
 		);
 
@@ -3554,7 +3599,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_footer_4_header_title_1',
 				array(
-					'label'           => __( 'Content', 'paddle' ),
+					'label'           => __('Content', 'paddle'),
 					'section'         => 'paddle_footer_4',
 				)
 			)
@@ -3574,15 +3619,15 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'footer_4_content_type',
 				array(
-					'label'           => __( 'Type', 'paddle' ),
+					'label'           => __('Type', 'paddle'),
 					'section'         => 'paddle_footer_4',
 					'input_attrs'     => array(
 						'fullwidth_label' => true,
 					),
 					'choices'         => array(
-						'menu'        => __( 'Menu', 'paddle' ),
-						'editor'      => __( 'Editor', 'paddle' ),
-						'html'        => __( 'HTML', 'paddle' ),
+						'menu'        => __('Menu', 'paddle'),
+						'editor'      => __('Editor', 'paddle'),
+						'html'        => __('HTML', 'paddle'),
 					),
 				)
 			)
@@ -3602,7 +3647,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'footer_4_menu_enable',
 				array(
-					'label'           => __( 'Menu', 'paddle' ),
+					'label'           => __('Menu', 'paddle'),
 					'section' => 'paddle_footer_4',
 					'active_callback' => 'paddle_footer_4_content_type_menu'
 				)
@@ -3610,21 +3655,23 @@ class paddle_initialise_customizer_settings {
 		);
 
 		// Footer (footer_4) Menu
-		$wp_customize->add_setting( 'footer_4_menu',
+		$wp_customize->add_setting(
+			'footer_4_menu',
 			array(
 				'default' => $this->defaults['footer_4_menu'],
 				'transport' => 'postMessage',
 				'sanitize_callback' => 'sanitize_text_field'
 			)
 		);
-		$wp_customize->add_control( new Paddle_Dropdown_Menu_Custom_Control( $wp_customize, 
+		$wp_customize->add_control(new Paddle_Dropdown_Menu_Custom_Control(
+			$wp_customize,
 			'footer_4_menu',
 			array(
-				'label' => __( 'Menu Slug', 'paddle' ),
+				'label' => __('Menu Slug', 'paddle'),
 				'section' => 'paddle_footer_4',
 				'active_callback' => 'paddle_footer_4_content_type_menu_enabled'
 			)
-		) );
+		));
 
 		//_____ Menu Column Count (footer_4).
 		$wp_customize->add_setting(
@@ -3640,7 +3687,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'footer_4_menu_count',
 				array(
-					'label'           => __( 'Column Count', 'paddle' ),
+					'label'           => __('Column Count', 'paddle'),
 					'section'         => 'paddle_footer_4',
 					'active_callback' => 'paddle_footer_4_content_type_menu_enabled',
 					'input_attrs'     => array(
@@ -3653,16 +3700,19 @@ class paddle_initialise_customizer_settings {
 		);
 
 		//___ Footer (footer_4) TinyMCE control
-		$wp_customize->add_setting( 'footer_4_editor',
-		array(
-			'default' => $this->defaults['footer_4_editor'],
-			'transport' => 'postMessage',
-			'sanitize_callback' => 'wp_kses_post'
-		)
-		);
-		$wp_customize->add_control( new Paddle_TinyMCE_Custom_control( $wp_customize, 'footer_4_editor',
+		$wp_customize->add_setting(
+			'footer_4_editor',
 			array(
-				'label' => __( 'Editor', 'paddle' ),
+				'default' => $this->defaults['footer_4_editor'],
+				'transport' => 'postMessage',
+				'sanitize_callback' => 'wp_kses_post'
+			)
+		);
+		$wp_customize->add_control(new Paddle_TinyMCE_Custom_control(
+			$wp_customize,
+			'footer_4_editor',
+			array(
+				'label' => __('Editor', 'paddle'),
 				'section' => 'paddle_footer_4',
 				'active_callback' => 'paddle_footer_4_content_type_editor',
 				'input_attrs' => array(
@@ -3670,7 +3720,7 @@ class paddle_initialise_customizer_settings {
 					'mediaButtons' => false,
 				)
 			)
-		) );
+		));
 
 		//___ Footer (footer_4) HTML.
 		$wp_customize->add_setting(
@@ -3686,8 +3736,8 @@ class paddle_initialise_customizer_settings {
 			array(
 				'section'     => 'paddle_footer_4',
 				'type'        => 'textarea',
-				'label'       => esc_html__( 'HTML', 'paddle' ),
-				'description' => esc_html__( 'See Allowed HTML tag lists.', 'paddle' ),
+				'label'       => esc_html__('HTML', 'paddle'),
+				'description' => esc_html__('See Allowed HTML tag lists.', 'paddle'),
 				'active_callback' => 'paddle_footer_4_content_type_html'
 			)
 		);
@@ -3706,12 +3756,12 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'footer_4_content_align',
 				array(
-					'label'           => __( 'Align', 'paddle' ),
+					'label'           => __('Align', 'paddle'),
 					'section'         => 'paddle_footer_4',
 					'choices'         => array(
-						'left'   => __( 'Left', 'paddle' ),
-						'center' => __( 'Center', 'paddle' ),
-						'right' => __( 'Right', 'paddle' ),
+						'left'   => __('Left', 'paddle'),
+						'center' => __('Center', 'paddle'),
+						'right' => __('Right', 'paddle'),
 					),
 				)
 			)
@@ -3731,7 +3781,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_footer_4_header_title_2',
 				array(
-					'label'           => __( 'Width Setting', 'paddle' ),
+					'label'           => __('Width Setting', 'paddle'),
 					'section'         => 'paddle_footer_4',
 				)
 			)
@@ -3752,14 +3802,14 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'footer_4_container_width',
 				array(
-					'label'           => __( 'Container Width', 'paddle' ),
+					'label'           => __('Container Width', 'paddle'),
 					'section'         => 'paddle_footer_4',
 					'choices'         => array(
-						'100' => __( '100%', 'paddle' ),
-						'66' => __( '66%', 'paddle' ),
-						'50' => __( '50%', 'paddle' ),
-						'33' => __( '33%', 'paddle' ),
-						'25'   => __( '25%', 'paddle' ),	
+						'100' => __('100%', 'paddle'),
+						'66' => __('66%', 'paddle'),
+						'50' => __('50%', 'paddle'),
+						'33' => __('33%', 'paddle'),
+						'25'   => __('25%', 'paddle'),
 					),
 				)
 			)
@@ -3769,7 +3819,7 @@ class paddle_initialise_customizer_settings {
 		 * Bottom Footer
 		 ****************************************************/
 
-		 //__ Layout
+		//__ Layout
 		$wp_customize->add_setting(
 			'footer_bottom_layout',
 			array(
@@ -3783,11 +3833,11 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'footer_bottom_layout',
 				array(
-					'label'           => __( 'Layout', 'paddle' ),
+					'label'           => __('Layout', 'paddle'),
 					'section'         => 'paddle_footer_settings',
 					'choices'         => array(
-						'column'   => __( 'Columns', 'paddle' ),
-						'center' => __( 'Centered', 'paddle' ),
+						'column'   => __('Columns', 'paddle'),
+						'center' => __('Centered', 'paddle'),
 					),
 				)
 			)
@@ -3806,7 +3856,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_privacy_policy',
 				array(
-					'label'       => __( 'Privacy Policy', 'paddle' ),
+					'label'       => __('Privacy Policy', 'paddle'),
 					'section'     => 'paddle_footer_settings',
 				)
 			)
@@ -3826,9 +3876,9 @@ class paddle_initialise_customizer_settings {
 			array(
 				'settings'    => 'paddle_footer_copyright_text',
 				'section'     => 'paddle_footer_settings',
-				'description' => __( '<code>&#37;currentyear&#37;</code> to insert the current year (auto updates)<br /><code>&#37;copy&#37;</code> to insert the Copyright symbol<br /><code>&#37;reg&#37;</code> to insert the Registered symbol<br /><code>&#37;trade&#37;</code> to insert the Trademark symbol', 'paddle' ),
+				'description' => __('<code>&#37;currentyear&#37;</code> to insert the current year (auto updates)<br /><code>&#37;copy&#37;</code> to insert the Copyright symbol<br /><code>&#37;reg&#37;</code> to insert the Registered symbol<br /><code>&#37;trade&#37;</code> to insert the Trademark symbol', 'paddle'),
 				'type'        => 'textarea',
-				'label'       => esc_html__( 'Copyright Text', 'paddle' ),
+				'label'       => esc_html__('Copyright Text', 'paddle'),
 			)
 		);
 
@@ -3854,7 +3904,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'footer_bottom_border_top',
 				array(
-					'label'   => __( 'Border Top', 'paddle' ),
+					'label'   => __('Border Top', 'paddle'),
 					'section' => 'paddle_footer_settings',
 				)
 			)
@@ -3877,7 +3927,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'footer_bottom_bgcolor',
 				array(
-					'label'           => __( 'Background color', 'paddle' ),
+					'label'           => __('Background color', 'paddle'),
 					'section'         => 'paddle_footer_settings',
 					'settings'        => 'footer_bottom_bgcolor',
 				)
@@ -3898,7 +3948,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_footer_bottom_title_1',
 				array(
-					'label'           => __( 'Menu', 'paddle' ),
+					'label'           => __('Menu', 'paddle'),
 					'section'         => 'paddle_footer_settings',
 				)
 			)
@@ -3919,10 +3969,10 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'footer_urls',
 				array(
-					'label'           => __( 'Footer Menu', 'paddle' ),
+					'label'           => __('Footer Menu', 'paddle'),
 					'section'         => 'paddle_footer_settings',
 					'button_labels'   => array(
-						'add' => __( 'Add Link', 'paddle' ),
+						'add' => __('Add Link', 'paddle'),
 					),
 					'input_attrs'     => array(
 						'multiple_input' => true,
@@ -3945,11 +3995,11 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'footer_urls_position',
 				array(
-					'label'           => __( 'Menu Position', 'paddle' ),
+					'label'           => __('Menu Position', 'paddle'),
 					'section'         => 'paddle_footer_settings',
 					'choices'         => array(
-						'left'   => __( 'Left', 'paddle' ),
-						'right' => __( 'Right', 'paddle' ),
+						'left'   => __('Left', 'paddle'),
+						'right' => __('Right', 'paddle'),
 					),
 				)
 			)
@@ -3970,7 +4020,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_footer_bottom_title_2',
 				array(
-					'label'           => __( 'Payment Badge', 'paddle' ),
+					'label'           => __('Payment Badge', 'paddle'),
 					'section'         => 'paddle_footer_settings',
 					'active_callback' => 'paddle_is_woocommerce_active',
 				)
@@ -3992,7 +4042,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'enable_payment_badge',
 				array(
-					'label'   => __( 'Trust Image', 'paddle' ),
+					'label'   => __('Trust Image', 'paddle'),
 					'section' => 'paddle_footer_settings',
 					'active_callback' => 'paddle_is_woocommerce_active',
 				)
@@ -4013,28 +4063,31 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'payment_badge_source',
 				array(
-					'label'           => __( 'Source Image', 'paddle' ),
+					'label'           => __('Source Image', 'paddle'),
 					'section'         => 'paddle_footer_settings_premium',
 					'active_callback' => 'paddle_is_woocommerce_active',
 					'choices'         => array(
-						'image'   => __( 'Image', 'paddle' ),
-						'svg' => __( 'SVG', 'paddle' ),
+						'image'   => __('Image', 'paddle'),
+						'svg' => __('SVG', 'paddle'),
 					),
 				)
 			)
 		);
 
 		//_____ Cropped Image Control
-		$wp_customize->add_setting( 'payment_badge_image',
+		$wp_customize->add_setting(
+			'payment_badge_image',
 			array(
 				'default' => $this->defaults['payment_badge_image'],
 				'transport' => 'refresh',
 				'sanitize_callback' => 'absint'
 			)
 		);
-		$wp_customize->add_control( new WP_Customize_Cropped_Image_Control( $wp_customize, 'payment_badge_image',
+		$wp_customize->add_control(new WP_Customize_Cropped_Image_Control(
+			$wp_customize,
+			'payment_badge_image',
 			array(
-				'label' => __( 'Trust Seal Image', 'paddle' ),
+				'label' => __('Trust Seal Image', 'paddle'),
 				'section'         => 'paddle_footer_settings_premium',
 				'active_callback' => 'paddle_is_woocommerce_active',
 				'flex_width' => true,
@@ -4042,25 +4095,27 @@ class paddle_initialise_customizer_settings {
 				'width' => 500,
 				'height' => 100
 			)
-		) );
-		
+		));
+
 		//___ Textarea field for SVG list
-		$wp_customize->add_setting( 'payment_badge_textarea',
+		$wp_customize->add_setting(
+			'payment_badge_textarea',
 			array(
 				'default' => $this->defaults['payment_badge_textarea'],
 				'transport' => 'refresh',
 				'sanitize_callback' => 'wp_filter_nohtml_kses'
 			)
 		);
-		$wp_customize->add_control( 'payment_badge_textarea',
+		$wp_customize->add_control(
+			'payment_badge_textarea',
 			array(
-				'label' => __( 'Badge Icons', 'paddle' ),
+				'label' => __('Badge Icons', 'paddle'),
 				'section'         => 'paddle_footer_settings',
 				'active_callback' => 'paddle_is_woocommerce_active',
 				'type' => 'textarea',
 				'input_attrs' => array(
 					'class' => 'list-custom-class',
-					'placeholder' => __( 'master,paypal,visa', 'paddle' ),
+					'placeholder' => __('master,paypal,visa', 'paddle'),
 				),
 			)
 		);
@@ -4078,14 +4133,14 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'payment_badge_info',
 				array(
-					'label'           => __( 'Header 5.', 'paddle' ),
+					'label'           => __('Header 5.', 'paddle'),
 					'section'         => 'paddle_footer_settings',
-				'active_callback' => 'paddle_is_woocommerce_active',
+					'active_callback' => 'paddle_is_woocommerce_active',
 					'input_attrs'     => array(
 						'show_label' => false,
 						'show_desc'  => false,
 						'infos'      => array(
-							'info_1' => __( 'amazon_payments,american_express,apple_pay,bitcoin,dinners_club,discover,interac,google_pay,jcb,klarna,maestro,master,paypal,sofort,visa', 'paddle' ),
+							'info_1' => __('amazon_payments,american_express,apple_pay,bitcoin,dinners_club,discover,interac,google_pay,jcb,klarna,maestro,master,paypal,sofort,visa', 'paddle'),
 						),
 					),
 				)
@@ -4106,12 +4161,12 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'payment_badge_color',
 				array(
-					'label'           => __( 'Image Color', 'paddle' ),
+					'label'           => __('Image Color', 'paddle'),
 					'section'         => 'paddle_footer_settings',
 					'active_callback' => 'paddle_is_woocommerce_active',
 					'choices'         => array(
-						'gray'   => __( 'Gray', 'paddle' ),
-						'color' => __( 'Color', 'paddle' ),
+						'gray'   => __('Gray', 'paddle'),
+						'color' => __('Color', 'paddle'),
 					),
 				)
 			)
@@ -4132,7 +4187,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'payment_badge_image_h',
 				array(
-					'label'           => __( 'Height', 'paddle' ),
+					'label'           => __('Height', 'paddle'),
 					'section'         => 'paddle_footer_settings',
 					'active_callback' => 'paddle_is_woocommerce_active',
 					'input_attrs'     => array(
@@ -4158,13 +4213,13 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'footer_payment_badge_column',
 				array(
-					'label'           => __( 'Trust Icons Column', 'paddle' ),
+					'label'           => __('Trust Icons Column', 'paddle'),
 					'section'         => 'paddle_footer_settings',
 					'active_callback' => 'paddle_is_woocommerce_active',
 					'description'	  => 'Select the column where you want the payment icons to appear. Default is at the top. ',
 					'choices'         => array(
-						'top' => __( 'Top', 'paddle' ),
-						'bottom' => __( 'Bottom', 'paddle' ),
+						'top' => __('Top', 'paddle'),
+						'bottom' => __('Bottom', 'paddle'),
 					),
 				)
 			)
@@ -4186,7 +4241,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_theme_credit',
 				array(
-					'label'   => __( 'Theme Credit', 'paddle' ),
+					'label'   => __('Theme Credit', 'paddle'),
 					'section' => 'paddle_footer_settings',
 				)
 			)
@@ -4212,12 +4267,12 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'header_media_select',
 				array(
-					'label'   => __( 'Hero / Slider', 'paddle' ),
+					'label'   => __('Hero / Slider', 'paddle'),
 					'section' => 'paddle_hero_and_slider',
 					'choices' => array(
-						'hero'   => __( 'Hero', 'paddle' ),
-						'slider' => __( 'Slider', 'paddle' ),
-						'none'   => __( 'None', 'paddle' ),
+						'hero'   => __('Hero', 'paddle'),
+						'slider' => __('Slider', 'paddle'),
+						'none'   => __('None', 'paddle'),
 					),
 				)
 			)
@@ -4237,7 +4292,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'use_default_banner_image',
 				array(
-					'label'       => __( 'Use default banner image', 'paddle' ),
+					'label'       => __('Use default banner image', 'paddle'),
 					'section'     => 'paddle_hero_and_slider',
 					'description' => 'Use default background image if no image selected.',
 				)
@@ -4258,7 +4313,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'hero_image',
 				array(
-					'label'           => __( 'Upload Hero Image', 'paddle' ),
+					'label'           => __('Upload Hero Image', 'paddle'),
 					'section'         => 'paddle_hero_and_slider',
 					'active_callback' => 'header_media_selected_hero',
 					'flex_width'      => true,
@@ -4283,13 +4338,13 @@ class paddle_initialise_customizer_settings {
 			array(
 				'type'            => 'radio',
 				'section'         => 'paddle_hero_and_slider',
-				'label'           => esc_html__( 'Slider source', 'paddle' ),
-				'description'     => esc_html( 'Select posts to display' ),
+				'label'           => esc_html__('Slider source', 'paddle'),
+				'description'     => esc_html('Select posts to display'),
 				'active_callback' => 'header_media_selected_slider',
 				'choices'         => array(
-					'latest-post' => esc_html( 'Latest posts' ),
-					'post-ids'    => esc_html( 'Posts by Id' ),
-					'page'        => esc_html( 'Post from page' ),
+					'latest-post' => esc_html('Latest posts'),
+					'post-ids'    => esc_html('Posts by Id'),
+					'page'        => esc_html('Post from page'),
 				),
 			)
 		);
@@ -4307,8 +4362,8 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_control(
 			'paddle_slider_post_ids',
 			array(
-				'label'           => __( 'Enter post IDs separated by commas', 'paddle' ),
-				'description'     => __( 'Enter 3 post ids, each post ID should be separated by commas.', 'paddle' ),
+				'label'           => __('Enter post IDs separated by commas', 'paddle'),
+				'description'     => __('Enter 3 post ids, each post ID should be separated by commas.', 'paddle'),
 				'section'         => 'paddle_hero_and_slider',
 				'type'            => 'text',
 				'active_callback' => 'paddle_slider_pid_active',
@@ -4347,8 +4402,8 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_control(
 			'paddle_slider_page1',
 			array(
-				'label'           => __( 'Set slider page 1', 'paddle' ),
-				'description'     => __( 'Select a page from the dropdown below.', 'paddle' ),
+				'label'           => __('Set slider page 1', 'paddle'),
+				'description'     => __('Select a page from the dropdown below.', 'paddle'),
 				'section'         => 'paddle_hero_and_slider',
 				'type'            => 'dropdown-pages',
 				'active_callback' => 'paddle_slider_source_from_page_active',
@@ -4358,8 +4413,8 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_control(
 			'paddle_slider_page2',
 			array(
-				'label'           => __( 'Set slider page 2', 'paddle' ),
-				'description'     => __( 'Select a page from the dropdown below.', 'paddle' ),
+				'label'           => __('Set slider page 2', 'paddle'),
+				'description'     => __('Select a page from the dropdown below.', 'paddle'),
 				'section'         => 'paddle_hero_and_slider',
 				'type'            => 'dropdown-pages',
 				'active_callback' => 'paddle_slider_source_from_page_active',
@@ -4369,8 +4424,8 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_control(
 			'paddle_slider_page3',
 			array(
-				'label'           => __( 'Set slider page 3', 'paddle' ),
-				'description'     => __( 'Select a page from the dropdown below.', 'paddle' ),
+				'label'           => __('Set slider page 3', 'paddle'),
+				'description'     => __('Select a page from the dropdown below.', 'paddle'),
 				'section'         => 'paddle_hero_and_slider',
 				'type'            => 'dropdown-pages',
 				'active_callback' => 'paddle_slider_source_from_page_active',
@@ -4391,7 +4446,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_slider_custom_url',
 				array(
-					'label'           => __( 'Use custom link and button', 'paddle' ),
+					'label'           => __('Use custom link and button', 'paddle'),
 					'section'         => 'paddle_hero_and_slider',
 					'active_callback' => 'header_media_selected_slider',
 				)
@@ -4429,8 +4484,8 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_control(
 			'paddle_slider_button_text1',
 			array(
-				'label'           => __( 'Button 1', 'paddle' ),
-				'description'     => __( 'Enter text for the slide button 1', 'paddle' ),
+				'label'           => __('Button 1', 'paddle'),
+				'description'     => __('Enter text for the slide button 1', 'paddle'),
 				'section'         => 'paddle_hero_and_slider',
 				'type'            => 'text',
 				'active_callback' => 'paddle_banner_custom_link_active',
@@ -4440,8 +4495,8 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_control(
 			'paddle_slider_button_text2',
 			array(
-				'label'           => __( 'Button 2', 'paddle' ),
-				'description'     => __( 'Enter text for the slide button 2', 'paddle' ),
+				'label'           => __('Button 2', 'paddle'),
+				'description'     => __('Enter text for the slide button 2', 'paddle'),
 				'section'         => 'paddle_hero_and_slider',
 				'type'            => 'text',
 				'active_callback' => 'paddle_banner_custom_link_active',
@@ -4451,8 +4506,8 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_control(
 			'paddle_slider_button_text3',
 			array(
-				'label'           => __( 'Button 3', 'paddle' ),
-				'description'     => __( 'Enter text for the slide button 3', 'paddle' ),
+				'label'           => __('Button 3', 'paddle'),
+				'description'     => __('Enter text for the slide button 3', 'paddle'),
 				'section'         => 'paddle_hero_and_slider',
 				'type'            => 'text',
 				'active_callback' => 'paddle_banner_custom_link_active',
@@ -4489,8 +4544,8 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_control(
 			'paddle_slider_button_url1',
 			array(
-				'label'           => __( 'URL 1', 'paddle' ),
-				'description'     => __( 'Enter link for slide 1', 'paddle' ),
+				'label'           => __('URL 1', 'paddle'),
+				'description'     => __('Enter link for slide 1', 'paddle'),
 				'section'         => 'paddle_hero_and_slider',
 				'type'            => 'url',
 				'active_callback' => 'paddle_banner_custom_link_active',
@@ -4500,8 +4555,8 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_control(
 			'paddle_slider_button_url2',
 			array(
-				'label'           => __( 'URL 2', 'paddle' ),
-				'description'     => __( 'Enter link for slide 2', 'paddle' ),
+				'label'           => __('URL 2', 'paddle'),
+				'description'     => __('Enter link for slide 2', 'paddle'),
 				'section'         => 'paddle_hero_and_slider',
 				'type'            => 'url',
 				'active_callback' => 'paddle_banner_custom_link_active',
@@ -4511,8 +4566,8 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_control(
 			'paddle_slider_button_url3',
 			array(
-				'label'           => __( 'URL 3', 'paddle' ),
-				'description'     => __( 'Enter link for slide 3', 'paddle' ),
+				'label'           => __('URL 3', 'paddle'),
+				'description'     => __('Enter link for slide 3', 'paddle'),
 				'section'         => 'paddle_hero_and_slider',
 				'type'            => 'url',
 				'active_callback' => 'paddle_banner_custom_link_active',
@@ -4533,7 +4588,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'header_media_height',
 				array(
-					'label'       => __( 'Banner Height', 'paddle' ),
+					'label'       => __('Banner Height', 'paddle'),
 					'section'     => 'paddle_hero_and_slider',
 					'input_attrs' => array(
 						'min'  => 20,
@@ -4560,8 +4615,8 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'banner_overlay_opacity',
 				array(
-					'label'       => __( 'Image Overlay', 'paddle' ),
-					'description' => __( 'Adjust the image overlay opacity', 'paddle' ),
+					'label'       => __('Image Overlay', 'paddle'),
+					'description' => __('Adjust the image overlay opacity', 'paddle'),
 					'section'     => 'paddle_hero_and_slider',
 					'input_attrs' => array(
 						'min'  => 0,
@@ -4588,12 +4643,12 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'banner_align_position',
 				array(
-					'label'   => __( 'Content Container Align', 'paddle' ),
+					'label'   => __('Content Container Align', 'paddle'),
 					'section' => 'paddle_hero_and_slider',
 					'choices' => array(
-						'left'  => __( 'Left', 'paddle' ),
-						'none'  => __( 'Center', 'paddle' ),
-						'right' => __( 'Right', 'paddle' ),
+						'left'  => __('Left', 'paddle'),
+						'none'  => __('Center', 'paddle'),
+						'right' => __('Right', 'paddle'),
 					),
 				)
 			)
@@ -4615,12 +4670,12 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'banner_content_align',
 				array(
-					'label'   => __( 'Content Align', 'paddle' ),
+					'label'   => __('Content Align', 'paddle'),
 					'section' => 'paddle_hero_and_slider',
 					'choices' => array(
-						'left'   => __( 'Left', 'paddle' ),
-						'center' => __( 'Center', 'paddle' ),
-						'right'  => __( 'Right', 'paddle' ),
+						'left'   => __('Left', 'paddle'),
+						'center' => __('Center', 'paddle'),
+						'right'  => __('Right', 'paddle'),
 					),
 				)
 			)
@@ -4642,7 +4697,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_banner_header_color',
 				array(
-					'label'    => __( 'Text Color', 'paddle' ),
+					'label'    => __('Text Color', 'paddle'),
 					'section'  => 'paddle_hero_and_slider',
 					'settings' => 'paddle_banner_header_color',
 				)
@@ -4663,7 +4718,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_enable_banner_bgcolor',
 				array(
-					'label'   => __( 'Background Color', 'paddle' ),
+					'label'   => __('Background Color', 'paddle'),
 					'section' => 'paddle_hero_and_slider',
 				)
 			)
@@ -4686,7 +4741,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_banner_header_bg_color',
 				array(
-					'label'           => __( 'Select Background Color', 'paddle' ),
+					'label'           => __('Select Background Color', 'paddle'),
 					'section'         => 'paddle_hero_and_slider',
 					'settings'        => 'paddle_banner_header_bg_color',
 					'active_callback' => 'paddle_banner_bgcolor_active',
@@ -4708,7 +4763,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'banner_content_bg_opacity',
 				array(
-					'label'           => __( 'Background Opacity', 'paddle' ),
+					'label'           => __('Background Opacity', 'paddle'),
 					'section'         => 'paddle_hero_and_slider',
 					'active_callback' => 'paddle_banner_bgcolor_active',
 					'input_attrs'     => array(
@@ -4734,7 +4789,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_banner_border_radius',
 				array(
-					'label'           => __( 'Border Radius', 'paddle' ),
+					'label'           => __('Border Radius', 'paddle'),
 					'section'         => 'paddle_hero_and_slider',
 					'active_callback' => 'paddle_banner_bgcolor_active',
 				)
@@ -4755,7 +4810,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_banner_box_shadow',
 				array(
-					'label'           => __( 'Border Box Shadow', 'paddle' ),
+					'label'           => __('Border Box Shadow', 'paddle'),
 					'section'         => 'paddle_hero_and_slider',
 					'active_callback' => 'paddle_banner_bgcolor_active',
 				)
@@ -4766,7 +4821,7 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_setting(
 			'header_banner_title',
 			array(
-				'default'           => __( 'Build Your Dream Website with Paddle', 'paddle' ),
+				'default'           => __('Build Your Dream Website with Paddle', 'paddle'),
 				'sanitize_callback' => 'sanitize_text_field',
 
 			)
@@ -4776,7 +4831,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'header_banner_title',
 				array(
-					'label'           => __( 'Banner Title', 'paddle' ),
+					'label'           => __('Banner Title', 'paddle'),
 					'section'         => 'paddle_hero_and_slider',
 					'settings'        => 'header_banner_title',
 					'type'            => 'text',
@@ -4789,7 +4844,7 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_setting(
 			'header_banner_description',
 			array(
-				'default'           => __( 'Let\'s improve the way you see business.', 'paddle' ),
+				'default'           => __('Let\'s improve the way you see business.', 'paddle'),
 				'sanitize_callback' => 'sanitize_text_field',
 			)
 		);
@@ -4799,7 +4854,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'header_banner_description',
 				array(
-					'label'           => __( 'Banner description', 'paddle' ),
+					'label'           => __('Banner description', 'paddle'),
 					'section'         => 'paddle_hero_and_slider',
 					'settings'        => 'header_banner_description',
 					'type'            => 'text',
@@ -4812,7 +4867,7 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_setting(
 			'header_banner_button_1',
 			array(
-				'default'           => __( 'Learn More', 'paddle' ),
+				'default'           => __('Learn More', 'paddle'),
 				'sanitize_callback' => 'sanitize_text_field',
 			)
 		);
@@ -4822,7 +4877,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'header_banner_button_1',
 				array(
-					'label'           => __( 'Button 1 Label', 'paddle' ),
+					'label'           => __('Button 1 Label', 'paddle'),
 					'section'         => 'paddle_hero_and_slider',
 					'settings'        => 'header_banner_button_1',
 					'type'            => 'text',
@@ -4844,7 +4899,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'header_banner_button_1_link',
 				array(
-					'label'           => __( 'Button 1 URL Link', 'paddle' ),
+					'label'           => __('Button 1 URL Link', 'paddle'),
 					'section'         => 'paddle_hero_and_slider',
 					'settings'        => 'header_banner_button_1_link',
 					'type'            => 'url',
@@ -4866,7 +4921,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'header_banner_button_2',
 				array(
-					'label'           => __( 'Button 2 Label', 'paddle' ),
+					'label'           => __('Button 2 Label', 'paddle'),
 					'section'         => 'paddle_hero_and_slider',
 					'settings'        => 'header_banner_button_2',
 					'type'            => 'text',
@@ -4888,7 +4943,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'header_banner_button_2_link',
 				array(
-					'label'           => __( 'Button 2 URL Link', 'paddle' ),
+					'label'           => __('Button 2 URL Link', 'paddle'),
 					'section'         => 'paddle_hero_and_slider',
 					'settings'        => 'header_banner_button_2_link',
 					'type'            => 'url',
@@ -4911,12 +4966,12 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'banner_button_align',
 				array(
-					'label'   => __( 'Button Position', 'paddle' ),
+					'label'   => __('Button Position', 'paddle'),
 					'section' => 'paddle_hero_and_slider',
 					'choices' => array(
-						'left'   => __( 'Left', 'paddle' ),
-						'center' => __( 'Center', 'paddle' ),
-						'right'  => __( 'Right', 'paddle' ),
+						'left'   => __('Left', 'paddle'),
+						'center' => __('Center', 'paddle'),
+						'right'  => __('Right', 'paddle'),
 					),
 				)
 			)
@@ -4936,12 +4991,12 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'banner_button_transform',
 				array(
-					'label'   => __( 'Text Transform', 'paddle' ),
+					'label'   => __('Text Transform', 'paddle'),
 					'section' => 'paddle_hero_and_slider',
 					'choices' => array(
-						'uppercase'  => __( 'Uppercase', 'paddle' ),
-						'capitalize' => __( 'Capitalize', 'paddle' ),
-						'none'       => __( 'None', 'paddle' ),
+						'uppercase'  => __('Uppercase', 'paddle'),
+						'capitalize' => __('Capitalize', 'paddle'),
+						'none'       => __('None', 'paddle'),
 					),
 				)
 			)
@@ -4961,7 +5016,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'banner_arrow_button',
 				array(
-					'label'   => __( 'Arrow Button', 'paddle' ),
+					'label'   => __('Arrow Button', 'paddle'),
 					'section' => 'paddle_hero_and_slider',
 				)
 			)
@@ -4981,8 +5036,8 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_enable_content_over_banner',
 				array(
-					'description'     => __( 'This will move the content up close to the banner. It can be adjusted below.', 'paddle' ),
-					'label'           => __( 'Shift Content Up', 'paddle' ),
+					'description'     => __('This will move the content up close to the banner. It can be adjusted below.', 'paddle'),
+					'label'           => __('Shift Content Up', 'paddle'),
 					'section'         => 'paddle_hero_and_slider',
 					'active_callback' => 'header_media_selected_hero',
 				)
@@ -5003,8 +5058,8 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'content_over_banner_position',
 				array(
-					'description' => __( 'If the banner covers the button, try increase or decrease the position of the content for better result.', 'paddle' ),
-					'label'       => __( 'Adjust content over banner position', 'paddle' ),
+					'description' => __('If the banner covers the button, try increase or decrease the position of the content for better result.', 'paddle'),
+					'label'       => __('Adjust content over banner position', 'paddle'),
 					'section'     => 'paddle_hero_and_slider',
 					'input_attrs' => array(
 						'min'  => 10,
@@ -5032,12 +5087,12 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'custom_container',
 				array(
-					'label'           => __( 'Content Width', 'paddle' ),
+					'label'           => __('Content Width', 'paddle'),
 					'section'         => 'paddle_theme_site_layout',
 					'type'            => 'select',
 					'choices'         => array(
-						'default' => __( 'Default', 'paddle' ),
-						'custom'  => __( 'Custom', 'paddle' ),
+						'default' => __('Default', 'paddle'),
+						'custom'  => __('Custom', 'paddle'),
 					),
 				)
 			)
@@ -5058,7 +5113,7 @@ class paddle_initialise_customizer_settings {
 				'paddle_theme_content_width',
 				array(
 					'section'         => 'paddle_theme_site_layout',
-					'label'           => __( 'Custom Width', 'paddle' ),
+					'label'           => __('Custom Width', 'paddle'),
 					'active_callback' => 'paddle_selected_custom_width',
 					'input_attrs'     => array(
 						'min'  => 300,
@@ -5082,16 +5137,16 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_sidebar_position_home',
 				array(
-					'label'           => __( 'Home', 'paddle' ),
+					'label'           => __('Home', 'paddle'),
 					'section'         => 'paddle_theme_site_layout',
 					'choices'         => array(
 						'no-sidebar'    => array(
-							'image' => trailingslashit( get_template_directory_uri() ) . 'inc/customizer/images/sidebar-none.png',
-							'name'  => __( 'No Sidebar', 'paddle' ),
+							'image' => trailingslashit(get_template_directory_uri()) . 'inc/customizer/images/sidebar-none.png',
+							'name'  => __('No Sidebar', 'paddle'),
 						),
 						'right-sidebar' => array(
-							'image' => trailingslashit( get_template_directory_uri() ) . 'inc/customizer/images/sidebar-right.png',
-							'name'  => __( 'Right Sidebar', 'paddle' ),
+							'image' => trailingslashit(get_template_directory_uri()) . 'inc/customizer/images/sidebar-right.png',
+							'name'  => __('Right Sidebar', 'paddle'),
 						),
 					),
 				)
@@ -5111,16 +5166,16 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_sidebar_position_page',
 				array(
-					'label'           => __( 'Page', 'paddle' ),
+					'label'           => __('Page', 'paddle'),
 					'section'         => 'paddle_theme_site_layout',
 					'choices'         => array(
 						'no-sidebar'    => array(
-							'image' => trailingslashit( get_template_directory_uri() ) . 'inc/customizer/images/sidebar-none.png',
-							'name'  => __( 'No Sidebar', 'paddle' ),
+							'image' => trailingslashit(get_template_directory_uri()) . 'inc/customizer/images/sidebar-none.png',
+							'name'  => __('No Sidebar', 'paddle'),
 						),
 						'right-sidebar' => array(
-							'image' => trailingslashit( get_template_directory_uri() ) . 'inc/customizer/images/sidebar-right.png',
-							'name'  => __( 'Right Sidebar', 'paddle' ),
+							'image' => trailingslashit(get_template_directory_uri()) . 'inc/customizer/images/sidebar-right.png',
+							'name'  => __('Right Sidebar', 'paddle'),
 						),
 					),
 				)
@@ -5140,16 +5195,16 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_sidebar_position',
 				array(
-					'label'           => __( 'Blog', 'paddle' ),
+					'label'           => __('Blog', 'paddle'),
 					'section'         => 'paddle_theme_site_layout',
 					'choices'         => array(
 						'no-sidebar'    => array(
-							'image' => trailingslashit( get_template_directory_uri() ) . 'inc/customizer/images/sidebar-none.png',
-							'name'  => __( 'No Sidebar', 'paddle' ),
+							'image' => trailingslashit(get_template_directory_uri()) . 'inc/customizer/images/sidebar-none.png',
+							'name'  => __('No Sidebar', 'paddle'),
 						),
 						'right-sidebar' => array(
-							'image' => trailingslashit( get_template_directory_uri() ) . 'inc/customizer/images/sidebar-right.png',
-							'name'  => __( 'Right Sidebar', 'paddle' ),
+							'image' => trailingslashit(get_template_directory_uri()) . 'inc/customizer/images/sidebar-right.png',
+							'name'  => __('Right Sidebar', 'paddle'),
 						),
 					),
 				)
@@ -5170,16 +5225,16 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_sidebar_position_archive',
 				array(
-					'label'           => __( 'Archive', 'paddle' ),
+					'label'           => __('Archive', 'paddle'),
 					'section'         => 'paddle_theme_site_layout',
 					'choices'         => array(
 						'no-sidebar'    => array(
-							'image' => trailingslashit( get_template_directory_uri() ) . 'inc/customizer/images/sidebar-none.png',
-							'name'  => __( 'No Sidebar', 'paddle' ),
+							'image' => trailingslashit(get_template_directory_uri()) . 'inc/customizer/images/sidebar-none.png',
+							'name'  => __('No Sidebar', 'paddle'),
 						),
 						'right-sidebar' => array(
-							'image' => trailingslashit( get_template_directory_uri() ) . 'inc/customizer/images/sidebar-right.png',
-							'name'  => __( 'Right Sidebar', 'paddle' ),
+							'image' => trailingslashit(get_template_directory_uri()) . 'inc/customizer/images/sidebar-right.png',
+							'name'  => __('Right Sidebar', 'paddle'),
 						),
 					),
 				)
@@ -5206,20 +5261,20 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'title_options_blog',
 				array(
-					'label'   => __( 'General', 'paddle' ),
+					'label'   => __('General', 'paddle'),
 					'section' => 'paddle_blog_post',
 					'type'    => 'select',
 					'choices' => array(
-						'general' => __( 'General', 'paddle' ),
-						'design'  => __( 'Design', 'paddle' ),
+						'general' => __('General', 'paddle'),
+						'design'  => __('Design', 'paddle'),
 					),
 				)
 			)
 		);
 
-		
 
-		
+
+
 		// Header
 		$wp_customize->add_setting(
 			'paddle_blog_section_header_1',
@@ -5234,7 +5289,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_blog_section_header_1',
 				array(
-					'label'           => __( 'Post Structure', 'paddle' ),
+					'label'           => __('Post Structure', 'paddle'),
 					'section'         => 'paddle_blog_post',
 					'active_callback' => 'paddle_blog_general_archive_selected',
 				)
@@ -5250,14 +5305,14 @@ class paddle_initialise_customizer_settings {
 			)
 		);
 
-		if ( class_exists( 'WooCommerce' ) ) {
+		if (class_exists('WooCommerce')) {
 
 			$wp_customize->add_control(
 				new Paddle_Toggle_Switch_Custom_control(
 					$wp_customize,
 					'paddle_remove_woo_single_sidebar',
 					array(
-						'label'   => __( 'WooCommerce Product Sidebar', 'paddle' ),
+						'label'   => __('WooCommerce Product Sidebar', 'paddle'),
 						'section' => 'paddle_blog_post',
 					)
 				)
@@ -5278,7 +5333,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'enable_archive_featured_image',
 				array(
-					'label'           => __( 'Featured Image', 'paddle' ),
+					'label'           => __('Featured Image', 'paddle'),
 					'section'         => 'paddle_blog_post',
 					'active_callback' => 'paddle_blog_general_archive_selected',
 				)
@@ -5299,7 +5354,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_blog_section_header_2',
 				array(
-					'label'           => __( 'Meta', 'paddle' ),
+					'label'           => __('Meta', 'paddle'),
 					'section'         => 'paddle_blog_post',
 					'active_callback' => 'paddle_blog_general_archive_selected',
 				)
@@ -5320,7 +5375,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_enable_archive_author',
 				array(
-					'label'           => __( 'Author', 'paddle' ),
+					'label'           => __('Author', 'paddle'),
 					'section'         => 'paddle_blog_post',
 					'active_callback' => 'paddle_blog_general_archive_selected',
 				)
@@ -5340,7 +5395,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_enable_archive_category',
 				array(
-					'label'           => __( 'Category', 'paddle' ),
+					'label'           => __('Category', 'paddle'),
 					'section'         => 'paddle_blog_post',
 					'active_callback' => 'paddle_blog_general_archive_selected',
 				)
@@ -5361,7 +5416,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_enable_archive_comment',
 				array(
-					'label'           => __( 'Comment', 'paddle' ),
+					'label'           => __('Comment', 'paddle'),
 					'section'         => 'paddle_blog_post',
 					'active_callback' => 'paddle_blog_general_archive_selected',
 				)
@@ -5382,7 +5437,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_enable_archive_published_date',
 				array(
-					'label'           => __( 'Publish Date', 'paddle' ),
+					'label'           => __('Publish Date', 'paddle'),
 					'section'         => 'paddle_blog_post',
 					'active_callback' => 'paddle_blog_general_archive_selected',
 				)
@@ -5403,7 +5458,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_enable_archive_tag',
 				array(
-					'label'           => __( 'Tag', 'paddle' ),
+					'label'           => __('Tag', 'paddle'),
 					'section'         => 'paddle_blog_post',
 					'active_callback' => 'paddle_blog_general_archive_selected',
 				)
@@ -5424,78 +5479,78 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_blog_section_header_3',
 				array(
-					'label'           => __( 'Post Content', 'paddle' ),
+					'label'           => __('Post Content', 'paddle'),
 					'section'         => 'paddle_blog_post',
 					'active_callback' => 'paddle_blog_general_archive_selected',
 				)
 			)
 		);
 
-			/** Blog Excerpt */
-			$wp_customize->add_setting(
+		/** Blog Excerpt */
+		$wp_customize->add_setting(
+			'enable_blog_excerpt',
+			array(
+				'default'           => $this->defaults['enable_blog_excerpt'],
+				'sanitize_callback' => 'paddle_switch_sanitization',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Paddle_Toggle_Switch_Custom_control(
+				$wp_customize,
 				'enable_blog_excerpt',
 				array(
-					'default'           => $this->defaults['enable_blog_excerpt'],
-					'sanitize_callback' => 'paddle_switch_sanitization',
+					'section'         => 'paddle_blog_post',
+					'label'           => __('Excerpt', 'paddle'),
+					'active_callback' => 'paddle_blog_general_archive_selected',
 				)
-			);
+			)
+		);
 
-			$wp_customize->add_control(
-				new Paddle_Toggle_Switch_Custom_control(
-					$wp_customize,
-					'enable_blog_excerpt',
-					array(
-						'section'         => 'paddle_blog_post',
-						'label'           => __( 'Excerpt', 'paddle' ),
-						'active_callback' => 'paddle_blog_general_archive_selected',
-					)
-				)
-			);
+		// Excerpt Length.
+		$wp_customize->add_setting(
+			'excerpt_length',
+			array(
+				'default'           => $this->defaults['excerpt_length'],
+				'sanitize_callback' => 'absint',
+			)
+		);
 
-			// Excerpt Length.
-			$wp_customize->add_setting(
+		$wp_customize->add_control(
+			new Paddle_Slider_Custom_Control(
+				$wp_customize,
 				'excerpt_length',
 				array(
-					'default'           => $this->defaults['excerpt_length'],
-					'sanitize_callback' => 'absint',
-				)
-			);
-
-			$wp_customize->add_control(
-				new Paddle_Slider_Custom_Control(
-					$wp_customize,
-					'excerpt_length',
-					array(
-						'section'         => 'paddle_blog_post',
-						'label'           => __( 'Excerpt Length', 'paddle' ),
-						'active_callback' => 'paddle_blog_general_archive_selected_excerpt_enabled',
-						'input_attrs'     => array(
-							'min'  => 10,
-							'max'  => 100,
-							'step' => 5,
-						),
-					)
-				)
-			);
-
-			// Read More Text.
-			$wp_customize->add_setting(
-				'read_more_text',
-				array(
-					'default'           => __( 'Continue reading', 'paddle' ),
-					'sanitize_callback' => 'sanitize_text_field',
-				)
-			);
-
-			$wp_customize->add_control(
-				'read_more_text',
-				array(
-					'type'            => 'text',
 					'section'         => 'paddle_blog_post',
+					'label'           => __('Excerpt Length', 'paddle'),
 					'active_callback' => 'paddle_blog_general_archive_selected_excerpt_enabled',
-					'label'           => __( 'Read More Text', 'paddle' ),
+					'input_attrs'     => array(
+						'min'  => 10,
+						'max'  => 100,
+						'step' => 5,
+					),
 				)
-			);
+			)
+		);
+
+		// Read More Text.
+		$wp_customize->add_setting(
+			'read_more_text',
+			array(
+				'default'           => __('Continue reading', 'paddle'),
+				'sanitize_callback' => 'sanitize_text_field',
+			)
+		);
+
+		$wp_customize->add_control(
+			'read_more_text',
+			array(
+				'type'            => 'text',
+				'section'         => 'paddle_blog_post',
+				'active_callback' => 'paddle_blog_general_archive_selected_excerpt_enabled',
+				'label'           => __('Read More Text', 'paddle'),
+			)
+		);
 
 		// Toggle layout.
 		$wp_customize->add_setting(
@@ -5511,13 +5566,13 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'post_archive_layout',
 				array(
-					'label'           => __( 'Archive Blog Layout', 'paddle' ),
+					'label'           => __('Archive Blog Layout', 'paddle'),
 					'section'         => 'paddle_blog_post',
 					'type'            => 'select',
 					'active_callback' => 'paddle_blog_design_archive_selected',
 					'choices'         => array(
-						'grid' => __( 'Grid', 'paddle' ),
-						'list' => __( 'List', 'paddle' ),
+						'grid' => __('Grid', 'paddle'),
+						'list' => __('List', 'paddle'),
 					),
 				)
 			)
@@ -5536,13 +5591,13 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_grid_columns',
 				array(
-					'label'           => __( 'Archive Columns', 'paddle' ),
+					'label'           => __('Archive Columns', 'paddle'),
 					'section'         => 'paddle_blog_post',
 					'type'            => 'select',
 					'active_callback' => 'paddle_blog_design_archive_selected_grid_selected',
 					'choices'         => array(
-						'2-columns' => __( '2 Columns', 'paddle' ),
-						'3-columns' => __( '3 Columns', 'paddle' ),
+						'2-columns' => __('2 Columns', 'paddle'),
+						'3-columns' => __('3 Columns', 'paddle'),
 					),
 				)
 			)
@@ -5562,7 +5617,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'enable_image_before_site_title',
 				array(
-					'label'           => __( 'Image before title', 'paddle' ),
+					'label'           => __('Image before title', 'paddle'),
 					'section'         => 'paddle_blog_post',
 					'active_callback' => 'paddle_blog_design_archive_selected_grid_selected',
 				)
@@ -5584,7 +5639,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_enable_author_bio',
 				array(
-					'label'           => __( 'Author', 'paddle' ),
+					'label'           => __('Author', 'paddle'),
 					'section'         => 'paddle_post_and_single',
 					'active_callback' => 'paddle_blog_design_archive_selected',
 				)
@@ -5605,7 +5660,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'enable_same_height_image',
 				array(
-					'label'           => __( 'Same Height Grid', 'paddle' ),
+					'label'           => __('Same Height Grid', 'paddle'),
 					'section'         => 'paddle_blog_post',
 					'active_callback' => 'paddle_blog_design_archive_selected_grid_selected',
 				)
@@ -5626,7 +5681,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_expand_grid_image',
 				array(
-					'label'           => __( 'Full Width Image', 'paddle' ),
+					'label'           => __('Full Width Image', 'paddle'),
 					'section'         => 'paddle_blog_post',
 					'active_callback' => 'paddle_blog_design_archive_selected_grid_selected',
 				)
@@ -5647,14 +5702,14 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_placeholder_image',
 				array(
-					'label'   => __( 'Placeholder Image', 'paddle' ),
+					'label'   => __('Placeholder Image', 'paddle'),
 					'section' => 'paddle_blog_post',
 				)
 			)
 		);
 
 
-		// H1 Font Alignment
+		// Blog Alignment
 		$wp_customize->add_setting(
 			'paddle_h1_alignment',
 			array(
@@ -5668,12 +5723,57 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_h1_alignment',
 				array(
-					'label'   => __( 'Content Align', 'paddle' ),
+					'label'   => __('Content Align', 'paddle'),
 					'section' => 'paddle_post_single',
 					'type'    => 'select',
 					'choices' => array(
-						'left'   => __( 'Left', 'paddle' ),
-						'center' => __( 'Center', 'paddle' ),
+						'left'   => __('Left', 'paddle'),
+						'center' => __('Center', 'paddle'),
+					),
+				)
+			)
+		);
+
+		// Blog Style
+		$wp_customize->add_setting(
+			'paddle_blog_section_header_6',
+			array(
+				'transport'         => 'postMessage',
+				'sanitize_callback' => 'paddle_text_sanitization',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Paddle_Simple_Header_Title_Control(
+				$wp_customize,
+				'paddle_blog_section_header_6',
+				array(
+					'label'   => __('Style', 'paddle'),
+					'section' => 'paddle_post_single',
+				)
+			)
+		);
+
+		// Blog style.
+		$wp_customize->add_setting(
+			'paddle_blog_style',
+			array(
+				'default'           => $this->defaults['paddle_blog_style'],
+				'sanitize_callback' => 'paddle_radio_sanitization',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Paddle_Text_Radio_Button_Custom_Control(
+				$wp_customize,
+				'paddle_blog_style',
+				array(
+					'label'   => __('Select Style', 'paddle'),
+					'section' => 'paddle_post_single',
+					'type'    => 'select',
+					'choices' => array(
+						'0'        => __('Default', 'paddle'),
+						'1'       => __('Style 1', 'paddle'),
 					),
 				)
 			)
@@ -5693,7 +5793,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_blog_section_header_3',
 				array(
-					'label'   => __( 'Featured Image', 'paddle' ),
+					'label'   => __('Featured Image', 'paddle'),
 					'section' => 'paddle_post_single',
 				)
 			)
@@ -5713,17 +5813,17 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_thumbnail_size',
 				array(
-					'label'   => __( 'Featured Image Size', 'paddle' ),
+					'label'   => __('Featured Image Size', 'paddle'),
 					'section' => 'paddle_post_single',
 					'type'    => 'select',
 					'choices' => array(
-						'paddle-small-thumb'        => __( '480 x 360', 'paddle' ),
-						'paddle-square-image'       => __( '600 x 600', 'paddle' ),
-						'paddle-horizontal-image'   => __( '760 x 400', 'paddle' ),
-						'paddle-medium-image'       => __( '800 x 600', 'paddle' ),
-						'paddle-with-sidebar-image' => __( '1020 x 600', 'paddle' ),
-						'paddle-featured-image'     => __( '1410 x 600', 'paddle' ),
-						'paddle-large-image'        => __( '1320 x 990', 'paddle' ),
+						'paddle-small-thumb'        => __('480 x 360', 'paddle'),
+						'paddle-square-image'       => __('600 x 600', 'paddle'),
+						'paddle-horizontal-image'   => __('760 x 400', 'paddle'),
+						'paddle-medium-image'       => __('800 x 600', 'paddle'),
+						'paddle-with-sidebar-image' => __('1020 x 600', 'paddle'),
+						'paddle-featured-image'     => __('1410 x 600', 'paddle'),
+						'paddle-large-image'        => __('1320 x 990', 'paddle'),
 					),
 				)
 			)
@@ -5743,12 +5843,12 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_thumbnail_alignment',
 				array(
-					'label'   => __( 'Position', 'paddle' ),
+					'label'   => __('Featured Image Position', 'paddle'),
 					'section' => 'paddle_post_single',
 					'type'    => 'select',
 					'choices' => array(
-						'left'   => __( 'Left', 'paddle' ),
-						'center' => __( 'Center', 'paddle' ),
+						'left'   => __('Left', 'paddle'),
+						'center' => __('Center', 'paddle'),
 					),
 				)
 			)
@@ -5768,16 +5868,38 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_caption_width',
 				array(
-					'label'   => __( 'Image Caption', 'paddle' ),
+					'label'   => __('Image Caption', 'paddle'),
 					'section' => 'paddle_post_single',
 					'type'    => 'select',
 					'choices' => array(
-						'inherit'     => __( 'Full' ),
-						'fit-content' => __( 'Fit' ),
+						'auto'     => __('Full'),
+						'fit-content' => __('Fit'),
 					),
 				)
 			)
 		);
+
+	
+		$wp_customize->add_setting(
+			'caption_over_image',
+			array(
+				'default'           => $this->defaults['caption_over_image'],
+				'transport'         => 'refresh',
+				'sanitize_callback' => 'paddle_switch_sanitization',
+			)
+		);
+		$wp_customize->add_control(
+			new Paddle_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'caption_over_image',
+				array(
+					'label'           => __('Caption Over Image', 'paddle'),
+					'section'         => 'paddle_post_single',
+				)
+			)
+		);
+
+	
 
 		/**
 		 * Single Post
@@ -5796,7 +5918,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_blog_section_header_4',
 				array(
-					'label'   => __( 'Meta', 'paddle' ),
+					'label'   => __('Meta', 'paddle'),
 					'section' => 'paddle_post_single',
 				)
 			)
@@ -5816,7 +5938,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_enable_blog_author',
 				array(
-					'label'   => __( 'Author', 'paddle' ),
+					'label'   => __('Author', 'paddle'),
 					'section' => 'paddle_post_single',
 				)
 			)
@@ -5835,7 +5957,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_enable_blog_category',
 				array(
-					'label'   => __( 'Category', 'paddle' ),
+					'label'   => __('Category', 'paddle'),
 					'section' => 'paddle_post_single',
 				)
 			)
@@ -5855,7 +5977,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_enable_blog_comment',
 				array(
-					'label'   => __( 'Comment', 'paddle' ),
+					'label'   => __('Comment', 'paddle'),
 					'section' => 'paddle_post_single',
 				)
 			)
@@ -5875,7 +5997,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_enable_blog_published_date',
 				array(
-					'label'   => __( 'Publish Date', 'paddle' ),
+					'label'   => __('Publish Date', 'paddle'),
 					'section' => 'paddle_post_single',
 				)
 			)
@@ -5895,7 +6017,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_enable_blog_updated_date',
 				array(
-					'label'   => __( 'Updated Date', 'paddle' ),
+					'label'   => __('Updated Date', 'paddle'),
 					'section' => 'paddle_post_single',
 				)
 			)
@@ -5915,7 +6037,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_enable_blog_tag',
 				array(
-					'label'   => __( 'Tag', 'paddle' ),
+					'label'   => __('Tag', 'paddle'),
 					'section' => 'paddle_post_single',
 				)
 			)
@@ -5935,12 +6057,12 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_blog_date_position',
 				array(
-					'label'   => __( 'Date', 'paddle' ),
+					'label'   => __('Date', 'paddle'),
 					'section' => 'paddle_post_single',
 					'type'    => 'select',
 					'choices' => array(
-						'before' => __( 'Before Content' ),
-						'after'  => __( 'After Content' ),
+						'before' => __('Before Content'),
+						'after'  => __('After Content'),
 					),
 				)
 			)
@@ -5960,8 +6082,8 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'hide_archive_meta',
 				array(
-					'label'   => __( 'Hide Footer Meta', 'paddle' ),
-					'section' => ( 'paddle_post_single' ),
+					'label'   => __('Hide Footer Meta', 'paddle'),
+					'section' => ('paddle_post_single'),
 				)
 			)
 		);
@@ -5980,13 +6102,605 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_enable_blog_author_bio',
 				array(
-					'label'   => __( 'Author Bio', 'paddle' ),
-					'section' => ( 'paddle_post_single' ),
+					'label'   => __('Author Bio', 'paddle'),
+					'section' => ('paddle_post_single'),
 				)
 			)
 		);
 
 		// ======================== END SINGLE POST ======================
+
+
+		/******************************* Page ********************************/
+
+		// Select Title Options
+		$wp_customize->add_setting(
+			'page_options_header',
+			array(
+				'default'           => 'general',
+				'sanitize_callback' => 'paddle_radio_sanitization',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Paddle_Option_Buttons_Title_Control(
+				$wp_customize,
+				'page_options_header',
+				array(
+					'label'    => __('General', 'paddle'),
+					'section' => 'paddle_page',
+					'type'     => 'select',
+					'priority' => 1,
+					'choices'  => array(
+						'general' => __('General', 'paddle'),
+						'design' => __('Design', 'paddle'),
+						'meta'  => __('Meta', 'paddle'),
+					),
+				)
+			)
+		);
+
+		// Header 2
+		$wp_customize->add_setting(
+			'paddle_page_section_header_2',
+			array(
+				'transport'         => 'postMessage',
+				'sanitize_callback' => 'paddle_text_sanitization',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Paddle_Simple_Header_Title_Control(
+				$wp_customize,
+				'paddle_page_section_header_2',
+				array(
+					'label'   => __('Featured Image', 'paddle'),
+					'section' => 'paddle_page',
+					'active_callback' => 'paddle_page_general_selected',
+				)
+			)
+		);
+
+		// Page Thumbnail size.
+		$wp_customize->add_setting(
+			'paddle_thumbnail_size_page',
+			array(
+				'default'           => $this->defaults['paddle_thumbnail_size_page'],
+				'sanitize_callback' => 'paddle_radio_sanitization',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Paddle_Text_Radio_Button_Custom_Control(
+				$wp_customize,
+				'paddle_thumbnail_size_page',
+				array(
+					'label'   => __('Featured Image Size', 'paddle'),
+					'section' => 'paddle_page',
+					'active_callback' => 'paddle_page_general_selected',
+					'type'    => 'select',
+					'choices' => array(
+						'paddle-small-thumb'        => __('480 x 360', 'paddle'),
+						'paddle-square-image'       => __('600 x 600', 'paddle'),
+						'paddle-horizontal-image'   => __('760 x 400', 'paddle'),
+						'paddle-medium-image'       => __('800 x 600', 'paddle'),
+						'paddle-with-sidebar-image' => __('1020 x 600', 'paddle'),
+						'paddle-featured-image'     => __('1410 x 600', 'paddle'),
+						'paddle-large-image'        => __('1320 x 990', 'paddle'),
+					),
+				)
+			)
+		);
+
+			//____ Header 1.
+			$wp_customize->add_setting(
+				'paddle_page_section_header_1',
+				array(
+					'transport'         => 'postMessage',
+					'sanitize_callback' => 'paddle_text_sanitization',
+				)
+			);
+	
+			$wp_customize->add_control(
+				new Paddle_Simple_Header_Title_Control(
+					$wp_customize,
+					'paddle_page_section_header_1',
+					array(
+						'label'   => __('Header Style', 'paddle'),
+						'section' => 'paddle_page',
+						'active_callback' => 'paddle_page_general_selected',
+					)
+				)
+			);
+	
+			// Page style.
+			$wp_customize->add_setting(
+				'paddle_page_header_type',
+				array(
+					'default'           => $this->defaults['paddle_page_header_type'],
+					'sanitize_callback' => 'paddle_radio_sanitization',
+				)
+			);
+	
+			$wp_customize->add_control(
+				new Paddle_Text_Radio_Button_Custom_Control(
+					$wp_customize,
+					'paddle_page_header_type',
+					array(
+						'label'   => __('Select Style', 'paddle'),
+						'section' => 'paddle_page',
+						'active_callback' => 'paddle_page_general_selected',
+						'type'    => 'select',
+						'choices' => array(
+							'0'        => __('Default', 'paddle'),
+							'PageBanner'       => __('Banner', 'paddle'),
+						),
+					)
+				)
+			);
+
+			//___ Page Banner  height
+			$wp_customize->add_setting(
+				'banner_height_page',
+				array(
+					'default'           => $this->defaults['banner_height_page'],
+					'transport'         => 'refresh',
+					'sanitize_callback' => 'paddle_range_sanitization',
+				)
+			);
+			$wp_customize->add_control(
+				new Paddle_Slider_Custom_Control(
+					$wp_customize,
+					'banner_height_page',
+					array(
+						'label'       => __('Banner Min Height', 'paddle'),
+						'section'     => 'paddle_page',
+						'active_callback' => 'paddle_page_header_is_banner',
+						'input_attrs' => array(
+							'min'  => 20,
+							'max'  => 50,
+							'step' => 1,
+						),
+					)
+				)
+			);
+
+			//___ Background image
+			$wp_customize->add_setting(
+				'banner_background_image_enable_page',
+				array(
+					'default'           => $this->defaults['banner_background_image_enable_page'],
+					'transport'         => 'refresh',
+					'type'              => 'theme_mod',
+					'sanitize_callback' => 'paddle_switch_sanitization',
+				)
+			);
+
+			$wp_customize->add_control(
+				new Paddle_Toggle_Switch_Custom_control(
+					$wp_customize,
+					'banner_background_image_enable_page',
+					array(
+						'label'   => __('Featured Image as background', 'paddle'),
+						'section' => 'paddle_page',
+						'active_callback' => 'paddle_page_header_is_banner',
+					)
+				)
+			);
+
+			//__ background color.
+			$wp_customize->add_setting(
+				'banner_overlay_color_page',
+				array(
+					'default'           => $this->defaults['banner_overlay_color_page'],
+					'transport'         => 'refresh',
+					'type'              => 'theme_mod',
+					'sanitize_callback' => 'sanitize_hex_color',
+				)
+			);
+	
+			$wp_customize->add_control(
+				new WP_Customize_Color_Control(
+					$wp_customize,
+					'banner_overlay_color_page',
+					array(
+						'label'    => __('Overlay Color', 'paddle'),
+						'section'  => 'paddle_page',
+						'active_callback' => 'paddle_page_header_is_banner_and_image_enable',
+						'settings' => 'banner_overlay_color_page',
+					)
+				)
+			);
+
+			// Overlay Opacity
+			$wp_customize->add_setting(
+				'banner_overlay_opacity_page',
+				array(
+					'default'           => $this->defaults['banner_overlay_opacity_page'],
+					'type'              => 'theme_mod',
+					'sanitize_callback' => 'sanitize_text_field',
+					'capability'        => 'edit_theme_options',
+				)
+			);
+
+			$wp_customize->add_control(
+				new Paddle_Slider_Custom_Control(
+					$wp_customize,
+					'banner_overlay_opacity_page',
+					array(
+						'label'       => __('Overlay Opacity', 'paddle'),
+						'section'     => 'paddle_page',
+						'active_callback' => 'paddle_page_header_is_banner_and_image_enable',
+						'input_attrs' => array(
+							'min'  => 0,
+							'max'  => 9,
+							'step' => 1,
+						),
+					)
+				)
+			);
+
+			//___ Background image
+			$wp_customize->add_setting(
+				'banner_background_color_enable_page',
+				array(
+					'default'           => $this->defaults['banner_background_color_enable_page'],
+					'transport'         => 'refresh',
+					'type'              => 'theme_mod',
+					'sanitize_callback' => 'paddle_switch_sanitization',
+				)
+			);
+
+			$wp_customize->add_control(
+				new Paddle_Toggle_Switch_Custom_control(
+					$wp_customize,
+					'banner_background_color_enable_page',
+					array(
+						'label'   => __('Use Background Color', 'paddle'),
+						'section' => 'paddle_page',
+						'active_callback' => 'paddle_page_header_is_banner',
+					)
+				)
+			);
+
+			//__ background color.
+			$wp_customize->add_setting(
+				'banner_background_color_page',
+				array(
+					'default'           => $this->defaults['banner_background_color_page'],
+					'transport'         => 'refresh',
+					'type'              => 'theme_mod',
+					'sanitize_callback' => 'sanitize_hex_color',
+				)
+			);
+	
+			$wp_customize->add_control(
+				new WP_Customize_Color_Control(
+					$wp_customize,
+					'banner_background_color_page',
+					array(
+						'label'    => __('Background Color', 'paddle'),
+						'section'  => 'paddle_page',
+						'active_callback' => 'paddle_page_header_is_banner_and_bgcolor_enable',
+						'settings' => 'banner_background_color_page',
+					)
+				)
+			);
+
+			//__ background color.
+			$wp_customize->add_setting(
+				'banner_background_color_gradient_page',
+				array(
+					'default'           => $this->defaults['banner_background_color_gradient_page'],
+					'transport'         => 'refresh',
+					'type'              => 'theme_mod',
+					'sanitize_callback' => 'sanitize_hex_color',
+				)
+			);
+	
+			$wp_customize->add_control(
+				new WP_Customize_Color_Control(
+					$wp_customize,
+					'banner_background_color_gradient_page',
+					array(
+						'label'    => __('Background Gradient', 'paddle'),
+						'section'  => 'paddle_page',
+						'active_callback' => 'paddle_page_header_is_banner_and_bgcolor_enable',
+						'settings' => 'banner_background_color_gradient_page',
+					)
+				)
+			);
+
+			$wp_customize->add_setting(
+				'header_1_info_page',
+				array(
+					'transport'         => 'postMessage',
+					'sanitize_callback' => 'paddle_text_sanitization',
+				)
+			);
+			$wp_customize->add_control(
+				new Paddle_Simple_Notice_Custom_control(
+					$wp_customize,
+					'header_5_info',
+					array(
+						'label'           => __('Header 5.', 'paddle'),
+						'section'  => 'paddle_page',
+						'active_callback' => 'paddle_page_design_selected',
+						'input_attrs'     => array(
+							'show_label' => false,
+							'show_desc'  => false,
+							'infos'      => array(
+								'info_1' => __('This settings is for page header', 'paddle'),
+							),
+						),
+					)
+				)
+			);
+
+			// Design
+			$wp_customize->add_setting(
+				'banner_title_color_page',
+				array(
+					'default'           => $this->defaults['banner_title_color_page'],
+					'transport'         => 'refresh',
+					'sanitize_callback' => 'sanitize_hex_color',
+				)
+			);
+			$wp_customize->add_control(
+				'banner_title_color_page',
+				array(
+					'label'   => __('Title Color', 'paddle'),
+					'section' => 'paddle_page',
+					'type'    => 'color',
+					'settings' => 'banner_title_color_page',
+					'active_callback' => 'paddle_page_design_selected',
+				)
+			);
+
+			$wp_customize->add_setting(
+				'banner_text_color_page',
+				array(
+					'default'           => $this->defaults['banner_text_color_page'],
+					'transport'         => 'refresh',
+					'sanitize_callback' => 'sanitize_hex_color',
+				)
+			);
+			$wp_customize->add_control(
+				'banner_text_color_page',
+				array(
+					'label'   => __('Text Color', 'paddle'),
+					'section' => 'paddle_page',
+					'type'    => 'color',
+					'settings' => 'banner_text_color_page',
+					'active_callback' => 'paddle_page_design_selected',
+				)
+			);
+
+			$wp_customize->add_setting(
+				'banner_link_color_page',
+				array(
+					'default'           => $this->defaults['banner_link_color_page'],
+					'transport'         => 'refresh',
+					'sanitize_callback' => 'sanitize_hex_color',
+				)
+			);
+			$wp_customize->add_control(
+				'banner_link_color_page',
+				array(
+					'label'   => __('Link Color', 'paddle'),
+					'section' => 'paddle_page',
+					'type'    => 'color',
+					'settings' => 'banner_link_color_page',
+					'active_callback' => 'paddle_page_design_selected',
+				)
+			);
+
+			$wp_customize->add_setting(
+				'banner_link_hover_color_page',
+				array(
+					'default'           => $this->defaults['banner_link_hover_color_page'],
+					'transport'         => 'refresh',
+					'sanitize_callback' => 'sanitize_hex_color',
+				)
+			);
+			$wp_customize->add_control(
+				'banner_link_hover_color_page',
+				array(
+					'label'   => __('Link Hover', 'paddle'),
+					'section' => 'paddle_page',
+					'type'    => 'color',
+					'settings' => 'banner_link_hover_color_page',
+					'active_callback' => 'paddle_page_design_selected',
+				)
+			);
+
+			//____ Header 3.
+			$wp_customize->add_setting(
+				'paddle_page_section_header_3',
+				array(
+					'transport'         => 'postMessage',
+					'sanitize_callback' => 'paddle_text_sanitization',
+				)
+			);
+	
+			$wp_customize->add_control(
+				new Paddle_Simple_Header_Title_Control(
+					$wp_customize,
+					'paddle_page_section_header_3',
+					array(
+						'label'   => __('Padding', 'paddle'),
+						'section' => 'paddle_page',
+						'active_callback' => 'paddle_page_design_selected',
+					)
+				)
+			);
+
+			$wp_customize->add_setting(
+				'banner_padding_top_page',
+				array(
+					'default'           => $this->defaults['banner_padding_top_page'],
+					'type'              => 'theme_mod',
+					'sanitize_callback' => 'sanitize_text_field',
+					'capability'        => 'edit_theme_options',
+				)
+			);
+	
+			$wp_customize->add_control(
+				new Paddle_Slider_Custom_Control(
+					$wp_customize,
+					'banner_padding_top_page',
+					array(
+						'label'       => __('Padding Top', 'paddle'),
+						'section' => 'paddle_page',
+						'active_callback' => 'paddle_page_design_selected',
+						'input_attrs' => array(
+							'min'  => 0,
+							'max'  => 50,
+							'step' => 1,
+						),
+					)
+				)
+			);
+
+			$wp_customize->add_setting(
+				'banner_padding_bottom_page',
+				array(
+					'default'           => $this->defaults['banner_padding_bottom_page'],
+					'type'              => 'theme_mod',
+					'sanitize_callback' => 'sanitize_text_field',
+					'capability'        => 'edit_theme_options',
+				)
+			);
+	
+			$wp_customize->add_control(
+				new Paddle_Slider_Custom_Control(
+					$wp_customize,
+					'banner_padding_bottom_page',
+					array(
+						'label'       => __('Padding Bottom', 'paddle'),
+						'section' => 'paddle_page',
+						'active_callback' => 'paddle_page_design_selected',
+						'input_attrs' => array(
+							'min'  => 0,
+							'max'  => 50,
+							'step' => 1,
+						),
+					)
+				)
+			);
+	
+
+			//____ Header 4.
+			$wp_customize->add_setting(
+				'paddle_page_section_header_4',
+				array(
+					'transport'         => 'postMessage',
+					'sanitize_callback' => 'paddle_text_sanitization',
+				)
+			);
+	
+			$wp_customize->add_control(
+				new Paddle_Simple_Header_Title_Control(
+					$wp_customize,
+					'paddle_page_section_header_4',
+					array(
+						'label'   => __('Horizontal Alignment', 'paddle'),
+						'section' => 'paddle_page',
+						'active_callback' => 'paddle_page_design_selected',
+					)
+				)
+			);
+
+			$wp_customize->add_setting(
+				'paddle_banner_alignment_page',
+				array(
+					'default'           => $this->defaults['paddle_banner_alignment_page'],
+					'sanitize_callback' => 'paddle_radio_sanitization',
+				)
+			);
+	
+			$wp_customize->add_control(
+				new Paddle_Option_Buttons_Control(
+					$wp_customize,
+					'paddle_banner_alignment_page',
+					array(
+						'label'   => __('Align', 'paddle'),
+						'section' => 'paddle_page',
+						'active_callback' => 'paddle_page_design_selected',
+						'type'    => 'select',
+						'choices' => array(
+							'left'   => __('Left', 'paddle'),
+							'center' => __('Center', 'paddle'),
+							'right' => __('Right', 'paddle'),
+						),
+					)
+				)
+			);
+	
+			//__ META
+			$wp_customize->add_setting(
+				'banner_author_page',
+				array(
+					'default'           => $this->defaults['banner_author_page'],
+					'sanitize_callback' => 'paddle_switch_sanitization',
+				)
+			);
+
+			$wp_customize->add_control(
+				new Paddle_Toggle_Switch_Custom_control_2(
+					$wp_customize,
+					'banner_author_page',
+					array(
+						'label'           => __('Author', 'paddle'),
+						'section'         => 'paddle_page',
+						'active_callback' => 'paddle_page_meta_selected',
+					)
+				)
+			);
+
+			$wp_customize->add_setting(
+				'banner_published_date_page',
+				array(
+					'default'           => $this->defaults['banner_published_date_page'],
+					'sanitize_callback' => 'paddle_switch_sanitization',
+				)
+			);
+
+			$wp_customize->add_control(
+				new Paddle_Toggle_Switch_Custom_control_2(
+					$wp_customize,
+					'banner_published_date_page',
+					array(
+						'label'           => __('Published Date', 'paddle'),
+						'section'         => 'paddle_page',
+						'active_callback' => 'paddle_page_meta_selected',
+					)
+				)
+			);
+
+			$wp_customize->add_setting(
+				'banner_excerpt_page',
+				array(
+					'default'           => $this->defaults['banner_excerpt_page'],
+					'sanitize_callback' => 'paddle_switch_sanitization',
+				)
+			);
+
+			$wp_customize->add_control(
+				new Paddle_Toggle_Switch_Custom_control_2(
+					$wp_customize,
+					'banner_excerpt_page',
+					array(
+						'label'           => __('Excerpt', 'paddle'),
+						'section'         => 'paddle_page',
+						'active_callback' => 'paddle_page_meta_selected',
+					)
+				)
+			);
+			
+
+			/** END PAGE SETTINGS */
+	
 
 		// Header for placeholder
 		$wp_customize->add_setting(
@@ -6002,7 +6716,7 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_blog_section_header_5',
 				array(
-					'label'   => __( 'Blog Placeholder Text', 'paddle' ),
+					'label'   => __('Blog Placeholder Text', 'paddle'),
 					'section' => 'paddle_placeholder_text',
 				)
 			)
@@ -6022,7 +6736,7 @@ class paddle_initialise_customizer_settings {
 			array(
 				'type'    => 'text',
 				'section' => 'paddle_placeholder_text',
-				'label'   => __( 'Posted on', 'paddle' ),
+				'label'   => __('Posted on', 'paddle'),
 			)
 		);
 
@@ -6040,7 +6754,7 @@ class paddle_initialise_customizer_settings {
 			array(
 				'type'    => 'text',
 				'section' => 'paddle_placeholder_text',
-				'label'   => __( 'Updated on', 'paddle' ),
+				'label'   => __('Updated on', 'paddle'),
 			)
 		);
 
@@ -6059,8 +6773,8 @@ class paddle_initialise_customizer_settings {
 				'site_title_font_size',
 				array(
 					'section'     => 'title_tagline',
-					'label'       => __( 'Site Title Font Size', 'paddle' ),
-					'description' => __( 'Change the font size of your site title.', 'paddle' ),
+					'label'       => __('Site Title Font Size', 'paddle'),
+					'description' => __('Change the font size of your site title.', 'paddle'),
 					'priority'    => 65,
 					'input_attrs' => array(
 						'min'  => 10,
@@ -6085,9 +6799,9 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'use_full_bootstrap',
 				array(
-					'label'       => __( 'Use full boostrap CSS', 'paddle' ),
+					'label'       => __('Use full boostrap CSS', 'paddle'),
 					'section'     => 'paddle_bootstrap',
-					'description' => __( 'By default only part of bootstrap CSS are loaded, enable this to load all CSS. This may affect performance.', 'paddle' ),
+					'description' => __('By default only part of bootstrap CSS are loaded, enable this to load all CSS. This may affect performance.', 'paddle'),
 				)
 			)
 		);
@@ -6106,19 +6820,19 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'use_bootstrap_js',
 				array(
-					'label'       => __( 'Load bootstrap JavaScript', 'paddle' ),
+					'label'       => __('Load bootstrap JavaScript', 'paddle'),
 					'section'     => 'paddle_bootstrap',
-					'description' => __( 'By default boostrap JavaScript is not loaded. If you need this, you can enable it here.', 'paddle' ),
+					'description' => __('By default boostrap JavaScript is not loaded. If you need this, you can enable it here.', 'paddle'),
 				)
 			)
 		);
-
 	}
 
 	/**
 	 * Register default controls
 	 */
-	public function paddle_register_theme_default_controls( $wp_customize ) {
+	public function paddle_register_theme_default_controls($wp_customize)
+	{
 
 		/**
 		 * Theme color
@@ -6135,7 +6849,7 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_control(
 			'paddle_primary_color',
 			array(
-				'label'   => __( 'Accent', 'paddle' ),
+				'label'   => __('Accent', 'paddle'),
 				'section' => 'paddle_theme_color_section',
 				'type'    => 'color',
 			)
@@ -6152,7 +6866,7 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_control(
 			'paddle_theme_color_body_text',
 			array(
-				'label'   => __( 'Body Text color', 'paddle' ),
+				'label'   => __('Body Text color', 'paddle'),
 				'section' => 'paddle_theme_color_section',
 				'type'    => 'color',
 			)
@@ -6169,7 +6883,7 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_control(
 			'paddle_theme_color_headings',
 			array(
-				'label'   => __( 'Headings (H1-H6)', 'paddle' ),
+				'label'   => __('Headings (H1-H6)', 'paddle'),
 				'section' => 'paddle_theme_color_section',
 				'type'    => 'color',
 			)
@@ -6187,7 +6901,7 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_control(
 			'paddle_theme_color_headings_hover',
 			array(
-				'label'   => __( 'Headings (H1-H6) Hover', 'paddle' ),
+				'label'   => __('Headings (H1-H6) Hover', 'paddle'),
 				'section' => 'paddle_theme_color_section',
 				'type'    => 'color',
 			)
@@ -6204,7 +6918,7 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_control(
 			'paddle_theme_color_buttons',
 			array(
-				'label'   => __( 'Buttons', 'paddle' ),
+				'label'   => __('Buttons', 'paddle'),
 				'section' => 'paddle_theme_color_section',
 				'type'    => 'color',
 			)
@@ -6222,7 +6936,7 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_control(
 			'paddle_theme_color_buttons_hover',
 			array(
-				'label'   => __( 'Buttons Hover', 'paddle' ),
+				'label'   => __('Buttons Hover', 'paddle'),
 				'section' => 'paddle_theme_color_section',
 				'type'    => 'color',
 			)
@@ -6239,7 +6953,7 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_control(
 			'paddle_theme_color_links',
 			array(
-				'label'   => __( 'Links', 'paddle' ),
+				'label'   => __('Links', 'paddle'),
 				'section' => 'paddle_theme_color_section',
 				'type'    => 'color',
 			)
@@ -6257,7 +6971,7 @@ class paddle_initialise_customizer_settings {
 		$wp_customize->add_control(
 			'paddle_theme_color_links_hover',
 			array(
-				'label'   => __( 'Links Hover', 'paddle' ),
+				'label'   => __('Links Hover', 'paddle'),
 				'section' => 'paddle_theme_color_section',
 				'type'    => 'color',
 			)
@@ -6278,8 +6992,8 @@ class paddle_initialise_customizer_settings {
 				$wp_customize,
 				'paddle_theme_button_global',
 				array(
-					'label'       => __( 'Button Appearance', 'paddle' ),
-					'description' => esc_html__( 'This is a sample Pill Checkbox Control', 'paddle' ),
+					'label'       => __('Button Appearance', 'paddle'),
+					'description' => esc_html__('This is a sample Pill Checkbox Control', 'paddle'),
 					'section'     => 'paddle_theme_button_section',
 					'input_attrs' => array(
 						'sortable'  => false,
@@ -6287,14 +7001,38 @@ class paddle_initialise_customizer_settings {
 						'sample'    => '',
 					),
 					'choices'     => array(
-						'bordered' => __( 'Bordered', 'paddle' ),
-						'outlined' => __( 'Outlined', 'paddle' ),
-						'rounded'  => __( 'Rounded', 'paddle' ),
+						'bordered' => __('Bordered', 'paddle'),
+						'outlined' => __('Outlined', 'paddle'),
+						'rounded'  => __('Rounded', 'paddle'),
 					),
 				)
 			)
 		);
 
+		// Navigation Type
+		$wp_customize->add_setting(
+			'paddle_navigation_type',
+			array(
+				'default'           => $this->defaults['paddle_navigation_type'],
+				'sanitize_callback' => 'paddle_radio_sanitization',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Paddle_Option_Buttons_Control(
+				$wp_customize,
+				'paddle_navigation_type',
+				array(
+					'label'   => __('Type', 'paddle'),
+					'section'     => 'paddle_theme_navigation_section',
+					'type'    => 'select',
+					'choices' => array(
+						'number'  => __('Number and Text'),
+						'text' => __('Text'),
+					),
+				)
+			)
+		);
 	}
 }
 
@@ -6302,7 +7040,7 @@ class paddle_initialise_customizer_settings {
 /**
  * Load all our Customizer Custom Controls
  */
-require_once trailingslashit( dirname( __FILE__ ) ) . 'custom-controls.php';
+require_once trailingslashit(dirname(__FILE__)) . 'custom-controls.php';
 
 /**
  * Initialise our Customizer settings
@@ -6313,5 +7051,5 @@ $paddle_settings = new paddle_initialise_customizer_settings();
  * Initialise WooCommerce Customiser
  */
 if (paddle_is_woocommerce_active()) {
-	require_once trailingslashit( dirname( __FILE__ ) ) . 'customizer-woocommerce.php';
+	require_once trailingslashit(dirname(__FILE__)) . 'customizer-woocommerce.php';
 }

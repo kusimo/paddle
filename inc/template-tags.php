@@ -264,7 +264,17 @@ if ( ! function_exists( 'paddle_post_thumbnail' ) ) :
 				<?php the_post_thumbnail( $featured_thumbnail ); ?>
 						</a>
 						<?php else : ?>
-							<?php the_post_thumbnail( $featured_thumbnail ); ?>
+							<?php 		
+							$loading = 'lazy';
+							if ( is_singular() ) {
+								$loading = 'eager';
+							}					
+							the_post_thumbnail( $featured_thumbnail,
+								array(
+									'loading' => $loading
+								) 
+							); ?>
+
 						<?php endif; ?>
 				</div><!-- .thumbnail-container -->
 			</div><!-- .post-thumbnail -->
@@ -497,3 +507,19 @@ if ( ! function_exists( 'paddle_thumbnail_svg_fallback' ) ) :
 	}
 
 endif;
+
+if ( ! function_exists( 'paddle_archive_post_navigation')) {
+	function paddle_archive_post_navigation() {
+		$type =  get_theme_mod( 'paddle_navigation_type', PADDLE_DEFAULT_OPTION['paddle_navigation_type'] );
+		if($type === 'text') {
+			the_posts_navigation();
+		} else {
+			the_posts_pagination( array(
+				'mid_size' => 2,
+				'prev_text' => __( 'Previous Page', 'textdomain' ),
+				'next_text' => __( 'Next Page', 'textdomain' ),
+			) );
+		}
+		
+	}
+}

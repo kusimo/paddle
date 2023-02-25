@@ -7,16 +7,22 @@
  * @package paddle
  */
 
+ $paddle_page_header_type = get_theme_mod( 'paddle_page_header_type', PADDLE_DEFAULT_OPTION['paddle_page_header_type'] );
+
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+	<?php if ('0' === esc_attr($paddle_page_header_type)) : ?>
 	<header class="entry-header">
 		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 	</header><!-- .entry-header -->
 
 	<?php 
-	$paddle_post_thumbnail_size = get_theme_mod( 'paddle_thumbnail_size', PADDLE_DEFAULT_OPTION['paddle_thumbnail_size'] );
-	paddle_post_thumbnail($paddle_post_thumbnail_size); ?>
+	$paddle_post_thumbnail_size_page = get_theme_mod( 'paddle_thumbnail_size_page', PADDLE_DEFAULT_OPTION['paddle_thumbnail_size_page'] );
+	paddle_post_thumbnail($paddle_post_thumbnail_size_page); 
+
+	endif;
+	?>
 
 	<div class="entry-content">
 		<?php

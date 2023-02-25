@@ -1054,6 +1054,10 @@ span.post-page-numbers.current, span.page-numbers.current {
   }
 }
 
+nav.navigation.pagination {
+  margin: 0 0 1.5em;
+}
+
 .post-navigation .nav-links {
   border-top: 1px dotted var(--paddle-color-4);
 }

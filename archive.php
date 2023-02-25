@@ -47,12 +47,7 @@ get_header();
 			?>
 
 			<?php
-			//the_posts_navigation();
-			the_posts_pagination( array(
-				'mid_size' => 2,
-				'prev_text' => __( 'Previous Page', 'textdomain' ),
-				'next_text' => __( 'Next Page', 'textdomain' ),
-			) );
+			paddle_archive_post_navigation();
 
 		else :
 

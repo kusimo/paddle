@@ -35,7 +35,14 @@ class PaddleMenu {
 	}
 
 	public function logo() {
+		if ( apply_filters( 'paddle_replace_logo_width', true ) ) {
+			add_filter( 'wp_get_attachment_image_src', 'paddle_replace_header_logo', 10, 4 );
+		}
 		$this->logo = the_custom_logo();
+
+		if ( apply_filters( 'paddle_replace_logo_width', true ) ) {
+			remove_filter( 'wp_get_attachment_image_src', 'paddle_replace_header_logo', 10 );
+		}
 		return $this->logo;
 	}
 
@@ -363,5 +370,6 @@ class PaddleMenu {
 
 		return $items;
 	}
+
 
 } // End Class

@@ -180,6 +180,8 @@ if ( ! function_exists( 'paddle_generate_defaults' ) ) {
 			'paddle_header_mobile_layout'             => 'mobile-header-1',
 			'use_default_banner_image'                => 1,
 			'paddle_thumbnail_size'                   => 'paddle-featured-image',
+			'paddle_thumbnail_size_page'              => 'paddle-featured-image',
+			'paddle_blog_style'						  => '0',
 			'site_title_font_size'                    => 18,
 			'excerpt_length'                          => 55,
 			'read_more_text'                          => 'Continue reading',
@@ -192,6 +194,7 @@ if ( ! function_exists( 'paddle_generate_defaults' ) ) {
 			'paddle_placeholder_image'                => 0,
 			'paddle_header_logo_align'                => 'self-start',
 			'paddle_caption_width'                    => 'fit-content',
+			'caption_over_image'					  => 1,
 			'paddle_thumbnail_alignment'              => 'left',
 			'use_full_bootstrap'                      => 0,
 			'use_bootstrap_js'                        => 0,
@@ -201,6 +204,7 @@ if ( ! function_exists( 'paddle_generate_defaults' ) ) {
 			'placeholder_text_posted_on'              => 'Posted on',
 			'placeholder_text_updated_on'             => 'Updated on',
 			'paddle_theme_button_global'              => 'bordered,rounded',
+			'paddle_navigation_type'				  => 'number',
 			'paddle_split_menu_options'               => 'padding',
 			'footer_logo_image'                       => '',
 			'footer_image_width'					  => 80,
@@ -256,6 +260,26 @@ if ( ! function_exists( 'paddle_generate_defaults' ) ) {
 			'payment_badge_textarea' => 'master,paypal,visa',
 			'payment_badge_image_h' => 30,
 			'footer_payment_badge_column' => 'top',
+
+			'paddle_page_header_type'				  => 'PageBanner',
+			'banner_height_page' => 20,
+			'banner_background_image_enable_page' => 1,
+			'banner_background_color_enable_page' => 1,
+			'banner_background_color_page' => '',
+			'banner_background_color_gradient_page' => '',
+			'banner_overlay_color_page'				=> '',
+			'banner_overlay_opacity_page' => 1,
+			'banner_title_color_page'		=> '',
+			'banner_text_color_page'		=> '',
+			'banner_link_color_page'		=> '',
+			'banner_link_hover_color_page'		=> '',
+			'banner_padding_top_page'		=> 30,
+			'banner_padding_bottom_page'		=> 30,
+			'paddle_banner_alignment_page'		=> 'left',
+			'banner_author_page'			=> 0,
+			'banner_published_date_page' => 0,
+			'banner_excerpt_page' => 0,
+			
 		);
 
 		return apply_filters( 'paddle_customizer_defaults', $customizer_defaults );
@@ -379,3 +403,4 @@ function paddle_sanitize_hex_color( $color ) {
 		return $color;
 	}
 }
+

@@ -69,10 +69,22 @@ function paddle_post_classes( $classes ) {
 	} else {
 		$classes[] = 'post-not-modified';
 	}
+	// Add blog style
+	if(paddle_is_blog()) {
+		$classes[] = 'blog-style-'.paddle_get_blog_style();
+	}
+
 	return $classes;
 }
  add_filter( 'post_class', 'paddle_post_classes' );
 
+function paddle_get_blog_style() {
+	return get_theme_mod( 'paddle_blog_style', PADDLE_DEFAULT_OPTION['paddle_blog_style'] );
+}
+
+function paddle_is_blog () {
+    return ( is_single()) && 'post' == get_post_type();
+}
 /**
  * Add a pingback url auto-discovery header for single posts, pages, or attachments.
  */
@@ -145,7 +157,7 @@ add_filter( 'nav_menu_css_class', 'paddle_add_additional_class_on_li', 1, 3 );
 function paddle_search_form( $form ) {
 	$form = '<form role="search" method="get" class="search--form d-inline-flex w-100" action="' . home_url( '/' ) . '" >
     <div class="d-flex w-100 align-items-center"><label class="screen-reader-text" for="s">' . esc_attr__( 'Search for:', 'paddle' ) . '</label>
-    <input type="search" value="' . get_search_query() . '" name="s" id="paddle-s" placeholder="' . esc_attr__( 'Search for:', 'paddle' ) . '" required/>
+    <input type="search" value="' . get_search_query() . '" name="s" placeholder="' . esc_attr__( 'Search for:', 'paddle' ) . '" required/>
 	<button type="submit" class="btn searchsubmit" title="' . esc_attr__( 'Search', 'paddle' ) . '">
 	</button>
     </div>
@@ -767,6 +779,7 @@ endif;
  */
 add_action( 'paddle_header', 'paddle_header_top_bar', 10 );
 add_action( 'paddle_header', 'paddle_header_main', 12 );
+add_action( 'paddle_header', 'paddle_header_banner_page', 13 );
 add_action( 'paddle_header', 'paddle_offcanvas_menu', 14 );
 add_action( 'paddle_header', 'paddle_header_media', 16 );
 
@@ -920,6 +933,21 @@ if ( ! function_exists( 'paddle_header_top_bar' ) ) {
 			</div><!--.container-->
 		</div>
 		<?php
+	}
+}
+
+if ( ! function_exists( 'paddle_header_banner_page' ) ) {
+	/**
+	 * paddle_header_banner_page
+	 *
+	 * @return void
+	 */
+	function paddle_header_banner_page() {
+		$paddle_page_header_type = get_theme_mod( 'paddle_page_header_type', PADDLE_DEFAULT_OPTION['paddle_page_header_type'] );
+		if ( is_page() && '0' !== $paddle_page_header_type ) :
+			get_template_part( 'template-parts/header/page', 'banner' );
+
+		endif;
 	}
 }
 
@@ -1154,6 +1182,107 @@ if (! function_exists( 'paddle_social_menu_list ')) {
   }
   
   add_action('navigation_markup_template', 'paddle_remove_header_from_post_nav');
+
+
+
+  function paddle_regenerate_logo_image() {
+		/* Generate Header Logo */
+		$custom_logo_id = get_theme_mod( 'custom_logo' );
+
+		/* check if size already exist, then bail if we have the size */
+		$size_exists = false;
+		$image = wp_get_attachment_image_src($custom_logo_id, 'paddle-logo-size');
+		$imgwidth = $image[1]; // logo's width   
+		$wanted_width = get_theme_mod( 'header_logo_size', PADDLE_DEFAULT_OPTION['header_logo_size'] ) ;
+		if ( ($imgwidth === intval($wanted_width) ) ) {
+			$size_exists = true;
+			return;
+		}
+		
+		 if ( '' !== $custom_logo_id && false === $size_exists) {
+			add_filter( 'intermediate_image_sizes_advanced', 'paddle_logo_image_sizes', 10, 2 );
+			paddle_generate_logo_by_width($custom_logo_id);
+			remove_filter( 'intermediate_image_sizes_advanced', 'paddle_logo_image_sizes', 10 );
+		}
+		
+		
+  }
+
+  function paddle_logo_image_sizes( $sizes, $metadata ) {
+
+	$logo_width = get_theme_mod( 'header_logo_size', PADDLE_DEFAULT_OPTION['header_logo_size'] );
+
+		if ( '' != $logo_width ) {
+			$max_value              = max( $logo_width );
+			$sizes['paddle-logo-size'] = array(
+				'width'  => $logo_width,
+				'height' => 0,
+				'crop'   => false,
+			);
+		}
+
+		return $sizes;
+
+}
+
+function paddle_generate_logo_by_width( $custom_logo_id ) {
+	if ( $custom_logo_id ) {
+
+		$image = get_post( $custom_logo_id );
+
+		if ( $image ) {
+			$fullsizepath = get_attached_file( $image->ID );
+			/** @psalm-suppress InvalidArgument */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
+			if ( false !== $fullsizepath || file_exists( $fullsizepath ) ) {
+
+				if ( ! function_exists( 'wp_generate_attachment_metadata' ) ) {
+					require_once ABSPATH . 'wp-admin/includes/image.php';// phpcs:ignore WPThemeReview.CoreFunctionality.FileInclude.FileIncludeFound
+				}
+
+				$metadata = wp_generate_attachment_metadata( $image->ID, $fullsizepath );
+
+				if ( ! is_wp_error( $metadata ) && ! empty( $metadata ) ) {
+					wp_update_attachment_metadata( $image->ID, $metadata );
+				}
+			}
+		}
+	}
+}
+
+  add_action( 'customize_save_after', 'paddle_regenerate_logo_image', 100 );
+
+/**
+ * Replace header logo.
+ */
+if ( ! function_exists( 'paddle_replace_header_logo' ) ) :
+
+	/**
+	 * Replace header logo.
+	 *
+	 * @param array  $image Size.
+	 * @param int    $attachment_id Image id.
+	 * @param sting  $size Size name.
+	 * @param string $icon Icon.
+	 *
+	 * @return array Size of image
+	 */
+	function paddle_replace_header_logo( $image, $attachment_id, $size, $icon ) {
+
+		$custom_logo_id = get_theme_mod( 'custom_logo' );
+
+		if ( ! is_customize_preview() && $custom_logo_id == $attachment_id && 'full' == $size ) {
+
+			$data = wp_get_attachment_image_src( $attachment_id, 'paddle-logo-size' );
+
+			if ( false != $data ) {
+				$image = $data;
+			}
+		}
+
+		return apply_filters( 'paddle_replace_header_logo', $image );
+	}
+
+endif;
 
 
 

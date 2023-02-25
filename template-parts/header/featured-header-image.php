@@ -8,56 +8,6 @@
 /**
  * Check if user is not using right sidebar option
  */
-$paddle_sidebar_check = paddle_layout_container( 'content' );
-if ( 'col-lg-8' !== $paddle_sidebar_check && 'classic' !== get_theme_mod( 'paddle_featured_image_style', 'classic' ) ) :  // Theme is not using the right sidebar option or classic, get wide header image.
-	?>
-
-	<header class="entry-header has-post-thumbnail <?php echo esc_attr( get_theme_mod( 'paddle_featured_image_style', 'slim-full-width' ) ); ?>">
-
-		<div class="header__text">
-			<div class="row">
-				<div class="page__title-wrap col-md-8 col-lg-6 column end">
-					<div class="page__title">
-						<?php
-						if ( is_singular() ) :
-							the_title( '<h1 class="entry-title">', '</h1>' );
-						else :
-							the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
-						endif;
-						?>
-					</div>
-					<div class="page__description">
-					</div>
-				</div>
-				<?php if ( post_type_supports( get_post_type( get_the_ID() ), 'author' ) && is_single() && 1 === get_theme_mod( 'paddle_enable_blog_author', PADDLE_DEFAULT_OPTION['paddle_enable_blog_author'] ) ) : ?>
-					<div class="author-bio-info col-md-8 col-lg-6">
-						<a class="author-link" href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>" rel="author">
-						<div class="author-avatar"><?php echo get_avatar( get_the_author_meta( 'ID' ), 60 ); ?></div>
-						<div class="author-name">
-							<small>
-								<?php
-								printf(
-									/* translators: %s: Author name. */
-									__( 'By %s', 'paddle' ),
-									esc_html( get_the_author() )
-								);
-								?>
-							</small>
-						</div>
-						</a>
-					</div>
-				<?php endif; ?>
-			</div>
-		</div><!-- .header__text -->
-
-		<div class="header__image">
-			<img src="<?php the_post_thumbnail_url( 'full' ); ?>" alt="<?php the_title_attribute(); ?>">
-		</div><!-- .header__image -->
-
-	</header><!-- .entry-header -->
-
-	<?php
-else :  // Right sidebar option is in use.
 
 	the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 	<div class="entry-meta<?php echo esc_attr(!has_post_thumbnail() ? ' order-is-2' : '' ); ?> ">
@@ -105,4 +55,4 @@ else :  // Right sidebar option is in use.
 	</figure><!-- figure -->
 	<?php } ?>
 
-<?php endif; ?>
+
