@@ -261,24 +261,18 @@ if ( ! function_exists( 'paddle_generate_defaults' ) ) {
 			'payment_badge_image_h' => 30,
 			'footer_payment_badge_column' => 'top',
 
-			'paddle_page_header_type'				  => 'PageBanner',
-			'banner_height_page' => 20,
-			'banner_background_image_enable_page' => 1,
-			'banner_background_color_enable_page' => 1,
-			'banner_background_color_page' => '',
-			'banner_background_color_gradient_page' => '',
-			'banner_overlay_color_page'				=> '',
-			'banner_overlay_opacity_page' => 1,
-			'banner_title_color_page'		=> '',
-			'banner_text_color_page'		=> '',
-			'banner_link_color_page'		=> '',
-			'banner_link_hover_color_page'		=> '',
-			'banner_padding_top_page'		=> 30,
-			'banner_padding_bottom_page'		=> 30,
+			'paddle_page_header_type'	=> 'PageBanner',
+			'banner_height_page' => 22,
+			'banner_parent_title_page' => 0,
+			'banner_image_width_page' => 50,
 			'paddle_banner_alignment_page'		=> 'left',
+			'paddle_banner_image_position_page'			=> 'right',
 			'banner_author_page'			=> 0,
 			'banner_published_date_page' => 0,
 			'banner_excerpt_page' => 0,
+			'default_page_header_spacing' => 5,
+			'default_page_horizontal_align' => 'left',
+			'default_page_header_title_position' => 'before'
 			
 		);
 

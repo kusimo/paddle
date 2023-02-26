@@ -2260,26 +2260,6 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		}
 	}
 
-	if ( ! function_exists( 'paddle_page_design_selected' ) ) {
-
-		/**
-		 * Check the design section selected.
-		 *
-		 * @since 1.0.0
-		 *
-		 * @param WP_Customize_Control $control WP_Customize_Control instance.
-		 *
-		 * @return bool Whether the control is active to the current preview.
-		 */
-		function paddle_page_design_selected( $control ) {
-
-			if ( 'design' === $control->manager->get_setting( 'page_options_header' )->value() ) {
-				return true;
-			} else {
-				return false;
-			}
-		}
-	}
 
 	if ( ! function_exists( 'paddle_page_meta_selected' ) ) {
 
@@ -2328,10 +2308,10 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		}
 	}
 
-	if ( ! function_exists( 'paddle_page_header_is_banner_and_bgcolor_enable' ) ) {
+	if ( ! function_exists( 'paddle_page_header_is_default' ) ) {
 
 		/**
-		 * Check the header style selected and background color is enable.
+		 * Check the header style selected.
 		 *
 		 * @since 1.0.0
 		 *
@@ -2339,34 +2319,12 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 *
 		 * @return bool Whether the control is active to the current preview.
 		 */
-		function paddle_page_header_is_banner_and_bgcolor_enable( $control ) {
+		function paddle_page_header_is_default( $control ) {
 
-			if ( 'PageBanner' === $control->manager->get_setting( 'paddle_page_header_type' )->value()  
+			if ( '0' === $control->manager->get_setting( 'paddle_page_header_type' )->value() 
 			&& paddle_page_general_selected($control)
-			&& 1 === $control->manager->get_setting( 'banner_background_color_enable_page' )->value() ) {
-				return true;
-			} else {
-				return false;
-			}
-		}
-	}
-
-	if ( ! function_exists( 'paddle_page_header_is_banner_and_image_enable' ) ) {
-
-		/**
-		 * Check the header style selected and image is enable.
-		 *
-		 * @since 1.0.0
-		 *
-		 * @param WP_Customize_Control $control WP_Customize_Control instance.
-		 *
-		 * @return bool Whether the control is active to the current preview.
-		 */
-		function paddle_page_header_is_banner_and_image_enable( $control ) {
-
-			if ( 'PageBanner' === $control->manager->get_setting( 'paddle_page_header_type' )->value() 
-		 	&& paddle_page_general_selected($control) 
-			&& 1 === $control->manager->get_setting( 'banner_background_image_enable_page' )->value() ) {
+			) 
+			{
 				return true;
 			} else {
 				return false;
