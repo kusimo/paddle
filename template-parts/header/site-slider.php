@@ -39,7 +39,7 @@
 		<div class="home-banner-overlay vh d-none"></div>
 
 		<div class="slideshow-content" data-src="<?php echo esc_url_raw( $paddle_image_url ); ?>">
-			<div class="home-banner-content outer content-<?php echo esc_attr( get_theme_mod( 'banner_align_position', PADDLE_DEFAULT_OPTION['banner_align_position'] ) ); ?>">
+			<div class="home-banner-content outer content-left">
 				<div class="board light-box-shadow">
 
 					<header class="no-bgcolor">

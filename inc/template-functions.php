@@ -23,10 +23,7 @@ function paddle_body_classes( $classes ) {
 		$classes[] = 'no-sidebar';
 	}
 
-	// Add a class of archive-grid when grid layout is enable.
-	if ( 1 === get_theme_mod( 'hide_archive_meta', PADDLE_DEFAULT_OPTION['hide_archive_meta'] ) ) {
-		$classes[] = 'category-grid-layout';
-	}
+	
 
 	// Add header layout option
 	$paddle_current_header_style = get_theme_mod( 'paddle_header_layout_style', PADDLE_DEFAULT_OPTION['paddle_header_layout_style'] );
@@ -540,19 +537,6 @@ if ( ! function_exists( 'paddle_social_menu ' ) ) :
 
 endif;
 
-
-if ( ! function_exists( ' paddle_banner_align ' ) ) {
-	/**
-	 * paddle_banner_align
-	 * Get banner align option
-	 *
-	 * @return void
-	 */
-	function paddle_banner_align() {
-		$paddle_banner_align_postion = get_theme_mod( 'banner_align_position', PADDLE_DEFAULT_OPTION['banner_align_position'] );
-		return $paddle_banner_align_postion;
-	}
-}
 
 
 if ( ! function_exists( 'paddle_banner_opacity' ) ) {
@@ -1283,6 +1267,27 @@ if ( ! function_exists( 'paddle_replace_header_logo' ) ) :
 	}
 
 endif;
+
+if (! function_exists('paddle_content_witdth_is_full_width')) {
+		
+	/**
+	 * check is content is using custom full width
+	 *
+	 * @param  mixed $paddle_header_content_max_width
+	 * @return boolean
+	 */
+	function paddle_content_witdth_is_full_width($paddle_header_content_max_width) {
+	
+		if( absint($paddle_header_content_max_width) > 2400 ) {
+			return true;
+		} else {
+			return false;
+		}
+		return false;
+	}
+}
+
+
 
 
 

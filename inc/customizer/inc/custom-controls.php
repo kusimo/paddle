@@ -1468,7 +1468,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 */
 		function paddle_banner_bgcolor_active( $control ) {
 
-			if ( 1 === $control->manager->get_setting( 'paddle_enable_banner_bgcolor' )->value() ) {
+			if ('design' === $control->manager->get_setting( 'title_options_hero' )->value() ) {
 				return true;
 			} else {
 				return false;
@@ -1490,7 +1490,10 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 */
 		function header_media_selected_hero( $control ) {
 
-			if ( 'hero' === $control->manager->get_setting( 'header_media_select' )->value() ) {
+			if ( 'hero' === $control->manager->get_setting( 'header_media_select' )->value() 
+				&& 'general' === $control->manager->get_setting( 'title_options_hero' )->value()
+				&& 'general' === $control->manager->get_setting( 'title_options_hero' )->value() 
+				) {
 				return true;
 			} else {
 				return false;
@@ -1498,6 +1501,101 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		}
 
 	endif;
+
+	if ( ! function_exists( 'header_media_selected_hero_half_image' ) ) :
+
+		/**
+		 * Check Hero is selected
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param WP_Customize_Control $control WP_Customize_Control instance.
+		 *
+		 * @return bool Whether the control is active to the current preview.
+		 */
+		function header_media_selected_hero_half_image( $control ) {
+
+			if ( 'hero' === $control->manager->get_setting( 'header_media_select' )->value() 
+				&& 'general' === $control->manager->get_setting( 'title_options_hero' )->value()
+				&& 'general' === $control->manager->get_setting( 'title_options_hero' )->value() 
+				&& 1 === $control->manager->get_setting( 'banner_half_image' )->value() 
+				) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+	endif;
+
+	if ( ! function_exists( 'paddle_selected_hero_width' ) ) :
+
+		/**
+		 * Check if hero/banner is using custom width
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param WP_Customize_Control $control WP_Customize_Control instance.
+		 *
+		 * @return bool Whether the control is active to the current preview.
+		 */
+		function paddle_selected_hero_width( $control ) {
+
+			if ('custom' === $control->manager->get_setting( 'hero_custom_container' )->value() ) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+	endif;
+
+	if ( ! function_exists( 'paddle_hero_option_general_selected' ) ) :
+
+		/**
+		 * Check if general section is selected
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param WP_Customize_Control $control WP_Customize_Control instance.
+		 *
+		 * @return bool Whether the control is active to the current preview.
+		 */
+		function paddle_hero_option_general_selected( $control ) {
+
+			if ( 'general' === $control->manager->get_setting( 'title_options_hero' )->value() ) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+	endif;
+
+	if ( ! function_exists( 'paddle_hero_option_design_selected' ) ) :
+
+		/**
+		 * Check if design section is selected
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param WP_Customize_Control $control WP_Customize_Control instance.
+		 *
+		 * @return bool Whether the control is active to the current preview.
+		 */
+		function paddle_hero_option_design_selected( $control ) {
+
+			if ( 'design' === $control->manager->get_setting( 'title_options_hero' )->value() ) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+	endif;
+
+
+	
 
 	if ( ! function_exists( 'header_media_selected_slider' ) ) :
 
@@ -1512,7 +1610,10 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 */
 		function header_media_selected_slider( $control ) {
 
-			if ( 'slider' === $control->manager->get_setting( 'header_media_select' )->value() ) {
+			if ( 'slider' === $control->manager->get_setting( 'header_media_select' )->value() 
+				&& 'general' === $control->manager->get_setting( 'title_options_hero' )->value()
+				&& 'general' === $control->manager->get_setting( 'title_options_hero' )->value()
+				) {
 				return true;
 			} else {
 				return false;
@@ -1536,6 +1637,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 
 			if ( 'post-ids' === $control->manager->get_setting( 'paddle_slider_source' )->value()
 				&& 'slider' === $control->manager->get_setting( 'header_media_select' )->value()
+				&& 'general' === $control->manager->get_setting( 'title_options_hero' )->value()
 			) {
 				return true;
 			} else {
@@ -1560,6 +1662,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 
 			if ( 'page' === $control->manager->get_setting( 'paddle_slider_source' )->value()
 				&& 'slider' === $control->manager->get_setting( 'header_media_select' )->value()
+				&& 'general' === $control->manager->get_setting( 'title_options_hero' )->value()
 				) {
 				return true;
 			} else {
@@ -1584,6 +1687,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 
 			if ( 1 === $control->manager->get_setting( 'paddle_slider_custom_url' )->value()
 			&& 'slider' === $control->manager->get_setting( 'header_media_select' )->value()
+			&& 'general' === $control->manager->get_setting( 'title_options_hero' )->value()
 			) {
 				return true;
 			} else {
@@ -1795,6 +1899,10 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		}
 
 	endif;
+
+
+
+
 
 	if ( ! function_exists( 'paddle_check_header_border_is_active' ) ) {
 

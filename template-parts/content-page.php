@@ -14,7 +14,9 @@
  $paddle_excerpt_page =absint(get_theme_mod( 'banner_excerpt_page', PADDLE_DEFAULT_OPTION['banner_excerpt_page'] ));
  $paddle_show_post_parent = get_theme_mod( 'banner_parent_title_page', PADDLE_DEFAULT_OPTION['banner_parent_title_page'] );
  $paddle_page_has_meta = false;
- if ( post_type_supports( get_post_type( get_the_ID() ), 'author' ) && 1 === absint($paddle_author_page) || 1 === absint($paddle_published_date_page) ) {
+ if ( post_type_supports( get_post_type( get_the_ID() ), 'author' ) 
+ 	&& '0' === esc_attr($paddle_page_header_type)
+ 	&& 1 === absint($paddle_author_page) || 1 === absint($paddle_published_date_page) ) {
 	$paddle_page_has_meta = true;
  }
 
@@ -39,11 +41,11 @@
 		<div class="page__entry-meta">
 	<?php endif; ?>
 
-		<?php if ( post_type_supports( get_post_type( get_the_ID() ), 'author' ) && 1 === absint($paddle_author_page) ) { 
+		<?php if ( post_type_supports( get_post_type( get_the_ID() ), 'author' ) && 1 === absint($paddle_author_page) && '0' === esc_attr($paddle_page_header_type)) { 
 			 paddle_posted_by();
 		 } ?>
 
-		<?php if ( 1 === absint($paddle_published_date_page)) {
+		<?php if ( 1 === absint($paddle_published_date_page) && '0' === esc_attr($paddle_page_header_type)) {
 			 paddle_posted_on();
 		 } ?>
 

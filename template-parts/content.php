@@ -7,12 +7,10 @@
  * @package paddle
  */
 
- $paddle_placeholder_image = 1 === absint( get_theme_mod( 'paddle_placeholder_image', PADDLE_DEFAULT_OPTION['paddle_placeholder_image'] ) ) ? 'has-placeholder-image' : '';
  $paddle_title_order = has_post_thumbnail() ? ' order-is-0' : ' order-is-1';
 
 ?>
-<article id="post-<?php the_ID(); ?>" <?php post_class( $paddle_placeholder_image ); ?>>
-
+<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<?php
 	if ( ( is_single() || ( is_page() && ! is_front_page() ) ) ) :
 		get_template_part( 'template-parts/header/featured-header', 'image' );
@@ -57,15 +55,7 @@
 					}
 				}
 
-				paddle_grid_category_list();
-
-				if ( is_archive() && 1 === get_theme_mod( 'hide_archive_meta', PADDLE_DEFAULT_OPTION['hide_archive_meta'] ) || is_front_page() && 1 === get_theme_mod( 'hide_archive_meta', PADDLE_DEFAULT_OPTION['hide_archive_meta'] ) ) :
-						return '';
-				else :
-					paddle_entry_footer();
-				endif; 
-				
-				?>
+				paddle_grid_category_list();?>
 
 			</div><!-- .entry-meta -->
 			<?php
@@ -74,11 +64,9 @@
 		do_action( 'paddle_after_post_title' );
 
 		if ( 1 === absint( get_theme_mod( 'enable_archive_featured_image', PADDLE_DEFAULT_OPTION['enable_archive_featured_image'] ) ) ) {
-			$paddle_post_thumbnail_size = get_theme_mod( 'paddle_thumbnail_size', PADDLE_DEFAULT_OPTION['paddle_thumbnail_size'] );
-			paddle_post_thumbnail();
+			$paddle_archive_thumbnail_size = get_theme_mod( 'paddle_archive_thumbnail_size', PADDLE_DEFAULT_OPTION['paddle_archive_thumbnail_size'] );
+			paddle_post_thumbnail($paddle_archive_thumbnail_size);
 		}
-
-		paddle_thumbnail_svg_fallback();
 
 	endif;
 	?>
@@ -126,14 +114,13 @@
 	<div class="clearfix"></div>
 
 	<?php
-	/*
-	if ( is_archive() && 1 === get_theme_mod( 'hide_archive_meta', PADDLE_DEFAULT_OPTION['hide_archive_meta'] ) || is_front_page() && 1 === get_theme_mod( 'hide_archive_meta', PADDLE_DEFAULT_OPTION['hide_archive_meta'] ) ) :
-				return '';
-		else :
-			?>
+	if(is_singular()) : ?>
 	<footer class="entry-footer">
-			<?php paddle_entry_footer(); ?>
+			<div class="entry-meta">
+				<?php paddle_entry_footer(); ?>
+			</div>
 	</footer><!-- .entry-footer -->
-	<?php endif; */?>
+	<?php endif; ?>
+	
 </article><!-- #post-<?php the_ID(); ?> -->
 

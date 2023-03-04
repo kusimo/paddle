@@ -1,4 +1,30 @@
+
 table {
-	margin: 0 0 1.5em;
+	line-height: 2;
+	margin: 0 0 24px;
 	width: 100%;
+	caption {
+		margin: 24px 0;
+	}
+}
+dl {
+	margin: 0 24px;
+}
+dt {
+	font-style: normal;
+	line-height: 1.5;
+}
+dd {
+	line-height: 1.5;
+	margin-bottom: 24px;
+}
+th, td {
+    text-align: left;
+}
+td {
+	border-bottom: 1px solid var(--paddle-color-4);
+	padding: 6px 10px 6px 0;
+}
+th {
+	border-bottom: 1px solid var(--paddle-color-4);
 }

@@ -12,8 +12,9 @@
 	the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 	<div class="entry-meta<?php echo esc_attr(!has_post_thumbnail() ? ' order-is-2' : '' ); ?> ">
 		<?php 
+		 $paddle_author_link_position  = get_theme_mod( 'paddle_author_link_position', PADDLE_DEFAULT_OPTION['paddle_author_link_position'] );
 
-		if ( 1 === get_theme_mod( 'paddle_enable_blog_author', PADDLE_DEFAULT_OPTION['paddle_enable_blog_author'] ) ) {
+		if ( 1 === get_theme_mod( 'paddle_enable_blog_author', PADDLE_DEFAULT_OPTION['paddle_enable_blog_author'] ) && 'before' === $paddle_author_link_position ) {
 			printf(
 				'<span class="by-author"> %1$s<span class="author vcard"><a class="url" href="%2$s"> %3$s</a></span></span>',
 				esc_html_x( 'By', 'post author', 'paddle' ),

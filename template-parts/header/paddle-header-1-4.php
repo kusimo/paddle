@@ -2,11 +2,12 @@
 // Header 1-4
 $paddle_menu     = new PaddleMenu();
 $has_woocommerce = $paddle_menu->hasWooCommerce();
+$paddle_header_content_max_width   = absint( get_theme_mod( 'header_custom_container_width', PADDLE_DEFAULT_OPTION['header_custom_container_width'] ) );
 ?>
 
 
 <div class="site-branding">
-	<div class="container">
+	<div class="container<?php echo esc_attr(paddle_content_witdth_is_full_width($paddle_header_content_max_width)) ? ' paddle-full-width-page': ''; ?>">
 		<div class="brand-wrap d-flex justify-content-between<?php echo $paddle_menu->hasWooCommerce() ? ' has-woocommerce' : ''; ?>">
 
 			<div class="toggler">

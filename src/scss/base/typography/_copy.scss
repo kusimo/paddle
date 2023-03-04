@@ -22,6 +22,9 @@ pre {
 	overflow: auto;
 	padding: 1.6em;
 	font-size: .8em;
+	border: 1px solid rgba(51,51,51,.1);
+	white-space: pre-wrap;
+    word-wrap: break-word;
 }
 
 code,

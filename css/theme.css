@@ -89,15 +89,6 @@ hr {
   overflow: visible;
 }
 
-/**
- * 1. Correct the inheritance and scaling of font size in all browsers.
- * 2. Correct the odd `em` font sizing in all browsers.
- */
-pre {
-  font-family: monospace, monospace;
-  font-size: 1em;
-}
-
 /* Text-level semantics
 	 ========================================================================== */
 /**
@@ -135,6 +126,19 @@ kbd,
 samp {
   font-family: monospace, monospace;
   font-size: 1em;
+}
+
+code {
+  padding: 1px 10px;
+  overflow: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  border-radius: 3px;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  font-size: 15px;
+  background: #eee;
 }
 
 /**
@@ -487,33 +491,6 @@ address {
   margin: 0 0 1.6em;
 }
 
-code,
-kbd,
-tt,
-var,
-samp,
-pre {
-  font-family: Inconsolata, monospace;
-  -webkit-hyphens: none;
-  -ms-hyphens: none;
-  hyphens: none;
-}
-
-pre {
-  background-color: transparent;
-  background-color: rgba(0, 0, 0, 0.01);
-  border: 1px solid #eaeaea;
-  border: 1px solid rgba(51, 51, 51, 0.1);
-  line-height: 1.2;
-  margin-bottom: 1.6em;
-  max-width: 100%;
-  overflow: auto;
-  padding: 0.8em;
-  white-space: pre;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-}
-
 abbr[title] {
   border-bottom: 1px dotted #eaeaea;
   border-bottom: 1px dotted rgba(51, 51, 51, 0.1);
@@ -597,6 +574,9 @@ pre {
   overflow: auto;
   padding: 1.6em;
   font-size: 0.8em;
+  border: 1px solid rgba(51, 51, 51, 0.1);
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
 code,
@@ -622,6 +602,14 @@ ins {
 body #page.site {
   overflow-x: hidden;
   word-wrap: break-word;
+}
+body #page.site article {
+  width: 100%;
+  word-wrap: break-word;
+}
+body #page.site .alignleft {
+  float: left;
+  margin: 0 20px 16px 0;
 }
 
 @media screen and (min-width: 800px) {
@@ -714,6 +702,23 @@ dd {
   margin: revert;
 }
 
+.paddle-oembed-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 30px;
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+  height: auto;
+}
+.paddle-oembed-container iframe, .paddle-oembed-container object, .paddle-oembed-container embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
 /* Make sure embeds and iframes fit their containers. */
 embed,
 iframe,
@@ -732,8 +737,39 @@ figure {
 }
 
 table {
-  margin: 0 0 1.5em;
+  line-height: 2;
+  margin: 0 0 24px;
   width: 100%;
+}
+table caption {
+  margin: 24px 0;
+}
+
+dl {
+  margin: 0 24px;
+}
+
+dt {
+  font-style: normal;
+  line-height: 1.5;
+}
+
+dd {
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+th, td {
+  text-align: left;
+}
+
+td {
+  border-bottom: 1px solid var(--paddle-color-4);
+  padding: 6px 10px 6px 0;
+}
+
+th {
+  border-bottom: 1px solid var(--paddle-color-4);
 }
 
 /* Links
@@ -894,6 +930,7 @@ span.post-page-numbers.current, span.page-numbers.current {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  word-break: break-all;
 }
 .comment-navigation .nav-next,
 .posts-navigation .nav-next,
@@ -1079,6 +1116,7 @@ input[type=week],
 input[type=time],
 input[type=datetime],
 input[type=datetime-local],
+select,
 input[type=color],
 textarea {
   color: var(--paddle-color-0);
@@ -1107,6 +1145,7 @@ input[type=week]:focus,
 input[type=time]:focus,
 input[type=datetime]:focus,
 input[type=datetime-local]:focus,
+select:focus,
 input[type=color]:focus,
 textarea:focus {
   color: var(--paddle-color-3);
@@ -1114,6 +1153,9 @@ textarea:focus {
 
 select {
   border: 1px solid var(--paddle-color-4);
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 
 textarea {
@@ -1448,28 +1490,36 @@ CUSTOM BOOTSTRAP PREFIX WITH .ADP
 }
 */
 /*
-@media (min-width: 576px) {
-  .col-sm {
-    -ms-flex-preferred-size: 0;
-    flex-basis: 0;
-    -ms-flex-positive: 1;
-    flex-grow: 1;
-    max-width: 100%;
-  }
 
-  .col-sm-auto {
-    -ms-flex: 0 0 auto;
-    flex: 0 0 auto;
-    width: auto;
-    max-width: 100%;
-  }
-}
 */
 /*
 .col-xs-6 {
   width: 50%;
 }
 */
+@media (min-width: 576px) {
+  .col-sm {
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    -ms-flex-positive: 1;
+    -webkit-box-flex: 1;
+            flex-grow: 1;
+    max-width: 100%;
+  }
+  .col-sm-auto {
+    -ms-flex: 0 0 auto;
+    -webkit-box-flex: 0;
+            flex: 0 0 auto;
+    width: auto;
+    max-width: 100%;
+  }
+  .col-sm-6 {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 auto;
+            flex: 0 0 auto;
+    width: 50%;
+  }
+}
 @media (min-width: 768px) {
   .col-md {
     -ms-flex-preferred-size: 0;
@@ -1830,7 +1880,35 @@ img {
 --------------------------------------------------------------*/
 /* Site Header - Shared CSS */
 .site-header {
+  position: relative;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
   line-height: 1;
+  z-index: 3;
+}
+.site-header > .container, .site-header > .site-branding, .site-header > .nav-primary {
+  position: relative;
+  max-width: var(--paddle-header-content-width);
+}
+.site-header > .container::before, .site-header > .site-branding::before, .site-header > .nav-primary::before {
+  content: "";
+  width: 100vw;
+  height: 100%;
+  position: absolute;
+  margin-left: 50%;
+  left: -50vw;
+  background-color: var(--paddle-header-menu-bg-color);
+}
+.site-header > .container .site-logo, .site-header > .container .site-branding, .site-header > .site-branding .site-logo, .site-header > .site-branding .site-branding, .site-header > .nav-primary .site-logo, .site-header > .nav-primary .site-branding {
+  z-index: 1;
+}
+.site-header.fixed-top {
+  position: fixed;
+  right: 0;
+  left: 0;
+}
+.site-header.header-scrolled {
+  background: rgba(255, 255, 255, 0.7);
 }
 
 /*-------------------------------------------- 
@@ -2059,6 +2137,31 @@ body.logged-in [data-menu=offcanvas] .offcanvas-header {
 [data-menu=offcanvas] .hide-dialog {
   -webkit-transform: translateX(-100%);
           transform: translateX(-100%);
+}
+
+.entry-content li, .comment-content li {
+  margin: 0 0 4px 28px;
+}
+
+.entry-meta {
+  padding: 9px 0;
+}
+
+.wp-caption {
+  margin-bottom: 1.5em;
+  max-width: 100%;
+}
+.wp-caption img[class*=wp-image-] {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.wp-caption .wp-caption-text {
+  margin: 0.8075em 0;
+}
+
+.wp-caption-text {
+  text-align: center;
 }
 
 /*--------------------------------------------------------------

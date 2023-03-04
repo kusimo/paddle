@@ -43,8 +43,8 @@ if ( ! function_exists( 'paddle_category_list' ) ) :
 	function paddle_category_list() {
 
 		if ( 'post' === get_post_type() ) {
-			/* translators: used between list items, there is a space after the comma */
-			$categories_list = get_the_category_list( esc_html__( ', ', 'paddle' ) );
+			/* translators: used between list items, there is a space after the category */
+			$categories_list = get_the_category_list( esc_html__( ' ', 'paddle' ) );
 			if ( $categories_list ) {
 				/* translators: 1: list of categories. */
 				printf( '<span class="cat-links"  title="' . __( 'Posted in', 'paddle' ) . '">%1$s</span>', $categories_list ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
@@ -62,8 +62,8 @@ if ( ! function_exists( 'paddle_grid_category_list' ) ) :
 		$enable_archive_category = get_theme_mod( 'paddle_enable_archive_category', PADDLE_DEFAULT_OPTION['paddle_enable_archive_category'] );
 
 		if ( 'post' === get_post_type() && 1 === $enable_archive_category ) {
-			/* translators: used between list items, there is a space after the comma */
-			$categories_list = get_the_category_list( esc_html__( ', ', 'paddle' ) );
+			/* translators: used between list items, there is a space after the category */
+			$categories_list = get_the_category_list( esc_html__( ' ', 'paddle' ) );
 			if ( $categories_list ) { 
 				?>
 				<?php
@@ -85,8 +85,8 @@ if ( ! function_exists( 'paddle_category_list_by_id' ) ) :
 	function paddle_category_list_by_id( $id ) {
 
 		if ( 'post' === get_post_type() ) {
-			/* translators: used between list items, there is a space after the comma */
-			$categories_list = get_the_category_list( esc_html__( ', ', 'paddle' ), '', $id );
+			/* translators: used between list items, there is a space after the category */
+			$categories_list = get_the_category_list( esc_html__( ' ', 'paddle' ), '', $id );
 			if ( $categories_list ) {
 				/* translators: 1: list of categories. */
 				printf( '<span class="cat-links"  title="' . __( 'Posted in', 'paddle' ) . '">%1$s</span>', $categories_list ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
@@ -103,8 +103,8 @@ if ( ! function_exists( 'paddle_tag_lists' ) ) :
 	 */
 
 	function paddle_tag_list() {
-		/* translators: used between list items, there is a space after the comma */
-		$tags_list = get_the_tag_list( '', esc_html_x( ', ', 'list item separator', 'paddle' ) );
+		/* translators: used between list items, there is a space after the tag */
+		$tags_list = get_the_tag_list( '', esc_html_x( ' ', 'list item separator', 'paddle' ) );
 		if ( $tags_list ) {
 			/* translators: 1: list of tags. */
 			printf( '<span class="tags-links" title="%2s">' . esc_html( '%2s' ) . '</span>', esc_attr__( 'Tagged', 'paddle' ), $tags_list ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
@@ -125,7 +125,7 @@ if ( ! function_exists( 'paddle_posted_by' ) ) :
 			'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
 		);
 
-		echo '<span class="byline"> ' . $byline . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo '<span class="byline by-author"> ' . $byline . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 	}
 endif;
@@ -144,6 +144,7 @@ if ( ! function_exists( 'paddle_entry_footer' ) ) :
 			$enable_blog_tag            = get_theme_mod( 'paddle_enable_blog_tag', PADDLE_DEFAULT_OPTION['paddle_enable_blog_tag'] );
 			$enable_blog_published_date = get_theme_mod( 'paddle_enable_blog_published_date', PADDLE_DEFAULT_OPTION['paddle_enable_blog_published_date'] );
 			$paddle_blog_date_position  = get_theme_mod( 'paddle_blog_date_position', PADDLE_DEFAULT_OPTION['paddle_blog_date_position'] );
+			$paddle_author_link_position  = get_theme_mod( 'paddle_author_link_position', PADDLE_DEFAULT_OPTION['paddle_author_link_position'] );
 
 			if ( is_single() && 1 === $enable_blog_category ) {
 				paddle_category_list();
@@ -151,10 +152,15 @@ if ( ! function_exists( 'paddle_entry_footer' ) ) :
 
 			if ( is_singular() && 1 === $enable_blog_tag ) {
 				paddle_tag_list();
-			} elseif ( is_archive() && 1 === get_theme_mod( 'paddle_enable_archive_tag', PADDLE_DEFAULT_OPTION['paddle_enable_archive_tag'] ) || is_front_page() && 1 === get_theme_mod( 'paddle_enable_archive_tag', PADDLE_DEFAULT_OPTION['paddle_enable_archive_tag'] ) ) {
-				paddle_tag_list();
-			} else {
-				// Do nothing.
+			} 
+
+			if ( is_single() && 'after' === $paddle_author_link_position ) {
+				printf(
+					'<span class="by-author"> %1$s<span class="author vcard"><a class="url" href="%2$s"> %3$s</a></span></span>',
+					esc_html_x( 'By', 'post author', 'paddle' ),
+					esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
+					esc_html( get_the_author() )
+				);
 			}
 
 			if ( is_single() && 'after' === $paddle_blog_date_position ) {
@@ -164,26 +170,7 @@ if ( ! function_exists( 'paddle_entry_footer' ) ) :
 			do_action( 'padddle_after_post_entry_footer' );
 		}
 
-		$enable_archive_comment = get_theme_mod( 'paddle_enable_archive_comment', PADDLE_DEFAULT_OPTION['paddle_enable_archive_comment'] );
-
-		if ( ! is_single() && 1 === $enable_archive_comment && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
-			echo '<span class="comments-link">';
-			comments_popup_link(
-				sprintf(
-					wp_kses(
-					/* translators: %s: post title */
-						__( 'Leave a Comment<span class="screen-reader-text"> on %s</span>', 'paddle' ),
-						array(
-							'span' => array(
-								'class' => array(),
-							),
-						)
-					),
-					wp_kses_post( get_the_title() )
-				)
-			);
-			echo '</span>';
-		}
+	
 
 		edit_post_link(
 			sprintf(
@@ -260,7 +247,7 @@ if ( ! function_exists( 'paddle_post_thumbnail' ) ) :
 			<div class="post-thumbnail">
 				<div class="thumbnail-container">
 			<?php if ( is_front_page() ) : ?>
-						<a class="post-thumbnail <?php echo esc_attr( 1 === get_theme_mod( 'paddle_expand_grid_image', PADDLE_DEFAULT_OPTION['paddle_expand_grid_image'] ) ? 'paddle-large-image' : 'paddle-small-thumb' ); ?>" href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
+						<a class="post-thumbnail" href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
 				<?php the_post_thumbnail( $featured_thumbnail ); ?>
 						</a>
 						<?php else : ?>
@@ -281,7 +268,7 @@ if ( ! function_exists( 'paddle_post_thumbnail' ) ) :
 
 		<?php else : ?>
 			<div class="thumbnail-container not-single">
-			<a class="post-thumbnail <?php echo esc_attr( 1 === get_theme_mod( 'paddle_expand_grid_image', PADDLE_DEFAULT_OPTION['paddle_expand_grid_image'] ) ? 'paddle-large-image' : 'paddle-small-thumb' ); ?>" href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
+			<a class="post-thumbnail" href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
 			
 			<?php
 			the_post_thumbnail(
@@ -303,6 +290,38 @@ if ( ! function_exists( 'paddle_post_thumbnail' ) ) :
 		endif; // End is_singular().
 	}
 endif;
+
+if ( !function_exists( 'paddle_grid_post_thumbnail')) {
+	/**
+	 * Displays an optional post thumbnail for archive post.
+	 */
+	function paddle_grid_post_thumbnail( $size = '' ) {
+		if ( post_password_required() || is_attachment() || ! has_post_thumbnail() ) {
+			return;
+		}
+		$featured_thumbnail = isset( $size ) && '' !== $size ? $size : PADDLE_DEFAULT_OPTION['paddle_thumbnail_size'];
+		?>
+		<div class="thumbnail-container-list">
+			<a class="post-thumbnail" href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
+			
+			<?php
+			the_post_thumbnail(
+				$featured_thumbnail,
+				array(
+					'alt' => the_title_attribute(
+						array(
+							'echo' => false,
+						)
+					),
+				)
+			);
+			?>
+			</a>
+		</div><!-- .thumbnail-container -->
+		<?php
+
+	}
+}
 
 if ( ! function_exists( 'wp_body_open' ) ) :
 	/**
@@ -368,22 +387,6 @@ if ( ! function_exists( 'paddle_banner_btncss ' ) ) {
 	}
 }
 
-/**
-* Content over homepage banner
-*/
-if ( ! function_exists( 'paddle_content_over_banner' ) ) {
-	function paddle_content_over_banner() {
-		$css          = false;
-		$option_value = get_theme_mod( 'paddle_enable_content_over_banner', PADDLE_DEFAULT_OPTION['paddle_enable_content_over_banner'] );
-		$media_value  = get_theme_mod( 'header_media_select', PADDLE_DEFAULT_OPTION['header_media_select'] );
-		if ( is_home() || is_front_page() ) {
-			if ( 1 === $option_value && 'hero' === $media_value ) {
-				$css = true;
-			}
-		}
-		return $css;
-	}
-}
 
 /**
  * Trim word
@@ -493,7 +496,7 @@ if ( ! function_exists( 'paddle_thumbnail_svg_fallback' ) ) :
 	 * Get Fallback Thumbnail SVG.
 	 */
 	function paddle_thumbnail_svg_fallback() {
-		if ( ! has_post_thumbnail() && 1 === absint( get_theme_mod( 'paddle_placeholder_image', PADDLE_DEFAULT_OPTION['paddle_placeholder_image'] ) ) ) {
+		if ( ! has_post_thumbnail() ) {
 			if ( is_front_page() || is_archive() ) {
 				?>
 				<div class="post-thumbnail">

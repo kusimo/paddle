@@ -653,7 +653,9 @@ document.addEventListener('DOMContentLoaded', function (event) {
 	//replaceCommas('.cat-links');
 		//replaceCommas('.tags-links');
 	
+		//paddleLazyLoadBgImg();
 
+		
 	})
 
 /*-----------------------------------------------------------------------------------------------
@@ -816,4 +818,26 @@ class SearchModal extends HTMLElement {
 }
 
 customElements.get('search-modal') || customElements.define('search-modal', SearchModal);
+
+function paddleLazyLoadBgImg() {
+	var lazyBackgrounds = [].slice.call(document.querySelectorAll(".home-banner-image"));
+	
+  if(lazyBackgrounds)
+
+  if ("IntersectionObserver" in window) {
+    let lazyBackgroundObserver = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          lazyBackgroundObserver.unobserve(entry.target);
+        }
+      });
+    });
+
+    lazyBackgrounds.forEach(function(lazyBackground) {
+      lazyBackgroundObserver.observe(lazyBackground);
+    });
+  }
+}
+
 

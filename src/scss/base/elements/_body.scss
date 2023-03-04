@@ -2,6 +2,14 @@ body {
   #page.site {
     overflow-x: hidden;
     word-wrap: break-word;
+    article {
+      width: 100%;
+      word-wrap: break-word;
+    }
+    .alignleft {
+      float: left;
+      margin: 0 20px 16px 0;
+    }
   }
 }
 

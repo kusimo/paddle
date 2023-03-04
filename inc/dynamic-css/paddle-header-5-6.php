@@ -45,9 +45,9 @@ if ( ! function_exists( 'paddle_header_5_6' ) ) {
 		 // Header Border Top / Bottom.
 		 $site_header_border = '';
 		if ( $border_bottom_enable || $border_top_enable ) {
-			$site_header_border .= '.site-header {';
+			$site_header_border .= '.site-header::after {';
 			$site_header_border .= $border_bottom_enable ? 'border-bottom: 1px solid ' . $header_border_color . ';' : '';
-			$site_header_border .= $border_top_enable ? 'border-top: 1px solid ' . $header_border_color . ';' : '';
+			//$site_header_border .= $border_top_enable ? 'border-top: 1px solid ' . $header_border_color . ';' : '';
 			$site_header_border .= '}';
 			$css                .= $site_header_border;
 		}

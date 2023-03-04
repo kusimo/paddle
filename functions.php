@@ -148,12 +148,34 @@ if ( ! function_exists( 'paddle_setup' ) ) :
 		);
 	}
 
+	// Filters the oEmbed process to run the responsive_embed() function
+    add_filter('embed_oembed_html', 'paddle_responsive_embed', 10, 3);
+
 endif;
 
 add_action( 'after_setup_theme', 'paddle_setup' );
 
+function paddle_responsive_embed($html, $url, $attr) {
+	$add_paddle_oembed_wrapper = apply_filters( 'paddle_responsive_oembed_wrapper_enable', true );
 
+			$allowed_providers = apply_filters(
+				'paddle_allowed_fullwidth_oembed_providers',
+				array(
+					'vimeo.com',
+					'youtube.com',
+					'youtu.be',
+					'wistia.com',
+					'wistia.net',
+				)
+			);
 
+			if ( paddle_strposa( $url, $allowed_providers ) ) {
+				if ( $add_paddle_oembed_wrapper ) {
+					$html = ( '' !== $html ) ? '<div class="paddle-oembed-container">' . $html . '</div>' : '';
+				}
+			}
+			return $html;
+}
 
 /**
  * Set the content width in pixels, based on the theme's design and stylesheet.

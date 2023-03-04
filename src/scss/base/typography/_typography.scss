@@ -127,34 +127,6 @@ address {
 	margin: 0 0 1.6em;
 }
 
-code,
-kbd,
-tt,
-var,
-samp,
-pre {
-	font-family: Inconsolata, monospace;
-	-webkit-hyphens: none;
-	-moz-hyphens: none;
-	-ms-hyphens: none;
-	hyphens: none;
-}
-
-pre {
-	background-color: transparent;
-	background-color: rgba(0, 0, 0, 0.01);
-	border: 1px solid #eaeaea;
-	border: 1px solid rgba(51, 51, 51, 0.1);
-	line-height: 1.2;
-	margin-bottom: 1.6em;
-	max-width: 100%;
-	overflow: auto;
-	padding: 0.8em;
-	white-space: pre;
-	white-space: pre-wrap;
-	word-wrap: break-word;
-}
-
 abbr[title] {
 	border-bottom: 1px dotted #eaeaea;
 	border-bottom: 1px dotted rgba(51, 51, 51, 0.1);

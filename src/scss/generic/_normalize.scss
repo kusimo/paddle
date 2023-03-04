@@ -50,16 +50,6 @@ hr {
 	overflow: visible;
 }
 
-/**
- * 1. Correct the inheritance and scaling of font size in all browsers.
- * 2. Correct the odd `em` font sizing in all browsers.
- */
-
-pre {
-	font-family: monospace, monospace;
-	font-size: 1em;
-}
-
 /* Text-level semantics
 	 ========================================================================== */
 
@@ -101,6 +91,16 @@ kbd,
 samp {
 	font-family: monospace, monospace;
 	font-size: 1em;
+}
+code {
+    padding: 1px 10px;
+    overflow: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    border-radius: 3px;
+    display: inline-flex;
+    font-size: 15px;
+	background: #eee;
 }
 
 /**

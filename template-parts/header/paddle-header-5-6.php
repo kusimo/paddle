@@ -1,7 +1,8 @@
 <?php
  $paddle_menu = new PaddleMenu();
+ $paddle_header_content_max_width   = absint( get_theme_mod( 'header_custom_container_width', PADDLE_DEFAULT_OPTION['header_custom_container_width'] ) );
 ?>
- <div class="container">
+ <div class="container<?php echo esc_attr(paddle_content_witdth_is_full_width($paddle_header_content_max_width)) ? ' paddle-full-width-page': ''; ?>">
 	<div id="header-style-2" class="d-flex justify-content-between align-items-center">
 	<div class="site-branding header-content-left site-logo">
 		<div class="site-branding-wrap">
