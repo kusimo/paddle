@@ -1278,7 +1278,8 @@ if (! function_exists('paddle_content_witdth_is_full_width')) {
 	 */
 	function paddle_content_witdth_is_full_width($paddle_header_content_max_width) {
 	
-		if( absint($paddle_header_content_max_width) > 2400 ) {
+		if( absint($paddle_header_content_max_width) > 2400 
+			&& 'custom' === get_theme_mod('header_custom_container', 'default') ) {
 			return true;
 		} else {
 			return false;

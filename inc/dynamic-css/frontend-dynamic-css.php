@@ -67,7 +67,7 @@ function paddle_frontend_css($dynamic_css)
 	$css .=
 	'
 	#content.site-content {
-		background-color: #F9F9FB;
+		background-color: var(--paddle-color-body-bg);
 	}
 	#primary.content-area, aside#secondary {
 		padding-top: 2em;
@@ -2040,7 +2040,7 @@ function paddle_blog_style_1($width = '43.75', $header_height = '23')
 	.single article.blog-style-1::after {
 		content: "";
 		width: 100%;
-		background: #f9f9fb;
+		background: var(--paddle-color-body-bg);
 		height: 30rem;
 		position: absolute;
 	}
@@ -2428,9 +2428,11 @@ function paddle_home_page_banner_css() {
 	$paddle_banner_height_mobile = 1;
 
 	$paddle_page_header_type = get_theme_mod( 'header_media_select', PADDLE_DEFAULT_OPTION['header_media_select'] );
-	$banner_image = get_theme_mod( 'hero_image', PADDLE_DEFAULT_OPTION['hero_image'] );
-	$half_banner = absint(get_theme_mod( 'banner_half_image', PADDLE_DEFAULT_OPTION['banner_half_image'] ));
+	$banner_image_style = get_theme_mod( 'banner_image_style', PADDLE_DEFAULT_OPTION['banner_image_style'] );
+	$half_banner = 'half' === $banner_image_style ? 1 : 0;
+	$full_banner_image = 'full' === $banner_image_style ? 1 : 0;
 	$box_shadow_value = '';
+	
 
 	if ('hero' === esc_attr($paddle_page_header_type)) {
 		
@@ -2439,6 +2441,7 @@ function paddle_home_page_banner_css() {
 		$paddle_banner_image_width_page = paddle_get_content_width();
 		$bg_opacity		= get_theme_mod( 'banner_content_bg_opacity', PADDLE_DEFAULT_OPTION['banner_content_bg_opacity'] ); 
 		$banner_alignment		= get_theme_mod( 'banner_content_align', PADDLE_DEFAULT_OPTION['banner_content_align'] );
+		$banner_alignment_2		= get_theme_mod( 'banner_content_align_2', PADDLE_DEFAULT_OPTION['banner_content_align_2'] );
 		$banner_bg_color = paddle_theme_get_color( 'paddle_banner_header_bg_color' );
 		$banner_bg_gradient = paddle_theme_get_color('paddle_banner_bg_gradient');
 		$text_color = paddle_theme_get_color( 'paddle_banner_desc_color' );
@@ -2456,6 +2459,13 @@ function paddle_home_page_banner_css() {
 		$padding_top = get_theme_mod( 'banner_padding_top', PADDLE_DEFAULT_OPTION['banner_padding_top'] );
 		$padding_bottom = get_theme_mod( 'banner_padding_bottom', PADDLE_DEFAULT_OPTION['banner_padding_bottom'] );
 		$fit_image = get_theme_mod( 'banner_fit_image', PADDLE_DEFAULT_OPTION['banner_fit_image'] );
+		$fit_image_full_height = get_theme_mod( 'banner_fit_image_full_height', PADDLE_DEFAULT_OPTION['banner_fit_image_full_height'] );
+		$image_order = 'left' === $banner_alignment_2 ? 'order: unset;' : '';
+		$transparent_header = get_theme_mod( 'banner_full_image_header_transparent', PADDLE_DEFAULT_OPTION['banner_full_image_header_transparent'] );
+		$banner_overlay_opacity = get_theme_mod( 'banner_overlay_opacity', PADDLE_DEFAULT_OPTION['banner_overlay_opacity'] );
+		$banner_navlink_text_color = paddle_theme_get_color( 'banner_navlink_text_color' );
+		$banner_navlink_text_color_hover = paddle_theme_get_color( 'banner_navlink_text_color_hover' );
+		$banner_navlink_text_color_active = paddle_theme_get_color( 'banner_navlink_text_color_active' );
 
 		if (1 === absint($banner_box_shadow)) {
 			$box_shadow_value .= '
@@ -2626,8 +2636,23 @@ function paddle_home_page_banner_css() {
 				right: 0;
 				left: unset;
 			}
+			
+		
+			
 			';
 		}
+		if($half_banner && 0 === absint($fit_image) && 1 ===  absint($fit_image_full_height)) {
+			$banner_css .= '
+			.Banner__image img {
+				object-fit: cover;
+			}';
+		} elseif($half_banner) {
+			$banner_css .= '
+			.Banner__image img {
+				object-fit: contain;
+			}';
+		}
+
 
 		if($half_banner && 'right' === $banner_button_align) {
 			$banner_css .='
@@ -2658,17 +2683,28 @@ function paddle_home_page_banner_css() {
 				max-width: 1200px;
 				margin: 0 auto;
 				padding: 0; /* mobile */
+
 			}
+
+			/*
+			@media (min-width:922px) {
+				.Banner__content {
+					width: 1200px;
+    				margin: 0 auto;
+				}
+			}
+			*/
+		
 			@media (min-width:768px) {
 				.Banner__content {
 					padding: '.$padding_top.'px 0px '.$padding_bottom.'px 0px;
 					flex-direction: row;
 				}
 			}
-			
+			/*
 			.Banner__image img {
 				object-fit: contain;
-			}
+			} */
 			
 			.Banner__media-layout {
 				position: unset; 
@@ -2678,7 +2714,7 @@ function paddle_home_page_banner_css() {
 			@media (min-width:768px) {
 				.Banner__media-layout {
 					flex-basis: 50%; 
-					order: unset;
+					'.$image_order.'
 				}
 			}
 			
@@ -2703,13 +2739,15 @@ function paddle_home_page_banner_css() {
 			';
 		}
 
+		//*
 		//___ Overlay 
+		if ( absint($banner_overlay_opacity)  > 0) {
+		
 		$banner_css .= '
 		.Banner__content::after {
 			background-color: transparent;
-			background-image: linear-gradient(180deg,var(--paddle-color-2 ) -50%,#000000 100%);
-			opacity: .49;
-			transition: background .3s,border-radius .3s,opacity .3s;
+			background-image: linear-gradient(90.13deg, '.$banner_bg_color.' -3.85%, '.$banner_bg_gradient.' 92.37%);
+			opacity: .'.absint($banner_overlay_opacity).';
 			content: "";
 			position: absolute;
 			width: 100%;
@@ -2720,17 +2758,24 @@ function paddle_home_page_banner_css() {
 			left: 0;
 		}
 		';
-		//*
+		}
+		//*/
 
+	
+
+	if($transparent_header) :
 		//__ Transparent Header add css to site-header for overlay enable, then add banner css. Step 1
 		$banner_css .= '
 		.site-header {height: 0; }
+		.Banner__content {
+			padding-top: 200px;
+		}
 		';
 		
 		$banner_css .= '
 		@media (max-width:380px) {
 			.Banner__content {
-				padding-top: 200px;
+				padding-top: 220px;
 			}
 		}
 		';
@@ -2741,7 +2786,35 @@ function paddle_home_page_banner_css() {
 			background-color: rgba(0,0,0,0.07);
 		}
 		';
-		//*/
+
+		//__ Menu
+		$banner_css .= '
+		@media (min-width:992px) {
+			#main-header-navigation li a:not(.btn) {
+				color: '.$banner_navlink_text_color.'!important;
+			}
+			#main-header-navigation li a:not(.btn):hover {
+				color: '.$banner_navlink_text_color_hover.'!important;
+			}
+			#main-header-navigation li a:not(.btn):active {
+				color: '.$banner_navlink_text_color_active.'!important;
+			}
+			#main-header-navigation .submenu-expand svg {
+				fill: '.$banner_navlink_text_color.'!important;
+			}
+		}
+		.toggler button.navbar-toggler span,
+		.site-header button.searchsubmit::before, .btn.button-search::before
+		 {
+			background-color: '.$banner_navlink_text_color.'!important;
+		}
+		.site-header button.searchsubmit::after, .btn.button-search::after {
+			border-color: '.$banner_navlink_text_color.'!important;
+		}
+		';
+
+	endif;
+	
 
 
 		

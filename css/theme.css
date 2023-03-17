@@ -380,7 +380,7 @@ body {
   font-size: var(--paddle-font-body-size);
   font-weight: 400;
   line-height: 1.5;
-  background-color: #fff;
+  background-color: var(--paddle-color-body-bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

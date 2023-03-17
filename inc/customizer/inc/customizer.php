@@ -988,6 +988,7 @@ class paddle_initialise_customizer_settings
 		$wp_customize->add_setting(
 			'paddle_header_section_title_bg',
 			array(
+				'default'           => $this->defaults['paddle_header_section_title_bg'],
 				'transport'         => 'postMessage',
 				'sanitize_callback' => 'paddle_text_sanitization',
 			)
@@ -4784,34 +4785,7 @@ class paddle_initialise_customizer_settings
 			)
 		);
 
-		// Overlay Opacity
-		$wp_customize->add_setting(
-			'banner_overlay_opacity',
-			array(
-				'default'           => $this->defaults['banner_overlay_opacity'],
-				'type'              => 'theme_mod',
-				'sanitize_callback' => 'sanitize_text_field',
-				'capability'        => 'edit_theme_options',
-			)
-		);
-
-		$wp_customize->add_control(
-			new Paddle_Slider_Custom_Control(
-				$wp_customize,
-				'banner_overlay_opacity',
-				array(
-					'label'       => __('Image Overlay', 'paddle'),
-					'description' => __('Adjust the image overlay opacity', 'paddle'),
-					'section'     => 'paddle_hero_and_slider',
-					'active_callback' => 'paddle_hero_option_general_selected',
-					'input_attrs' => array(
-						'min'  => 0,
-						'max'  => 9,
-						'step' => 1,
-					),
-				)
-			)
-		);
+	
 
 		// Banner Padding Top
 		$wp_customize->add_setting(
@@ -4870,26 +4844,55 @@ class paddle_initialise_customizer_settings
 		);
 		
 
-		// Half Image
+		// ______ Header for Banner Image Style
+
 		$wp_customize->add_setting(
-			'banner_half_image',
+			'paddle_hero_section_header_6',
 			array(
-				'default'           => $this->defaults['banner_half_image'],
-				'sanitize_callback' => 'paddle_switch_sanitization',
+				'transport'         => 'postMessage',
+				'sanitize_callback' => 'paddle_text_sanitization',
 			)
 		);
 
 		$wp_customize->add_control(
-			new Paddle_Toggle_Switch_Custom_control(
+			new Paddle_Simple_Header_Title_Control(
 				$wp_customize,
-				'banner_half_image',
+				'paddle_hero_section_header_6',
 				array(
-					'label'   => __('Half Image', 'paddle'),
-					'section'     => 'paddle_hero_and_slider',
-					'active_callback' => 'header_media_selected_hero',
+					'label'   => __('Banner Image', 'paddle'),
+					'section'  => 'paddle_hero_and_slider',
+					'active_callback' => 'paddle_hero_option_design_selected',
 				)
 			)
 		);
+
+			// ______ Banner Image Style Container.
+			$wp_customize->add_setting(
+				'banner_image_style',
+				array(
+					'default'           => $this->defaults['banner_image_style'],
+					'type'              => 'theme_mod',
+					'sanitize_callback' => 'paddle_radio_sanitization',
+					'capability'        => 'edit_theme_options',
+				)
+			);
+	
+			$wp_customize->add_control(
+				new Paddle_Text_Radio_Button_Custom_Control(
+					$wp_customize,
+					'banner_image_style',
+					array(
+						'label'   => __('Container', 'paddle'),
+						'section' => 'paddle_hero_and_slider',
+						'active_callback' => 'paddle_hero_option_design_selected',
+						'choices' => array(
+							'half'   => __('Half', 'paddle'),
+							'full' => __('Full', 'paddle'),
+						),
+					)
+				)
+			);
+
 
 		// Fit Image
 		$wp_customize->add_setting(
@@ -4912,10 +4915,81 @@ class paddle_initialise_customizer_settings
 			)
 		);
 
-		//____ Header.
-
+		// Fit Image Full height
 		$wp_customize->add_setting(
-			'paddle_hero_section_header_1',
+			'banner_fit_image_full_height',
+			array(
+				'default'           => $this->defaults['banner_fit_image_full_height'],
+				'sanitize_callback' => 'paddle_switch_sanitization',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Paddle_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'banner_fit_image_full_height',
+				array(
+					'label'   => __('Full Height', 'paddle'),
+					'section'     => 'paddle_hero_and_slider',
+					'active_callback' => 'header_media_selected_hero_half_image_full_height',
+				)
+			)
+		);
+
+			// Overlay Opacity for full banner image
+			$wp_customize->add_setting(
+				'banner_overlay_opacity',
+				array(
+					'default'           => $this->defaults['banner_overlay_opacity'],
+					'type'              => 'theme_mod',
+					'sanitize_callback' => 'sanitize_text_field',
+					'capability'        => 'edit_theme_options',
+				)
+			);
+	
+			$wp_customize->add_control(
+				new Paddle_Slider_Custom_Control(
+					$wp_customize,
+					'banner_overlay_opacity',
+					array(
+						'label'       => __('Image Overlay', 'paddle'),
+						'description' => __('Adjust the image overlay opacity', 'paddle'),
+						'section'     => 'paddle_hero_and_slider',
+						'active_callback' => 'paddle_hero_option_design_selected',
+						'input_attrs' => array(
+							'min'  => 0,
+							'max'  => 9,
+							'step' => 1,
+						),
+					)
+				)
+			);
+
+		// Full Image header transparent
+		$wp_customize->add_setting(
+			'banner_full_image_header_transparent',
+			array(
+				'default'           => $this->defaults['banner_full_image_header_transparent'],
+				'sanitize_callback' => 'paddle_switch_sanitization',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Paddle_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'banner_full_image_header_transparent',
+				array(
+					'label'   => __('Transparent Header', 'paddle'),
+					'section'     => 'paddle_hero_and_slider',
+					'active_callback' => 'paddle_hero_option_design_selected',
+				)
+			)
+		);
+
+		//____ Header for transparent header settings.
+	
+		$wp_customize->add_setting(
+			'paddle_hero_section_header_7',
 			array(
 				'transport'         => 'postMessage',
 				'sanitize_callback' => 'paddle_text_sanitization',
@@ -4925,59 +4999,260 @@ class paddle_initialise_customizer_settings
 		$wp_customize->add_control(
 			new Paddle_Simple_Header_Title_Control(
 				$wp_customize,
-				'paddle_hero_section_header_1',
+				'paddle_hero_section_header_7',
 				array(
-					'label'   => __('Content', 'paddle'),
+					'label'   => __('Tranparent Header', 'paddle'),
 					'section'  => 'paddle_hero_and_slider',
-					'active_callback' => 'paddle_hero_option_design_selected',
+					'active_callback' => 'header_media_selected_hero_transparent_header_on',
 				)
 			)
 		);
 
-		//__ Colors
+		//______ Transparent Header Menu foreground colour.
 		$wp_customize->add_setting(
-			'banner_title_color',
+			'banner_navlink_text_color',
 			array(
-				'default'           => $this->defaults['banner_title_color'],
-				'transport'         => 'refresh',
-				'sanitize_callback' => 'sanitize_hex_color',
-			)
-		);
-		$wp_customize->add_control(
-			'banner_title_color',
-			array(
-				'label'   => __('Title Color', 'paddle'),
-				'type'    => 'color',
-				'settings' => 'banner_title_color',
-				'section'  => 'paddle_hero_and_slider',
-				'active_callback' => 'paddle_hero_option_design_selected',
-			)
-		);
-
-		// Hero Text color.
-		$wp_customize->add_setting(
-			'paddle_banner_desc_color',
-			array(
-				'default'           => $this->defaults['paddle_banner_desc_color'],
+				'default'           => $this->defaults['banner_navlink_text_color'],
 				'transport'         => 'refresh',
 				'type'              => 'theme_mod',
 				'sanitize_callback' => 'sanitize_hex_color',
+
 			)
 		);
 
 		$wp_customize->add_control(
 			new WP_Customize_Color_Control(
 				$wp_customize,
-				'paddle_banner_desc_color',
+				'banner_navlink_text_color',
 				array(
-					'label'    => __('Text Color', 'paddle'),
+					'label'           => __('Link', 'paddle'),
 					'section'  => 'paddle_hero_and_slider',
-					'settings' => 'paddle_banner_desc_color',
-					'active_callback' => 'paddle_hero_option_design_selected',
+					'active_callback' => 'header_media_selected_hero_transparent_header_on',
+					'settings'        => 'banner_navlink_text_color',
 				)
 			)
 		);
 
+		//______ Transparent Header  Menu hover colour.
+		$wp_customize->add_setting(
+			'banner_navlink_text_color_hover',
+			array(
+				'default'           => $this->defaults['banner_navlink_text_color_hover'],
+				'transport'         => 'refresh',
+				'type'              => 'theme_mod',
+				'sanitize_callback' => 'sanitize_hex_color',
+
+			)
+		);
+
+		$wp_customize->add_control(
+			new WP_Customize_Color_Control(
+				$wp_customize,
+				'banner_navlink_text_color_hover',
+				array(
+					'label'           => __('Hover', 'paddle'),
+					'section'  => 'paddle_hero_and_slider',
+					'active_callback' => 'header_media_selected_hero_transparent_header_on',
+					'settings'        => 'banner_navlink_text_color_hover',
+				)
+			)
+		);
+
+		//______ Transparent Header  Menu Active.
+		$wp_customize->add_setting(
+			'banner_navlink_text_color_active',
+			array(
+				'default'           => $this->defaults['banner_navlink_text_color_active'],
+				'transport'         => 'refresh',
+				'type'              => 'theme_mod',
+				'sanitize_callback' => 'sanitize_hex_color',
+
+			)
+		);
+
+		$wp_customize->add_control(
+			new WP_Customize_Color_Control(
+				$wp_customize,
+				'banner_navlink_text_color_active',
+				array(
+					'label'           => __('Active', 'paddle'),
+					'section'  => 'paddle_hero_and_slider',
+					'active_callback' => 'header_media_selected_hero_transparent_header_on',
+					'settings'        => 'banner_navlink_text_color_active',
+				)
+			)
+		);
+
+			//____ Header for content box.
+		
+			$wp_customize->add_setting(
+				'paddle_hero_section_header_2',
+				array(
+					'transport'         => 'postMessage',
+					'sanitize_callback' => 'paddle_text_sanitization',
+				)
+			);
+	
+			$wp_customize->add_control(
+				new Paddle_Simple_Header_Title_Control(
+					$wp_customize,
+					'paddle_hero_section_header_2',
+					array(
+						'label'   => __('Content Box', 'paddle'),
+						'section'  => 'paddle_hero_and_slider',
+						'active_callback' => 'paddle_hero_option_design_selected',
+						'input_attrs'     => array(
+							'has_dropdown' => false,
+							'label_id' => 'paddle_hero_section_header_2'
+						),
+					)
+				)
+			);
+	
+			// Align banner content for full container.
+			$wp_customize->add_setting(
+				'banner_content_align',
+				array(
+					'default'           => $this->defaults['banner_content_align'],
+					'type'              => 'theme_mod',
+					'sanitize_callback' => 'paddle_radio_sanitization',
+					'capability'        => 'edit_theme_options',
+				)
+			);
+	
+			$wp_customize->add_control(
+				new Paddle_Text_Radio_Button_Custom_Control(
+					$wp_customize,
+					'banner_content_align',
+					array(
+						'label'   => __('Position', 'paddle'),
+						'section' => 'paddle_hero_and_slider',
+						'active_callback' => 'header_media_selected_hero_full_image_content_position',
+						'choices' => array(
+							'left'   => __('Left', 'paddle'),
+							'center' => __('Center', 'paddle'),
+							'right'  => __('Right', 'paddle'),
+						),
+					)
+				)
+			);
+
+			// Align banner content for half container.
+			$wp_customize->add_setting(
+				'banner_content_align_2',
+				array(
+					'default'           => $this->defaults['banner_content_align_2'],
+					'type'              => 'theme_mod',
+					'sanitize_callback' => 'paddle_radio_sanitization',
+					'capability'        => 'edit_theme_options',
+				)
+			);
+	
+			$wp_customize->add_control(
+				new Paddle_Text_Radio_Button_Custom_Control(
+					$wp_customize,
+					'banner_content_align_2',
+					array(
+						'label'   => __('Position', 'paddle'),
+						'section' => 'paddle_hero_and_slider',
+						'active_callback' => 'header_media_selected_hero_half_image_content_position',
+						'choices' => array(
+							'left'   => __('Left', 'paddle'),
+							'right'  => __('Right', 'paddle'),
+						),
+					)
+				)
+			);
+	
+			$wp_customize->add_setting(
+				'banner_content_bgcolor',
+				array(
+					'default'           => $this->defaults['banner_content_bgcolor'],
+					'transport'         => 'refresh',
+					'sanitize_callback' => 'sanitize_hex_color',
+				)
+			);
+			$wp_customize->add_control(
+				'banner_content_bgcolor',
+				array(
+					'label'   => __('Background', 'paddle'),
+					'type'    => 'color',
+					'settings' => 'banner_content_bgcolor',
+					'section'  => 'paddle_hero_and_slider',
+					'active_callback' => 'paddle_hero_option_design_selected',
+				)
+			);
+	
+	
+			// Slider background overlay
+			$wp_customize->add_setting(
+				'banner_content_bg_opacity',
+				array(
+					'default'           => $this->defaults['banner_content_bg_opacity'],
+					'transport'         => 'refresh',
+					'sanitize_callback' => 'absint',
+				)
+			);
+			$wp_customize->add_control(
+				new Paddle_Slider_Opacity_Control(
+					$wp_customize,
+					'banner_content_bg_opacity',
+					array(
+						'label'           => __('Background Opacity', 'paddle'),
+						'section'         => 'paddle_hero_and_slider',
+						'active_callback' => 'paddle_banner_bgcolor_active',
+						'input_attrs'     => array(
+							'min'  => 0,
+							'max'  => 10,
+							'step' => 1,
+						),
+					)
+				)
+			);
+	
+			// Banner border radius .
+			$wp_customize->add_setting(
+				'paddle_banner_border_radius',
+				array(
+					'default'           => $this->defaults['paddle_banner_border_radius'],
+					'sanitize_callback' => 'paddle_switch_sanitization',
+				)
+			);
+	
+			$wp_customize->add_control(
+				new Paddle_Toggle_Switch_Custom_control(
+					$wp_customize,
+					'paddle_banner_border_radius',
+					array(
+						'label'           => __('Border Radius', 'paddle'),
+						'section'         => 'paddle_hero_and_slider',
+						'active_callback' => 'paddle_banner_bgcolor_active',
+					)
+				)
+			);
+	
+			// Box Shadow
+			$wp_customize->add_setting(
+				'paddle_banner_box_shadow',
+				array(
+					'default'           => $this->defaults['paddle_banner_box_shadow'],
+					'sanitize_callback' => 'paddle_switch_sanitization',
+				)
+			);
+	
+			$wp_customize->add_control(
+				new Paddle_Toggle_Switch_Custom_control(
+					$wp_customize,
+					'paddle_banner_box_shadow',
+					array(
+						'label'           => __('Box Shadow', 'paddle'),
+						'section'         => 'paddle_hero_and_slider',
+						'active_callback' => 'paddle_banner_bgcolor_active',
+					)
+				)
+			);
+
+		
 		//____ Header.
 		$wp_customize->add_setting(
 			'paddle_hero_section_header_4',
@@ -5081,143 +5356,50 @@ class paddle_initialise_customizer_settings
 			)
 		);
 
-		//____ Header.
-		
+		//__ Colors
 		$wp_customize->add_setting(
-			'paddle_hero_section_header_2',
+			'banner_title_color',
 			array(
-				'transport'         => 'postMessage',
-				'sanitize_callback' => 'paddle_text_sanitization',
-			)
-		);
-
-		$wp_customize->add_control(
-			new Paddle_Simple_Header_Title_Control(
-				$wp_customize,
-				'paddle_hero_section_header_2',
-				array(
-					'label'   => __('Content Box', 'paddle'),
-					'section'  => 'paddle_hero_and_slider',
-					'active_callback' => 'paddle_hero_option_design_selected',
-				)
-			)
-		);
-
-		// Align Media Header content.
-		$wp_customize->add_setting(
-			'banner_content_align',
-			array(
-				'default'           => $this->defaults['banner_content_align'],
-				'type'              => 'theme_mod',
-				'sanitize_callback' => 'paddle_radio_sanitization',
-				'capability'        => 'edit_theme_options',
-			)
-		);
-
-		$wp_customize->add_control(
-			new Paddle_Text_Radio_Button_Custom_Control(
-				$wp_customize,
-				'banner_content_align',
-				array(
-					'label'   => __('Position', 'paddle'),
-					'section' => 'paddle_hero_and_slider',
-					'active_callback' => 'paddle_hero_option_design_selected',
-					'choices' => array(
-						'left'   => __('Left', 'paddle'),
-						'center' => __('Center', 'paddle'),
-						'right'  => __('Right', 'paddle'),
-					),
-				)
-			)
-		);
-
-		$wp_customize->add_setting(
-			'banner_content_bgcolor',
-			array(
-				'default'           => $this->defaults['banner_content_bgcolor'],
+				'default'           => $this->defaults['banner_title_color'],
 				'transport'         => 'refresh',
 				'sanitize_callback' => 'sanitize_hex_color',
 			)
 		);
 		$wp_customize->add_control(
-			'banner_content_bgcolor',
+			'banner_title_color',
 			array(
-				'label'   => __('Background', 'paddle'),
+				'label'   => __('Title Color', 'paddle'),
 				'type'    => 'color',
-				'settings' => 'banner_content_bgcolor',
+				'settings' => 'banner_title_color',
 				'section'  => 'paddle_hero_and_slider',
 				'active_callback' => 'paddle_hero_option_design_selected',
 			)
 		);
 
-
-		// Slider background overlay
+		// Hero Text color.
 		$wp_customize->add_setting(
-			'banner_content_bg_opacity',
+			'paddle_banner_desc_color',
 			array(
-				'default'           => $this->defaults['banner_content_bg_opacity'],
+				'default'           => $this->defaults['paddle_banner_desc_color'],
 				'transport'         => 'refresh',
-				'sanitize_callback' => 'absint',
-			)
-		);
-		$wp_customize->add_control(
-			new Paddle_Slider_Opacity_Control(
-				$wp_customize,
-				'banner_content_bg_opacity',
-				array(
-					'label'           => __('Background Opacity', 'paddle'),
-					'section'         => 'paddle_hero_and_slider',
-					'active_callback' => 'paddle_banner_bgcolor_active',
-					'input_attrs'     => array(
-						'min'  => 0,
-						'max'  => 10,
-						'step' => 1,
-					),
-				)
-			)
-		);
-
-		// Banner border radius .
-		$wp_customize->add_setting(
-			'paddle_banner_border_radius',
-			array(
-				'default'           => $this->defaults['paddle_banner_border_radius'],
-				'sanitize_callback' => 'paddle_switch_sanitization',
+				'type'              => 'theme_mod',
+				'sanitize_callback' => 'sanitize_hex_color',
 			)
 		);
 
 		$wp_customize->add_control(
-			new Paddle_Toggle_Switch_Custom_control(
+			new WP_Customize_Color_Control(
 				$wp_customize,
-				'paddle_banner_border_radius',
+				'paddle_banner_desc_color',
 				array(
-					'label'           => __('Border Radius', 'paddle'),
-					'section'         => 'paddle_hero_and_slider',
-					'active_callback' => 'paddle_banner_bgcolor_active',
+					'label'    => __('Text Color', 'paddle'),
+					'section'  => 'paddle_hero_and_slider',
+					'settings' => 'paddle_banner_desc_color',
+					'active_callback' => 'paddle_hero_option_design_selected',
 				)
 			)
 		);
 
-		// Box Shadow
-		$wp_customize->add_setting(
-			'paddle_banner_box_shadow',
-			array(
-				'default'           => $this->defaults['paddle_banner_box_shadow'],
-				'sanitize_callback' => 'paddle_switch_sanitization',
-			)
-		);
-
-		$wp_customize->add_control(
-			new Paddle_Toggle_Switch_Custom_control(
-				$wp_customize,
-				'paddle_banner_box_shadow',
-				array(
-					'label'           => __('Box Shadow', 'paddle'),
-					'section'         => 'paddle_hero_and_slider',
-					'active_callback' => 'paddle_banner_bgcolor_active',
-				)
-			)
-		);
 
 
 		//____ Header.
@@ -5234,7 +5416,7 @@ class paddle_initialise_customizer_settings
 				$wp_customize,
 				'paddle_hero_section_header_5',
 				array(
-					'label'   => __('Button', 'paddle'),
+					'label'   => __('Content Button', 'paddle'),
 					'section'  => 'paddle_hero_and_slider',
 					'active_callback' => 'paddle_hero_option_design_selected',
 				)
@@ -7152,6 +7334,24 @@ class paddle_initialise_customizer_settings
 				'label'   => __('Accent', 'paddle'),
 				'section' => 'paddle_theme_color_section',
 				'type'    => 'color',
+			)
+		);
+
+		$wp_customize->add_setting(
+			'paddle_theme_color_body_bg',
+			array(
+				'default'           => $this->defaults['paddle_theme_color_body_bg'],
+				'transport'         => 'refresh',
+				'sanitize_callback' => 'sanitize_hex_color',
+			)
+		);
+		$wp_customize->add_control(
+			'paddle_theme_color_body_bg',
+			array(
+				'label'   => __('Body Text color', 'paddle'),
+				'section' => 'paddle_theme_color_section',
+				'type'    => 'color',
+				'settings' => 'paddle_theme_color_body_bg'
 			)
 		);
 

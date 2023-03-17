@@ -597,6 +597,29 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 * The type of control being rendered
 		 */
 		public $type = 'simple_header_title';
+
+			/**
+		 * Array of info to display
+		 */
+		private $has_dropdown = false;
+		private $label_id  = '';
+
+		/**
+		 * Constructor
+		 */
+		public function __construct( $manager, $id, $args = array(), $options = array() ) {
+			parent::__construct( $manager, $id, $args );
+
+			if ( isset( $this->input_attrs['has_dropdown'] ) && $this->input_attrs['has_dropdown'] ) {
+				$this->has_dropdown = true;
+			}
+
+			if ( isset( $this->input_attrs['label_id'] ) && '' !== $this->input_attrs['label_id'] ) {
+				$this->label_id = $this->input_attrs['label_id'];
+			}
+
+		}
+
 		/**
 		 * Render the control in the customizer
 		 */
@@ -621,8 +644,10 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 			);
 			?>
 			<div class="simple-notice-custom-control">
-				<?php if ( ! empty( $this->label ) ) { ?>
+				<?php if ( ! empty( $this->label ) && !$this->has_dropdown ) { ?>
 					<span class="customize-control-title paddle-simple-header-title"><?php echo esc_html( $this->label ); ?></span>
+				<?php } elseif($this->has_dropdown && !empty($this->label_id)) { ?>
+					<label for="<?php echo esc_html($this->label_id);?>" class="customize-control-title paddle-simple-header-title has-label-toggle"><?php echo esc_html( $this->label ); ?></label>
 				<?php } ?>
 				<?php if ( ! empty( $this->description ) ) { ?>
 					<span class="customize-control-description"><?php echo wp_kses( $this->description, $allowed_html ); ?></span>
@@ -1516,9 +1541,141 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		function header_media_selected_hero_half_image( $control ) {
 
 			if ( 'hero' === $control->manager->get_setting( 'header_media_select' )->value() 
-				&& 'general' === $control->manager->get_setting( 'title_options_hero' )->value()
-				&& 'general' === $control->manager->get_setting( 'title_options_hero' )->value() 
-				&& 1 === $control->manager->get_setting( 'banner_half_image' )->value() 
+				&& 'design' === $control->manager->get_setting( 'title_options_hero' )->value()
+				&& 'half' === $control->manager->get_setting( 'banner_image_style' )->value()
+				) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+	endif;
+
+	if ( ! function_exists( 'header_media_selected_hero_full_image' ) ) :
+
+		/**
+		 * Check Hero is selected
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param WP_Customize_Control $control WP_Customize_Control instance.
+		 *
+		 * @return bool Whether the control is active to the current preview.
+		 */
+		function header_media_selected_hero_full_image( $control ) {
+
+			if ( 'hero' === $control->manager->get_setting( 'header_media_select' )->value() 
+				&& 'design' === $control->manager->get_setting( 'title_options_hero' )->value()
+				&& 'full' === $control->manager->get_setting( 'banner_image_style' )->value()
+				) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+	endif;
+
+	if ( ! function_exists( 'header_media_selected_hero_half_image_content_position' ) ) :
+
+		/**
+		 * Check Hero is selected
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param WP_Customize_Control $control WP_Customize_Control instance.
+		 *
+		 * @return bool Whether the control is active to the current preview.
+		 */
+		function header_media_selected_hero_half_image_content_position( $control ) {
+
+			if ( 'hero' === $control->manager->get_setting( 'header_media_select' )->value() 
+				&& 'design' === $control->manager->get_setting( 'title_options_hero' )->value()
+				&& 'half' === $control->manager->get_setting( 'banner_image_style' )->value()
+				&& 1 === $control->manager->get_setting( 'banner_fit_image' )->value()
+				) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+	endif;
+
+
+	if ( ! function_exists( 'header_media_selected_hero_full_image_content_position' ) ) :
+
+		/**
+		 * Check Hero is selected
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param WP_Customize_Control $control WP_Customize_Control instance.
+		 *
+		 * @return bool Whether the control is active to the current preview.
+		 */
+		function header_media_selected_hero_full_image_content_position( $control ) {
+			$full_image = 'hero' === $control->manager->get_setting( 'header_media_select' )->value() 
+			&& 'design' === $control->manager->get_setting( 'title_options_hero' )->value()
+			&& 'full' === $control->manager->get_setting( 'banner_image_style' )->value();
+			
+
+			$half_image = 'hero' === $control->manager->get_setting( 'header_media_select' )->value() 
+			&& 'design' === $control->manager->get_setting( 'title_options_hero' )->value()
+			&& 0 === $control->manager->get_setting( 'banner_fit_image' )->value();
+
+			if ( $full_image || $half_image ) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+	endif;
+
+	if ( ! function_exists( 'header_media_selected_hero_half_image_full_height' ) ) :
+
+		/**
+		 * Check Hero is selected
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param WP_Customize_Control $control WP_Customize_Control instance.
+		 *
+		 * @return bool Whether the control is active to the current preview.
+		 */
+		function header_media_selected_hero_half_image_full_height( $control ) {
+
+			if ( 'hero' === $control->manager->get_setting( 'header_media_select' )->value() 
+				&& 'design' === $control->manager->get_setting( 'title_options_hero' )->value()
+				&& 'half' === $control->manager->get_setting( 'banner_image_style' )->value()
+				&& 0 === $control->manager->get_setting( 'banner_fit_image' )->value()
+				) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+	endif;
+
+	if ( ! function_exists( 'header_media_selected_hero_transparent_header_on' ) ) :
+
+		/**
+		 * Check Hero is selected
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param WP_Customize_Control $control WP_Customize_Control instance.
+		 *
+		 * @return bool Whether the control is active to the current preview.
+		 */
+		function header_media_selected_hero_transparent_header_on( $control ) {
+
+			if ( 'hero' === $control->manager->get_setting( 'header_media_select' )->value() 
+				&& 'design' === $control->manager->get_setting( 'title_options_hero' )->value()
+				&& 1 === $control->manager->get_setting( 'banner_full_image_header_transparent' )->value()
 				) {
 				return true;
 			} else {
