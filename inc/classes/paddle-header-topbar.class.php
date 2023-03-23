@@ -22,15 +22,8 @@ class Paddle_Header_TopBar {
 	}
 
 	public static function get_menu() {
-		$selected_menu = get_theme_mod( 'topbar_content_menu', PADDLE_DEFAULT_OPTION['topbar_content_menu'] );
-
-		if( !empty($selected_menu) && '' !== $selected_menu) {
-			$menu_args = wp_get_nav_menu_object( esc_attr($selected_menu) );
 		
-			self::$menu = wp_get_nav_menu_items($menu_args->term_id);
-		}
-		
-		if(!empty(self::$menu) && is_array(self::$menu)) { ?>
+		if(!empty(self::$menu) && is_array(self::$menu)) {  ?>
 		<ul class="ul-content d-flex list-inline m-0">
 			<?php 
 				foreach(self::$menu as $item) {
@@ -48,6 +41,15 @@ class Paddle_Header_TopBar {
 	}
 
 	public static function have_menu() {
+
+		$selected_menu = get_theme_mod( 'topbar_content_menu', PADDLE_DEFAULT_OPTION['topbar_content_menu'] );
+
+		if( !empty($selected_menu) && '' !== $selected_menu) {
+			$menu_args = wp_get_nav_menu_object( esc_attr($selected_menu) );
+		
+			self::$menu = wp_get_nav_menu_items($menu_args->term_id);
+		}
+
 		if(!empty(self::$menu) && is_array(self::$menu)) {
 			return true;
 		}

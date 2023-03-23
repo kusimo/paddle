@@ -210,13 +210,12 @@ class paddle_initialise_customizer_settings
 		);
 
 		/**
-		 * Add Header Buttons
+		 * Add Transparent Header Section
 		 */
 		$wp_customize->add_section(
-			'paddle_theme_header_buttons_options',
+			'paddle_theme_header_transparent_options',
 			array(
-				'title'       => __('CTA Button', 'paddle'),
-				'description' => esc_html__('Header Buttons', 'paddle'),
+				'title'       => __('Transparent Header', 'paddle'),
 				'panel'       => 'paddle_theme_header_option',
 			)
 		);
@@ -725,8 +724,7 @@ class paddle_initialise_customizer_settings
 			)
 		);
 
-		// Header Layout
-		// Title Options
+		// Header Layout (Tab)
 		$wp_customize->add_setting(
 			'title_options_header',
 			array(
@@ -1771,6 +1769,187 @@ class paddle_initialise_customizer_settings
 			)
 		);
 
+		//______________Transparent Header Global________.
+
+		// Tab Navigation
+		$wp_customize->add_setting(
+			'title_options_header_transparent',
+			array(
+				'default'           => 'general',
+				'sanitize_callback' => 'paddle_radio_sanitization',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Paddle_Option_Buttons_Title_Control(
+				$wp_customize,
+				'title_options_header_transparent',
+				array(
+					'label'    => __('General', 'paddle'),
+					'section'  => 'paddle_theme_header_transparent_options',
+					'type'     => 'select',
+					'priority' => 1,
+					'choices'  => array(
+						'general' => __('General', 'paddle'),
+						'design'  => __('Design', 'paddle'),
+					),
+				)
+			)
+		);
+
+		$wp_customize->add_setting(
+			'paddle_header_transparent_home_only',
+			array(
+				'default'           => $this->defaults['paddle_header_transparent_home_only'],
+				'transport'         => 'refresh',
+				'sanitize_callback' => 'paddle_switch_sanitization',
+			)
+		);
+		$wp_customize->add_control(
+			new Paddle_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'paddle_header_transparent_home_only',
+				array(
+					'label'           => __('Enable on Home page Only', 'paddle'),
+					'section'         => 'paddle_theme_header_transparent_options',
+					'active_callback'   => 'paddle_transparent_header_general'
+				)
+			)
+		);
+
+		$wp_customize->add_setting(
+			'paddle_header_transparent_global',
+			array(
+				'default'           => $this->defaults['paddle_header_transparent_global'],
+				'transport'         => 'refresh',
+				'sanitize_callback' => 'paddle_switch_sanitization',
+			)
+		);
+		$wp_customize->add_control(
+			new Paddle_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'paddle_header_transparent_global',
+				array(
+					'label'           => __('Enable on Complete Site', 'paddle'),
+					'section'         => 'paddle_theme_header_transparent_options',
+					'active_callback'   => 'paddle_transparent_header_enabled_home_only'
+				)
+			)
+		);
+		
+		$wp_customize->add_setting(
+			'paddle_header_transparent_arc',
+			array(
+				'default'           => $this->defaults['paddle_header_transparent_arc'],
+				'transport'         => 'refresh',
+				'sanitize_callback' => 'paddle_switch_sanitization',
+			)
+		);
+		$wp_customize->add_control(
+			new Paddle_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'paddle_header_transparent_arc',
+				array(
+					'label'           => __('Enable on 404, Search & Archives', 'paddle'),
+					'section'         => 'paddle_theme_header_transparent_options',
+					'active_callback'   => 'paddle_transparent_header_enabled'
+					//'description' => esc_html__( 'This setting is not recommended, but you can still enable it.', 'paddle' ),
+				)
+			)
+		);
+		
+		$wp_customize->add_setting(
+			'paddle_header_transparent_post',
+			array(
+				'default'           => $this->defaults['paddle_header_transparent_post'],
+				'transport'         => 'refresh',
+				'sanitize_callback' => 'paddle_switch_sanitization',
+			)
+		);
+		$wp_customize->add_control(
+			new Paddle_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'paddle_header_transparent_post',
+				array(
+					'label'           => __('Disable on Blog Posts', 'paddle'),
+					'section'         => 'paddle_theme_header_transparent_options',
+					'active_callback'   => 'paddle_transparent_header_enabled'
+				)
+			)
+		);
+		
+		$wp_customize->add_setting(
+			'paddle_header_transparent_page',
+			array(
+				'default'           => $this->defaults['paddle_header_transparent_page'],
+				'transport'         => 'refresh',
+				'sanitize_callback' => 'paddle_switch_sanitization',
+			)
+		);
+		$wp_customize->add_control(
+			new Paddle_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'paddle_header_transparent_page',
+				array(
+					'label'           => __('Disable on Pages', 'paddle'),
+					'section'         => 'paddle_theme_header_transparent_options',
+					'active_callback'   => 'paddle_transparent_header_enabled'
+				)
+			)
+		);
+		//____ Header (Visibility).
+		$wp_customize->add_setting(
+			'paddle_transparent_section_header_1',
+			array(
+				'transport'         => 'postMessage',
+				'sanitize_callback' => 'paddle_text_sanitization',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Paddle_Simple_Header_Title_Control(
+				$wp_customize,
+				'paddle_transparent_section_header_1',
+				array(
+					'label'   => __('Visibility', 'paddle'),
+					'section' => 'paddle_theme_header_transparent_options',
+					'active_callback'   => 'paddle_transparent_header_general',
+				)
+			)
+		);
+
+		
+		//____ Desktop + Mobile Transparent.
+		$wp_customize->add_setting(
+			'paddle_header_transparent_visible',
+			array(
+				'default'           => $this->defaults['paddle_header_transparent_visible'],
+				'transport'         => 'refresh',
+				'sanitize_callback' => 'paddle_radio_sanitization',
+			)
+		);
+		$wp_customize->add_control(
+			new Paddle_Text_Radio_Button_Custom_Control(
+				$wp_customize,
+				'paddle_header_transparent_visible',
+				array(
+					'label'   => __('Show On', 'paddle'),
+					'section' => 'paddle_theme_header_transparent_options',
+					'active_callback'   => 'paddle_transparent_header_general',
+					'choices' => array(
+						'desktop'  => __('Desktop', 'paddle'),
+						'desktop_mobile' => __('Desktop + Mobile', 'paddle'),
+					),
+				)
+			)
+		);
+
+
+
+			
+
+
+
 		//______________________ TOPBAR_______________.
 
 		// Select Title Options
@@ -2020,6 +2199,33 @@ class paddle_initialise_customizer_settings
 				)
 			)
 		);
+
+		// Top bar item postion draggable pill
+		$wp_customize->add_setting( 'top_bar_items_position',
+			array(
+				'default' => $this->defaults['top_bar_items_position'],
+				'transport' => 'refresh',
+				'sanitize_callback' => 'paddle_text_sanitization'
+			)
+		);
+		$wp_customize->add_control( new Paddle_Pill_Checkbox_Custom_Control( $wp_customize, 'top_bar_items_position',
+			array(
+				'label' => __( 'Items Position', 'paddle' ),
+				'description' => esc_html__( 'Arrange how the topbar items appear. Drag to change item position', 'paddle' ),
+				'section'         => 'paddle_header_top_bar',
+				'active_callback' => 'paddle_top_header_option_settings',
+				'input_attrs' => array(
+					'sortable' => true,
+					'fullwidth' => true,
+					'checkbox_disable' => true,
+				),
+				'choices' => array(
+					'info' => __( 'Phone / Email', 'paddle' ),
+					'content' => __( 'Menu / Content', 'paddle' ),
+					'social' => __( 'Social Buttons', 'paddle'  ),
+				)
+			)
+		) );
 
 		// Title
 		$wp_customize->add_setting(
@@ -7348,7 +7554,7 @@ class paddle_initialise_customizer_settings
 		$wp_customize->add_control(
 			'paddle_theme_color_body_bg',
 			array(
-				'label'   => __('Body Text color', 'paddle'),
+				'label'   => __('Body Background color', 'paddle'),
 				'section' => 'paddle_theme_color_section',
 				'type'    => 'color',
 				'settings' => 'paddle_theme_color_body_bg'

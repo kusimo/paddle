@@ -854,6 +854,7 @@ if ( ! function_exists( 'paddle_header_top_bar' ) ) {
 		$selected_content_menu = get_theme_mod( 'topbar_content_menu', PADDLE_DEFAULT_OPTION['topbar_content_menu'] );
 		$selected_content_content = get_theme_mod( 'topbar_content', '' );
 		$topbar_active_content_selected = get_theme_mod( 'topbar_content_select', PADDLE_DEFAULT_OPTION['topbar_content_select'] ); 
+		$items_position = get_theme_mod( 'top_bar_items_position', PADDLE_DEFAULT_OPTION['top_bar_items_position'] ); 
 		$social_urls = get_theme_mod( 'social_urls', PADDLE_DEFAULT_OPTION['social_urls'] ); 
 		$have_socials_url = array();
 
@@ -865,13 +866,25 @@ if ( ! function_exists( 'paddle_header_top_bar' ) ) {
 		if($hide_info_mobile && $hide_social_mobile && $hide_content_mobile) {
 			$hide_all_on_mobile = true;
 		}
+
+		$items_order = explode(',', $items_position);
+		$order_social_item = '';
+		$order_info = '';
+		$order_content = '';
+
+		if( !empty($items_order)) {
+			$order_social_item = array_search('social', $items_order); 
+			$order_info = array_search('info', $items_order); 
+			$order_content = array_search('content', $items_order); 
+		}
+		
 		
 		?>
 		<div id="top-bar-v1" class="has-border-bottom<?php echo esc_attr($hide_all_on_mobile ? ' d-none d-lg-block' : ''); ?>">
 			<div class="container top-bar--container">
 			<div class="top-bar--wrapper">
 				<?php if ('' !== $topbar->get_contact_email() ||  '' !== $topbar->get_contact_number() ) : ?>
-					<div class="top-bar--wrapper-main-info<?php echo esc_attr(1 === $hide_info_mobile ? ' d-none d-lg-block' : '') ;?>">
+					<div class="top-bar--wrapper-main-info<?php echo esc_attr(1 === $hide_info_mobile ? ' d-none d-lg-block' : '') ; echo esc_attr('' !== $order_info ? ' order-'.$order_info : ''); ?>">
 						<ul class="d-flex list-inline m-0">
 							
 						<?php if ( '' !== $topbar->get_contact_number() ) : ?>
@@ -895,8 +908,8 @@ if ( ! function_exists( 'paddle_header_top_bar' ) ) {
 					</div><!-- .topbar-left -->
 				<?php endif; // End is_left_panel_active. ?>
 
-				<?php if( $topbar->have_menu() || strlen(trim($selected_content_content))) : ?>
-					<div class="top-bar--wrapper-main-content<?php echo esc_attr(1 === $hide_content_mobile ? ' d-none d-lg-block' : '') ;?>">
+				<?php if( $topbar->have_menu() && !empty($selected_content_content) || strlen(trim($selected_content_content)) && 'content' === $topbar_active_content_selected ) : ?>
+					<div class="top-bar--wrapper-main-content<?php echo esc_attr(1 === $hide_content_mobile ? ' d-none d-lg-block' : '') ;  echo esc_attr('' !== $order_content ? ' order-'.$order_content : ''); ?>">
 						<?php if ('menu' === $topbar_active_content_selected ) {
 							$topbar->get_menu();
 						} else { ?>
@@ -907,7 +920,7 @@ if ( ! function_exists( 'paddle_header_top_bar' ) ) {
 				<?php endif; ?>
 				
 				<?php if (!empty($have_socials_url) ) : ?>
-				<div class="top-bar--wrapper-main-social<?php echo esc_attr(1 === $hide_social_mobile ? ' d-none d-lg-block' : '');?>">
+				<div class="top-bar--wrapper-main-social<?php echo esc_attr(1 === $hide_social_mobile ? ' d-none d-lg-block' : '');  echo esc_attr('' !== $order_social_item ? ' order-'.$order_social_item : ''); ?>">
 					<?php if ( 'social' === $topbar::$topbar_select ) :  $paddle_social_urls  = explode( ',', get_theme_mod( 'social_urls', '' ) ); ?>	
 						<?php paddle_social_menu_list($paddle_social_urls); ?>
 					<?php endif; ?>

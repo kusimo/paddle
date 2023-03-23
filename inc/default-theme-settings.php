@@ -80,6 +80,7 @@ if ( ! function_exists( 'paddle_generate_defaults' ) ) {
 			'paddle_navlink_text_color_active'        => get_theme_mod( 'paddle_theme_color_links_active', '#2a3a51' ),
 
 			'enable_top_bar'                          => 0,
+			'top_bar_items_position'                    => 'info,content,social',
 			'enable_top_bar_on_mobile'                => 0,
 			'topbar_border_bottom' 					  => 1,
 			'topbar_bgcolor' 						  => '',
@@ -296,6 +297,15 @@ if ( ! function_exists( 'paddle_generate_defaults' ) ) {
 			'banner_navlink_text_color'               => get_theme_mod( 'paddle_theme_color_body_text', '#2a3a51' ),
 			'banner_navlink_text_color_hover'         => get_theme_mod( 'paddle_theme_color_links_hover', '#0357ab' ),
 			'banner_navlink_text_color_active'        => get_theme_mod( 'paddle_theme_color_links_active', '#2a3a51' ),
+
+
+			'paddle_header_transparent_home_only'			 => 0,
+			'paddle_header_transparent_global'			 => 0,
+			'paddle_header_transparent_arc'			 => 0,
+			'paddle_header_transparent_post'			 => 1,
+			'paddle_header_transparent_page'			 => 1,
+			'paddle_header_transparent_visible'			 => 'desktop_mobile',
+
 			
 		);
 

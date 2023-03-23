@@ -722,9 +722,15 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 */
 		private $fullwidth = false;
 		/**
+		 * $checkbox_disable - Use the sortable for sorting only. This turns turns the checkbox on.
+		 *  User will not be able to uncheck. Use for arranging items. Default = false
+		 */
+		private $checkbox_disable = false;
+		/**
 		 * The sample to display. This is html code
 		 */
 		private $sample = null;
+
 		/**
 		 * Constructor
 		 */
@@ -737,6 +743,10 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 			// Check if the pills should be full width
 			if ( isset( $this->input_attrs['fullwidth'] ) && $this->input_attrs['fullwidth'] ) {
 				$this->fullwidth = true;
+			}
+			// Check if the pill is used to positioning only
+			if ( isset( $this->input_attrs['checkbox_disable'] ) && $this->input_attrs['checkbox_disable'] ) {
+				$this->checkbox_disable = true;
 			}
 			// Check if the pills should show sample
 			if ( isset( $this->input_attrs['sample'] ) && '' !== $this->input_attrs['sample'] ) {
@@ -784,10 +794,15 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 				<?php } ?>
 				
 				<input type="hidden" id="<?php echo esc_attr( $this->id ); ?>" name="<?php echo esc_attr( $this->id ); ?>" value="<?php echo esc_attr( $this->value() ); ?>" class="customize-control-sortable-pill-checkbox" <?php $this->link(); ?> />
-				<div class="sortable_pills<?php echo ( $this->sortable ? ' sortable' : '' ) . ( $this->fullwidth ? ' fullwidth_pills' : '' ); ?>">
+				<div class="sortable_pills<?php echo ( $this->sortable ? ' sortable' : '' ) . ( $this->fullwidth ? ' fullwidth_pills' : '' )  . ( $this->checkbox_disable ? ' pill-checkbox--disabled' : '' ); ?>">
 				<?php foreach ( $reordered_choices as $key => $value ) { ?>
 					<label class="checkbox-label">
-						<input type="checkbox" name="<?php echo esc_attr( $key ); ?>" value="<?php echo esc_attr( $key ); ?>" <?php checked( in_array( esc_attr( $key ), $saved_choices, true ), true ); ?> class="sortable-pill-checkbox"/>
+						<?php if ( $this->sortable && $this->checkbox_disable ) { ?>
+						<input type="checkbox" name="<?php echo esc_attr( $key ); ?>" value="<?php echo esc_attr( $key ); ?>" checked="checked" disabled="disabled" class="sortable-pill-checkbox"/>
+						<?php } else {  ?>	
+							<input type="checkbox" name="<?php echo esc_attr( $key ); ?>" value="<?php echo esc_attr( $key ); ?>" <?php checked( in_array( esc_attr( $key ), $saved_choices, true ), true ); ?> class="sortable-pill-checkbox"/>
+						<?php } ?>
+
 						<span class="sortable-pill-title"><?php echo esc_attr( $value ); ?></span>
 						<?php if ( $this->sortable && $this->fullwidth ) { ?>
 							<span class="dashicons dashicons-sort"></span>
@@ -2596,6 +2611,101 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 			}
 		}
 	}
+
+	if ( ! function_exists( 'paddle_transparent_header_general' ) ) {
+
+		/**
+		 * Check transparent header general selected.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param WP_Customize_Control $control WP_Customize_Control instance.
+		 *
+		 * @return bool Whether the control is active to the current preview.
+		 */
+		function paddle_transparent_header_general( $control ) {
+
+			if ( 'general' === $control->manager->get_setting( 'title_options_header_transparent' )->value() 
+			) 
+			{
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
+	if ( ! function_exists( 'paddle_transparent_header_design' ) ) {
+
+		/**
+		 * Check transparent header general selected.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param WP_Customize_Control $control WP_Customize_Control instance.
+		 *
+		 * @return bool Whether the control is active to the current preview.
+		 */
+		function paddle_transparent_header_design( $control ) {
+
+			if ( 'design' === $control->manager->get_setting( 'title_options_header_transparent' )->value() 
+			) 
+			{
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
+	if ( ! function_exists( 'paddle_transparent_header_enabled' ) ) {
+
+		/**
+		 * Check transparent header is enabled.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param WP_Customize_Control $control WP_Customize_Control instance.
+		 *
+		 * @return bool Whether the control is active to the current preview.
+		 */
+		function paddle_transparent_header_enabled( $control ) {
+
+			if ( 1 === $control->manager->get_setting( 'paddle_header_transparent_global' )->value() 
+				&& 'general' === $control->manager->get_setting( 'title_options_header_transparent' )->value() 
+			) 
+			{
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
+	if ( ! function_exists( 'paddle_transparent_header_enabled_home_only' ) ) {
+
+		/**
+		 * Check transparent header is enabled.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param WP_Customize_Control $control WP_Customize_Control instance.
+		 *
+		 * @return bool Whether the control is active to the current preview.
+		 */
+		function paddle_transparent_header_enabled_home_only( $control ) {
+
+			if ( 0 === $control->manager->get_setting( 'paddle_header_transparent_home_only' )->value() 
+				&& 'general' === $control->manager->get_setting( 'title_options_header_transparent' )->value() 
+			) 
+			{
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
 
 	
 }

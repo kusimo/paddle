@@ -427,6 +427,15 @@ li.customize-control-image_radio_button .paddle-fw-label label.radio-button-labe
 	margin-bottom: 5px
 }
 
+.sortable_pills.sortable.pill-checkbox--disabled {
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+.pill-checkbox--disabled .checkbox-label > .sortable-pill-title {
+	cursor: grab!important;
+}
+
 .pill_checkbox_control .sortable .checkbox-label > .sortable-pill-title {
 	cursor: move;
 }
@@ -438,6 +447,15 @@ li.customize-control-image_radio_button .paddle-fw-label label.radio-button-labe
 .pill_checkbox_control .checkbox-label > input:checked + .sortable-pill-title {
 	background-color: #2084bd;
 	color: #fff;
+}
+.pill-checkbox--disabled .checkbox-label > input:checked + .sortable-pill-title {
+	background-color: #ffffff;
+    color: #3b3b3b;
+	border-bottom: 3px solid #2084bd;
+    padding: 10px 12px;
+    margin-bottom: 0px;
+    border: 1px solid #d2d2d2;
+	border-radius: 0;
 }
 
 .pill_checkbox_control .checkbox-label > input:checked + .sortable-pill-title:before {
@@ -458,6 +476,18 @@ li.customize-control-image_radio_button .paddle-fw-label label.radio-button-labe
 	height: 20px;
 	width: 20px;
 }
+
+
+.pill-checkbox--disabled .checkbox-label > input:checked + .sortable-pill-title:before {
+	content: none;
+}
+.pill-checkbox--disabled .checkbox-label {
+	display: flex;
+	gap: 5px;
+	align-items: center;
+	margin-bottom: 5px;
+}
+
 
 .pill_checkbox_control .fullwidth_pills .checkbox-label > .sortable-pill-title {
 	width: 100%;
@@ -494,6 +524,9 @@ li.customize-control-image_radio_button .paddle-fw-label label.radio-button-labe
 	margin: 5px 0 0 1px;
 	color: #d4d4d4;
 	cursor: move;
+}
+.pill-checkbox--disabled .dashicons-sort {
+	color: #434343;
 }
 
 .pill_checkbox_control .dashicons-sort:hover {
@@ -688,6 +721,7 @@ ul#sub-accordion-section-paddle_post_and_pages .slider-custom-control:first-chil
 .toggle-switch-control .customize-control-title {
 	display: inline-block;
 	font-weight: normal;
+	max-width: 167px;
 }
 
 li[id^="customize-control-paddle_"]
@@ -889,6 +923,7 @@ li#customize-control-paddle_enable_blog_tag .toggle-switch-control.toggle-switch
 }
 
 .sortable div {
+	position: relative;
 	cursor: move;
 }
 
@@ -896,7 +931,7 @@ li#customize-control-paddle_enable_blog_tag .toggle-switch-control.toggle-switch
 	position: absolute;
     right: 0;
     transform: translateY(50%);
-	color: #d4d4d4;
+	color: #4c4c4c;
 }
 .is-multiple-input .customize-control-sortable-repeater-delete {
 	height: 100%;
@@ -923,12 +958,13 @@ li#customize-control-paddle_enable_blog_tag .toggle-switch-control.toggle-switch
 
 .repeater .dashicons-sort {
 	margin: 8px 5px 0 5px;
-	color: #d4d4d4;
+	color: #565454;
 	position: absolute;
     left: -15px;
     transform: translateY(100%);
 	top: 0;
     margin: 0;
+	border: 1px solid;
 }
 .is-multiple-input .dashicons-sort {
 	height: 100%;

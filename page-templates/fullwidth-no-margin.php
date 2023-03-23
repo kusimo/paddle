@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Template Name: Full Width No Margin
+ * Template Name:   
  * The template for displaying full width page with no padding
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-page
