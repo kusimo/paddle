@@ -64,12 +64,18 @@
 							<a href="<?php echo ( esc_url_raw( $paddle_banner_btn_1_link ) ? esc_url_raw( $paddle_banner_btn_1_link ) : esc_attr($paddle_banner_btn_1_link) ); ?>"
 								role="link" class="button button--primary">
 								<span><?php echo esc_attr( $paddle_banner_btn_1 ); ?></span>
+								<?php if (1 === absint($paddle_banner_arrow_button)) {
+									 echo wp_kses(paddle_get_svg_icon('arrow-right'), paddle_svg_allowedHtml() );
+								} ?>
 							</a>
 							<?php endif; ?>
 							<?php if ( ! empty( $paddle_banner_btn_2 ) ) : ?>
 							<a href="<?php echo ( esc_url_raw( $paddle_banner_btn_2_link ) ? esc_url_raw( $paddle_banner_btn_2_link ) : esc_attr($paddle_banner_btn_2_link) ); ?>"
 								role="link" class="button button--primary">
 								<span><?php echo esc_attr( $paddle_banner_btn_2 ); ?></span>
+								<?php if (1 === absint($paddle_banner_arrow_button)) {
+									 echo wp_kses(paddle_get_svg_icon('arrow-right'), paddle_svg_allowedHtml() );
+								} ?>
 							</a>
 							<?php endif; ?>
 						</div>

@@ -845,7 +845,7 @@ class paddle_initialise_customizer_settings
 				array(
 					'label'           => __('Custom Width', 'paddle'),
 					'section'         => 'paddle_theme_header_options',
-					'active_callback' => 'paddle_header_desktop_selected',
+					'active_callback' => 'paddle_header_desktop_selected_custom_width',
 					'input_attrs'     => array(
 						'min'  => 1200,
 						'max'  => 2500,
@@ -1177,7 +1177,7 @@ class paddle_initialise_customizer_settings
 				$wp_customize,
 				'header_logo_padding',
 				array(
-					'label'           => __('Adjust Logo Padding', 'paddle'),
+					'label'           => __('Logo Padding Top / Bottom', 'paddle'),
 					'section'         => 'paddle_theme_header_options',
 					'active_callback' => 'paddle_header_desktop_selected',
 					'input_attrs'     => array(
@@ -1443,6 +1443,31 @@ class paddle_initialise_customizer_settings
 			)
 		);
 
+		// Menu Container Background color
+		$wp_customize->add_setting(
+			'menu_container_bg_color',
+			array(
+				'default'           => $this->defaults['menu_container_bg_color'],
+				'transport'         => 'refresh',
+				'type'              => 'theme_mod',
+				'sanitize_callback' => 'sanitize_hex_color',
+
+			)
+		);
+
+		$wp_customize->add_control(
+			new WP_Customize_Color_Control(
+				$wp_customize,
+				'menu_container_bg_color',
+				array(
+					'label'           => __('Container Background Color', 'paddle'),
+					'section'         => 'paddle_theme_header_options',
+					'active_callback' => 'paddle_using_header_1_4_desktop_selected',
+					'settings'        => 'menu_container_bg_color',
+				)
+			)
+		);
+
 		// Notice setting and control for displaying a message about header style menu background colour
 		$wp_customize->add_setting(
 			'theme_using_header_two',
@@ -1572,7 +1597,7 @@ class paddle_initialise_customizer_settings
 				$wp_customize,
 				'paddle_header_section_title_7',
 				array(
-					'label'           => __('Call To Action', 'paddle'),
+					'label'           => __('Menu CTA Button', 'paddle'),
 					'section'         => 'paddle_theme_header_options',
 					'active_callback' => 'paddle_header_desktop_selected',
 				)
@@ -1682,7 +1707,6 @@ class paddle_initialise_customizer_settings
 				'label'           => esc_html__('CTA Text', 'paddle'),
 				'section'         => 'paddle_theme_header_options',
 				'type'            => 'text',
-				'priority'        => 50,
 				'input_attrs'     => array(
 					'style'       => 'border: 2px solid #e6e6e6',
 					'placeholder' => __('Enter Text...', 'paddle'),
@@ -1690,6 +1714,136 @@ class paddle_initialise_customizer_settings
 				'active_callback' => 'paddle_header_desktop_selected_cta_enab',
 			)
 		);
+
+		$wp_customize->add_setting(
+			'menu_cta_bgcolor',
+			array(
+				'default'           => $this->defaults['menu_cta_bgcolor'],
+				'transport'         => 'refresh',
+				'sanitize_callback' => 'sanitize_hex_color',
+			)
+		);
+		$wp_customize->add_control(
+			'menu_cta_bgcolor',
+			array(
+				'label'   => __('Button Background', 'paddle'),
+				'type'    => 'color',
+				'settings' => 'menu_cta_bgcolor',
+				'section'         => 'paddle_theme_header_options',
+				'active_callback' => 'paddle_header_desktop_selected',
+			)
+		);
+
+		//___ background opacity
+		$wp_customize->add_setting(
+			'menu_cta_bg_opacity',
+			array(
+				'default'           => $this->defaults['menu_cta_bg_opacity'],
+				'transport'         => 'refresh',
+				'sanitize_callback' => 'absint',
+			)
+		);
+		$wp_customize->add_control(
+			new Paddle_Slider_Opacity_Control(
+				$wp_customize,
+				'menu_cta_bg_opacity',
+				array(
+					'label'           => __('Background Opacity', 'paddle'),
+					'section'         => 'paddle_theme_header_options',
+					'active_callback' => 'paddle_header_desktop_selected',						
+					'input_attrs'     => array(
+						'min'  => 0,
+						'max'  => 10,
+						'step' => 1,
+					),
+				)
+			)
+		);
+
+		$wp_customize->add_setting(
+			'menu_cta_link_color',
+			array(
+				'default'           => $this->defaults['menu_cta_link_color'],
+				'transport'         => 'refresh',
+				'sanitize_callback' => 'sanitize_hex_color',
+			)
+		);
+		$wp_customize->add_control(
+			'menu_cta_link_color',
+			array(
+				'label'   => __('Button Text Color', 'paddle'),
+				'type'    => 'color',
+				'settings' => 'menu_cta_link_color',
+				'section'         => 'paddle_theme_header_options',
+				'active_callback' => 'paddle_header_desktop_selected',
+			)
+		);
+
+		$wp_customize->add_setting(
+			'menu_cta_link_hover_color',
+			array(
+				'default'           => $this->defaults['menu_cta_link_hover_color'],
+				'transport'         => 'refresh',
+				'sanitize_callback' => 'sanitize_hex_color',
+			)
+		);
+		$wp_customize->add_control(
+			'menu_cta_link_hover_color',
+			array(
+				'label'   => __('Button Background Hover', 'paddle'),
+				'type'    => 'color',
+				'settings' => 'menu_cta_link_hover_color',
+				'section'         => 'paddle_theme_header_options',
+				'active_callback' => 'paddle_header_desktop_selected',
+			)
+		);
+
+		$wp_customize->add_setting(
+			'menu_cta_link_border_color',
+			array(
+				'default'           => $this->defaults['menu_cta_link_border_color'],
+				'transport'         => 'refresh',
+				'sanitize_callback' => 'sanitize_hex_color',
+			)
+		);
+		$wp_customize->add_control(
+			'menu_cta_link_border_color',
+			array(
+				'label'   => __('Button Border', 'paddle'),
+				'type'    => 'color',
+				'settings' => 'menu_cta_link_border_color',
+				'section'         => 'paddle_theme_header_options',
+				'active_callback' => 'paddle_header_desktop_selected',
+			)
+		);
+
+		// __ Button Padding
+		$wp_customize->add_setting(
+			'menu_cta_padding',
+			array(
+				'default' => $this->defaults['menu_cta_padding'],
+				'sanitize_callback' => 'paddle_text_sanitization',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Paddle_MultipleInput_Custom_control(
+				$wp_customize,
+				'menu_cta_padding',
+				array(
+					'label'           => __('Button Padding', 'paddle'),
+					'section'         => 'paddle_theme_header_options',
+					'active_callback' => 'paddle_header_desktop_selected',
+					'input_attrs' => array(
+						'edges' => 'top,right,bottom,left',
+						'max' => 4,
+						'extra_class' => 'paddle-settings-has-border-top paddle-settings-has-border-bottom paddle-settings-has-margin-top paddle-settings-has-margin-bottom paddle-settings-has-title-has-margin-bottom',
+					  ),
+					
+				)
+			)
+		);
+
 
 		$wp_customize->selective_refresh->add_partial(
 			'paddle_header_cta_text',
@@ -2065,9 +2219,9 @@ class paddle_initialise_customizer_settings
 				$wp_customize,
 				'topbar_border_color',
 				array(
-					'label'           => __('Border Color', 'paddle'),
+					'label'           => __('Border Bottom Color', 'paddle'),
 					'section'         => 'paddle_header_top_bar',
-					'active_callback' => 'paddle_top_header_option_settings',
+					'active_callback' => 'paddle_topbar_border_bottom_active',
 					'settings'        => 'topbar_border_color',
 				)
 			)
@@ -5406,7 +5560,7 @@ class paddle_initialise_customizer_settings
 					array(
 						'label'           => __('Background Opacity', 'paddle'),
 						'section'         => 'paddle_hero_and_slider',
-						'active_callback' => 'paddle_banner_bgcolor_active',
+						'active_callback' => 'paddle_hero_option_design_selected_have_bg',
 						'input_attrs'     => array(
 							'min'  => 0,
 							'max'  => 10,
@@ -5606,6 +5760,32 @@ class paddle_initialise_customizer_settings
 			)
 		);
 
+		//__ Item Spacing
+		$wp_customize->add_setting(
+			'banner_header_content_spacing',
+			array(
+				'default'           => $this->defaults['banner_header_content_spacing'],
+				'transport'         => 'refresh',
+				'sanitize_callback' => 'paddle_range_sanitization',
+			)
+		);
+		$wp_customize->add_control(
+			new Paddle_Slider_Custom_Control(
+				$wp_customize,
+				'banner_header_content_spacing',
+				array(
+					'label'       => __('Item Spacing', 'paddle'),
+					'section' => 'paddle_hero_and_slider',
+					'active_callback' => 'paddle_hero_option_design_selected',
+					'input_attrs' => array(
+						'min'  => 0,
+						'max'  => 30,
+						'step' => 1,
+					),
+				)
+			)
+		);
+
 
 
 		//____ Header.
@@ -5648,6 +5828,7 @@ class paddle_initialise_customizer_settings
 			)
 		);
 
+
 		$wp_customize->add_setting(
 			'banner_link_color',
 			array(
@@ -5659,7 +5840,7 @@ class paddle_initialise_customizer_settings
 		$wp_customize->add_control(
 			'banner_link_color',
 			array(
-				'label'   => __('Button Color', 'paddle'),
+				'label'   => __('Button Text Color', 'paddle'),
 				'type'    => 'color',
 				'settings' => 'banner_link_color',
 				'section'  => 'paddle_hero_and_slider',
@@ -5683,6 +5864,54 @@ class paddle_initialise_customizer_settings
 				'settings' => 'banner_link_hover_color',
 				'section'  => 'paddle_hero_and_slider',
 				'active_callback' => 'paddle_hero_option_design_selected',
+			)
+		);
+
+		//__ Enable border
+		$wp_customize->add_setting(
+			'banner_button_border_enable',
+			array(
+				'default'           => $this->defaults['banner_button_border_enable'],
+				'sanitize_callback' => 'paddle_switch_sanitization',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Paddle_Toggle_Switch_Custom_control(
+				$wp_customize,
+				'banner_button_border_enable',
+				array(
+					'label'           => __('Border', 'paddle'),
+					'section'  => 'paddle_hero_and_slider',
+					'active_callback' => 'paddle_hero_option_design_selected',
+				)
+			)
+		);
+
+		// __ Button Padding
+		$wp_customize->add_setting(
+			'banner_button_padding',
+			array(
+				'default' => $this->defaults['banner_button_padding'],
+				'sanitize_callback' => 'paddle_text_sanitization',
+			)
+		);
+
+		$wp_customize->add_control(
+			new Paddle_MultipleInput_Custom_control(
+				$wp_customize,
+				'banner_button_padding',
+				array(
+					'label'           => __('Padding', 'paddle'),
+					'section'  => 'paddle_hero_and_slider',
+					'active_callback' => 'paddle_hero_option_design_selected',
+					'input_attrs' => array(
+						'edges' => 'top,right,bottom,left',
+						'max' => 4,
+						'extra_class' => 'paddle-settings-has-border-top paddle-settings-has-border-bottom paddle-settings-has-margin-top paddle-settings-has-margin-bottom paddle-settings-has-title-has-margin-bottom',
+					  ),
+					
+				)
 			)
 		);
 
@@ -5752,7 +5981,7 @@ class paddle_initialise_customizer_settings
 				$wp_customize,
 				'banner_arrow_button',
 				array(
-					'label'   => __('Arrow After Button', 'paddle'),
+					'label'   => __('Use Arrow', 'paddle'),
 					'section' => 'paddle_hero_and_slider',
 					'active_callback' => 'paddle_hero_option_design_selected',
 				)
@@ -7525,6 +7754,43 @@ class paddle_initialise_customizer_settings
 		/**
 		 * Theme color
 		 */
+
+		 //__ Palette
+		 /**
+		 * Typography Preset
+		 */
+		$wp_customize->add_setting(
+			'paddle_color_palette',
+			array(
+				'default'           => $this->defaults['paddle_color_palette'],
+				'transport'         => 'refresh',
+				'sanitize_callback' => 'paddle_radio_sanitization',
+			)
+		);
+		$wp_customize->add_control(
+			new Paddle_Image_Radio_Button_Custom_Control(
+				$wp_customize,
+				'paddle_color_palette',
+				array(
+					'label'   => __('Global Palette', 'paddle'),
+					'section' => 'paddle_theme_color_section',
+					'choices' => array(
+						'default'     => array(
+							'palette' => $this->defaults['paddle_color_palette_default_colors'],
+							'name'  => __('Default', 'paddle'),
+						),
+						'style-1'          => array(
+							'palette' => '#0170b9,#3a3a3a,#3a3a3a,#4b4f58',
+							'name'  => __('Style 1', 'paddle'),
+						),
+						'style-2'       => array(
+							'palette' => '#a28557,#3a3a3a,#3a3a3a,#4b4f58',
+							'name'  => __('Style 2', 'paddle'),
+						),
+					),
+				)
+			)
+		);
 
 		$wp_customize->add_setting(
 			'paddle_primary_color',

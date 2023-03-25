@@ -27,6 +27,10 @@ function paddle_body_classes( $classes ) {
 
 	// Add header layout option
 	$paddle_current_header_style = get_theme_mod( 'paddle_header_layout_style', PADDLE_DEFAULT_OPTION['paddle_header_layout_style'] );
+	// check if the default header is using the old theme where value parameter include logo string.
+	if (strpos($paddle_current_header_style, 'logo-') !== false) {
+		$paddle_current_header_style = 'paddle-header-1';
+	}
 	$classes[]                   = $paddle_current_header_style;
 
 	// Add sidebar classes.
@@ -779,6 +783,11 @@ if ( ! function_exists( ' paddle_header_main ' ) ) :
 	function paddle_header_main() {
 		$default_header = get_theme_mod( 'paddle_header_layout_style', PADDLE_DEFAULT_OPTION['paddle_header_layout_style'] );
 
+		// check if the default header is using the old theme where value parameter include logo string.
+		if (strpos($default_header, 'logo-') !== false) {
+			$default_header = 'paddle-header-1';
+		}
+
 		$style         = explode( '-', $default_header );
 		$header_number = is_array( $style ) ? end( $style ) : 1;
 
@@ -908,7 +917,7 @@ if ( ! function_exists( 'paddle_header_top_bar' ) ) {
 					</div><!-- .topbar-left -->
 				<?php endif; // End is_left_panel_active. ?>
 
-				<?php if( $topbar->have_menu() && !empty($selected_content_content) || strlen(trim($selected_content_content)) && 'content' === $topbar_active_content_selected ) : ?>
+				<?php if( $topbar->have_menu()  && 'menu' === $topbar_active_content_selected || strlen(trim($selected_content_content)) && 'content' === $topbar_active_content_selected ) : ?>
 					<div class="top-bar--wrapper-main-content<?php echo esc_attr(1 === $hide_content_mobile ? ' d-none d-lg-block' : '') ;  echo esc_attr('' !== $order_content ? ' order-'.$order_content : ''); ?>">
 						<?php if ('menu' === $topbar_active_content_selected ) {
 							$topbar->get_menu();
@@ -921,9 +930,9 @@ if ( ! function_exists( 'paddle_header_top_bar' ) ) {
 				
 				<?php if (!empty($have_socials_url) ) : ?>
 				<div class="top-bar--wrapper-main-social<?php echo esc_attr(1 === $hide_social_mobile ? ' d-none d-lg-block' : '');  echo esc_attr('' !== $order_social_item ? ' order-'.$order_social_item : ''); ?>">
-					<?php if ( 'social' === $topbar::$topbar_select ) :  $paddle_social_urls  = explode( ',', get_theme_mod( 'social_urls', '' ) ); ?>	
-						<?php paddle_social_menu_list($paddle_social_urls); ?>
-					<?php endif; ?>
+					<?php 
+						$paddle_social_urls  = explode( ',', get_theme_mod( 'social_urls', '' ) ); 
+						 paddle_social_menu_list($paddle_social_urls); ?>
 				</div>
 				<?php endif; ?>
 			</div>

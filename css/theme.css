@@ -1885,22 +1885,28 @@ img {
   transition: all 0.5s;
   line-height: 1;
   z-index: 3;
+  background-color: var(--paddle-header-menu-bg-color);
 }
 .site-header > .container, .site-header > .site-branding, .site-header > .nav-primary {
   position: relative;
+  /*
   max-width: var(--paddle-header-content-width);
-}
-.site-header > .container::before, .site-header > .site-branding::before, .site-header > .nav-primary::before {
-  content: "";
-  width: 100vw;
-  height: 100%;
-  position: absolute;
-  margin-left: 50%;
-  left: -50vw;
-  background-color: var(--paddle-header-menu-bg-color);
+  &::before {
+          content: "";
+          width: 100vw;
+          height: 100%;
+          position: absolute;
+          margin-left: 50%;
+          left: -50vw;
+          background-color: var(--paddle-header-menu-bg-color);
+  }
+  */
 }
 .site-header > .container .site-logo, .site-header > .container .site-branding, .site-header > .site-branding .site-logo, .site-header > .site-branding .site-branding, .site-header > .nav-primary .site-logo, .site-header > .nav-primary .site-branding {
   z-index: 1;
+}
+.site-header .paddle-full-width-page, .site-header .container {
+  max-width: var(--paddle-header-content-width);
 }
 .site-header.fixed-top {
   position: fixed;

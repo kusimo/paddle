@@ -5,6 +5,10 @@ defined( 'ABSPATH' ) || exit;
 if ( ! function_exists( 'paddle_header_st2' ) ) {
 	function paddle_header_st2( $css_style ) {
 		$paddle_default_header_style = get_theme_mod( 'paddle_header_layout_style', PADDLE_DEFAULT_OPTION['paddle_header_layout_style'] );
+    // check if the default header is using the old theme where value parameter include logo string.
+    if (strpos($paddle_default_header_style, 'logo-') !== false) {
+      $paddle_default_header_style = 'paddle-header-1';
+    }
 		$paddle_header_number        = paddle_get_default_header_number( $paddle_default_header_style );
 		if ( '1-4' !== $paddle_header_number ) {
 			return '';
@@ -20,6 +24,7 @@ if ( ! function_exists( 'paddle_header_st2' ) ) {
 		$border_bottom_enable                    = absint( get_theme_mod( 'menu_border_bottom', PADDLE_DEFAULT_OPTION['menu_border_bottom'] ) );
     $paddle_header_mobile_layout = get_theme_mod( 'paddle_header_mobile_layout', PADDLE_DEFAULT_OPTION['paddle_header_mobile_layout'] );
 		$header_border_color                     = paddle_theme_get_color( 'paddle_header_border_color' );
+    $header_menu_bgcolor                     = paddle_theme_get_color( 'menu_container_bg_color' );
 		$paddle_header_logo_padding              = absint( get_theme_mod( 'header_logo_padding', PADDLE_DEFAULT_OPTION['header_logo_padding'] ) );
 		$menu_wrap                               = get_theme_mod( 'paddle_menu_spacing', PADDLE_DEFAULT_OPTION['paddle_menu_spacing'] ); // paddle_menu_spacing
 		$menu_padding                            = absint( get_theme_mod( 'header_menu_padding', PADDLE_DEFAULT_OPTION['header_menu_padding'] ) );
@@ -91,7 +96,6 @@ if ( ! function_exists( 'paddle_header_st2' ) ) {
             }';
 			$css .= '.site-header .site-logo img {
                 display: inline-block;
-                /*max-height: 80px;*/
                 width: 100%;
                 max-width: 516px;
                 height: auto;
@@ -138,6 +142,7 @@ if ( ! function_exists( 'paddle_header_st2' ) ) {
 		$css .= '#masthead [data-nav="1-4"]  {
             width: auto;
             line-height: 0;
+            background-color: '.$header_menu_bgcolor.';
           }
             #masthead [data-nav="1-4"]  div#primary-menu,
             #masthead [data-nav="1-4"]  .container {

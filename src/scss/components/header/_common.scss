@@ -5,8 +5,12 @@
     transition: all 0.5s;
     line-height: 1;
     z-index: 3;
+    background-color: var(--paddle-header-menu-bg-color);
     >.container, >.site-branding, >.nav-primary {
         position:relative;
+       
+       
+        /*
         max-width: var(--paddle-header-content-width);
         &::before {
                 content: "";
@@ -17,10 +21,14 @@
                 left: -50vw;
                 background-color: var(--paddle-header-menu-bg-color);
         }
+        */
        
         .site-logo, .site-branding {
             z-index: 1;
         }
+    }
+    .paddle-full-width-page, .container {
+        max-width: var(--paddle-header-content-width);
     }
     &.fixed-top {
         position: fixed;

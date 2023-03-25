@@ -66,6 +66,11 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 */
 		private $fullwidth_label = false;
 
+		/** 
+		 * Use Table
+		*/
+		private $table = false;
+
 		/**
 		 * Constructor
 		 */
@@ -91,6 +96,10 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 			if ( isset( $this->input_attrs['fullwidth_label'] ) && $this->input_attrs['fullwidth_label'] ) {
 				$this->fullwidth_label = true;
 			}
+
+			if ( isset( $this->input_attrs['table'] ) && $this->input_attrs['table'] ) {
+				$this->table = true;
+			}
 		}
 		/**
 		 * Enqueue our scripts and styles
@@ -103,6 +112,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		 */
 		public function render_content() {
 			$counter = 0;
+			$palette_counter = 0;
 			?>
 			<div class="image_radio_button_control paddle-section-spacing paddle-item<?php echo esc_html( $this->fullwidth_label ? ' paddle-fw-label' : '' ); ?>">
 				<?php if ( ! empty( $this->label ) ) { ?>
@@ -125,7 +135,9 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 						?>
 					<label class="radio-button-label paddle-toggle-item">
 						<input type="radio" name="<?php echo esc_attr( $this->id ); ?>" value="<?php echo esc_attr( $key ); ?>" <?php $this->link(); ?> <?php checked( esc_attr( $key ), $this->value() ); ?>/>
+						<?php if(array_key_exists('image', $value) && '' !== $value['image'] && !empty($value['image'])) : ?>
 						<img src="<?php echo esc_attr( $value['image'] ); ?>" alt="<?php echo esc_attr( $value['name'] ); ?>" title="<?php echo esc_attr( $value['name'] ); ?>" />
+						<?php endif; ?>
 						<?php
 						if ( $this->show_number ) {
 							?>
@@ -138,7 +150,40 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 				<?php else : ?>
 					<label class="radio-button-label">
 						<input type="radio" name="<?php echo esc_attr( $this->id ); ?>" value="<?php echo esc_attr( $key ); ?>" <?php $this->link(); ?> <?php checked( esc_attr( $key ), $this->value() ); ?>/>
+						<?php if(array_key_exists('image', $value) && '' !== $value['image'] && !empty($value['image'])) : ?>
 						<img src="<?php echo esc_attr( $value['image'] ); ?>" alt="<?php echo esc_attr( $value['name'] ); ?>" title="<?php echo esc_attr( $value['name'] ); ?>" />
+						<?php endif; ?>
+						<?php if(array_key_exists('palette', $value)) : ?>
+							<div class="paddle-color-palette">
+								<div class="paddle-palette">
+									<?php if(0 === $palette_counter) : ?>
+										<?php $pallete0 = explode(',', $value['palette']);
+											foreach($pallete0 as $color) { ?>
+												<span style="background-color: <?php echo esc_attr($color);?>">&nbsp;</span>	
+											<?php }
+										?>
+									<?php endif ;?>
+
+									<?php if(1 === $palette_counter) : ?>
+										<?php $pallete1 = explode(',', $value['palette']);
+											foreach($pallete1 as $color) { ?>
+												<span style="background-color: <?php echo esc_attr($color);?>">&nbsp;</span>	
+											<?php }
+										?>
+									<?php endif ;?>
+
+									<?php if(2 === $palette_counter) : ?>
+										<?php $pallete2 = explode(',', $value['palette']);
+											foreach($pallete2 as $color) { ?>
+												<span style="background-color: <?php echo esc_attr($color);?>">&nbsp;</span>	
+											<?php }
+										?>
+									<?php endif ;?>
+										
+								</div>
+								<div class="label-name"><?php echo esc_attr($value['name']); ?></div>
+							</div>
+						<?php endif; ?>
 						<?php
 						if ( $this->show_number ) {
 							?>
@@ -148,6 +193,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 					endif;
 
 					$counter++;
+					$palette_counter++;
 				}
 				if ( $this->toggle ) {
 					?>
@@ -1036,6 +1082,78 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		<?php
 		}
 	}
+
+	/**
+	 * Multiple Input Control
+	 */
+	class Paddle_MultipleInput_Custom_control extends Paddle_Custom_Control {
+		public $type = 'multiple_input';
+
+		/* Max input fields to display */
+		public $max = 2;
+		/* label for the input fields*/
+		public $edges = 'top,bottom';
+		/* style class for the title */
+		private $margin_top;
+		private $margin_bottom;
+		private $border_top;
+		/* Add extra class to the control container.
+		* Usage in attr: 'extra_class' => 'paddle-settings-has-border-top paddle-settings-has-border-bottom paddle-settings-has-margin-top paddle-settings-has-margin-bottom paddle-settings-has-title-has-margin-bottom',
+		*/
+		private $extra_class;
+
+		/**
+		 * Constructor has_dropdown
+		 */
+		public function __construct( $manager, $id, $args = array(), $options = array() ) {
+			parent::__construct( $manager, $id, $args );
+
+			if ( isset( $this->input_attrs['max'] ) && $this->input_attrs['max'] ) {
+				$this->max = $this->input_attrs['max'];
+			}
+
+			if ( isset( $this->input_attrs['edges'] ) && '' !== $this->input_attrs['edges'] ) {
+				$this->edges = $this->input_attrs['edges'];
+			}
+
+			if ( isset( $this->input_attrs['extra_class'] ) && '' !== $this->input_attrs['extra_class'] ) {
+				$this->type = $this->type.' '.$this->input_attrs['extra_class'];
+			}
+
+		}
+
+		public function render_content() { 
+			$saved_choices     = explode( ',', esc_attr( $this->value() ) );
+			$edges = explode(',',$this->edges);
+			$i = 0;
+			$checked_box_status = intval(end($saved_choices));
+			$checked = 1 === $checked_box_status ? 'checked=checked' : '';
+			
+			?>
+			<?php if ( ! empty( $this->label ) ) { ?>
+					<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
+			<?php } ?>
+
+			<div class="multiple-input-wrapper">
+				<div class="connected-control">
+					<input type="checkbox" name="connected-input-<?php echo esc_attr( $this->id ); ?>" id="connected-input-<?php echo esc_attr( $this->id ); ?>" <?php echo esc_attr($checked);?>>
+					<label for="connected-input-<?php echo esc_attr( $this->id ); ?>"></label>
+				</div>
+				<ul class="d-flex">
+				<input type="hidden" id="<?php echo esc_attr( $this->id ); ?>" name="<?php echo esc_attr( $this->id ); ?>" value="<?php echo esc_attr( $this->value() ); ?>" class="customize-control-multiple-input" <?php $this->link(); ?> />
+					<?php foreach($saved_choices as $key => $value) { 
+						if($i < absint($this->max)) {
+						?>
+						<li>
+							<input type="number" value="<?php echo esc_attr($value);?>" pattern="[0-9]+" class="multiple-input">
+							<span><?php echo esc_attr($edges[$i]);?></span>
+						</li>
+					<?php } $i++;
+					 } ?>
+				</ul>
+			</div>
+		<?php }
+	}
 	/**
 	 * URL sanitization
 	 *
@@ -1401,6 +1519,31 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		}
 	}
 
+	if ( ! function_exists( 'paddle_topbar_border_bottom_active' ) ) {
+
+        /**
+         * Check if header border section is active and on desktop section page.
+         *
+         * @since 1.0.0
+         *
+         * @param WP_Customize_Control $control WP_Customize_Control instance.
+         *
+         * @return bool Whether the control is active to the current preview.
+         */
+        function paddle_topbar_border_bottom_active( $control ) {
+
+            if ( true == $control->manager->get_setting( 'enable_top_bar' )->value()
+			&& 'settings' == $control->manager->get_setting( 'top_bar_options_header' )->value()
+            && 1 === $control->manager->get_setting( 'topbar_border_bottom' )->value()
+            
+            ) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
 	if ( ! function_exists( 'paddle_top_header_border_active' ) ) {
 		/**
 		 * Check the links option is selected
@@ -1442,41 +1585,6 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 
 	endif;
 
-	if ( ! function_exists( 'paddle_top_header_select_button' ) ) {
-		/**
-		 * Check the top header is active and button is selected
-		 *
-		 * @param  mixed $control
-		 * @return void
-		 */
-		function paddle_top_header_select_button( $control ) {
-			if ( true == $control->manager->get_setting( 'enable_top_bar' )->value()
-			&& 'button' == $control->manager->get_setting( 'topbar_select' )->value()
-			) {
-				return true;
-			} else {
-				return false;
-			}
-		}
-	}
-
-	if ( ! function_exists( 'paddle_top_header_select_social' ) ) {
-		/**
-		 * Check the top header is active and social link is selected
-		 *
-		 * @param  mixed $control
-		 * @return void
-		 */
-		function paddle_top_header_select_social( $control ) {
-			if ( true == $control->manager->get_setting( 'enable_top_bar' )->value()
-			&& 'social' == $control->manager->get_setting( 'topbar_select' )->value()
-			) {
-				return true;
-			} else {
-				return false;
-			}
-		}
-	}
 
 	if ( ! function_exists( 'paddle_footer_select_social' ) ) {
 		/**
@@ -1758,6 +1866,30 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		function paddle_hero_option_design_selected( $control ) {
 
 			if ( 'design' === $control->manager->get_setting( 'title_options_hero' )->value() ) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+	endif;
+
+
+	if ( ! function_exists( 'paddle_hero_option_design_selected_have_bg' ) ) :
+
+		/**
+		 * Check if design section is selected
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param WP_Customize_Control $control WP_Customize_Control instance.
+		 *
+		 * @return bool Whether the control is active to the current preview.
+		 */
+		function paddle_hero_option_design_selected_have_bg( $control ) {
+
+			if ( 'design' === $control->manager->get_setting( 'title_options_hero' )->value()  
+				&& '' !== $control->manager->get_setting( 'banner_content_bgcolor' )->value()) {
 				return true;
 			} else {
 				return false;
@@ -2102,6 +2234,8 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		}
 	}
 
+	
+
 	if ( ! function_exists( 'paddle_header_desktop_selected' ) ) {
 
 		/**
@@ -2270,6 +2404,28 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 
 			if ( 'desktop' === $control->manager->get_setting( 'title_options_header' )->value()
 			&& 1 === $control->manager->get_setting( 'paddle_header_cta' )->value() ) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
+	if ( ! function_exists( 'paddle_header_desktop_selected_custom_width' ) ) {
+
+		/**
+		 * Check if Desktop Header section is active and custom width is selected
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param WP_Customize_Control $control WP_Customize_Control instance.
+		 *
+		 * @return bool Whether the control is active to the current preview.
+		 */
+		function paddle_header_desktop_selected_custom_width( $control ) {
+
+			if ( 'desktop' === $control->manager->get_setting( 'title_options_header' )->value()
+			&& 'custom' === $control->manager->get_setting( 'header_custom_container' )->value() ) {
 				return true;
 			} else {
 				return false;

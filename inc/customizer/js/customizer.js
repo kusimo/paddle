@@ -420,7 +420,7 @@ jQuery( document ).ready(function($) {
 	  $element.find('.customize-control-multi-image-checkbox').val(inputValues).trigger('change');
 	}
 
-	/** @todo Remove this not using it
+	/** 
 	 * Pill Checkbox Custom Control
 	 *
 	 * @author Anthony Hortin 
@@ -446,6 +446,55 @@ jQuery( document ).ready(function($) {
 		}).toArray();
 		$element.find('.customize-control-sortable-pill-checkbox').val(inputValues).trigger('change');
 	}
+
+	/**
+	 * Pill Checkbox Custom Control
+	 *
+	 * @author Abie Kusimo
+	 */
+	// When the checkbox is changed
+	$('.customize-control-multiple_input input[type="checkbox"]').on('change', function () {
+		let currentVal = '0';
+		let initialValue = $(this).parent().parent().find('.customize-control-multiple-input').val().split(',');
+
+		if(this.checked) {
+            currentVal = '1';
+        } else {
+			currentVal = '0';
+		}
+		initialValue.pop();
+		initialValue.push(currentVal);
+		//update the final value
+		$(this).parent().parent().find('.customize-control-multiple-input').val(initialValue)
+	});
+
+	$('.customize-control-multiple_input .multiple-input').on('keyup mousewheel', function () {
+		var initialValue = $(this).parent().parent().find('.customize-control-multiple-input').val().split(',');
+
+		var initialCheckValue = initialValue[initialValue.length - 1];
+		
+		if(parseInt(initialCheckValue) === 1) {
+			let repeatValue = $(this).val();
+			$(this).parent().parent().find('.multiple-input').each(function() {
+				$(this).val(repeatValue);
+			})
+		}
+		
+        paddleGetAllMultipleInputBoxes($(this).parent().parent().parent());
+    });
+
+
+	// Get the values from the multiple input and add to our hidden field
+    function paddleGetAllMultipleInputBoxes($element) {
+		let initialValue = $element.find('.customize-control-multiple-input').val().split(',');
+		let initialCheckValue = initialValue[initialValue.length - 1];
+		
+        var inputValues = $element.find('.multiple-input').map(function() {
+                return $(this).val();
+        }).toArray();
+        $element.find('.customize-control-multiple-input').val(`${inputValues},${initialCheckValue}`).trigger('change');
+		
+    }
 
 	// Color section change select color title to the label title
 	let colorTitleLabel = document.querySelectorAll('li[id^="customize-control-paddle_theme_color"] .customize-control-title');

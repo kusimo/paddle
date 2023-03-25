@@ -896,11 +896,40 @@ function paddle_header_css_for_cta()
 {
 	$paddle_cta_enable       = absint(get_theme_mod('paddle_header_cta', PADDLE_DEFAULT_OPTION['paddle_header_cta']));
 	$paddle_cta_padding_left = absint(get_theme_mod('header_cta_padding_left', PADDLE_DEFAULT_OPTION['header_cta_padding_left']));
+	$menu_cta_bgcolor          = paddle_theme_get_color('menu_cta_bgcolor');
+	$menu_cta_link_color          = paddle_theme_get_color('menu_cta_link_color');
+	$menu_cta_link_hover_color          = paddle_theme_get_color('menu_cta_link_hover_color');
+	$menu_cta_link_border_color          = paddle_theme_get_color('menu_cta_link_border_color');
+	$menu_cta_bgcolor_opacity          = absint(get_theme_mod('menu_cta_bg_opacity', PADDLE_DEFAULT_OPTION['menu_cta_bg_opacity']));
+	$menu_cta_padding = explode(',',get_theme_mod('menu_cta_padding', PADDLE_DEFAULT_OPTION['menu_cta_padding'])); 
+	$btn_padding_top = !empty($menu_cta_padding[0]) ? $menu_cta_padding[0] : '0';
+	$btn_padding_right = !empty($menu_cta_padding[1]) ? $menu_cta_padding[1] : '0';
+	$btn_padding_bottom = !empty($menu_cta_padding[2]) ? $menu_cta_padding[2] : '0';
+	$btn_padding_left = !empty($menu_cta_padding[3]) ? $menu_cta_padding[3] : '0';
+
 	$css                     = '';
 	if ($paddle_cta_enable) {
-		$css .= '#header-btn-cta a {padding: 0.375rem 0.75rem;}';
-		$css .= '#header-btn-cta:hover a { color: white;} ';
-		$css .= '#header-btn-cta a:hover {border-color: var(--paddle-color-1); color: var(--paddle-color-1); background-color: white;}';
+		$css .= '#masthead #header-btn-cta a.cta-button-link {
+			padding-top: '.$btn_padding_top.'px;
+			padding-bottom: '.$btn_padding_bottom.'px;
+			padding-right: '.$btn_padding_right.'px;
+			padding-left: '.$btn_padding_left.'px;
+			color: '.$menu_cta_link_color.';
+			border-color: '.$menu_cta_link_border_color.'; 
+		}';
+		if ( 10 !== $menu_cta_bgcolor_opacity && '' !== $menu_cta_bgcolor ) {
+            $css .= '#header-btn-cta a  { 
+                background-color: ' . paddle_rgba( $menu_cta_bgcolor, $menu_cta_bgcolor_opacity ) . ';
+            }';
+        }
+		$css.= '
+		#header-btn-cta a:hover {
+			background-color: '.$menu_cta_link_hover_color.';
+		}
+		';
+
+		
+	
 
 		$css   .= '.sep-header-cta {
 			  display: grid;
@@ -2494,7 +2523,8 @@ function paddle_home_page_banner_css() {
 		$button_bgcolor = paddle_theme_get_color('banner_button_bgcolor') ? paddle_theme_get_color('banner_button_bgcolor') : 'transparent';
 		$link_color = paddle_theme_get_color('banner_link_color');
 		$link_color_hover = paddle_theme_get_color('banner_link_hover_color');
-		$content_bgcolor = paddle_theme_get_color('banner_content_bgcolor') ? paddle_theme_get_color('banner_content_bgcolor') : '#fff'; // empty
+		$button_border = get_theme_mod( 'banner_button_border_enable', PADDLE_DEFAULT_OPTION['banner_button_border_enable'] );
+		$content_bgcolor = paddle_theme_get_color('banner_content_bgcolor') ? paddle_theme_get_color('banner_content_bgcolor') : ''; // empty
 		$header_font_size = get_theme_mod( 'banner_header_font_size', PADDLE_DEFAULT_OPTION['banner_header_font_size'] );
 		$header_font_weight = get_theme_mod( 'banner_font_weight', PADDLE_DEFAULT_OPTION['banner_font_weight'] );
 		$button__text_transform = get_theme_mod( 'banner_button_transform', PADDLE_DEFAULT_OPTION['banner_button_transform'] );
@@ -2509,6 +2539,13 @@ function paddle_home_page_banner_css() {
 		$banner_navlink_text_color = paddle_theme_get_color( 'banner_navlink_text_color' );
 		$banner_navlink_text_color_hover = paddle_theme_get_color( 'banner_navlink_text_color_hover' );
 		$banner_navlink_text_color_active = paddle_theme_get_color( 'banner_navlink_text_color_active' );
+		$content_spacing = absint(get_theme_mod( 'banner_header_content_spacing', PADDLE_DEFAULT_OPTION['banner_header_content_spacing'] ));
+		$paddle_banner_arrow_button = get_theme_mod( 'banner_arrow_button', PADDLE_DEFAULT_OPTION['banner_arrow_button'] );
+		$cta_padding = explode(',',get_theme_mod('banner_button_padding', PADDLE_DEFAULT_OPTION['banner_button_padding'])); 
+		$btn_padding_top = !empty($cta_padding[0]) ? $cta_padding[0] : '0';
+		$btn_padding_right = !empty($cta_padding[1]) ? $cta_padding[1] : '0';
+		$btn_padding_bottom = !empty($cta_padding[2]) ? $cta_padding[2] : '0';
+		$btn_padding_left = !empty($cta_padding[3]) ? $cta_padding[3] : '0';
 
 		if (1 === absint($banner_box_shadow)) {
 			$box_shadow_value .= '
@@ -2630,9 +2667,12 @@ function paddle_home_page_banner_css() {
 			position: static;
 			height: auto;
 			width: 100%;
-			background-color: '.$content_bgcolor.';
+			background-color: '. $content_bgcolor.';
 			padding: 2rem;
-			'.$box_shadow_value.'
+			'.$box_shadow_value.';
+			flex-direction: column;
+			display: flex;
+			gap: '.$content_spacing.'px;
 		}
 
 		.Banner__detail-heading {
@@ -2648,16 +2688,42 @@ function paddle_home_page_banner_css() {
 			text-align: '.$banner_button_align.';
 		}
 
-		.Banner__buttons a {
+		.Banner__buttons a.button {
+			display:flex;
+			gap: 9px;
+    		align-items: center;
+			width: fit-content;
 			background-color: '.$button_bgcolor.';
 			color: '.$link_color.';
 			text-transform: '.$button__text_transform.';
+			padding-top: '.$btn_padding_top.'px;
+			padding-bottom: '.$btn_padding_bottom.'px;
+			padding-right: '.$btn_padding_right.'px;
+			padding-left: '.$btn_padding_left.'px;
 		}
 		.Banner__buttons a:hover {
 			color: '.$link_color_hover.';
 		}
 		';
-		if ( 10 !== $bg_opacity ) {
+		if (0 === absint($button_border)) {
+			$banner_css .= '
+			.Banner__buttons a {
+				border-color: transparent;
+			}';
+		}
+		if (1 === absint($paddle_banner_arrow_button)) {
+			$banner_css .= '
+			.Banner__buttons svg {
+				width: 1em;
+				height: auto;
+				fill: '.$link_color.';
+			}
+			.Banner__buttons a:hover svg {
+				fill: '.$link_color_hover.';
+			}
+			';
+		}
+		if ( 10 !== $bg_opacity && '' !== $content_bgcolor ) {
 			
 			$banner_css .= '.Banner__details-container  { 
 				background-color: ' . paddle_rgba( $content_bgcolor, $bg_opacity ) . ';

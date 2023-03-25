@@ -6,7 +6,6 @@ class Paddle_Header_TopBar {
 	public static $active;
 	public static $enable_on_mobile;
 	public static $contact_email;
-	public static $topbar_select;
 	public static $menu;
 
 	public function __construct() {
@@ -17,7 +16,6 @@ class Paddle_Header_TopBar {
 		self::$active           = absint( get_theme_mod( 'enable_top_bar', PADDLE_DEFAULT_OPTION['enable_top_bar'] ) );
 		self::$enable_on_mobile = absint( get_theme_mod( 'enable_top_bar_on_mobile', PADDLE_DEFAULT_OPTION['enable_top_bar_on_mobile'] ) );
 
-		self::$topbar_select = get_theme_mod( 'topbar_select', PADDLE_DEFAULT_OPTION['topbar_select'] );
 
 	}
 
