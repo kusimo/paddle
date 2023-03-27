@@ -27,9 +27,33 @@ if ( ! function_exists( 'paddle_convert_rgba_to_hex' ) ) {
 }
 
 if ( ! defined( 'PADDLE_PRIMARY_COLOR' ) ) {
-	$primary_color = get_theme_mod( 'paddle_primary_color' ) ? sanitize_hex_color( get_theme_mod( 'paddle_primary_color' ) ) : '#000000';
-	define( 'PADDLE_PRIMARY_COLOR', $primary_color );
+	$primary_color = '' !== get_theme_mod( 'paddle_primary_color' ) && !empty(get_theme_mod( 'paddle_primary_color' )) ?  get_theme_mod( 'paddle_primary_color' )  : get_theme_mod( 'paddle_theme_color_buttons', '#016edb' );
+	define( 'PADDLE_PRIMARY_COLOR', sanitize_hex_color($primary_color) );
 }
+
+if (! function_exists('paddle_current_color_palettes')) {
+	function paddle_current_color_palettes() {
+			$accent_color = '' !== PADDLE_PRIMARY_COLOR && !empty(PADDLE_PRIMARY_COLOR) ? PADDLE_PRIMARY_COLOR : get_theme_mod( 'paddle_theme_color_buttons', '#016edb');
+			$color0 = get_theme_mod( 'paddle_theme_color_headings', '#2a3a51' );
+			$color1 = get_theme_mod( 'paddle_theme_color_buttons', $accent_color );
+			$color2 = get_theme_mod( 'paddle_theme_color_links_hover', '#0357ab' );
+			$color3 = get_theme_mod( 'paddle_theme_color_body_text', '#2a3a51' );
+
+			return $color1.','.$color0.','.$color2.','.$color3;
+	}
+}
+
+if( !function_exists( 'paddle_get_color_palette')) {
+	function paddle_get_color_palette($palette) {
+		$palette_style = get_theme_mod('paddle_color_palette', PADDLE_DEFAULT_OPTION['paddle_color_palette']);
+		if(!empty($palette)) {
+			$color = explode(',', $palette);
+
+			return $color[0].','.$color[1].','.$color[2].','.$color[3];
+		}
+		return '';
+	}
+} 
 /**
 * Set our Customizer default options
 */
@@ -102,8 +126,11 @@ if ( ! function_exists( 'paddle_generate_defaults' ) ) {
 			'topbar_content_menu' 					  => '',
 			'topbar_content_select'					  => 'content',
 			'enable_icon_bg'                          => 0,
-			'paddle_color_palette'					  => 'default',
-			'paddle_color_palette_default_colors'	  => '#cf0202,#3a3a3a,#f9cc0b,#4b4f58',
+			'paddle_color_palette'					  => 'style-1',
+			'paddle_color_palette_default_colors'	  => paddle_current_color_palettes(),
+			'paddle_color_palette_1'					  => get_theme_mod( 'paddle_color_palette_1', paddle_current_color_palettes() ),
+			'paddle_color_palette_2'					  => get_theme_mod( 'paddle_color_palette_2', paddle_current_color_palettes() ),
+			'paddle_color_palette_3'					  => get_theme_mod( 'paddle_color_palette_3', paddle_current_color_palettes() ),
 			'paddle_primary_color'                    => PADDLE_PRIMARY_COLOR,
 			'paddle_h1bg_color'                       => PADDLE_PRIMARY_COLOR,
 			'paddle_theme_color_body_bg'              => '#FFFFFF',
@@ -362,6 +389,11 @@ if ( ! function_exists( 'paddle_static_header_css' ) ) {
 		$paddle_theme_color_border         = paddle_theme_get_color( 'paddle_theme_color_border' );
 		$primary_color                     = sanitize_hex_color( get_theme_mod( 'paddle_primary_color', PADDLE_PRIMARY_COLOR ) );
 
+		// Compatible with old theme
+		if ('' !== get_theme_mod( 'paddle_primary_color' ) && !empty(get_theme_mod( 'paddle_primary_color' ))) {
+			$paddle_theme_color_buttons = $primary_color;
+		}
+
 		$body_font_size          = absint( get_theme_mod( 'base_font_size', PADDLE_DEFAULT_OPTION['base_font_size'] ) );
 		$h1_font_size            = absint( get_theme_mod( 'h1_font_size', PADDLE_DEFAULT_OPTION['h1_font_size'] ) );
 		$h2_font_size            = absint( get_theme_mod( 'h2_font_size', PADDLE_DEFAULT_OPTION['h2_font_size'] ) );
@@ -405,12 +437,38 @@ if ( ! function_exists( 'paddle_static_header_css' ) ) {
 		$css = '';
 
 		// Variables.
+		$palette_1 = explode(',', get_theme_mod('paddle_color_palette_1', PADDLE_DEFAULT_OPTION['paddle_color_palette_1']));
+		$palette_2 = explode(',', get_theme_mod('paddle_color_palette_2', PADDLE_DEFAULT_OPTION['paddle_color_palette_2']));
+		$palette_3 = explode(',', get_theme_mod('paddle_color_palette_3', PADDLE_DEFAULT_OPTION['paddle_color_palette_3']));
+		$selected_color_palette = get_theme_mod('paddle_color_palette', PADDLE_DEFAULT_OPTION['paddle_color_palette']);
+
+		
 
 		$css.= ':root {';
+			$css .='--paddle-color-0: ' . $paddle_theme_color_headings . ';';
+			if( 'style-1' === $selected_color_palette) {
+				$css .= '
+				--paddle-color-1 : '.$palette_1[0].'!important;
+				--paddle-color-2 : '.$palette_1[1].'!important;
+				';
+				} elseif('style-2' === $selected_color_palette) {
+					$css .= '
+					--paddle-color-1 : '.$palette_2[0].'!important;
+					--paddle-color-2 : '.$palette_2[1].'!important;
+				';
+				} elseif('style-3' === $selected_color_palette) {
+					$css .= '
+					--paddle-color-1 : '.$palette_3[0].'!important;
+					--paddle-color-2 : '.$palette_3[1].'!important;
+				';
+				}
+				else {
+					$css .= '
+					--paddle-color-1 : ' . $paddle_theme_color_buttons . ';
+					--paddle-color-2 : ' . $paddle_theme_color_links_hover . ';';
+				}
 			$css .= '
-			--paddle-color-0: ' . $paddle_theme_color_headings . ';
-			--paddle-color-1 : ' . $paddle_theme_color_buttons . ';
-			--paddle-color-2 : ' . $paddle_theme_color_links_hover . ';
+		
 			--paddle-color-3 : ' . $paddle_theme_color_body_text . ';
 			--paddle-color-4 : ' . $paddle_theme_color_border . ';  
 			--paddle-color-accent : ' . $primary_color . '; 
@@ -447,9 +505,35 @@ if ( ! function_exists( 'paddle_static_header_css' ) ) {
 
 			// Content Width
 			$css .= '--paddle-header-content-width: ' . $header_content_max_width . ';';
+
+			// Check if the editor is in customiser
+			/*
+			if ( is_customize_preview() ) {
+				$palette_style = explode(',', get_theme_mod('paddle_color_palette_1', PADDLE_DEFAULT_OPTION['paddle_color_palette_1']));
+				$selected_color_palette = get_theme_mod('paddle_color_palette', PADDLE_DEFAULT_OPTION['paddle_color_palette']);
+
+				if( 'style-1' === $selected_color_palette) {
+				$css .= '
+				--paddle-color-1 : '.$palette_style[0].';
+				--paddle-color-2 : '.$palette_style[1].';
+				--paddle-color-3 : '.$palette_style[2].';
+				--paddle-color-4 : '.$palette_style[3].';
+				';
+				}
+			}
+			*/
 			
 
 		$css .= '}';
+		
+		if ( is_customize_preview() ) {
+			// Adjust the menu dropdown button svg arrow.
+			$css .= '
+			#masthead [data-nav="1-4"] button.submenu-expand {
+				margin-top: -7px;
+			}
+			';
+		}
 
 		// Retrun all css
 

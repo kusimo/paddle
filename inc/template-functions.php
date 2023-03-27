@@ -1311,6 +1311,25 @@ if (! function_exists('paddle_content_witdth_is_full_width')) {
 }
 
 
+/**
+ * Save the color pallete if the chosen style is defer from style 1
+ */
+if ( ! function_exists( 'paddle_get_current_color_palette')) {
+	function paddle_get_current_color_palette() {
+		$palette_style = get_theme_mod('paddle_color_palette', PADDLE_DEFAULT_OPTION['paddle_color_palette']);
+		if( 'default' !== $palette_style) {
+			switch ($palette_style) {
+				case 'style-1':
+					set_theme_mod('paddle_theme_color_buttons', '#ff6900');
+					set_theme_mod('paddle_theme_color_headings', '#ff6900');
+					set_theme_mod('paddle_theme_color_body_bg', '#8ed1fc');
+					break;
+			}
+		}
+	}
+}
+
+//add_action( 'customize_save_after', 'paddle_get_current_color_palette', 100 );
 
 
 

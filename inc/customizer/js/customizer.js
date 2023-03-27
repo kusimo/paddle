@@ -1,4 +1,4 @@
-jQuery( document ).ready(function($) {
+jQuery(document).ready(function ($) {
 	"use strict";
 
 	/**
@@ -10,17 +10,17 @@ jQuery( document ).ready(function($) {
 	 */
 
 	// Update the values for all our input fields and initialise the sortable repeater
-	$('.sortable_repeater_control').each(function() {
+	$('.sortable_repeater_control').each(function () {
 		// If there is an existing customizer value, populate our rows
 		var defaultValuesArray = $(this).find('.customize-control-sortable-repeater').val().split(',');
 		let sortableHaveMultiple = false;
 		var numRepeaterItems = defaultValuesArray.length;
 
-		if(numRepeaterItems > 0) {
+		if (numRepeaterItems > 0) {
 			// Add the first item to our existing input field
 			var isMultipleInput = $(this).find('.is-multiple-input')
-			
-			if(isMultipleInput.length) {
+
+			if (isMultipleInput.length) {
 				sortableHaveMultiple = true;
 				$(this).find('.repeater-input.is-text').val(defaultValuesArray[0]);
 				$(this).find('.repeater-input.is-url').val(defaultValuesArray[1]);
@@ -28,15 +28,15 @@ jQuery( document ).ready(function($) {
 				$(this).find('.repeater-input.is-url').val(defaultValuesArray[0]);
 			}
 
-			
+
 
 			// Create a new row for each new value
-			if(sortableHaveMultiple) {
+			if (sortableHaveMultiple) {
 				//numRepeaterItems = numRepeaterItems / 2;
 			}
 
 			// Repeater with no multiple inputs
-			if(numRepeaterItems > 1 && !sortableHaveMultiple) {
+			if (numRepeaterItems > 1 && !sortableHaveMultiple) {
 				var i;
 				for (i = 1; i < numRepeaterItems; ++i) {
 					paddleAppendRow($(this), defaultValuesArray[i]);
@@ -44,7 +44,7 @@ jQuery( document ).ready(function($) {
 			} else {
 				// Loop through multiple inputs
 				var i;
-				
+
 				for (i = 1; i < numRepeaterItems / 2; ++i) {
 					paddleAppendRow($(this), defaultValuesArray[i], defaultValuesArray[i]);
 				}
@@ -55,7 +55,7 @@ jQuery( document ).ready(function($) {
 				// update the input fields with text
 				var c;
 				for (c = 0; c < inputFields.length; c++) {
-					inputFields[c].setAttribute('value',defaultValuesArray[c])
+					inputFields[c].setAttribute('value', defaultValuesArray[c])
 				}
 			}
 		}
@@ -63,18 +63,18 @@ jQuery( document ).ready(function($) {
 
 	// Make our Repeater fields sortable
 	$(this).find('.sortable_repeater.sortable').sortable({
-		update: function(event, ui) {
+		update: function (event, ui) {
 			paddleGetAllInputs($(this).parent());
 		}
 	});
 
 	// Remove item starting from it's parent element
-	$('.sortable_repeater.sortable').on('click', '.customize-control-sortable-repeater-delete', function(event) {
+	$('.sortable_repeater.sortable').on('click', '.customize-control-sortable-repeater-delete', function (event) {
 		event.preventDefault();
 		var numItems = $(this).parent().parent().find('.repeater').length;
 
-		if(numItems > 1) {
-			$(this).parent().slideUp('fast', function() {
+		if (numItems > 1) {
+			$(this).parent().slideUp('fast', function () {
 				var parentContainer = $(this).parent().parent();
 				$(this).remove();
 				paddleGetAllInputs(parentContainer);
@@ -87,43 +87,43 @@ jQuery( document ).ready(function($) {
 	});
 
 	// Add new item
-	$('.customize-control-sortable-repeater-add').click(function(event) {
+	$('.customize-control-sortable-repeater-add').click(function (event) {
 		event.preventDefault();
 		paddleAppendRow($(this).parent());
 		paddleGetAllInputs($(this).parent());
 	});
 
 	// Refresh our hidden field if any fields change
-	$('.sortable_repeater.sortable').change(function() {
+	$('.sortable_repeater.sortable').change(function () {
 		paddleGetAllInputs($(this).parent());
 	})
 
 	// Add https:// to the start of the URL if it doesn't have it
-	$('.sortable_repeater.sortable').on('blur', '.repeater-input', function() {
+	$('.sortable_repeater.sortable').on('blur', '.repeater-input', function () {
 		var url = $(this);
 		var val = url.val();
-		
-		if(val && !val.match(/^.+:\/\/.*/) && !url.hasClass('is-text')) {
+
+		if (val && !val.match(/^.+:\/\/.*/) && !url.hasClass('is-text')) {
 			// Important! Make sure to trigger change event so Customizer knows it has to save the field
 			//url.val('https://' + val.replace(/\s+/g, '')).trigger('change');
 			url.val(val.replace(/\s+/g, '')).trigger('change');
 		}
-		
+
 	});
 
 	// Save changes on blur
-	$('.sortable_repeater.sortable').on('blur', '.repeater-input.is-text', function() {
+	$('.sortable_repeater.sortable').on('blur', '.repeater-input.is-text', function () {
 		var url = $(this);
 		var val = url.val();
-			// Important! Make sure to trigger change event so Customizer knows it has to save the field
-			//url.val(val.replace('https://', '')).trigger('change');
+		// Important! Make sure to trigger change event so Customizer knows it has to save the field
+		//url.val(val.replace('https://', '')).trigger('change');
 	});
 
 	// Append a new row to our list of elements
 	function paddleAppendRow($element, defaultValue = '', defaultValue2 = '') {
 		var isMultipleInput = $element.find('.is-multiple-input') //$('.is-multiple-input');
 		var multipleInput = '';
-		if(isMultipleInput.length) {
+		if (isMultipleInput.length) {
 			multipleInput = `<input type="text" value="${defaultValue2}" class="repeater-input is-text" placeholder="title" />`;
 		}
 		var newRow = `<div class="repeater" style="display:none">
@@ -133,19 +133,19 @@ jQuery( document ).ready(function($) {
 		<a class="customize-control-sortable-repeater-delete" href="#"><span class="dashicons dashicons-no-alt"></span></a></div>`;
 
 		$element.find('.sortable').append(newRow);
-		$element.find('.sortable').find('.repeater:last').slideDown('slow', function(){
+		$element.find('.sortable').find('.repeater:last').slideDown('slow', function () {
 			$(this).find('input:first').focus();
 		});
 	}
 
 	// Get the values from the repeater input fields and add to our hidden field
 	function paddleGetAllInputs($element) {
-		var inputValues = $element.find('.repeater-input').map(function() {
+		var inputValues = $element.find('.repeater-input').map(function () {
 			return $(this).val();
 		}).toArray();
 		// Add all the values from our repeater fields to the hidden field (which is the one that actually gets saved)
 		$element.find('.customize-control-sortable-repeater').val(inputValues);
-		
+
 		// Important! Make sure to trigger change event so Customizer knows it has to save the field
 		$element.find('.customize-control-sortable-repeater').trigger('change');
 	}
@@ -158,36 +158,36 @@ jQuery( document ).ready(function($) {
 
 	// Add event listener to secondary color value change
 	let secondaryButton = document.querySelector('#customize-control-paddle_secondary_color .wp-color-result');
-	if (typeof(secondaryButton) != 'undefined' && secondaryButton != null) {
-		secondaryButton.addEventListener('blur', function(event) {
+	if (typeof (secondaryButton) != 'undefined' && secondaryButton != null) {
+		secondaryButton.addEventListener('blur', function (event) {
 			let currentColorValue = secondaryButton.style.backgroundColor;
 			const button = event.target;
-			setTimeout(function() {
-				if(button.style.backgroundColor != currentColorValue) {
+			setTimeout(function () {
+				if (button.style.backgroundColor != currentColorValue) {
 					let resetButton = document.querySelector('#customize-control-opacity_slider_control .slider-reset');
 					//resetButton.click();
 				}
-			},200)
-	
+			}, 200)
+
 		})
 	}
 
 	let colorPicker = document.querySelector('#customize-control-paddle_secondary_color .wp-color-picker');
-	if (typeof(colorPicker) != 'undefined' && colorPicker != null) {
+	if (typeof (colorPicker) != 'undefined' && colorPicker != null) {
 		let secondaryButton = document.querySelector('#customize-control-paddle_secondary_color .wp-color-result');
 		let currentColorValue = secondaryButton.style.backgroundColor;
-		colorPicker.addEventListener('blur', function() {
-			setTimeout(function() {
-			if(document.querySelector('#customize-control-paddle_secondary_color .wp-color-result').style.backgroundColor != currentColorValue) {
-				let resetButton = document.querySelector('#customize-control-opacity_slider_control .slider-reset');
-				//resetButton.click();
-			}
-			},200)
+		colorPicker.addEventListener('blur', function () {
+			setTimeout(function () {
+				if (document.querySelector('#customize-control-paddle_secondary_color .wp-color-result').style.backgroundColor != currentColorValue) {
+					let resetButton = document.querySelector('#customize-control-opacity_slider_control .slider-reset');
+					//resetButton.click();
+				}
+			}, 200)
 		})
 	}
 
 	// Set our slider defaults and initialise the slider
-	$('.slider-custom-control').each(function(){
+	$('.slider-custom-control').each(function () {
 		var sliderValue = $(this).find('.customize-control-slider-value').val();
 		var newSlider = $(this).find('.slider');
 		var sliderMinValue = parseFloat(newSlider.attr('slider-min-value'));
@@ -196,19 +196,19 @@ jQuery( document ).ready(function($) {
 
 		// Set RGBA Color value
 		let ImageOpacity = $(this).find('.opacity-image');
-		if(ImageOpacity.length > 0) {
+		if (ImageOpacity.length > 0) {
 			let colorValue = $(this).parent().prev().find('.wp-color-result').css('backgroundColor');
-			
+
 			let opacityValue = sliderValue;
-			if(opacityValue == '10') opacityValue = 99;
-			if(opacityValue == '0'){
+			if (opacityValue == '10') opacityValue = 99;
+			if (opacityValue == '0') {
 				ImageOpacity.addClass('checked-background')
 			} else {
 				ImageOpacity.removeClass('checked-background')
 			}
 			let new_col = colorValue.replace(/rgb/i, "rgba");
-			new_col = new_col.replace(/\)/i,',0.'+opacityValue+')');
-			ImageOpacity.css('background-color', new_col);			
+			new_col = new_col.replace(/\)/i, ',0.' + opacityValue + ')');
+			ImageOpacity.css('background-color', new_col);
 		}
 
 		newSlider.slider({
@@ -216,79 +216,79 @@ jQuery( document ).ready(function($) {
 			min: sliderMinValue,
 			max: sliderMaxValue,
 			step: sliderStepValue,
-			change: function(e,ui){
+			change: function (e, ui) {
 				// Important! When slider stops moving make sure to trigger change event so Customizer knows it has to save the field
 				$(this).parent().find('.customize-control-slider-value').trigger('change');
-	      }
+			}
 		});
 	});
 
 	// Change the value of the input field as the slider is moved
-	$('.slider').on('slide', function(event, ui) {
+	$('.slider').on('slide', function (event, ui) {
 		$(this).parent().find('.customize-control-slider-value').val(ui.value);
 		//Set opacity if changing color value
 		let opacityImage = $(this).parent().find('.opacity-image');
-		if (typeof(opacityImage) != 'undefined' && opacityImage != null && opacityImage.length > 0) {
+		if (typeof (opacityImage) != 'undefined' && opacityImage != null && opacityImage.length > 0) {
 			let new_col = $(this).parent().parent().prev().find('.wp-color-result').css('backgroundColor').replace(/rgb/i, "rgba");
 			let opacityValue = ui.value;
-			if(opacityValue == '10') opacityValue = 99;
-			if(opacityValue == '0'){
+			if (opacityValue == '10') opacityValue = 99;
+			if (opacityValue == '0') {
 				opacityImage.addClass('checked-background')
 			} else {
 				opacityImage.removeClass('checked-background')
 			}
-			new_col = new_col.replace(/\)/i,',0.'+opacityValue+')');
+			new_col = new_col.replace(/\)/i, ',0.' + opacityValue + ')');
 			opacityImage.css('background-color', new_col);
 		}
-		
+
 		// Logo slider
-        const logoSlider = $(this).prev().attr('id');
-		if(logoSlider.includes('logo_size')) {
-		//$("#customize-preview>iframe").contents().find('.site-logo img').css('max-height', ui.value)
+		const logoSlider = $(this).prev().attr('id');
+		if (logoSlider.includes('logo_size')) {
+			//$("#customize-preview>iframe").contents().find('.site-logo img').css('max-height', ui.value)
 		}
 
 	});
 
 	// Reset slider and input field back to the default value
-	$('.slider-reset').on('click', function() {
+	$('.slider-reset').on('click', function () {
 		var resetValue = $(this).attr('slider-reset-value');//$(this).parent().find('.slider').attr('slider-min-value'); 
 		$(this).parent().find('.customize-control-slider-value').val(resetValue);
 		$(this).parent().find('.slider').slider('value', resetValue);
 		let ImageOpacity = $(this).parent().find('.opacity-image');
-	
-		if(ImageOpacity.length > 0) {
+
+		if (ImageOpacity.length > 0) {
 			let colorRgb = $(this).parent().parent().prev().find('.wp-color-result').css('backgroundColor');
 			let currentColorValue = $(this).parent().find('.slider').attr('slider-min-value');
 			let opacityValue;
 			opacityValue = currentColorValue;
-			if(currentColorValue == '10') opacityValue = 99;
-			if(currentColorValue == '0'){
+			if (currentColorValue == '10') opacityValue = 99;
+			if (currentColorValue == '0') {
 				ImageOpacity.addClass('checked-background')
 			} else {
 				ImageOpacity.removeClass('checked-background')
 			}
 
 			let new_col = colorRgb.replace(/rgb/i, "rgba");
-			new_col = new_col.replace(/\)/i,',0.'+opacityValue+')');
+			new_col = new_col.replace(/\)/i, ',0.' + opacityValue + ')');
 			ImageOpacity.css('background-color', new_col);
-			
+
 		}
-		
+
 	});
 
 	// Update slider if the input field loses focus as it's most likely changed
-	$('.customize-control-slider-value').blur(function() {
+	$('.customize-control-slider-value').blur(function () {
 		var resetValue = $(this).val();
 		var slider = $(this).parent().find('.slider');
 		var sliderMinValue = parseInt(slider.attr('slider-min-value'));
 		var sliderMaxValue = parseInt(slider.attr('slider-max-value'));
 
 		// Make sure our manual input value doesn't exceed the minimum & maxmium values
-		if(resetValue < sliderMinValue) {
+		if (resetValue < sliderMinValue) {
 			resetValue = sliderMinValue;
 			$(this).val(resetValue);
 		}
-		if(resetValue > sliderMaxValue) {
+		if (resetValue > sliderMaxValue) {
 			resetValue = sliderMaxValue;
 			$(this).val(resetValue);
 		}
@@ -301,13 +301,13 @@ jQuery( document ).ready(function($) {
 	 * @author Anthony Hortin 
 	 */
 
-	$('.customize-control-tinymce-editor').each(function(){
+	$('.customize-control-tinymce-editor').each(function () {
 		// Get the toolbar strings that were passed from the PHP Class
 		var tinyMCEToolbar1String = _wpCustomizeSettings.controls[$(this).attr('id')].paddletinymcetoolbar1;
 		var tinyMCEToolbar2String = _wpCustomizeSettings.controls[$(this).attr('id')].paddletinymcetoolbar2;
 		var tinyMCEMediaButtons = _wpCustomizeSettings.controls[$(this).attr('id')].paddlemediabuttons;
 
-		wp.editor.initialize( $(this).attr('id'), {
+		wp.editor.initialize($(this).attr('id'), {
 			tinymce: {
 				wpautop: true,
 				toolbar1: tinyMCEToolbar1String,
@@ -317,73 +317,73 @@ jQuery( document ).ready(function($) {
 			mediaButtons: tinyMCEMediaButtons
 		});
 	});
-	$(document).on( 'tinymce-editor-init', function( event, editor ) {
-		editor.on('change', function(e) {
+	$(document).on('tinymce-editor-init', function (event, editor) {
+		editor.on('change', function (e) {
 			tinyMCE.triggerSave();
-			$('#'+editor.id).trigger('change');
+			$('#' + editor.id).trigger('change');
 		});
 	});
 
 
- 	/**
-	 * Theme Slider Custom Control
-	 *
-	 * @author Anthony Hortin
-	 * .slider-custom-control = .theme-slider-control
-	 * .slider-control-slider-value = theme-slider-control-slider-value
-	 * .slider =  .theme-slider
-	 * .slider-reset = .theme-slider-reset
-	 */
+	/**
+   * Theme Slider Custom Control
+   *
+   * @author Anthony Hortin
+   * .slider-custom-control = .theme-slider-control
+   * .slider-control-slider-value = theme-slider-control-slider-value
+   * .slider =  .theme-slider
+   * .slider-reset = .theme-slider-reset
+   */
 
 	// Set our slider defaults and initialise the slider
-	$('.theme-slider-control').each(function(){
+	$('.theme-slider-control').each(function () {
 		var sliderValue = $(this).find('.theme-slider-control-slider-value').val();
 		var newSlider = $(this).find('.theme-slider');
 		var sliderMinValue = parseFloat(newSlider.attr('slider-min-value'));
 		var sliderMaxValue = parseFloat(newSlider.attr('slider-max-value'));
 		var sliderStepValue = parseFloat(newSlider.attr('slider-step-value'));
 
-		newSlider.theme-slider({
+		newSlider.theme - slider({
 			value: sliderValue,
 			min: sliderMinValue,
 			max: sliderMaxValue,
 			step: sliderStepValue,
-			change: function(e,ui){
+			change: function (e, ui) {
 				// Important! When slider stops moving make sure to trigger change event so Customizer knows it has to save the field
 				$(this).parent().find('.theme-slider-control-slider-value').trigger('change');
-	      }
+			}
 		});
 	});
 
 	// Change the value of the input field as the slider is moved
-	$('.theme-slider').on('slide', function(event, ui) {
+	$('.theme-slider').on('slide', function (event, ui) {
 		$(this).parent().find('.theme-slider-control-slider-value').val(ui.value);
 	});
 
 	// Reset slider and input field back to the default value
-	$('.theme-slider-reset').on('click', function() {
+	$('.theme-slider-reset').on('click', function () {
 		var resetValue = $(this).attr('slider-reset-value');
 		$(this).parent().find('.theme-slider-control-slider-value').val(resetValue);
-		$(this).parent().find('.theme-slider').theme-slider('value', resetValue);
+		$(this).parent().find('.theme-slider').theme - slider('value', resetValue);
 	});
 
 	// Update slider if the input field loses focus as it's most likely changed
-	$('.theme-slider-control-slider-value').blur(function() {
+	$('.theme-slider-control-slider-value').blur(function () {
 		var resetValue = $(this).val();
 		var slider = $(this).parent().find('.theme-slider');
 		var sliderMinValue = parseInt(slider.attr('slider-min-value'));
 		var sliderMaxValue = parseInt(slider.attr('slider-max-value'));
 
 		// Make sure our manual input value doesn't exceed the minimum & maxmium values
-		if(resetValue < sliderMinValue) {
+		if (resetValue < sliderMinValue) {
 			resetValue = sliderMinValue;
 			$(this).val(resetValue);
 		}
-		if(resetValue > sliderMaxValue) {
+		if (resetValue > sliderMaxValue) {
 			resetValue = sliderMaxValue;
 			$(this).val(resetValue);
 		}
-		$(this).parent().find('.theme-slider').theme-slider('value', resetValue);
+		$(this).parent().find('.theme-slider').theme - slider('value', resetValue);
 	});
 
 	/** @todo Remove this not using it
@@ -392,9 +392,9 @@ jQuery( document ).ready(function($) {
 	 * @author Anthony Hortin 
 	 */
 
-	$('.single-accordion-toggle').click(function() {
+	$('.single-accordion-toggle').click(function () {
 		var $accordionToggle = $(this);
-		$(this).parent().find('.single-accordion').slideToggle('slow', function() {
+		$(this).parent().find('.single-accordion').slideToggle('slow', function () {
 			$accordionToggle.toggleClass('single-accordion-toggle-rotate', $(this).is(':visible'));
 		});
 	});
@@ -406,18 +406,18 @@ jQuery( document ).ready(function($) {
 	 */
 
 	$('.multi-image-checkbox').on('change', function () {
-	  paddleGetAllImageCheckboxes($(this).parent().parent());
+		paddleGetAllImageCheckboxes($(this).parent().parent());
 	});
 
 	// Get the values from the checkboxes and add to our hidden field
 	function paddleGetAllImageCheckboxes($element) {
-	  var inputValues = $element.find('.multi-image-checkbox').map(function() {
-	    if( $(this).is(':checked') ) {
-	      return $(this).val();
-	    }
-	  }).toArray();
-	  // Important! Make sure to trigger change event so Customizer knows it has to save the field
-	  $element.find('.customize-control-multi-image-checkbox').val(inputValues).trigger('change');
+		var inputValues = $element.find('.multi-image-checkbox').map(function () {
+			if ($(this).is(':checked')) {
+				return $(this).val();
+			}
+		}).toArray();
+		// Important! Make sure to trigger change event so Customizer knows it has to save the field
+		$element.find('.customize-control-multi-image-checkbox').val(inputValues).trigger('change');
 	}
 
 	/** 
@@ -426,9 +426,9 @@ jQuery( document ).ready(function($) {
 	 * @author Anthony Hortin 
 	 */
 
-	$( ".pill_checkbox_control .sortable" ).sortable({
+	$(".pill_checkbox_control .sortable").sortable({
 		placeholder: "pill-ui-state-highlight",
-		update: function( event, ui ) {
+		update: function (event, ui) {
 			paddleGetAllPillCheckboxes($(this).parent());
 		}
 	});
@@ -439,8 +439,8 @@ jQuery( document ).ready(function($) {
 
 	// Get the values from the checkboxes and add to our hidden field
 	function paddleGetAllPillCheckboxes($element) {
-		var inputValues = $element.find('.sortable-pill-checkbox').map(function() {
-			if( $(this).is(':checked') ) {
+		var inputValues = $element.find('.sortable-pill-checkbox').map(function () {
+			if ($(this).is(':checked')) {
 				return $(this).val();
 			}
 		}).toArray();
@@ -457,9 +457,9 @@ jQuery( document ).ready(function($) {
 		let currentVal = '0';
 		let initialValue = $(this).parent().parent().find('.customize-control-multiple-input').val().split(',');
 
-		if(this.checked) {
-            currentVal = '1';
-        } else {
+		if (this.checked) {
+			currentVal = '1';
+		} else {
 			currentVal = '0';
 		}
 		initialValue.pop();
@@ -472,48 +472,220 @@ jQuery( document ).ready(function($) {
 		var initialValue = $(this).parent().parent().find('.customize-control-multiple-input').val().split(',');
 
 		var initialCheckValue = initialValue[initialValue.length - 1];
-		
-		if(parseInt(initialCheckValue) === 1) {
+
+		if (parseInt(initialCheckValue) === 1) {
 			let repeatValue = $(this).val();
-			$(this).parent().parent().find('.multiple-input').each(function() {
+			$(this).parent().parent().find('.multiple-input').each(function () {
 				$(this).val(repeatValue);
 			})
 		}
-		
-        paddleGetAllMultipleInputBoxes($(this).parent().parent().parent());
-    });
+
+		paddleGetAllMultipleInputBoxes($(this).parent().parent().parent());
+	});
 
 
 	// Get the values from the multiple input and add to our hidden field
-    function paddleGetAllMultipleInputBoxes($element) {
+	function paddleGetAllMultipleInputBoxes($element) {
 		let initialValue = $element.find('.customize-control-multiple-input').val().split(',');
 		let initialCheckValue = initialValue[initialValue.length - 1];
-		
-        var inputValues = $element.find('.multiple-input').map(function() {
-                return $(this).val();
-        }).toArray();
-        $element.find('.customize-control-multiple-input').val(`${inputValues},${initialCheckValue}`).trigger('change');
-		
-    }
+
+		var inputValues = $element.find('.multiple-input').map(function () {
+			return $(this).val();
+		}).toArray();
+		$element.find('.customize-control-multiple-input').val(`${inputValues},${initialCheckValue}`).trigger('change');
+
+	}
 
 	// Color section change select color title to the label title
 	let colorTitleLabel = document.querySelectorAll('li[id^="customize-control-paddle_theme_color"] .customize-control-title');
 	let colorTitlePrimaryLabel = document.querySelectorAll('li[id^="customize-control-paddle_primary_color"] .customize-control-title');
-	
+
+
 	replaceLabelTitle(colorTitlePrimaryLabel);
 	replaceLabelTitle(colorTitleLabel);
 
 	function replaceLabelTitle(selectors) {
-		if( selectors.length > 0 ) {
+		if (selectors.length > 0) {
 			selectors.forEach(elem => {
 				let parentElem = elem.parentElement;
 				let container = parentElem.querySelector('.wp-color-result-text');
-				if(container) {
+				if (container) {
 					container.textContent = elem.textContent
 				}
 			})
 		}
 	}
+
+	/**********************************************************
+	 * Color Palette
+	 *********************************************************/
+	
+	// Color 1
+	updateColorPalette('#customize-control-paddle_primary_color');
+	// Color 2
+	updateColorPalette('#customize-control-paddle_theme_color_headings');
+
+	function updateColorPalette(buttonContainer) {
+		let paddleButtonContainer = document.querySelector(buttonContainer);
+		getColorButton(paddleButtonContainer)?.addEventListener('click', () => {
+			
+			if(getSelectedPalette() ==='style-1') {
+				handleColorChange(paddleButtonContainer, document.querySelector('#_customize-input-paddle_color_palette_1'));
+			}
+			if(getSelectedPalette() ==='style-2') {
+				handleColorChange(paddleButtonContainer, document.querySelector('#_customize-input-paddle_color_palette_2'));
+			}
+			if(getSelectedPalette() ==='style-3') {
+				handleColorChange(paddleButtonContainer, document.querySelector('#_customize-input-paddle_color_palette_3'));
+			}
+		})
+	}
+
+	function handleColorChange(buttonContainer, inputElem) {
+		waitForElm('.wp-picker-container.wp-picker-active .wp-color-picker').then((elem) => {
+
+			elem.addEventListener('input', function () {
+				let indexToChange = getActiveColorIndex(elem);
+				//inputElem.value = changedColorIndex(inputElem.value, indexToChange, elem.value);
+			})
+
+			let elementToObserve = getColorButton(buttonContainer);
+
+			// Create a new MutationObserver and pass in a callback function
+			const observer = new MutationObserver((mutations) => {
+				// Loop through each mutation that occurred
+				mutations.forEach((mutation) => {
+					// Check if the background color of the observed element has changed
+					if (mutation.attributeName === 'style') {
+						const backgroundColor = window.getComputedStyle(elementToObserve).getPropertyValue('background-color');
+
+						// Get index to change
+						let indexToChange = getActiveColorIndex(elem);
+						
+						/*
+						buttonContainer.parentElement.setAttribute('data-paddle-palette-color', elem.value );
+						buttonContainer.parentElement.setAttribute('data-paddle-palette-color-index', indexToChange );
+						buttonContainer.parentElement.setAttribute('data-paddle-palette-new-value', changedColorIndex(inputElem.value, indexToChange, elem.value) );
+						*/
+
+						if(getSelectedPalette() ==='style-1' && inputElem.getAttribute('id').includes('palette_1')) {
+								inputElem.value = changedColorIndex(inputElem.value, indexToChange, elem.value);
+								$(inputElem).val(`${inputElem.value}`).trigger('change');
+								paletteUpdateUI('#customize-control-paddle_color_palette .radio-button-label > input:checked + div .paddle-palette>span',inputElem.value);
+						}
+
+						if(getSelectedPalette() ==='style-2' && inputElem.getAttribute('id').includes('palette_2')) {
+								inputElem.value = changedColorIndex(inputElem.value, indexToChange, elem.value);
+								$(inputElem).val(`${inputElem.value}`).trigger('change');
+								paletteUpdateUI('#customize-control-paddle_color_palette .radio-button-label > input:checked + div .paddle-palette>span',inputElem.value);
+						}
+
+						if( getSelectedPalette() ==='style-3' && inputElem.getAttribute('id').includes('palette_3')) {
+								inputElem.value = changedColorIndex(inputElem.value, indexToChange, elem.value);
+								$(inputElem).val(`${inputElem.value}`).trigger('change');
+								// Show the color in UI
+								paletteUpdateUI('#customize-control-paddle_color_palette .radio-button-label > input:checked + div .paddle-palette>span',inputElem.value);
+								
+						}	
+						
+					}
+				});
+				if (null == document.querySelector('.wp-picker-container.wp-picker-active')) {
+					observer.disconnect();
+				}
+			});
+
+			// Start observing changes to the element's attributes, including its style attribute
+			observer.observe(elementToObserve, { attributes: true });
+
+		});
+	}
+
+	function paletteUpdateUI(ui,colors){
+		let paletteColorgrids = document.querySelectorAll(ui);
+			if(paletteColorgrids.length > 0) {
+				let colorsArray = colors.split(',');
+				paletteColorgrids.forEach((grid, index) => {
+					grid.style.backgroundColor = colorsArray[index];
+				})
+			}
+	}
+
+	function getActiveColorIndex(elem) {
+		let activeParent = elem.parentElement.parentElement.parentElement.parentElement.parentElement;
+				let indexToChange = 0;
+				if(activeParent) {
+					let id = activeParent.getAttribute('id');
+					if(id.includes('primary')) {
+						indexToChange = 0
+					}
+					if(id.includes('heading')) {
+						indexToChange = 1
+					}
+				}
+			return indexToChange;	
+	}
+
+	function waitForElm(selector) {
+		return new Promise(resolve => {
+			if (document.querySelector(selector)) {
+				return resolve(document.querySelector(selector));
+			}
+
+			const observer = new MutationObserver(mutations => {
+				if (document.querySelector(selector)) {
+					resolve(document.querySelector(selector));
+					observer.disconnect();
+				}
+			});
+
+			observer.observe(document.body, {
+				childList: true,
+				subtree: true
+			});
+		});
+	}
+
+	// Return selected pallete
+	function getSelectedPalette() {
+		let selectedPalette = '';
+		let paddleColorPaletteRadioButtons = document.querySelector('#customize-control-paddle_color_palette .radio-button-label > input:checked');
+		selectedPalette = paddleColorPaletteRadioButtons?.value;
+		return selectedPalette;
+	}
+	// return color button
+	function getColorButton(elemButton) {
+		if (elemButton) {
+			return elemButton.querySelector('.wp-picker-container button');
+		}
+		return null;
+	}
+
+	function changedColorIndex($colors, index, $newValue) {
+		let colorsArray = $colors.split(',');
+		colorsArray[index] = $newValue;
+
+		// return the new colors
+		return `${colorsArray[0]},${colorsArray[1]},${colorsArray[2]},${colorsArray[3]}`;
+	}
+
+	// Global palette radio button on select
+	$('input[name="paddle_color_palette"]').on('click', function(e) {
+
+		let color1, color2, color3, color4;
+		let colorsArray = $(this).next().find('span'); //$(this).next().attr('data-value').split(',');
+		$(colorsArray).each(function(index) {
+			index === 0 ? color1 = $( this ).css('background-color') : '' ;
+			index === 1 ? color2 = $( this ).css('background-color') : '' ;
+			index === 2 ? color3 = $( this ).css('background-color') : '' ;
+			index === 3 ? color4 = $( this ).css('background-color') : '' ;
+			//console.log( index + ": " + $( this ).css('background-color') );
+		})
+		let container = document.querySelector('li[id^="customize-control-paddle_primary_color"]').parentElement;
+		let primaryColorBtn = container.querySelector('#customize-control-paddle_primary_color button');
+		// Change color 1 background
+		primaryColorBtn.style.backgroundColor = color1;
+	});
 
 	/**
 	 * Find control's last element and add class to it
@@ -526,13 +698,13 @@ jQuery( document ).ready(function($) {
 		}
 	}
 
-	let paddleCustomControlsClass = 
-	['.customize-control-toggle_switch_2', 
-	'.customize-control-toggle_switch', 
-	'#customize-control-paddle_sidebar_position',
-	'#customize-control-paddle_sidebar_position_page',
-	'.customize-control-image_radio_button'
-	];
+	let paddleCustomControlsClass =
+		['.customize-control-toggle_switch_2',
+			'.customize-control-toggle_switch',
+			'#customize-control-paddle_sidebar_position',
+			'#customize-control-paddle_sidebar_position_page',
+			'.customize-control-image_radio_button'
+		];
 	paddleCustomControlsClass.forEach(elem => {
 		addClassToLastItem(elem, 'paddle-last-item')
 	})
@@ -542,41 +714,41 @@ jQuery( document ).ready(function($) {
 	// Builder preview
 	let buttonPreviewHeader = document.querySelector('#accordion-section-paddle_theme_button_section');
 	let buttonPreviewBack = document.querySelector('#sub-accordion-section-paddle_theme_button_section .customize-section-back')
-	if(buttonPreviewHeader) {
+	if (buttonPreviewHeader) {
 		buttonPreviewHeader.addEventListener('click', () => {
 			let parentContainer = document.querySelector('#sub-accordion-section-paddle_theme_button_section');
 			let container = parentContainer.querySelector('.sample-container');
 			let customizerPreviewContainer = document.getElementById('customize-preview');
-			
-			if(container) {
+
+			if (container) {
 				setTimeout(() => {
-					customizerPreviewContainer.style.bottom = container.clientHeight+'px';
+					customizerPreviewContainer.style.bottom = container.clientHeight + 'px';
 					customizerPreviewContainer.style.height = 'auto';
 					customizerPreviewContainer.style.marginBottom = '-1px';
-				},200)
-	
+				}, 200)
+
 				setTimeout(() => {
 					container.style.transform = 'translateY(0%)';
-				},100)
+				}, 100)
 			}
-			
+
 		})
 	}
 
-	if(buttonPreviewBack) {
+	if (buttonPreviewBack) {
 		buttonPreviewBack.addEventListener('click', () => {
 			let parentContainer = document.querySelector('#sub-accordion-section-paddle_theme_button_section');
 			let container = parentContainer.querySelector('.sample-container');
 			let customizerPreviewContainer = document.getElementById('customize-preview');
 
-			if (container ) {
+			if (container) {
 				customizerPreviewContainer.style.bottom = '0';
-			
+
 				setTimeout(() => {
 					container.style.transform = 'translateY(100%)';
-				},100)
+				}, 100)
 			}
-			
+
 		})
 	}
 
@@ -586,18 +758,18 @@ jQuery( document ).ready(function($) {
 /**
  * Remove attached events from the Upsell Section to stop panel from being able to open/close
  */
-( function( $, api ) {
-	api.sectionConstructor['paddle-upsell'] = api.Section.extend( {
+(function ($, api) {
+	api.sectionConstructor['paddle-upsell'] = api.Section.extend({
 
 		// Remove events for this type of section.
-		attachEvents: function () {},
+		attachEvents: function () { },
 
 		// Ensure this type of section is active. Normally, sections without contents aren't visible.
 		isContextuallyActive: function () {
 			return true;
 		}
-	} );
-} )( jQuery, wp.customize );
+	});
+})(jQuery, wp.customize);
 
 
 

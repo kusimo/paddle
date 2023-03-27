@@ -332,6 +332,10 @@ span.customize-control-title
 	line-height: 1.5;
 	text-transform: uppercase!important;
 }
+#sub-accordion-section-paddle_theme_color_section li[id*="_color"].customize-control-color
+span.customize-control-title {
+	display: none;
+}
 span.customize-control-title.paddle-simple-header-title-2 {
 	margin: 0 -24px 15px;
 	padding: 5px 24px;
@@ -395,9 +399,10 @@ li.customize-control-image_radio_button .paddle-fw-label label.radio-button-labe
     display: flex;
     flex-direction: column;
     margin-bottom: 21px;
-    border: 1px solid gray;
+    border: 1px solid #dcdcdc;
     border-radius: 5px;
     margin-right: 15px;
+	overflow: hidden;
 }
 .paddle-palette {
     display: flex;
@@ -415,6 +420,9 @@ li.customize-control-image_radio_button .paddle-fw-label label.radio-button-labe
     line-height: 22px;
     letter-spacing: 1.5px;
     text-transform: uppercase;
+}
+.image_radio_button_control .radio-button-label > input:checked + .paddle-color-palette {
+    border: 1px solid #2885bb;
 }
 /* ==========================================================================
    Image Checkboxes
@@ -1320,12 +1328,15 @@ li[id^="customize-control-paddle_primary_color"] .wp-picker-container .wp-color-
 {
 	width: 30px;
 	height: 30px;
+	font-size: 13px;
+    font-weight: 600;
 }
 li[id^="customize-control-paddle_theme_color"]  input[type=text].wp-color-picker,
 li[id^="customize-control-paddle_primary_color"]  input[type=text].wp-color-picker
  {
 	width: 120px;
 	text-align: center;
+	margin-top: 0!important;
 }
 
 /** Text */

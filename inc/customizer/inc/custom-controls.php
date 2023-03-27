@@ -154,28 +154,52 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 						<img src="<?php echo esc_attr( $value['image'] ); ?>" alt="<?php echo esc_attr( $value['name'] ); ?>" title="<?php echo esc_attr( $value['name'] ); ?>" />
 						<?php endif; ?>
 						<?php if(array_key_exists('palette', $value)) : ?>
-							<div class="paddle-color-palette">
+							<div class="paddle-color-palette" data-value="<?php echo esc_attr($value['palette']);?>">
 								<div class="paddle-palette">
 									<?php if(0 === $palette_counter) : ?>
 										<?php $pallete0 = explode(',', $value['palette']);
-											foreach($pallete0 as $color) { ?>
-												<span style="background-color: <?php echo esc_attr($color);?>">&nbsp;</span>	
+											foreach($pallete0 as $key=>$color) { ?>
+												<span class="color-grid color-<?php echo esc_attr($key);?>" style="background-color: <?php echo esc_attr($color);?>">&nbsp;</span>	
 											<?php }
 										?>
 									<?php endif ;?>
 
 									<?php if(1 === $palette_counter) : ?>
 										<?php $pallete1 = explode(',', $value['palette']);
-											foreach($pallete1 as $color) { ?>
-												<span style="background-color: <?php echo esc_attr($color);?>">&nbsp;</span>	
+											foreach($pallete1 as $key=>$color) { ?>
+												<span class="color-grid color-<?php echo esc_attr($key);?>" style="background-color: <?php echo esc_attr($color);?>">&nbsp;</span>	
 											<?php }
 										?>
 									<?php endif ;?>
 
 									<?php if(2 === $palette_counter) : ?>
 										<?php $pallete2 = explode(',', $value['palette']);
-											foreach($pallete2 as $color) { ?>
-												<span style="background-color: <?php echo esc_attr($color);?>">&nbsp;</span>	
+											foreach($pallete2 as $key=>$color) { ?>
+												<span class="color-grid color-<?php echo esc_attr($key);?>" style="background-color: <?php echo esc_attr($color);?>">&nbsp;</span>	
+											<?php }
+										?>
+									<?php endif ;?>
+
+									<?php if(3 === $palette_counter) : ?>
+										<?php $pallete3 = explode(',', $value['palette']);
+											foreach($pallete3 as $key=>$color) { ?>
+												<span class="color-grid color-<?php echo esc_attr($key);?>" style="background-color: <?php echo esc_attr($color);?>">&nbsp;</span>	
+											<?php }
+										?>
+									<?php endif ;?>
+
+									<?php if(4 === $palette_counter) : ?>
+										<?php $pallete4 = explode(',', $value['palette']);
+											foreach($pallete4 as $key=>$color) { ?>
+												<span class="color-grid color-<?php echo esc_attr($key);?>" style="background-color: <?php echo esc_attr($color);?>">&nbsp;</span>	
+											<?php }
+										?>
+									<?php endif ;?>
+
+									<?php if(5 === $palette_counter) : ?>
+										<?php $pallete5 = explode(',', $value['palette']);
+											foreach($pallete5 as $key=>$color) { ?>
+												<span class="color-grid color-<?php echo esc_attr($key);?>" style="background-color: <?php echo esc_attr($color);?>">&nbsp;</span>	
 											<?php }
 										?>
 									<?php endif ;?>

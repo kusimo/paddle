@@ -30,3 +30,12 @@
 	<div id="content" class="site-content">
 	<div class="container paddle-body-container">
 		<div class="row main-row">
+
+		<?php // temp
+		/*
+		$test_delete = paddle_generate_defaults();
+		foreach($test_delete as $key=>$value) {
+			//remove_theme_mod($key);
+		}
+		*/
+		?>

@@ -7775,20 +7775,63 @@ class paddle_initialise_customizer_settings
 					'label'   => __('Global Palette', 'paddle'),
 					'section' => 'paddle_theme_color_section',
 					'choices' => array(
-						'default'     => array(
-							'palette' => $this->defaults['paddle_color_palette_default_colors'],
-							'name'  => __('Default', 'paddle'),
-						),
 						'style-1'          => array(
-							'palette' => '#0170b9,#3a3a3a,#3a3a3a,#4b4f58',
+							'palette' => $this->defaults['paddle_color_palette_1'],
 							'name'  => __('Style 1', 'paddle'),
 						),
 						'style-2'       => array(
-							'palette' => '#a28557,#3a3a3a,#3a3a3a,#4b4f58',
+							'palette' => $this->defaults['paddle_color_palette_2'],
 							'name'  => __('Style 2', 'paddle'),
+						),
+						'style-3'       => array(
+							'palette' => $this->defaults['paddle_color_palette_3'],
+							'name'  => __('Style 3', 'paddle'),
 						),
 					),
 				)
+			)
+		);
+
+		// Color Palette colors
+		$wp_customize->add_setting( 'paddle_color_palette_1',
+			array(
+				'default' => $this->defaults['paddle_color_palette_1'],
+				'transport' => 'refresh',
+				'sanitize_callback' => 'paddle_text_sanitization'
+			)
+		);
+		$wp_customize->add_control( 'paddle_color_palette_1',
+			array(
+				'section' => 'paddle_theme_color_section',
+				'type' => 'hidden'
+			)
+		);
+
+		$wp_customize->add_setting( 'paddle_color_palette_2',
+			array(
+				'default' => $this->defaults['paddle_color_palette_2'],
+				'transport' => 'refresh',
+				'sanitize_callback' => 'paddle_text_sanitization'
+			)
+		);
+		$wp_customize->add_control( 'paddle_color_palette_2',
+			array(
+				'section' => 'paddle_theme_color_section',
+				'type' => 'hidden'
+			)
+		);
+
+		$wp_customize->add_setting( 'paddle_color_palette_3',
+			array(
+				'default' => $this->defaults['paddle_color_palette_3'],
+				'transport' => 'refresh',
+				'sanitize_callback' => 'paddle_text_sanitization'
+			)
+		);
+		$wp_customize->add_control( 'paddle_color_palette_3',
+			array(
+				'section' => 'paddle_theme_color_section',
+				'type' => 'hidden'
 			)
 		);
 
@@ -7796,7 +7839,7 @@ class paddle_initialise_customizer_settings
 			'paddle_primary_color',
 			array(
 				'default'           => $this->defaults['paddle_primary_color'],
-				'transport'         => 'refresh',
+				'transport'         => 'postMessage',
 				'sanitize_callback' => 'sanitize_hex_color',
 			)
 		);
@@ -7810,35 +7853,35 @@ class paddle_initialise_customizer_settings
 		);
 
 		$wp_customize->add_setting(
-			'paddle_theme_color_body_bg',
+			'paddle_theme_color_links',
 			array(
-				'default'           => $this->defaults['paddle_theme_color_body_bg'],
+				'default'           => $this->defaults['paddle_theme_color_links'],
 				'transport'         => 'refresh',
 				'sanitize_callback' => 'sanitize_hex_color',
 			)
 		);
 		$wp_customize->add_control(
-			'paddle_theme_color_body_bg',
+			'paddle_theme_color_links',
 			array(
-				'label'   => __('Body Background color', 'paddle'),
+				'label'   => __('Links', 'paddle'),
 				'section' => 'paddle_theme_color_section',
 				'type'    => 'color',
-				'settings' => 'paddle_theme_color_body_bg'
 			)
 		);
 
+		// Hover state
 		$wp_customize->add_setting(
-			'paddle_theme_color_body_text',
+			'paddle_theme_color_links_hover',
 			array(
-				'default'           => $this->defaults['paddle_theme_color_body_text'],
+				'default'           => $this->defaults['paddle_theme_color_links_hover'],
 				'transport'         => 'refresh',
 				'sanitize_callback' => 'sanitize_hex_color',
 			)
 		);
 		$wp_customize->add_control(
-			'paddle_theme_color_body_text',
+			'paddle_theme_color_links_hover',
 			array(
-				'label'   => __('Body Text color', 'paddle'),
+				'label'   => __('Links Hover', 'paddle'),
 				'section' => 'paddle_theme_color_section',
 				'type'    => 'color',
 			)
@@ -7880,6 +7923,23 @@ class paddle_initialise_customizer_settings
 		);
 
 		$wp_customize->add_setting(
+			'paddle_theme_color_body_text',
+			array(
+				'default'           => $this->defaults['paddle_theme_color_body_text'],
+				'transport'         => 'refresh',
+				'sanitize_callback' => 'sanitize_hex_color',
+			)
+		);
+		$wp_customize->add_control(
+			'paddle_theme_color_body_text',
+			array(
+				'label'   => __('Body Text color', 'paddle'),
+				'section' => 'paddle_theme_color_section',
+				'type'    => 'color',
+			)
+		);
+
+		$wp_customize->add_setting(
 			'paddle_theme_color_buttons',
 			array(
 				'default'           => $this->defaults['paddle_theme_color_buttons'],
@@ -7914,41 +7974,26 @@ class paddle_initialise_customizer_settings
 			)
 		);
 
+
 		$wp_customize->add_setting(
-			'paddle_theme_color_links',
+			'paddle_theme_color_body_bg',
 			array(
-				'default'           => $this->defaults['paddle_theme_color_links'],
+				'default'           => $this->defaults['paddle_theme_color_body_bg'],
 				'transport'         => 'refresh',
 				'sanitize_callback' => 'sanitize_hex_color',
 			)
 		);
 		$wp_customize->add_control(
-			'paddle_theme_color_links',
+			'paddle_theme_color_body_bg',
 			array(
-				'label'   => __('Links', 'paddle'),
+				'label'   => __('Body Background color', 'paddle'),
 				'section' => 'paddle_theme_color_section',
 				'type'    => 'color',
+				'settings' => 'paddle_theme_color_body_bg'
 			)
 		);
 
-		// Hover state
-		$wp_customize->add_setting(
-			'paddle_theme_color_links_hover',
-			array(
-				'default'           => $this->defaults['paddle_theme_color_links_hover'],
-				'transport'         => 'refresh',
-				'sanitize_callback' => 'sanitize_hex_color',
-			)
-		);
-		$wp_customize->add_control(
-			'paddle_theme_color_links_hover',
-			array(
-				'label'   => __('Links Hover', 'paddle'),
-				'section' => 'paddle_theme_color_section',
-				'type'    => 'color',
-			)
-		);
-
+		
 		// Buttons Sections
 
 		$wp_customize->add_setting(
